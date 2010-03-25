@@ -4,7 +4,8 @@
 
 Ext.ns(
     'Ext.trick',
-    'Ext.trick.app'
+    'Ext.trick.app',
+    'Ext.trick.layout'
 );
 
 // }}}
