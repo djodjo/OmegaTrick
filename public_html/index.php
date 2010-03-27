@@ -15,7 +15,7 @@ include 'xFrameworkPX/Loader/Core.php';
 
 xFrameworkPX_Dispatcher::getInstance()->run(
     array(
-        'DEBUG' => 2
+        'DEBUG' => 1
     )
 );
 
