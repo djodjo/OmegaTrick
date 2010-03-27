@@ -11,6 +11,6 @@ xFramework PX が設置されています。
 ディレクトリの下で動作する前提で設定されています。
 環境に応じて、次の位置に格納されている.htaccessを変更してください。
 
-``public_html/.htaccess``
+<pre>public_html/.htaccess</pre>
 
 
