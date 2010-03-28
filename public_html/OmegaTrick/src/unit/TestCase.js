@@ -1,28 +1,31 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
-// {{{ Namespace
+// {{{ Namsespace
 
 Ext.ns(
     'Ext.trick',
-    'Ext.trick.app',
-    'Ext.trick.layout',
-    'Ext.trick.unit',
-    'Ext.trick.util'
+    'Ext.trick.unit'
 );
 
 // }}}
-// {{{ Ext.trick.app.App
+// {{{ Ext.trick.unit.TestCase
 
 /**
- * Ext.trick.app.App Class
+ * Ext.trick.unit.TestCase
+ *
+ * テストケースクラス
  *
  * @author  Kazuhiro Kotsutsumi <kotsutsumi@xenophy.com>
  * @version 1.0
  */
-Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
+Ext.trick.unit.TestCase = function() {
+
+    var me = this;
+
+    // テスティングフレームワーク設定
 
 
-});
+};
 
 // }}}
 
