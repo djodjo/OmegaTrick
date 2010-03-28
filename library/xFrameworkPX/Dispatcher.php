@@ -397,7 +397,7 @@ class xFrameworkPX_Dispatcher extends xFrameworkPX_Object
                 )
             )
         );
-
+        
         // コントローラー実行
         try {
             $this->getController(
