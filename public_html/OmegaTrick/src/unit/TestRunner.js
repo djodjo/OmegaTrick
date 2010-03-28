@@ -20,9 +20,53 @@ Ext.ns(
  */
 Ext.trick.unit.TestRunner = function() {
 
-    var me = this;
+    var me = this,
+        runner;
 
+    // テストランナーオブジェクト生成
+    switch(Ext.trick.Config.getTestingFrameworkName()){
+    
+        // YIU Test
+        case 'yui':
+            runner = YAHOO.tool.TestRunner;
+            break;
+    }
 
+    return {
+    
+        // {{{ add
+
+        /**
+         * テストケース/スイート追加メソッド
+         * 
+         * @param t Ext.trick.unit.TestCase/Ext.trick.unit.TestSuite テストランナーに追加するオブジェクトを設定します。
+         * @return void
+         */
+        add : function (t) {
+    
+            switch(Ext.trick.Config.getTestingFrameworkName()) {
+            
+                // YUI Test
+                case 'yui':
+                    runner.add(t);
+                    break;
+            }
+        },
+    
+        // }}}
+        // {{{ run
+        
+        /**
+         * テスト実行メソッド
+         *
+         * @return void
+         */
+        run : function() {
+              
+        }
+
+        // }}}
+    };
 
 };
 

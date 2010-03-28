@@ -12,6 +12,12 @@
     <!--{include file="../templates/OmegaTrick/extjs.html"}-->
     <!-- /Ext JS -->
 
+    <!-- YUI Test -->
+    <script src="<!--{$relpath}-->yui/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+    <script src="<!--{$relpath}-->yui/build/logger/logger-min.js"></script>
+    <script src="<!--{$relpath}-->yui/build/yuitest/yuitest-min.js"></script>
+    <!-- /YUI Test -->
+
     <!-- Ext.trick.Config -->
     <script type="text/javascript" src="<!--{$relpath}-->OmegaTrick/src/core/Config.js"></script>
     <!-- /Ext.trick.Config -->
@@ -19,14 +25,26 @@
     <!-- Ext.trick.unit.TestCase -->
     <script type="text/javascript" src="<!--{$relpath}-->OmegaTrick/src/unit/TestCase.js"></script>
     <!-- /Ext.trick.unit.TestCase -->
+    
+    <!-- Ext.trick.unit.TestSuite -->
+    <script type="text/javascript" src="<!--{$relpath}-->OmegaTrick/src/unit/TestSuite.js"></script>
+    <!-- /Ext.trick.unit.TestSuite -->
+
+    <!-- Ext.trick.unit.TestRunner -->
+    <script type="text/javascript" src="<!--{$relpath}-->OmegaTrick/src/unit/TestRunner.js"></script>
+    <!-- /Ext.trick.unit.TestRunner -->
 
     <!-- Ext.trick.util.clone -->
     <script type="text/javascript" src="<!--{$relpath}-->OmegaTrick/src/util/clone.js"></script>
     <!-- /Ext.trick.util.clone -->
 
-    <!-- TestCase -->
+    <!-- Ext.trick.test.unit.util.clone TestCase -->
     <script type="text/javascript" src="<!--{$relpath}-->OmegaTrick/test/unit/util/clone.js"></script>
-    <!-- /TestCase -->
+    <!-- /Ext.trick.test.unit.util.clone TestCase -->
+
+    <!-- TestRunner -->
+    <script type="text/javascript" src="<!--{$relpath}-->OmegaTrick/test/unit/util/clone-runner.js"></script>
+    <!-- /TestRunner -->
 
 </body>
 </html>
