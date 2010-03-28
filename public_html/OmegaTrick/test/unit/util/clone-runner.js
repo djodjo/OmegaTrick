@@ -16,7 +16,7 @@ Ext.onReady(function(){
     r.add(Ext.trick.test.unit.util.clone);
 
     //create the logger
-    var logger = new YAHOO.tool.TestLogger("testLogger");
+    var logger = new Ext.trick.unit.TestLogger('testLogger');
 
     // テスト実行
     r.run();
