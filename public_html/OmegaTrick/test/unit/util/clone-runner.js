@@ -15,7 +15,7 @@ Ext.onReady(function(){
     // Ext.trick.test.unit.util.clone テストケース追加
     r.add(Ext.trick.test.unit.util.clone);
 
-    //create the logger
+    // ロガー生成
     var logger = new Ext.trick.unit.TestLogger('testLogger');
 
     // テスト実行
