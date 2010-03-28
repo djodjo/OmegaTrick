@@ -22,11 +22,6 @@ Ext.trick.util.clone = function(o) {
         return o;
     }
 
-    // 関数オブジェクトの場合、cloneメソッドの戻り値を返却する
-    if ('function' === typeof o.clone) {
-        return o.clone();
-    }
-
     // 引数が配列の場合、空の配列を、それ以外はオブジェクトを生成
     var c = '[object Array]' === Object.prototype.toString.call(o) ? [] : {};
     var p, v;
