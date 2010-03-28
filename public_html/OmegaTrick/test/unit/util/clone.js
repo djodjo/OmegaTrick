@@ -19,8 +19,17 @@ Ext.ns(
 Ext.trick.test.unit.util.clone = new Ext.trick.unit.TestCase({
 
     // TestCase名
-    name: "Ext.trick.test.unit.util.clone"
+    name: "Ext.trick.test.unit.util.clone",
 
+    testEqualityAsserts : function () {
+        var Assert = YAHOO.util.Assert;
+ 
+        Assert.areEqual(5, 5);     //passes
+        Assert.areEqual(5, "5");     //passes
+        Assert.areNotEqual(5, 6);  //passes
+        Assert.areEqual(5, 6, "Five was expected."); //fails
+    }
+    
 });
 
 /*

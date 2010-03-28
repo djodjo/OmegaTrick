@@ -10,10 +10,13 @@
 Ext.onReady(function(){
 
     // テストランナー生成
-    var r = new Ext.trick.unit.TestRunner();         
+    var r = Ext.trick.unit.TestRunner;
 
-    // Ext.trick.test.unit.util.cloneテストケース追加
+    // Ext.trick.test.unit.util.clone テストケース追加
     r.add(Ext.trick.test.unit.util.clone);
+
+    //create the logger
+    var logger = new YAHOO.tool.TestLogger("testLogger");
 
     // テスト実行
     r.run();

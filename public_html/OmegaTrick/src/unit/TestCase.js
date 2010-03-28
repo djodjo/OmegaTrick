@@ -31,12 +31,10 @@ Ext.trick.unit.TestCase = function(o) {
             // テストケース生成
             ret = new YAHOO.tool.TestCase(o);
             
-            
-            
             break;
     }
 
-    return o;
+    return ret;
 };
 
 // }}}

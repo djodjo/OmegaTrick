@@ -21,17 +21,18 @@ Ext.ns(
 Ext.trick.unit.TestRunner = function() {
 
     var me = this,
+        tfn = Ext.trick.Config.getTestingFrameworkName(),
         runner;
 
     // テストランナーオブジェクト生成
-    switch(Ext.trick.Config.getTestingFrameworkName()){
+    switch(tfn){
     
         // YIU Test
         case 'yui':
             runner = YAHOO.tool.TestRunner;
             break;
     }
-
+    
     return {
     
         // {{{ add
@@ -43,9 +44,9 @@ Ext.trick.unit.TestRunner = function() {
          * @return void
          */
         add : function (t) {
-    
-            switch(Ext.trick.Config.getTestingFrameworkName()) {
             
+            switch(tfn) {
+               
                 // YUI Test
                 case 'yui':
                     runner.add(t);
@@ -62,13 +63,20 @@ Ext.trick.unit.TestRunner = function() {
          * @return void
          */
         run : function() {
-              
+            
+            switch(tfn) {
+
+                // YUI Test
+                case 'yui':
+                    runner.run();      
+                    break;
+            }
         }
 
         // }}}
     };
 
-};
+}();
 
 // }}}
 
