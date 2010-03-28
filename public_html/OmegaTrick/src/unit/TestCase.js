@@ -30,7 +30,8 @@ Ext.trick.unit.TestCase = function(o) {
 
             // テストケース生成
             ret = new YAHOO.tool.TestCase(o);
-            
+           
+            ret.assert = YAHOO.util.Assert;
             break;
     }
 

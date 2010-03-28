@@ -2,10 +2,14 @@
 
 // {{{ Object.prototype.clone
 
-if(Object.prototype.clone) {
-
+if(!Object.prototype.clone) {
+    //
     // Object.prototype.cloneにExt.trick.util.cloneを設定
-    Object.prototype.clone = Ext.trick.util.clone;
+    Object.prototype.clone = function() {
+        //console.log(this);
+        return Ext.trick.util.clone(this);
+
+    };
 }
 
 // }}}
