@@ -4,8 +4,10 @@
 
 if(!Array.prototype.clone) {
 
-    // Array.prototype.cloneにExt.trick.util.cloneを設定
-    Array.prototype.clone = Ext.trick.util.clone;
+    //Array.prototype.cloneにExt.trick.util.cloneを設定
+    Array.prototype.clone = function() {
+        return Ext.trick.util.clone(this);
+    };
 }
 
 // }}}

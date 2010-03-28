@@ -85,10 +85,68 @@ Ext.trick.test.unit.util.clone = new Ext.trick.unit.TestCase({
         me.assert.areEqual(dest.adata[0], 'dest1');
         me.assert.areEqual(dest.adata[1], 'dest2');
 
+    },
+
+    // }}}
+    // {{{ testCloneArray
+    
+    /**
+     * 配列クローンテスト
+     */
+    testCloneArray : function() {
+      
+        var me = this;
+
+        // コピー元配列生成
+        var src = [
+            'string data',
+            999,
+            true,
+            ['item1', 'item2', 'item3']
+        ]
+
+        // クローンで作成されたオブジェクトと比較し別物であることを確認
+        me.assert.areNotEqual(src, Ext.trick.util.clone(src));
+
+        // プロトタイプ経由でクローン生成し比較
+        me.assert.areNotEqual(src, src.clone());
+
+        // クローン配列生成
+        var dest = src.clone();
+
+        // 配列の内容が一致していることを確認
+        me.assert.areEqual(src[0], dest[0]);        // string data
+        me.assert.areEqual(src[1], dest[1]);        // 999
+        me.assert.areEqual(src[2], dest[2]);        // true
+        me.assert.areEqual(src[3][0], dest[3][0]);  // item1
+        me.assert.areEqual(src[3][1], dest[3][1]);  // item1
+        me.assert.areEqual(src[3][2], dest[3][2]);  // item1
+
+        // dest 側の値を変更
+        dest[0] = 'string data dest';
+        dest[1] = 777;
+        dest[2] = false;
+        dest[3] = ['dest1', 'dest2'];
+
+        // src 側のデータは変更されていないことを確認
+        me.assert.areEqual(src[0], 'string data');
+        me.assert.areEqual(src[1], 999);
+        me.assert.areEqual(src[2], true);
+        me.assert.areEqual(src[3][0], 'item1');
+        me.assert.areEqual(src[3][1], 'item2');
+        me.assert.areEqual(src[3][2], 'item3');
+
+        // dest 側のデータが変更されていることを確認
+        me.assert.areEqual(dest[0], 'string data dest');
+        me.assert.areEqual(dest[1], 777);
+        me.assert.areEqual(dest[2], false);
+        me.assert.areEqual(dest[3][0], 'dest1');
+        me.assert.areEqual(dest[3][1], 'dest2');
+
     }
 
     // }}}
-    
+
 });
 
 /*
