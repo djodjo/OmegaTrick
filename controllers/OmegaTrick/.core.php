@@ -64,11 +64,13 @@ class OmegaTrick_core extends xFrameworkPX_Controller_Action
         // 出力ファイル名設定
         $cmd .=  ' --js_output_file=' . $outDir . 'core-min.js';
 
-        echo 'core-min.js 出力中...' . PHP_EOL; 
+        if (count($jslist) > 0) {
 
-        // 処理実行
-        exec($cmd);
- 
+            echo 'core-min.js 出力中...' . PHP_EOL; 
+
+            // 処理実行
+            exec($cmd);
+        }
     }
 }
 

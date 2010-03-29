@@ -1,6 +1,6 @@
 <?php
 
-class OmegaTrick_core extends xFrameworkPX_Controller_Action
+class OmegaTrick_util extends xFrameworkPX_Controller_Action
 {
     public function execute()
     {
@@ -25,7 +25,7 @@ class OmegaTrick_core extends xFrameworkPX_Controller_Action
         }
 
         // 出力先ディレクトリ内のファイルを削除
-        $ret = get_filelist($outDir . 'core/');
+        $ret = get_filelist($outDir . 'util/');
         $outDirFiles = array();
         foreach ($ret as $file) {
             if (!matchesIn($js, '.svn')) {
@@ -44,7 +44,7 @@ class OmegaTrick_core extends xFrameworkPX_Controller_Action
 
             // 出力ファイル名設定
             $file = get_filename($js) . '-min.js';
-            $cmd .=  ' --js_output_file=' . $outDir . 'core/' . $file; 
+            $cmd .=  ' --js_output_file=' . $outDir . 'util/' . $file; 
 
             echo $file . '出力中...' . PHP_EOL; 
 
@@ -62,9 +62,9 @@ class OmegaTrick_core extends xFrameworkPX_Controller_Action
         }
 
         // 出力ファイル名設定
-        $cmd .=  ' --js_output_file=' . $outDir . 'core-min.js';
+        $cmd .=  ' --js_output_file=' . $outDir . 'util-min.js';
 
-        echo 'core-min.js 出力中...' . PHP_EOL; 
+        echo 'util-min.js 出力中...' . PHP_EOL; 
 
         // 処理実行
         exec($cmd);
