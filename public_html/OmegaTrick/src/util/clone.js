@@ -5,17 +5,17 @@
 Ext.ns('Ext.trick', 'Ext.trick.util');
 
 // }}}
-// {{{ Ext.trick.util.clone
+// {{{ Ext.trick.util.Clone
 
 /**
- * Ext.trick.util.clone
+ * Ext.trick.util.Clone
  *
  * オブジェクトクローン生成関数
  *
  * @author  Kazuhiro Kotsutsumi <kotsutsumi@xenophy.com>
  * @version 1.0
  */
-Ext.trick.util.clone = function(o) {
+Ext.trick.util.Clone = function(o) {
 
     // オブジェクトでないか、偽判定の場合は、引数をそのまま返却する
     if (!o || 'object' !== typeof o) {
@@ -31,8 +31,8 @@ Ext.trick.util.clone = function(o) {
         if(o.hasOwnProperty(p)) {
             v = o[p];
             if(v && 'object' === typeof v) {
-                // Ext.trick.util.cloneの再帰コール
-                c[p] = Ext.trick.util.clone(v);
+                // Ext.trick.util.Cloneの再帰コール
+                c[p] = Ext.trick.util.Clone(v);
             }
             else {
                 c[p] = v;
