@@ -4,12 +4,11 @@
 
 Ext.ns(
     'Ext.trick',
-    'Ext.trick.util'
+    'Ext.trick.plugins'
 );
 
 // }}}
-// {{{ Ext.trick.util.Phantom
-
+// {{{ Ext.trick.plugins.DisplayFieldNumberFormat
 
 
 

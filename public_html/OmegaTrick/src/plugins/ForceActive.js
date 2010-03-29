@@ -2,13 +2,17 @@
 
 // {{{ Namespace
 
-Ext.ns(
+Ext.ux(
     'Ext.trick',
-    'Ext.trick.util'
+    'Ext.trick.plugins'
 );
 
 // }}}
-// {{{ Ext.trick.util.Phantom
+// {{{ Ext.trick.plugins.ForceActive
+
+
+
+
 
 
 
