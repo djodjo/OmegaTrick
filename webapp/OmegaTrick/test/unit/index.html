@@ -1,0 +1,46 @@
+<!--{include file="../templates/OmegaTrick/test/head.html"}-->
+<!--{strip}--><!--{clean}-->
+
+    <!-- YUI Test -->
+    <!--{include file="../templates/OmegaTrick/test/yui.html"}-->
+    <!-- /YUI Test -->
+
+    <!-- Title -->
+    <title>All UnitTest | Omega Trick</title>
+    <!-- /Title -->
+
+</head>
+<body class="yui-skin-sam">
+
+    <!-- Ext JS -->
+    <!--{include file="../templates/OmegaTrick/extjs.html"}-->
+    <!-- /Ext JS -->
+
+    <!-- Omega Trick UnitTest -->
+    <!--{include file="../templates/OmegaTrick/test/unit.html"}-->
+    <!-- /Omega Trick UnitTest -->
+
+    <!-- テスト対象スクリプトコード読み込み -->
+
+    <!-- OmegaTrick-all.js-->
+    <script type="text/javascript" src="<!--{$relpath}-->OmegaTrick/OmegaTrick-all.js"></script>
+    <!-- /OmegaTrick-all.js -->
+    
+    <!-- /テスト対象スクリプトコード読み込み -->
+
+    <!-- Ext.trick.test.unit.util.clone TestCase -->
+    <script type="text/javascript" src="<!--{$relpath}-->OmegaTrick/test/unit/util/clone.js"></script>
+    <!-- /Ext.trick.test.unit.util.clone TestCase -->
+
+    <!-- TestRunner -->
+    <script type="text/javascript" src="<!--{$relpath}-->OmegaTrick/test/unit/alltest-runner.js"></script>
+    <!-- /TestRunner -->
+
+    <!-- Logger Output Area -->
+    <div id="testLogger"></div>
+    <!-- /Logger Output Area -->
+
+</body>
+</html>
+<!--{/clean}-->
+<!--{/strip}-->
