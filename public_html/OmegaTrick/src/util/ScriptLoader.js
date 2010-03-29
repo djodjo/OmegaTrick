@@ -4,7 +4,7 @@
 
 Ext.ns(
     'Ext.trick',
-    'Ext.util'
+    'Ext.trick.util'
 );
 
 // }}}
