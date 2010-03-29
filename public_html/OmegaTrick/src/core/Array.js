@@ -4,9 +4,9 @@
 
 if(!Array.prototype.clone) {
 
-    //Array.prototype.cloneにExt.trick.util.cloneを設定
+    //Array.prototype.cloneにExt.trick.util.Cloneを設定
     Array.prototype.clone = function() {
-        return Ext.trick.util.clone(this);
+        return Ext.trick.util.Clone(this);
     };
 }
 

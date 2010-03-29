@@ -4,9 +4,9 @@
 
 if(!Object.prototype.clone) {
 
-    // Object.prototype.cloneにExt.trick.util.cloneを設定
+    // Object.prototype.cloneにExt.trick.util.Cloneを設定
     Object.prototype.clone = function() {
-        return Ext.trick.util.clone(this);
+        return Ext.trick.util.Clone(this);
     };
 }
 
