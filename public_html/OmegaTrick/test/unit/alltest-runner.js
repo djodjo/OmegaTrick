@@ -1,19 +1,25 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
-// {{{ Ext.trick.test.unit.util.clone-runner
+// {{{ Ext.trick.test.unit.alltest-runner
 
 /**
- * Ext.trick.test.unit.util.clone-runner
+ * Ext.trick.test.unit.alltest-runner
  *
- * Ext.trick.test.unit.util.cloneテストケースを実行します。
+ * OmegaTrick全体のテストケースを実行します。
  */
 Ext.onReady(function(){
 
     // テストランナー生成
     var r = Ext.trick.unit.TestRunner;
 
+    // Ext.trick.util TestSuite生成
+    var utilSuite = new Ext.trick.unit.TestSuite("Ext.trick.util TestSuite");
+
     // Ext.trick.test.unit.util.clone テストケース追加
-    //r.add(Ext.trick.test.unit.util.clone);
+    utilSuite.add(Ext.trick.test.unit.util.Clone);
+
+    // テストランナーに追加
+    r.add(utilSuite);
 
     // ロガー生成
     var logger = new Ext.trick.unit.TestLogger('testLogger');

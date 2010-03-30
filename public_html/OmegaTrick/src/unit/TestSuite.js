@@ -18,12 +18,23 @@ Ext.ns(
  * @author  Kazuhiro Kotsutsumi <kotsutsumi@xenophy.com>
  * @version 1.0
  */
-Ext.trick.unit.TestSuite = function() {
+Ext.trick.unit.TestSuite = function(name) {
 
-    var me = this;
+    var me = this,
+        ret;
 
+    switch(Ext.trick.Config.getTestingFrameworkName()) {
+        
+        // YUI Test
+        case 'yui':
 
+            // テストケース生成
+            ret = new YAHOO.tool.TestSuite(name);
+           
+            break;
+    }
 
+    return ret;
 };
 
 // }}}

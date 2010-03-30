@@ -30,7 +30,7 @@ Ext.trick.util.ScriptLoader = function(config) {
     Ext.trick.util.ScriptLoader.superclass.constructor.call(me);
 };
 
-Ext.extend(Ext.ux.ScriptLoader, Ext.util.Observable, {
+Ext.extend(Ext.trick.util.ScriptLoader, Ext.util.Observable, {
 
     // {{{ initEvents
 

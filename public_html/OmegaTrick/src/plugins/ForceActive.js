@@ -2,7 +2,7 @@
 
 // {{{ Namespace
 
-Ext.ux(
+Ext.ns(
     'Ext.trick',
     'Ext.trick.plugins'
 );

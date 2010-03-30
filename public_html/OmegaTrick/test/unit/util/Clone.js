@@ -10,16 +10,16 @@ Ext.ns(
 );
 
 // }}}
-// {{{ Ext.trick.test.unit.util.clone
+// {{{ Ext.trick.test.unit.util.Clone
 
 /**
- * Ext.trick.test.unit.util.cloneオブジェクト
+ * Ext.trick.test.unit.util.Cloneオブジェクト
  *
  */
-Ext.trick.test.unit.util.clone = new Ext.trick.unit.TestCase({
+Ext.trick.test.unit.util.Clone = new Ext.trick.unit.TestCase({
 
     // TestCase名
-    name: "Ext.trick.test.unit.util.clone",
+    name: "Ext.trick.test.unit.util.Clone",
 
     // {{{ testCloneObject
 

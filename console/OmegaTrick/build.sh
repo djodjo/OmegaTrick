@@ -1,11 +1,11 @@
 
-#./app.sh;
-#./core.sh;
-#./draw.sh;
-#./locale.sh;
-#./plugins.sh;
-#./util.sh;
-#./widgets.sh;
+./app.sh;
+./core.sh;
+./draw.sh;
+./locale.sh;
+./plugins.sh;
+./util.sh;
+./widgets.sh;
 
 cat ../../public_html/OmegaTrick/pkgs/app-min.js \
     ../../public_html/OmegaTrick/pkgs/draw-min.js \
