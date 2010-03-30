@@ -1,19 +1,19 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
-// {{{ Ext.trick.test.unit.util.clone-runner
+// {{{ Ext.trick.test.unit.util.Clone-runner
 
 /**
- * Ext.trick.test.unit.util.clone-runner
+ * Ext.trick.test.unit.util.Clone-runner
  *
- * Ext.trick.test.unit.util.cloneテストケースを実行します。
+ * Ext.trick.test.unit.util.Cloneテストケースを実行します。
  */
 Ext.onReady(function(){
 
     // テストランナー生成
     var r = Ext.trick.unit.TestRunner;
 
-    // Ext.trick.test.unit.util.clone テストケース追加
-    r.add(Ext.trick.test.unit.util.clone);
+    // Ext.trick.test.unit.util.Clone テストケース追加
+    r.add(Ext.trick.test.unit.util.Clone);
 
     // ロガー生成
     var logger = new Ext.trick.unit.TestLogger('testLogger');
