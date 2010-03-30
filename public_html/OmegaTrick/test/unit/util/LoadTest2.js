@@ -17,7 +17,7 @@ Ext.ns(
  *
  */
 Ext.trick.test.unit.util.LoadTest2 = function() {
-    
+    return 'LoadTest2 Loaded.';
 };
 
 /*

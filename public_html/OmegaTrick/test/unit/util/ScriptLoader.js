@@ -24,7 +24,7 @@ Ext.trick.test.unit.util.ScriptLoader = new Ext.trick.unit.TestCase({
     // {{{ testSingleLoadScript
 
     /**
-     * スクリプト読み込みテスト
+     * 単体スクリプト読み込みテスト
      */
     testSingleLoadScript : function() {
 
@@ -40,6 +40,67 @@ Ext.trick.test.unit.util.ScriptLoader = new Ext.trick.unit.TestCase({
 
         // スクリプト読み込み
         loader.load();
+    },
+
+    // }}}
+    // {{{ testMultiLoadScript
+
+    /**
+     * 複数スクリプト読み込みテスト
+     */
+    testMultiLoadScript : function() {
+
+        var me = this;
+        var loader = new Ext.trick.util.ScriptLoader({
+            items: [{
+                src: 'http://localhost/~OmegaTrick/OmegaTrick/test/unit/util/LoadTest1.js',
+                callback: function() {
+                    me.assert.areEqual(Ext.trick.test.unit.util.LoadTest1(), 'LoadTest1 Loaded.');
+                }
+            },{
+                src: 'http://localhost/~OmegaTrick/OmegaTrick/test/unit/util/LoadTest2.js',
+                callback: function() {
+                    me.assert.areEqual(Ext.trick.test.unit.util.LoadTest2(), 'LoadTest2 Loaded.');
+                }
+            },{
+                src: 'http://localhost/~OmegaTrick/OmegaTrick/test/unit/util/LoadTest3.js',
+                callback: function() {
+                    me.assert.areEqual(Ext.trick.test.unit.util.LoadTest3(), 'LoadTest3 Loaded.');
+                }
+            }]    
+        });
+
+        // スクリプト読み込み
+        loader.load();
+                          
+    },
+
+    // }}}
+    // {{{ testScope
+
+    /**
+     * スコープ設定テスト
+     */
+    testScope : function() {
+                
+        var me = this,
+            o = {
+                test: 'scope object OK!'
+            };
+        var loader = new Ext.trick.util.ScriptLoader({
+            items: [{
+                src: 'http://localhost/~OmegaTrick/OmegaTrick/test/unit/util/LoadTest1.js',
+                callback: function() {
+                    me.assert.areEqual(Ext.trick.test.unit.util.LoadTest1(), 'LoadTest1 Loaded.');
+                    me.assert.areEqual(this.test, 'scope object OK!');
+                },
+                scope: o
+            }]    
+        });
+
+        // スクリプト読み込み
+        loader.load();
+ 
     }
 
     // }}}
