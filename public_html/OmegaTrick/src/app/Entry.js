@@ -24,8 +24,10 @@ Ext.trick.app.Entry = function() {
          * @return アプリケーションID
          */
         add : function(app) {
-              
-              
+
+            var id = Ext.id(null, 'OmegaTrickApp');
+            
+            apps[id] = new app();
         },
 
         // }}}
@@ -38,7 +40,10 @@ Ext.trick.app.Entry = function() {
          * @return true:成功, false:アプリケーションが存在しない
          */
         remove : function(id) {
-                 
+       
+            if(aps[id]) {
+                delete apps[id];
+            }
         },
 
         // }}}
@@ -50,9 +55,9 @@ Ext.trick.app.Entry = function() {
          * return void
          */
         boot : function() {
-
-alert('boot');
-            
+            Ext.iterate(apps, function(key, item, items) {
+                item.start();
+            });
         }
 
         // }}}

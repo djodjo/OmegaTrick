@@ -1,11 +1,19 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
-SimpleApp = Ext.extend(Ext.trick.app.App, {
-        
-        
-});
+Ext.trick.app.Entry.add(Ext.extend(Ext.trick.app.App, {
 
-Ext.trick.app.Entry.add(SimpleApp);
+    // {{{ start
+
+    /**
+     * 開始メソッド
+     */
+    start : function() {
+        alert("アプリケーション開始"); 
+    }
+    
+    // }}}
+
+}));
 
 /*
  * Local variables:

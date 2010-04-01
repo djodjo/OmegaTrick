@@ -21,6 +21,14 @@ Ext.ns(
  */
 Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
 
+    // {{{ start
+
+    /**
+     * 開始メソッド
+     */
+    start : Ext.emptyFn
+
+    // }}}
 
 });
 
