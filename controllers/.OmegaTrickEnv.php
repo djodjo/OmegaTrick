@@ -7,7 +7,10 @@ class OmegaTrickEnv extends xFrameworkPX_Controller_Action
     {
 
         // Ext JS ディレクトリ設定
-        $this->set('extjsdir', 'ext-3.2-rc'); 
+        $this->set('extjsdir', 'ext-3.2.0'); 
+
+        // Omega Trick ディレクトリ設定
+        $this->set('omegatrickdir', 'OmegaTrick');
     
     }
 

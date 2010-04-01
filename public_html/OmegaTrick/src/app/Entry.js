@@ -51,7 +51,7 @@ Ext.trick.app.Entry = function() {
          */
         boot : function() {
 
-
+alert('boot');
             
         }
 
