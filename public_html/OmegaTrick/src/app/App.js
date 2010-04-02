@@ -21,6 +21,14 @@ Ext.ns(
  */
 Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
 
+    // {{{ screens
+
+    /**
+     * スクリーン配列
+     */
+    screens: [],
+
+    // }}}
     // {{{ start
 
     /**

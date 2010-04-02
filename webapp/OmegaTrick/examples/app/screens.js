@@ -5,6 +5,23 @@
  */
 Ext.onTrick({
 
+    // {{{ screens
+   
+    /**
+     * スクリーン定義
+     */
+    screens: [{
+        dashboard: true,
+        name: 'Dashboard'
+    },{
+        name: 'ScreenA'
+    },{
+        name: 'ScreenB'
+    },{
+        name: 'ScreenC'
+    }],
+
+    // }}}
     // {{{ start
 
     /**
