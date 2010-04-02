@@ -12,7 +12,7 @@
  * @author     Kazuhiro Kotsutsumi <kotsutsumi@xenophy.com>
  * @copyright  Copyright (c) 2006-2010 Xenophy.CO.,LTD All rights Reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
- * @version    SVN $Id$
+ * @version    SVN $Id: LiveRecord.php 1496 2010-04-01 12:27:22Z tamari $
  */
 
 // {{{ xFrameworkPX_Model_Behavior_LiveRecord
@@ -510,6 +510,9 @@ extends xFrameworkPX_Model_Behavior
                           ? $options['where']
                           : '';
 
+        // WHERE句が配列の場合join
+        $whereClause = $this->_getWhereClause($whereClause);
+
         // WHERE句が宣言されている場合と空の場合は、'WHERE'を付加しない
         if (
             (is_string($whereClause) &&
@@ -517,11 +520,6 @@ extends xFrameworkPX_Model_Behavior
             $whereClause == ''
         ) {
             $clause = "\x20";
-        }
-
-        // WHERE句が配列の場合join
-        if (is_array($whereClause) && !empty($whereClause)) {
-            $whereClause = implode(' AND ', $whereClause);
         }
 
         // SET節生成
@@ -580,6 +578,9 @@ extends xFrameworkPX_Model_Behavior
                               ? $options['bind']
                               : array();
 
+        // WHERE句が配列の場合join
+        $whereClause = $this->_getWhereClause($whereClause);
+
         // WHERE句が宣言されている場合と空の場合は、'WHERE'を付加しない
         if (
             (is_string($whereClause) &&
@@ -587,11 +588,6 @@ extends xFrameworkPX_Model_Behavior
             $whereClause == ''
         ) {
             $clause = "\x20";
-        }
-
-        // WHERE句が配列の場合join
-        if (is_array($whereClause) && !empty($whereClause)) {
-            $whereClause = implode(' AND ', $whereClause);
         }
 
         // クエリー生成
@@ -705,19 +701,14 @@ extends xFrameworkPX_Model_Behavior
         $orderClause     = isset($options['order'])
                               ? $options['order']
                               : '';
+        /*
         $limitClause     = isset($options['limit'])
                               ? $options['limit']
                               : '';
+        */
         $pageClause     = isset($options['page'])
                               ? $options['page']
                               : '';
-
-        // LIMIT節チェック
-        if (matchesIn(@strtolower($query), 'limit')) {
-            throw new xFrameworkPX_Model_Exception(
-                'LIMITは自動的に設定されるため、設定できません。'
-            );
-        }
 
         // WHERE句が配列の場合join
         $whereClause = $this->_getWhereClause($whereClause);
@@ -774,6 +765,17 @@ extends xFrameworkPX_Model_Behavior
 
         // LIMIT節付加
         $query = rtrim($query);
+
+        // LIMIT節チェック
+        if (preg_match(
+            '/limit\x20+[0-9]+\x20*(?:(?:,|\x20offset\x20)\x20*[0-9]+\x20*)?$/i',
+            $query
+        )) {
+            throw new xFrameworkPX_Model_Exception(
+                'LIMITは自動的に設定されるため、設定できません。'
+            );
+        }
+
         if (endsWith($query,';')) {
             $query = substr($query, 0, strlen($query) - 1);
         }
@@ -886,6 +888,9 @@ extends xFrameworkPX_Model_Behavior
                               ? $options['page']
                               : 0;
 
+        // WHERE句が配列の場合join
+        $whereClause = $this->_getWhereClause($whereClause);
+
         // WHERE句が宣言されている場合と空の場合は、'WHERE'を付加しない
         if (
             (is_string($whereClause) &&
@@ -894,9 +899,6 @@ extends xFrameworkPX_Model_Behavior
         ) {
             $clause = "\x20";
         }
-
-        // WHERE句が配列の場合join
-        $whereClause = $this->_getWhereClause($whereClause);
 
         // GROUP BY節付加
         if (
@@ -2043,6 +2045,12 @@ extends xFrameworkPX_Model_Behavior
             return 'LIKE';
         } else if (startsWith(trim(strtoupper($text)), 'BETWEEN')) {
             return 'BETWEEN';
+        } else if (startsWith(trim(strtoupper($text)), 'NOT BETWEEN')) {
+            return 'NOT BETWEEN';
+        } else if (startsWith(trim(strtoupper($text)), 'IN')) {
+            return 'IN';
+        } else if (startsWith(trim(strtoupper($text)), 'NOT IN')) {
+            return 'NOT IN';
         }
 
         return false;
@@ -2053,23 +2061,29 @@ extends xFrameworkPX_Model_Behavior
 
     private function _getWhereClause($whereClause)
     {
-        $whereTemp = '';
+
         if (is_array($whereClause) && !empty($whereClause)) {
             $whereTemp = '';
             $prevOperator = false;
+
             foreach ($whereClause as $key => $value) {
-                if($value == 'AND' || $value == 'OR') {
+
+                if ($value == 'AND' || $value == 'OR') {
                     $whereTemp .= ' ' . $value;
                     $prevOperator = true;
                 } else {
-                    if($prevOperator || $key == 0) {
+
+                    if ($prevOperator || $key == 0) {
                         $whereTemp .= ' ' . $value;
                     } else {
                         $whereTemp .= ' AND ' . $value;
                     }
+
                     $prevOperator = false;
                 }
+
             }
+
             $whereClause = $whereTemp;
         }
 
@@ -2123,20 +2137,19 @@ extends xFrameworkPX_Model_Behavior
                 $where[] = strtoupper(trim($value));
             } else {
                 $func = false;
+                $inVal = null;
                 $isFunc = false;
                 $type = '';
 
                 // 演算子取得
                 $hasOperator = $this->_hasOperator(trim($value));
 
-                if ($hasOperator != 'BETWEEN') {
-
-                    // 関数取得
-                    $func = $this->_getFunction($value);
-                } else {
+                if (
+                    $hasOperator == 'BETWEEN' || $hasOperator == 'NOT BETWEEN'
+                ) {
 
                     if (preg_match(
-                        '/^between\x20+([^\x20]+)\x20+and\x20+([^\x20]+)/i',
+                        '/^(?:between|not between)\x20+([^\x20]+)\x20+and\x20+([^\x20]+)/i',
                         $value,
                         $matches
                     )) {
@@ -2204,6 +2217,51 @@ extends xFrameworkPX_Model_Behavior
 
                     }
 
+                } else if ($hasOperator == 'IN' || $hasOperator == 'NOT IN') {
+
+                    if (preg_match(
+                        '/^(?:in|not in)\x20+(.+)/i', $value, $matches
+                    )) {
+                        $inVal = explode(',', $matches[1]);
+
+                        if (count($inVal) > 0) {
+                            $func = array();
+
+                            foreach ($inVal as $index => $val) {
+                                $tempFunc = $this->_getFunction(trim($val));
+
+                                if ($tempFunc) {
+                                    $inVal[$index] = $tempFunc;
+                                    $func[$index] = $tempFunc;
+                                } else {
+
+                                    // クォーテーション除去
+                                    if (preg_match(
+                                        "/^(?:(\")|('))(.*)(?(1)\"|')$/",
+                                        trim($val),
+                                        $matches
+                                    )) {
+                                        $inVal[$index] = $matches[3];
+                                    } else {
+                                        $inVal[$index] = trim($val);
+                                    }
+
+                                }
+
+                            }
+
+                            if (empty($func)) {
+                                $func = false;
+                            }
+
+                        }
+
+                    }
+
+                } else {
+
+                    // 関数取得
+                    $func = $this->_getFunction($value);
                 }
 
                 if (strpos($key, '.')) {
@@ -2224,7 +2282,11 @@ extends xFrameworkPX_Model_Behavior
 
                 }
 
-                if ($hasOperator == 'BETWEEN' && $func) {
+                if (
+                    ($hasOperator == 'BETWEEN' ||
+                    $hasOperator == 'NOT BETWEEN') &&
+                    $func
+                ) {
 
                     foreach ($func as $val) {
 
@@ -2256,6 +2318,40 @@ extends xFrameworkPX_Model_Behavior
                         */
                     }
 
+                } else if (
+                    ($hasOperator == 'IN' ||
+                    $hasOperator == 'NOT IN') &&
+                    $func
+                ) {
+
+                    foreach ($func as $val) {
+
+                        if (is_array($val)) {
+
+                            if ($val['type'] == 'date') {
+
+                                if (
+                                    matchesIn(strtolower($type), 'date') ||
+                                    matchesIn(strtolower($type), 'time')
+                                ) {
+                                    $isFunc = true;
+                                }
+
+                            } else if ($val['type'] == 'other') {
+
+                                if (
+                                    !matchesIn(strtolower($type), 'date') &&
+                                    !matchesIn(strtolower($type), 'time')
+                                ) {
+                                    $isFunc = true;
+                                }
+
+                            }
+
+                        }
+
+                    }
+
                 } else if ($func && $func['type'] == 'date') {
 
                     if (
@@ -2266,6 +2362,7 @@ extends xFrameworkPX_Model_Behavior
                     }
 
                 } else if ($func && $func['type'] == 'other') {
+
                     if (
                         !matchesIn(strtolower($type), 'date') &&
                         !matchesIn(strtolower($type), 'time')
@@ -2279,7 +2376,10 @@ extends xFrameworkPX_Model_Behavior
 
                     if ($hasOperator !== false) {
 
-                        if ($hasOperator == 'BETWEEN') {
+                        if (
+                            $hasOperator == 'BETWEEN' ||
+                            $hasOperator == 'NOT BETWEEN'
+                        ) {
 
                             if (is_string($func[0])) {
                                 $from = ':' . $bindKey . '__from';
@@ -2294,10 +2394,47 @@ extends xFrameworkPX_Model_Behavior
                             }
 
                             $tempWhere = sprintf(
-                                '%s BETWEEN %s AND %s',
+                                '%s %s %s AND %s',
                                 $key,
+                                $hasOperator,
                                 $from,
                                 $to
+                            );
+
+                        } else if (
+                            $hasOperator == 'IN' || $hasOperator == 'NOT IN'
+                        ) {
+                            $inTemp = array();
+                            $bindTemp = array();
+
+                            foreach ($inVal as $index => $val) {
+
+                                if (is_array($val)) {
+
+                                    if (strtoupper($val['name']) == 'MD5()') {
+                                        $bkTemp = $bindKey . '__in' . $index;
+                                        $inTemp[$index] = sprintf(
+                                            'MD5(:%s)',
+                                            $bkTemp
+                                        );
+                                        $bindTemp[$bkTemp] = $val['param'];
+                                    } else {
+                                        $inTemp[$index] = $val['src'];
+                                    }
+
+                                } else {
+                                    $bkTemp = $bindKey . '__in' . $index;
+                                    $inTemp[$index] = ':' . $bkTemp;
+                                    $bindTemp[$bkTemp] = $val;
+                                }
+
+                            }
+
+                            $tempWhere = sprintf(
+                                '%s %s (%s)',
+                                $key,
+                                $hasOperator,
+                                implode(', ', $inTemp)
                             );
                         } else {
                             $tempWhere = sprintf(
@@ -2327,7 +2464,10 @@ extends xFrameworkPX_Model_Behavior
 
                     }
 
-                    if ($hasOperator == 'BETWEEN') {
+                    if (
+                        $hasOperator == 'BETWEEN' ||
+                        $hasOperator == 'NOT BETWEEN'
+                    ) {
 
                         if (is_string($func[0])) {
 
@@ -2357,6 +2497,25 @@ extends xFrameworkPX_Model_Behavior
 
                         }
 
+                    } else if (
+                        $hasOperator == 'IN' ||
+                        $hasOperator == 'NOT IN'
+                    ) {
+
+                        foreach ($bindTemp as $bk => $val) {
+
+                            if (array_key_exists($bk, $binds)) {
+                                $dupKey = $bk . '__duplicateKey' . $dubCnt++;
+                                $binds[$dupKey] = $val;
+                                $tempWhere = str_replace(
+                                    $bk, $dupKey, $tempWhere
+                                );
+                            } else {
+                                $binds[$bk] = $val;
+                            }
+
+                        }
+
                     } else if (strtoupper($func['name']) == 'MD5()') {
 
                         if (array_key_exists($bindKey, $binds)) {
@@ -2375,15 +2534,36 @@ extends xFrameworkPX_Model_Behavior
 
                     if ($hasOperator !== false) {
 
-                        if ($hasOperator == 'BETWEEN') {
-
+                        if (
+                            $hasOperator == 'BETWEEN' ||
+                            $hasOperator == 'NOT BETWEEN'
+                        ) {
                             $tempWhere = sprintf(
-                                '%s BETWEEN :%s AND :%s',
+                                '%s %s :%s AND :%s',
                                 $key,
+                                $hasOperator,
                                 $bindKey . '__from',
                                 $bindKey . '__to'
                             );
+                        } else if (
+                            $hasOperator == 'IN' ||
+                            $hasOperator == 'NOT IN'
+                        ) {
+                            $inTemp = array();
+                            $bindTemp = array();
 
+                            foreach ($inVal as $index => $val) {
+                                $bkTemp = $bindKey . '__in' . $index;
+                                $inTemp[$index] = ':' . $bkTemp;
+                                $bindTemp[$bkTemp] = $val;
+                            }
+
+                            $tempWhere = sprintf(
+                                '%s %s (%s)',
+                                $key,
+                                $hasOperator,
+                                implode(', ', $inTemp)
+                            );
                         } else {
                             $tempWhere = implode(
                                 '',
@@ -2408,7 +2588,10 @@ extends xFrameworkPX_Model_Behavior
                         $tempWhere = $key . ' = :' . $bindKey;
                     }
 
-                    if ($hasOperator == 'BETWEEN') {
+                    if (
+                        $hasOperator == 'BETWEEN' ||
+                        $hasOperator == 'NOT BETWEEN'
+                    ) {
 
                         if (array_key_exists($bindKey . '__from', $binds)) {
                             $dupKey = $bindKey . '__from___duplicateKey' . $dubCnt++;
@@ -2426,6 +2609,24 @@ extends xFrameworkPX_Model_Behavior
                             $binds[$bindKey . '__to'] = $value[1];
                         }
 
+                    } else if (
+                        $hasOperator == 'IN' ||
+                        $hasOperator == 'NOT IN'
+                    ) {
+
+                        foreach ($bindTemp as $bk => $val) {
+
+                            if (array_key_exists($bk, $binds)) {
+                                $dupKey = $bk . '___duplicateKey' . $dubCnt++;
+                                $binds[$dupKey] = $val;
+                                $tempWhere = str_replace(
+                                    $bk, $dupKey, $tempWhere
+                                );
+                            } else {
+                                $binds[$bk] = $val;
+                            }
+
+                        }
                     } else {
 
                         if (array_key_exists($bindKey, $binds)) {
@@ -2441,39 +2642,6 @@ extends xFrameworkPX_Model_Behavior
                 }
 
                 $where[] = $tempWhere;
-                /*
-                if ($this->_hasOperator($value) !== false) {
-                    $tempWhere = implode(
-                        '',
-                        array(
-                            $key,
-                            ' ',
-                            $this->_hasOperator(trim($value)),
-                            ' :',
-                            $bindKey
-                        )
-                    );
-
-                    $value = trim(
-                        substr(
-                            trim($value),
-                            strlen($this->_hasOperator(trim($value)))
-                        )
-                    );
-                } else {
-                    $tempWhere = $key . ' = :' . $bindKey;
-                }
-
-                if (array_key_exists($bindKey, $binds)) {
-                    $dupKey = $bindKey . '___duplicateKey' . $dubCnt++;
-                    $binds[$dupKey] = $bindValue;
-                    $tempWhere = str_replace($bindKey, $dupKey, $tempWhere);
-                } else {
-                    $binds[$bindKey] = $value;
-                }
-
-                $where[] = $tempWhere;
-                */
             }
 
         }
@@ -2771,7 +2939,7 @@ extends xFrameworkPX_Model_Behavior
     // }}}
     // {{{ bindSet
 
-    public function bindSet($data, $lock=true)
+    public function bindSet($data, $primaryCond = array(), $lock = true)
     {
         if (is_null($this->module->usetable)) {
             $tableName = $this->module->getTableName();
@@ -2784,17 +2952,28 @@ extends xFrameworkPX_Model_Behavior
             $this->bindLock(array($tableName));
         }
 
-        if (isset($data[$this->primaryKey])) {
-            $cnt = $this->bindGet(
-                'count',
-                array(
+        $configs = null;
+
+        if (is_array($primaryCond) && count($primaryCond) > 0) {
+            $configs = array(
+                'conditions' => $primaryCond
+            );
+        } else {
+
+            if (isset($data[$this->primaryKey])) {
+                $configs = array(
                     'conditions' => array(
                         array(
-                            $tableName . '.' . $this->primaryKey => $data[$this->primaryKey],
+                            $tableName . '.' . $this->primaryKey => $data[$this->primaryKey]
                         )
                     )
-                )
-            );
+                );
+            }
+
+        }
+
+        if (isset($configs)) {
+            $cnt = $this->bindGet('count', $configs);
         } else {
             $cnt = 0;
         }
@@ -2805,9 +2984,10 @@ extends xFrameworkPX_Model_Behavior
         $colType = '';
         $schema = $this->bindSchema();
 
-        if ($cnt === 1) {
+        if ($cnt > 0) {
 
             foreach ($data as $key => $value) {
+
                 if ($key !== $this->primaryKey) {
 
                     foreach ($schema as $column) {
@@ -2863,6 +3043,51 @@ extends xFrameworkPX_Model_Behavior
                     }
 
                 }
+
+            }
+
+            // 検索条件取得
+            $tempWhere = array();
+
+            if (is_array($primaryCond) && count($primaryCond) > 0) {
+                $temp = $this->_getConditions($primaryCond);
+                $tempWhere = $temp['where'];
+
+                foreach ($temp['bind'] as $bindKey => $bindVal) {
+
+                    if (array_key_exists($bindKey, $binds)) {
+                        $dupCnt = 1;
+
+                        do {
+                            $dupKey = $bindKey . '___duplicate' . $dupCnt++;
+                        } while (array_key_exists($dupKey, $binds));
+
+                        $binds[$dupKey] = $bindVal;
+                    } else {
+                        $binds[$bindKey] = $bindVal;
+                    }
+
+                }
+
+            } else {
+                $bindKey = $tableName . '_' . $this->primaryKey;
+                $tempWhere = sprintf(
+                    '%s.%s = :%s', $tableName, $this->primaryKey, $bindKey
+                );
+
+                if (array_key_exists($bindKey, $binds)) {
+                    $dupCnt = 1;
+
+                    do {
+                        $dupKey = $bindKey . '___duplicate' . $dupCnt++;
+                    } while (array_key_exists($dupKey, $binds));
+
+                    $binds[$dupKey] = $data[$this->primaryKey];
+                    $tempWhere = str_replace($bindKey, $dupKey, $tempWhere);
+                } else {
+                    $binds[$bindKey] = $data[$this->primaryKey];
+                }
+
             }
 
             // UPDATE
@@ -2870,10 +3095,15 @@ extends xFrameworkPX_Model_Behavior
                 'field' => $fields,
                 'value' => $values,
                 'bind' => $binds,
-                'where' => $tableName . '.' . $this->primaryKey . ' = ' . $data[$this->primaryKey]
+                'where' => $tempWhere
             ));
 
         } else {
+
+            // primaryCondの設定があれば終了
+            if (is_array($primaryCond) && !empty($primaryCond)) {
+                return;
+            }
 
             // INSERT
             foreach ($data as $key => $value) {
@@ -2964,25 +3194,30 @@ extends xFrameworkPX_Model_Behavior
     // }}}
     // {{{ bindRemove
 
-    public function bindRemove($data)
+    public function bindRemove($cond)
     {
-        $where = array();
-        $bind = array();
 
-        $i=0;
-        foreach ($data as $id) {
-            $where[] = $this->primaryKey . '=:' . $this->primaryKey . '___' . $i;
-            $bind[$this->primaryKey . '___' . $i] = $id;
-            $i++;
+        if (is_array($cond) && array_key_exists('conditions', $cond)) {
+            $temp = $this->_getConditions($cond['conditions']);
+        } else {
+            $condTemp = array();
+
+            foreach ($cond as $index => $id) {
+
+                if ($index != 0) {
+                    $condTemp[] = 'OR';
+                }
+
+                $condTemp[] = array($this->primaryKey => $id);
+            }
+
+            $temp = $this->_getConditions($condTemp);
         }
 
+        // DELTE文実行
         $this->bindDelete(
-            array(
-                'where' => implode(' OR ', $where),
-                'bind' => $bind
-            )
+            array('where' => $temp['where'], 'bind' => $temp['bind'])
         );
-
     }
 
     // }}}

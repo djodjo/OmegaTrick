@@ -1,6 +1,6 @@
 <?php
 
-// SVN $Id$
+// SVN $Id: Tools.class.php 451 2009-12-08 12:22:37Z  $
 
 /**
  * xFrameworkPX_Tools Class File
@@ -17,7 +17,7 @@
  * @link          http://www.xframeworkpx.com xFrameworkPX
  * @package       xFrameworkPX
  * @since         xFrameworkPX 3.5.0
- * @version       $Revision$
+ * @version       $Revision: 451 $
  * @license       http://www.opensource.org/licenses/mit-license.php
  */
 

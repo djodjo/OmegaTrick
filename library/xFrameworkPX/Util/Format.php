@@ -12,7 +12,7 @@
  * @author     Kazuhiro Kotsutsumi <kotsutsumi@xenophy.com>
  * @copyright  Copyright (c) 2006-2010 Xenophy.CO.,LTD All rights Reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
- * @version    SVN $Id$
+ * @version    SVN $Id: Format.php 1398 2010-01-19 10:08:38Z tamari $
  */
 
 // {{{ xFrameworkPX_Util_Format

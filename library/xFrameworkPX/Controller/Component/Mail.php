@@ -12,7 +12,7 @@
  * @author     Kazuhiro Kotsutsumi <kotsutsumi@xenophy.com>
  * @copyright  Copyright (c) 2006-2010 Xenophy.CO.,LTD All rights Reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
- * @version    SVN $Id$
+ * @version    SVN $Id: Mail.php 912 2009-12-23 20:00:22Z kotsutsumi $
  */
 
 // {{{ xFrameworkPX_Controller_Component_Mail

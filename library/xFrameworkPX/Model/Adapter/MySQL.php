@@ -12,7 +12,7 @@
  * @author     Kazuhiro Kotsutsumi <kotsutsumi@xenophy.com>
  * @copyright  Copyright (c) 2006-2010 Xenophy.CO.,LTD All rights Reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
- * @version    SVN $Id$
+ * @version    SVN $Id: MySQL.php 1369 2010-01-18 12:02:07Z kotsutsumi $
  */
 
 // {{{ xFrameworkPX_Model_Adapter_MySQL

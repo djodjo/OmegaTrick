@@ -12,7 +12,7 @@
  * @author     Kazuhiro Kotsutsumi <kotsutsumi@xenophy.com>
  * @copyright  Copyright (c) 2006-2010 Xenophy.CO.,LTD All rights Reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
- * @version    SVN $Id$
+ * @version    SVN $Id: Dispatcher.php 1475 2010-02-27 23:45:20Z kotsutsumi $
  */
 
 // {{{ xFrameworkPX_Dispatcher
@@ -397,7 +397,7 @@ class xFrameworkPX_Dispatcher extends xFrameworkPX_Object
                 )
             )
         );
-        
+
         // コントローラー実行
         try {
             $this->getController(

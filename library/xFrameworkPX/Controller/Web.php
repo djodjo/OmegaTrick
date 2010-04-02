@@ -12,7 +12,7 @@
  * @author     Kazuhiro Kotsutsumi <kotsutsumi@xenophy.com>
  * @copyright  Copyright (c) 2006-2010 Xenophy.CO.,LTD All rights Reserved.
  * @license    http://www.opensource.org/licenses/mit-license.html MIT License
- * @version    SVN $Id$
+ * @version    SVN $Id: Web.php 1492 2010-03-30 01:28:37Z yasunaga $
  */
 
 // {{{ xFrameworkPX_Controller_Web
@@ -263,11 +263,16 @@ class xFrameworkPX_Controller_Web extends xFrameworkPX_Controller
                 $clsName = (string)$xmlController;
 
                 $filename = implode(
-                    '',
                     array(
+                        dirname(
+                           str_replace('_', '/', $clsName)
+                        ),
+                        DS,
                         $pxconf['CONTROLLER_PREFIX'],
-                        $clsName,
-                        $pxconf['CONTROLLER_EXTENSION'],
+                        get_filename(
+                            str_replace('_', '/', $clsName)
+                        ),
+                        $pxconf['CONTROLLER_EXTENSION']
                     )
                 );
 
@@ -367,11 +372,16 @@ class xFrameworkPX_Controller_Web extends xFrameworkPX_Controller
                 $clsName = (string)$xmlController;
 
                 $filename = implode(
-                    '',
                     array(
+                        dirname(
+                           str_replace('_', '/', $clsName)
+                        ),
+                        DS,
                         $pxconf['CONTROLLER_PREFIX'],
-                        $clsName,
-                        $pxconf['CONTROLLER_EXTENSION'],
+                        get_filename(
+                            str_replace('_', '/', $clsName)
+                        ),
+                        $pxconf['CONTROLLER_EXTENSION']
                     )
                 );
 

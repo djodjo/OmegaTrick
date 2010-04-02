@@ -1,1 +1,1 @@
-Ext.trick.app.Entry=function(){var me=this,apps={};return{add:function(app){},remove:function(id){},boot:function(){}}}();Ext.onReady(Ext.trick.app.Entry.boot);
+Ext.trick.app.Entry=function(){var me=this,apps={};return{add:function(app){var id=Ext.id(null,"OmegaTrickApp");apps[id]=new app},remove:function(id){if(aps[id])delete apps[id]},boot:function(){Ext.iterate(apps,function(key,item,items){item.start()})}}}();Ext.onReady(Ext.trick.app.Entry.boot);

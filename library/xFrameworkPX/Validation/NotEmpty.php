@@ -1,6 +1,6 @@
 <?php
 
-// SVN $Id$
+// SVN $Id: NotEmpty.php 1178 2010-01-05 15:13:08Z tamari $
 
 /**
  * xFrameworkPX_Validation_NotEmpty Class File
@@ -17,7 +17,7 @@
  * @link          http://www.xframeworkpx.com xFrameworkPX
  * @package       xFrameworkPX\Validation
  * @since         xFrameworkPX 3.5.0
- * @version       $Revision$
+ * @version       $Revision: 1178 $
  * @license       http://www.opensource.org/licenses/mit-license.php
  */
 
