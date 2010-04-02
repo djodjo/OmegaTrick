@@ -86,7 +86,7 @@ class OmegaTrick_compressionJs extends xFrameworkPX_Model
             } else {
                 echo $file . '出力中...' . PHP_EOL; 
             }
-print_r($cmd);
+
             // 処理実行
             exec($cmd);
         }
