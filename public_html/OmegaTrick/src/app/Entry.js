@@ -56,7 +56,12 @@ Ext.trick.app.Entry = function() {
          */
         boot : function() {
             Ext.iterate(apps, function(key, item, items) {
-                item.start();
+                if(item.init()) {
+                    if(item.fireEvent('beforestart')) {
+                        item.start();
+                        item.fireEvent('start');
+                    }
+                }
             });
         }
 

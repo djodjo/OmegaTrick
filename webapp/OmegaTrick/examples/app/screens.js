@@ -11,7 +11,7 @@ Ext.onTrick({
      * スクリーン定義
      */
     screens: [{
-        dashboard: true,
+        fix: true,
         name: 'Dashboard'
     },{
         name: 'ScreenA'

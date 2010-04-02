@@ -29,6 +29,55 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
     screens: [],
 
     // }}}
+    // {{{ initEvents
+    
+    /**
+     * イベント初期化メソッド
+     *
+     * @return void
+     */
+    initEvents : function() {
+
+        var me = this;
+
+        me.addEvents(
+            'beforeinit',
+            'init',
+            'beforestart',
+            'start',
+            'beforeloadscript',
+            'loadscript'
+        );
+    
+    },
+
+    // }}}
+    // {{{ init
+
+    /**
+     * 初期化メソッド
+     */
+    init : function() {
+        
+        var me = this;
+
+        // イベント初期化
+        me.initEvents();
+
+        if(!me.fireEvent('beforeinit')) {
+            return false;
+        }
+
+        Ext.iterate(me.screens, function(item, cnt, items) {
+            if(item.fix) {
+                 
+            }
+        });
+  
+        return me.fireEvent('init');
+    },
+    
+    // }}}
     // {{{ start
 
     /**
