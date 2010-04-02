@@ -22,14 +22,12 @@ class OmegaTrick_compressJs extends xFrameworkPX_Controller_Action
 
         $target = $this->args->target;
 
-            $this->OmegaTrick_compressionJs->compressAll();
-/*
         if ($target != 'build') {
             $this->OmegaTrick_compressionJs->compress($target);
         } else {
             $this->OmegaTrick_compressionJs->compressAll();
         }
-*/
+
     }
 
 }
