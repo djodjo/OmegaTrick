@@ -78,6 +78,18 @@ Ext.trick.app.Entry = function() {
 Ext.onReady(Ext.trick.app.Entry.boot);
 
 // }}}
+// {{{ Ext.onTrick
+
+/**
+ * Omega Trick Application Entry
+ *
+ * @param o アプリケーションクラスオブジェクト
+ */
+Ext.onTrick = function(o) {
+   return Ext.trick.app.Entry.add(Ext.extend(Ext.trick.app.App, o));
+};
+
+// }}}
 
 /*
  * Local variables:

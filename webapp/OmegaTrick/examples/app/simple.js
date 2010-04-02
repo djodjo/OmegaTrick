@@ -1,6 +1,6 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
-Ext.trick.app.Entry.add(Ext.extend(Ext.trick.app.App, {
+Ext.onTrick({
 
     // {{{ start
 
@@ -13,7 +13,7 @@ Ext.trick.app.Entry.add(Ext.extend(Ext.trick.app.App, {
     
     // }}}
 
-}));
+});
 
 /*
  * Local variables:
