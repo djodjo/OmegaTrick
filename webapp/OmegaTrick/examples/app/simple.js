@@ -8,7 +8,9 @@ Ext.onTrick({
      * 開始メソッド
      */
     start : function() {
-        alert("アプリケーション開始"); 
+        Ext.DomHelper.append(Ext.getBody(),{
+            html: 'アプリケーション開始！'    
+        });
     }
     
     // }}}
