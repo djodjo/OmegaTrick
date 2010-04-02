@@ -22,6 +22,9 @@ class OmegaTrick_compressionJs extends xFrameworkPX_Model
     // 出力先ディレクトリ
     private $_outDir = '../public_html/OmegaTrick/pkgs/';
 
+    // ALL用出力先ディレクトリ
+    private $_outDirAll = '../public_html/OmegaTrick/';
+
     // {{{ compress
 
     /**
@@ -82,7 +85,9 @@ class OmegaTrick_compressionJs extends xFrameworkPX_Model
             $cmd .=  ' --js_output_file=' . $outDir . $target . '/' . $file;
 
             if (matchesIn(PHP_OS, 'WIN')) {
-                echo mb_convert_encoding($file . '出力中...' . PHP_EOL, 'sjis-win', 'UTF-8'); 
+                echo mb_convert_encoding(
+                    $file . '出力中...' . PHP_EOL, 'sjis-win', 'UTF-8'
+                );
             } else {
                 echo $file . '出力中...' . PHP_EOL; 
             }
@@ -106,7 +111,9 @@ class OmegaTrick_compressionJs extends xFrameworkPX_Model
         if (count($jslist) > 0) {
 
             if (matchesIn(PHP_OS, 'WIN')) {
-                echo mb_convert_encoding($target.'-min.js 出力中...' . PHP_EOL, 'sjis-win', 'UTF-8'); 
+                echo mb_convert_encoding(
+                    $target.'-min.js 出力中...' . PHP_EOL, 'sjis-win', 'UTF-8'
+                ); 
             } else {
                 echo $target.'-min.js 出力中...' . PHP_EOL; 
             }
@@ -114,6 +121,39 @@ class OmegaTrick_compressionJs extends xFrameworkPX_Model
             // 処理実行
             exec($cmd);
         }
+    }
+
+    // }}}
+    // {{{ compressAll
+
+    /**
+     * jsファイル圧縮メソッド
+     *
+     * @param $target 対象ディレクトリ名（$_targetDirsのいずれか）
+     * @param $compress true: 圧縮 false:非圧縮
+     * @param $baseDir ベース作業ディレクトリ
+     * @param $outDir 出力先ディレクトリ
+     * @return void
+     */
+    public function compressAll($compress = true, $baseDir = '', $outDir = '', $outDirAll = '')
+    {
+
+        foreach ($this->_targetDirs as $target) {
+            $this->compress($target, $compress, $baseDir, $outDir);
+        }
+
+        $js = '';
+        foreach ($this->_targetDirs as $target) {
+            $js .= @file_get_contents($this->_outDir.$target.'-min.js');
+        }
+
+        // 出力先ディレクトリ
+        if (empty($outDirAll)) {
+            $outDirAll = $this->_outDirAll;
+        }
+
+        file_put_contents($outDirAll.'OmegaTrick-all.js', $js, LOCK_EX);
+
     }
 
     // }}}
