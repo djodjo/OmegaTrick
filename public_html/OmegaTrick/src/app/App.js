@@ -70,7 +70,22 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
 
         Ext.iterate(me.screens, function(item, cnt, items) {
             if(item.fix) {
-                 
+
+                // スクリプト読み込み
+                if(item.items) {
+                    new Ext.trick.util.ScriptLoader({
+                        items: item.items
+                    }).load();
+                } else {
+                    new Ext.trick.util.ScriptLoader({
+                        items: [{
+                            src: 'screens/' + item.name + '.js',
+                            callback: function() {
+                                
+                            }
+                        }]
+                    }).load();                
+                }
             }
         });
   
