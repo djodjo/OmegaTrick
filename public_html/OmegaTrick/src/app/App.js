@@ -28,6 +28,11 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
      */
     screens: [],
 
+    /**
+     * ケーシングオブジェクト
+     */
+    casing: {},
+
     // }}}
     // {{{ initEvents
     

@@ -28,13 +28,36 @@ Ext.onTrick({
     }],
 
     // }}}
+    // {{{ casing
+
+    /**
+     * ケーシング設定
+     */
+    casing: {
+        
+        north: {
+            border: false,
+            tbar: [{
+                text: 'Dashboard'
+            },{
+                text: 'ScreenA'
+            },{
+                text: 'ScreenB'
+            },{
+                text: 'ScreenC'
+            }]
+        }
+            
+    },
+
+    // }}}
     // {{{ start
 
     /**
      * 開始メソッド
      */
     start : function() {
-
+        
         // ビューポート生成
         new Ext.Viewport({
             layout: 'border',
