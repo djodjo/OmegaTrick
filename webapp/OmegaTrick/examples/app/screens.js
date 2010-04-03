@@ -14,7 +14,13 @@ Ext.onTrick({
         fix: true,
         name: 'Dashboard'
     },{
-        name: 'ScreenA'
+        fix: true,
+        name: 'ScreenA',
+        items: [{
+            src: 'screens/ScreenA/item1.js'
+        },{
+            src: 'screens/ScreenA/item2.js'
+        }]
     },{
         name: 'ScreenB'
     },{
@@ -28,7 +34,31 @@ Ext.onTrick({
      * 開始メソッド
      */
     start : function() {
-        alert("アプリケーション開始"); 
+
+        // ビューポート生成
+        new Ext.Viewport({
+            layout: 'border',
+            items: [{
+                region: 'north',
+                border: false,
+                tbar: [{
+                    text: 'Dashboard'
+                },{
+                    text: 'ScreenA'
+                },{
+                    text: 'ScreenB'
+                },{
+                    text: 'ScreenC'
+                }]
+            },{
+                region: 'center',
+                layout: 'fit',
+                border: false,
+                items: [{
+                    title: "test"
+                }]
+            }]
+        });            
     }
     
     // }}}

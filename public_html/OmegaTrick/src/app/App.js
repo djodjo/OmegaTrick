@@ -48,9 +48,29 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
             'beforeloadscript',
             'loadscript'
         );
-    
+
+        me.on('init', me.removeScriptTags, me);
+        me.on('init', me.start, me);
+
     },
 
+    // }}}
+    // {{{ removeScriptTags
+    
+    /**
+     * スクリプトタグ削除メソッド
+     */
+    removeScriptTags : function() {
+  
+        var me = this;
+        
+        // スクリプトタグ削除
+        Ext.select('body script').each(function(el) {
+            Ext.removeNode(Ext.getDom(el));
+        }, me);
+                   
+    },
+    
     // }}}
     // {{{ init
 
@@ -68,28 +88,42 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
             return false;
         }
 
+        var scripts = [];
         Ext.iterate(me.screens, function(item, cnt, items) {
-            if(item.fix) {
 
-                // スクリプト読み込み
-                if(item.items) {
-                    new Ext.trick.util.ScriptLoader({
-                        items: item.items
-                    }).load();
-                } else {
-                    new Ext.trick.util.ScriptLoader({
-                        items: [{
-                            src: 'screens/' + item.name + '.js',
-                            callback: function() {
-                                
-                            }
-                        }]
-                    }).load();                
+            // Fix用スクリプト一覧作成    
+            if(item.fix)
+            {
+
+                if(item.items)
+                {
+                    scripts = scripts.concat(item.items); 
+                }
+                else
+                {
+                    scripts.push({
+                        src: 'screens/' + item.name + '.js'
+                    }); 
                 }
             }
         });
-  
-        return me.fireEvent('init');
+ 
+        if(scripts.length > 0) {
+            var loader = new Ext.trick.util.ScriptLoader({
+                items: scripts        
+            });
+            loader.on('load', function() {
+                if(me.fireEvent('loadscript')) {
+                    me.fireEvent('init');
+                }
+            });
+
+            if(me.fireEvent('beforeloadscript')) {
+                loader.load();
+            }
+        } else {
+            me.fireEvent('init');
+        }
     },
     
     // }}}
