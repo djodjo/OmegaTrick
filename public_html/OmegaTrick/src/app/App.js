@@ -21,6 +21,14 @@ Ext.ns(
  */
 Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
 
+    // {{{ autoRender
+
+    /**
+     * 自動レンダリング設定
+     */
+    autoRender: true,
+
+    // }}}
     // {{{ screens
 
     /**
@@ -55,7 +63,11 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
         );
 
         me.on('init', me.removeScriptTags, me);
-        me.on('init', me.render, me);
+        if(me.autoRender) {
+            me.on('init', me.render, me);
+        } else {
+            me.on('init', me.start, me);
+        }
     },
 
     // }}}
