@@ -55,8 +55,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
         );
 
         me.on('init', me.removeScriptTags, me);
-        me.on('init', me.start, me);
-
+        me.on('init', me.render, me);
     },
 
     // }}}
@@ -131,6 +130,63 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
         }
     },
     
+    // }}}
+    // {{{ render
+
+    /**
+     * レンダリングメソッド
+     */
+    render : function() {
+             
+        var me = this,
+            renderItems;
+
+        // レンダリングアイテム設定
+        renderItems = [{
+            region: 'center',
+            title: 'test'
+        }];
+       
+        // ケーシング設定
+        if(Ext.isObject(me.casing) && me.casing.north) {
+            var north = me.casing.north;
+            north.region = 'north';
+            renderItems.push(north);
+        }
+        if(Ext.isObject(me.casing) && me.casing.west) {
+            var west = me.casing.west;
+            west.region = 'west';
+            renderItems.push(west);
+        }
+        if(Ext.isObject(me.casing) && me.casing.east) {
+            var east = me.casing.east;
+            east.region = 'east';
+            renderItems.push(east);
+        }
+        if(Ext.isObject(me.casing) && me.casing.south) {
+            var south = me.casing.south;
+            south.region = 'east';
+            renderItems.push(south);
+        }
+
+        // ビューポート生成
+        me.viewport = new Ext.Viewport({
+            layout: 'fit',
+            items: [{
+                border: false,
+                layout: 'border',
+                items: renderItems
+            }],
+            listeners: {
+                afterrender: {
+                    fn: function() {
+                        me.start.call(me);
+                    }
+                }
+            }
+        });
+    },
+
     // }}}
     // {{{ start
 

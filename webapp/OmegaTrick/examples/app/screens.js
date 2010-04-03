@@ -57,31 +57,6 @@ Ext.onTrick({
      * 開始メソッド
      */
     start : function() {
-        
-        // ビューポート生成
-        new Ext.Viewport({
-            layout: 'border',
-            items: [{
-                region: 'north',
-                border: false,
-                tbar: [{
-                    text: 'Dashboard'
-                },{
-                    text: 'ScreenA'
-                },{
-                    text: 'ScreenB'
-                },{
-                    text: 'ScreenC'
-                }]
-            },{
-                region: 'center',
-                layout: 'fit',
-                border: false,
-                items: [{
-                    title: "test"
-                }]
-            }]
-        });            
     }
     
     // }}}
