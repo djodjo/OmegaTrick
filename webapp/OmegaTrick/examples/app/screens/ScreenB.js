@@ -2,10 +2,10 @@
 
 Ext.ns(
     'ScreenExamples',
-    'ScreenExamples.Dashboard'    
+    'ScreenExamples.ScreenB'    
 );
 
-ScreenExamples.Dashboard.ScreenPanel = Ext.extend(Ext.Panel, {
+ScreenExamples.ScreenB.ScreenPanel = Ext.extend(Ext.Panel, {
 
     // {{{ initComponent
 
@@ -13,20 +13,15 @@ ScreenExamples.Dashboard.ScreenPanel = Ext.extend(Ext.Panel, {
     
         var me = this;
 
-        Ext.apply(me, {
-            id: 'Dashboard',
-            title: 'Dashboard'    
-        });
-
         // スーパークラスメソッドコール
-        ScreenExamples.Dashboard.ScreenPanel.superclass.initComponent.call(me);
+        ScreenExamples.ScreenB.ScreenPanel.superclass.initComponent.call(me);
     }
 
     // }}}        
         
 });
 
-Ext.reg('dashboard', ScreenExamples.Dashboard.ScreenPanel);
+Ext.reg('screenb', ScreenExamples.ScreenB.ScreenPanel);
 
 /*
  * Local variables:
@@ -35,4 +30,6 @@ Ext.reg('dashboard', ScreenExamples.Dashboard.ScreenPanel);
  * c-hanging-comment-ender-p: nil
  * End:
  */
+
+
 

@@ -130,7 +130,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
                 }
             }
         });
- 
+
         if(scripts.length > 0) {
             var loader = new Ext.trick.util.ScriptLoader({
                 items: scripts        
@@ -160,10 +160,18 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
         var me = this,
             renderItems;
         
+        // スクリーンアイテム配列生成
+        var screens = [];
+        Ext.iterate(me.screens, function(item, cnt, items) {
+            screens.push({
+                xtype: item.name.toLowerCase()   
+            });
+        }, me);
+
         // レンダリングアイテム設定
         renderItems = [{
             xtype: 'screen',
-            items: me.screens,
+            items: screens,
             region: 'center'
         }];
        
