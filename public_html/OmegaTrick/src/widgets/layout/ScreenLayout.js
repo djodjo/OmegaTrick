@@ -1,5 +1,13 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
+// {{{ Namespace
+
+Ext.ns(
+    'Ext.trick',
+    'Ext.trick.layout'
+);
+
+// }}}
 // {{{ Ext.trick.layout.ScreenLayout
 
 /**

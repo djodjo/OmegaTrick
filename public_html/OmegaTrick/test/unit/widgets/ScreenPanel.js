@@ -21,15 +21,26 @@ Ext.trick.test.unit.widgets.ScreenPanel = new Ext.trick.unit.TestCase({
     // TestCase名
     name: "Ext.trick.test.unit.widgets.ScreenPanel",
 
-    // {{{ testScreenPanelObject
+    // {{{ testCreate
 
     /**
-     * オブジェクトクローンテスト
+     * パネル生成テスト
      */
-    testScreenPanelObject : function() {
+    testCreate : function() {
     
         var me = this;
-       
+
+        var p = new Ext.trick.ScreenPanel({
+            title: 'testCreate',
+            layout: 'screen',
+            activeItem: 0,
+            items: [{
+                title: 'ScreenA' 
+            },{
+                title: 'ScreenB' 
+            }],
+            renderTo: Ext.getBody()     
+        });
     }
 
     // }}}
