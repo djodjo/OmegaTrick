@@ -21,6 +21,14 @@ Ext.ns(
  */
 Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
 
+    // {{{ appName
+
+    /**
+     * アプリケーション名設定
+     */
+    appName: null,
+
+    // }}}
     // {{{ autoRender
 
     /**
@@ -110,7 +118,6 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
             // Fix用スクリプト一覧作成    
             if(item.fix)
             {
-
                 if(item.items)
                 {
                     scripts = scripts.concat(item.items); 
@@ -152,15 +159,12 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
              
         var me = this,
             renderItems;
-console.log(me.screens);
+        
         // レンダリングアイテム設定
         renderItems = [{
             xtype: 'screen',
-            layout: 'screen',
-            setActiveItem: 0,
             items: me.screens,
-            region: 'center',
-            title: 'test'
+            region: 'center'
         }];
        
         // ケーシング設定

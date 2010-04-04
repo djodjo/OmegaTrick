@@ -33,6 +33,9 @@ Ext.trick.app.Entry = function() {
             // アプリケーションオブジェクトを設定
             if(apps[id].appName) {
                 window[apps[id].appName] = apps[id];
+            } else {
+                window[id] = apps[id];
+                apps[id].appName = id;
             }
         },
 

@@ -21,6 +21,18 @@ Ext.trick.ScreenPanel = Ext.extend(Ext.Panel,{
 
     initComponent: function() {
     
+        var me = this;
+
+        Ext.applyIf(me, {
+            layout: 'screen'    
+        });
+
+        if(me.layout === 'screen') {
+            Ext.applyIf(me, {
+                activeItem: 0
+            });
+        }
+
         // スーパークラスメソッドコール
         Ext.trick.ScreenPanel.superclass.initComponent.call(this);
     },
