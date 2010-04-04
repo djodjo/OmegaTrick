@@ -89,6 +89,30 @@ Ext.trick.test.unit.widgets.ScreenPanel = new Ext.trick.unit.TestCase({
     
         var me = this;
 
+        // スクリーン子パネル存在確認
+        me.assert.isNotNull(Ext.getDom('testScreenPanelA'));
+
+        // スクリーン子パネル非存在確認
+        me.assert.isNull(Ext.getDom('testScreenPanelB'));
+
+        // 数値によるスクリーン切り替え
+        me.panel.layout.setActiveItem(1);
+
+        // スクリーン子パネル非存在確認
+        me.assert.isNull(Ext.getDom('testScreenPanelA'));
+
+        // スクリーン子パネル存在確認
+        me.assert.isNotNull(Ext.getDom('testScreenPanelB'));
+
+        // IDによるスクリーン切り替え
+        me.panel.layout.setActiveItem('testScreenPanelA');
+
+        // スクリーン子パネル存在確認
+        me.assert.isNotNull(Ext.getDom('testScreenPanelA'));
+
+        // スクリーン子パネル非存在確認
+        me.assert.isNull(Ext.getDom('testScreenPanelB'));
+
     }
 
     // }}}
