@@ -5,6 +5,14 @@
  */
 Ext.onTrick({
 
+    // {{{ appName
+
+    /**
+     * アプリケーション名設定
+     */
+    appName: 'ScreenExamples',
+
+    // }}}
     // {{{ screens
    
     /**

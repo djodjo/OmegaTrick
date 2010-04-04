@@ -152,9 +152,13 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
              
         var me = this,
             renderItems;
-
+console.log(me.screens);
         // レンダリングアイテム設定
         renderItems = [{
+            xtype: 'screen',
+            layout: 'screen',
+            setActiveItem: 0,
+            items: me.screens,
             region: 'center',
             title: 'test'
         }];

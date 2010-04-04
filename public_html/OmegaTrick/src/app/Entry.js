@@ -28,6 +28,12 @@ Ext.trick.app.Entry = function() {
             var id = Ext.id(null, 'OmegaTrickApp');
             
             apps[id] = new app();
+            
+            // アプリケーション名が設定されている場合、グローバルスコープに
+            // アプリケーションオブジェクトを設定
+            if(apps[id].appName) {
+                window[apps[id].appName] = apps[id];
+            }
         },
 
         // }}}
