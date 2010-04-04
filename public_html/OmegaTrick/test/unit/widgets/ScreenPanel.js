@@ -20,7 +20,45 @@ Ext.trick.test.unit.widgets.ScreenPanel = new Ext.trick.unit.TestCase({
 
     // TestCase名
     name: "Ext.trick.test.unit.widgets.ScreenPanel",
+ 
+    // {{{ setUp
 
+    /**
+     * セットアップメソッド
+     *
+     * @return void
+     */
+    setUp : function () {
+
+        this.panel = new Ext.trick.ScreenPanel({
+            id: 'testScreenPanel',
+            title: 'testCreate',
+            layout: 'screen',
+            activeItem: 0,
+            items: [{
+                id: 'testScreenPanelA',
+                title: 'ScreenA' 
+            },{
+                id: 'testScreenPanelB',
+                title: 'ScreenB' 
+            }],
+            renderTo: Ext.getBody()     
+        });
+    },
+ 
+    // }}}
+    // {{{ tearDown
+
+    /**
+     * ティアーダウンメソッド
+     *
+     * @return void
+     */
+    tearDown : function () {
+        this.panel.destroy();
+    },
+ 
+    // }}}
     // {{{ testCreate
 
     /**
@@ -30,17 +68,27 @@ Ext.trick.test.unit.widgets.ScreenPanel = new Ext.trick.unit.TestCase({
     
         var me = this;
 
-        var p = new Ext.trick.ScreenPanel({
-            title: 'testCreate',
-            layout: 'screen',
-            activeItem: 0,
-            items: [{
-                title: 'ScreenA' 
-            },{
-                title: 'ScreenB' 
-            }],
-            renderTo: Ext.getBody()     
-        });
+        // スクリーンパネル存在確認
+        me.assert.isNotNull(Ext.getDom('testScreenPanel'));
+
+        // スクリーン子パネル存在確認
+        me.assert.isNotNull(Ext.getDom('testScreenPanelA'));
+
+        // スクリーン子パネル非存在確認
+        me.assert.isNull(Ext.getDom('testScreenPanelB'));
+
+    },
+
+    // }}}
+    // {{{ testSwitch
+
+    /**
+     * スクリーン切り替えテスト
+     */
+    testSwitch : function() {
+    
+        var me = this;
+
     }
 
     // }}}
