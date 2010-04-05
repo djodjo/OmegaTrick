@@ -134,10 +134,18 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
             sp.layout.setActiveItem(to);
         } else {
 
-            var loader = new Ext.trick.util.ScriptLoader({
-                items: [{
+            var scripts = [];
+            console.log(t);
+            if(t.scriptItems) {
+                scripts = scripts.concat(t.scriptItems); 
+            } else {
+                scripts.push({
                     src: 'screens/' + t.name + '.js'
-                }]        
+                }); 
+            }
+
+            var loader = new Ext.trick.util.ScriptLoader({
+                items: scripts
             }); 
 
             loader.on('load', function() {
@@ -225,6 +233,18 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
                 name: item.name,
                 xtype: me.screenXTypePrefix + item.name.toLowerCase()   
             };
+           
+            if(item.items) {
+                o.scriptItems = item.items;
+            } 
+            /*
+            // 既にスクリーンパネル定義があるか判定
+            if(Ext.ComponentMgr.types[o.xtype]){
+                o.dynamicLoad = false;
+            } else {
+                o.dynamicLoad = true;
+            }
+*/
 
             if(item.fix) {
                 o.fix = true;
