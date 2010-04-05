@@ -188,6 +188,9 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
             if(item.fix) {
                 o.fix = true;
             }
+            if(item.id) {
+                o.id = item.id;
+            }
             screens.push(o);
 
         }, me);

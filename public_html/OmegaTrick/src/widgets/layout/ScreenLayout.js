@@ -114,10 +114,34 @@ Ext.trick.layout.ScreenLayout = Ext.extend(Ext.layout.FitLayout, {
         } else if(Ext.isString(item)) {
 
             // IDで指定された場合
-       
+            var id = item;
+
+            // 存在するアイテム内から検索
+            Ext.iterate(ci.items, function(item, cnt, items) {
+                if(item.id === id) {
+                    si = item;
+                }        
+            });
+        
+            // アイテム内に存在しない場合
+            if(!si) {
+                Ext.iterate(ici, function(item, cnt, items) {
+                    if(item.id === id) {
+                        si = c.add(item);
+                    }
+                });
+            }
+        
         } else {
         
             // オブジェクトで指定された場合
+            var target = item;
+            
+            Ext.iterate(ci.items, function(item, cnt, items) {
+                if(item === target) {
+                    si = item;
+                }
+            });
 
         }
 

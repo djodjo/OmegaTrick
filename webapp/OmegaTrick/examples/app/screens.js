@@ -20,9 +20,11 @@ Ext.onTrick({
      */
     screens: [{
         fix: true,
+        id: 'Dashboard',
         name: 'Dashboard'
     },{
         fix: true,
+        id: 'ScreenA',
         name: 'ScreenA',
         items: [{
             src: 'screens/ScreenA/item1.js'
@@ -48,7 +50,7 @@ Ext.onTrick({
             tbar: [{
                 text: 'Dashboard',
                 handler: function(btn, e) {
-                    ScreenExamples.screenTo(0);
+                    ScreenExamples.screenTo('Dashboard');
                 }
             },{
                 text: 'ScreenA',
@@ -58,12 +60,12 @@ Ext.onTrick({
             },{
                 text: 'ScreenB',
                 handler: function(btn, e) {
-                    
+                    ScreenExamples.screenTo(2);
                 }
             },{
                 text: 'ScreenC',
                 handler: function(btn, e) {
-                    
+                    ScreenExamples.screenTo(3);
                 }
             }]
         }
