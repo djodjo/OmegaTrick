@@ -112,8 +112,48 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
     screenTo : function(to) {
       
         var me = this,
-            sp = Ext.getCmp(me.appName + '_SCREEN'); 
-        sp.layout.setActiveItem(to);
+            sp = Ext.getCmp(me.appName + '_SCREEN'),
+            t; 
+
+        if(Ext.isNumber(to)) {
+            Ext.iterate(sp.initialConfig.items, function(item, cnt, items) {
+                if(to === cnt) {
+                    t = item;
+                }     
+            });
+        }
+        if(Ext.isString(to)) {
+            Ext.iterate(sp.initialConfig.items, function(item, cnt, items) {
+                if(to === item.id) {
+                    t = item;
+                }     
+            }); 
+        }
+
+        if(t && t.fix) {
+            sp.layout.setActiveItem(to);
+        } else {
+
+            var loader = new Ext.trick.util.ScriptLoader({
+                items: [{
+                    src: 'screens/' + t.name + '.js'
+                }]        
+            }); 
+
+            loader.on('load', function() {
+            
+                sp.layout.setActiveItem(to);
+                me.viewport.el.unmask();
+                me.removeScriptTags();
+            });
+
+            me.viewport.el.mask('読み込み中');
+            
+
+            loader.load();
+        }
+
+
     },
 
     // }}}
@@ -182,6 +222,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
         Ext.iterate(me.screens, function(item, cnt, items) {
 
             var o = {
+                name: item.name,
                 xtype: me.screenXTypePrefix + item.name.toLowerCase()   
             };
 

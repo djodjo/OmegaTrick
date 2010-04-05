@@ -32,9 +32,8 @@ Ext.onTrick({
             src: 'screens/ScreenA/item2.js'
         }]
     },{
+        id: 'ScreenB',
         name: 'ScreenB'
-    },{
-        name: 'ScreenC'
     }],
 
     // }}}
@@ -55,17 +54,12 @@ Ext.onTrick({
             },{
                 text: 'ScreenA',
                 handler: function(btn, e) {
-                    ScreenExamples.screenTo(1);
+                    ScreenExamples.screenTo('ScreenA');
                 }
             },{
                 text: 'ScreenB',
                 handler: function(btn, e) {
-                    ScreenExamples.screenTo(2);
-                }
-            },{
-                text: 'ScreenC',
-                handler: function(btn, e) {
-                    ScreenExamples.screenTo(3);
+                    ScreenExamples.screenTo('ScreenB');
                 }
             }]
         }

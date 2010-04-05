@@ -71,6 +71,9 @@ Ext.trick.layout.ScreenLayout = Ext.extend(Ext.layout.FitLayout, {
         Ext.iterate(ici, function(item, cnt, items) {
             if(!item.fix && ci.items[cnt]) {
                 ci.items[cnt].destroy();
+
+                // 定義も削除
+                //
             }
 
             if(item.fix && ci.items[cnt]) {
