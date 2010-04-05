@@ -18,33 +18,131 @@ Ext.ns(
  */
 Ext.trick.layout.ScreenLayout = Ext.extend(Ext.layout.FitLayout, {
 
-    // {{{ props
+    // {{{ deferrdRender
 
+    /**
+     * 遅延レンダリング設定
+     */
     deferredRender : false,
+
+    /**
+     *
+     */
     layoutOnCardChange : false,
+
+    /**
+     *
+     */
     renderHidden : true,
 
     // }}}
     // {{{ constructor
 
+    /**
+     * コンストラクタ
+     *
+     * @param config コンフィグオプション
+     * @return void
+     */
     constructor: function(config) {
+
+        // スーパークラスメソッドコール
         Ext.trick.layout.ScreenLayout.superclass.constructor.call(this, config);
     },
 
     // }}}
+    // {{{ destroyFlexItems
+   
+    /**
+     * フレックスアイテム削除メソッド
+     *
+     * 固定アイテム以外を削除します。
+     *
+     * @return void
+     */ 
+    destroyFlexItems : function() {
+                  
+        var me = this,
+            c = me.container,
+            ci = c.items,
+            ic = c.initialConfig,
+            ici = ic.items;
+
+        Ext.iterate(ici, function(item, cnt, items) {
+            if(!item.fix && ci.items[cnt]) {
+                ci.items[cnt].destroy();
+            }
+
+            if(item.fix && ci.items[cnt]) {
+                ci.items[cnt].hide();
+            }
+        });
+    },
+    
+    // }}}
     // {{{ setActiveItem
 
+    /**
+     * アクティブアイテム設定メソッド
+     *
+     * @param item 設定アイテム
+     */
     setActiveItem : function(item) {
 
-        var me = this, ai = me.activeItem, oi = item;
+        var me = this,
+            c = me.container,
+            ci = c.items,
+            ic = c.initialConfig,
+            ici = ic.items,
+            ai = me.activeItem,
+            oi = item;
 
+        var si;
+
+        // フレックスアイテム削除
+        me.destroyFlexItems();
+        
+        if(Ext.isNumber(item)) {
+
+            // 数値での指定の場合
+            if(ci.items[item]) {
+                si = ci.items[item];
+            } else {
+                si = c.add(ici[item]);
+            }
+
+        } else if(Ext.isString(item)) {
+
+            // IDで指定された場合
+       
+        } else {
+        
+            // オブジェクトで指定された場合
+
+        }
+
+        if(si) {
+            si.show();
+            me.activeItem = si;
+        }
+        
+        me.layout();
+
+        if(si) {
+            si.doLayout();
+        }
+
+        si.fireEvent('activate', si);
+ 
+
+        /*
         item = me.container.getComponent(item);
 
         if(!item) {
-
             me.container.activeItem = oi;
             delete me.container.items;
             me.container.items = me.container.initialConfig.items;
+            console.log(me.container);
             item = me.container.add(me.container.initialConfig.items);
             item = item.pop();
         }
@@ -70,6 +168,8 @@ Ext.trick.layout.ScreenLayout = Ext.extend(Ext.layout.FitLayout, {
 
             item.fireEvent('activate', item);
         }
+        */
+
     },
 
     // }}}

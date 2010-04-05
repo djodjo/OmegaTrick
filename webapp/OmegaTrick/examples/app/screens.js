@@ -11,7 +11,7 @@ Ext.onTrick({
      * アプリケーション名設定
      */
     appName: 'ScreenExamples',
-
+    
     // }}}
     // {{{ screens
    
@@ -46,13 +46,25 @@ Ext.onTrick({
         north: {
             border: false,
             tbar: [{
-                text: 'Dashboard'
+                text: 'Dashboard',
+                handler: function(btn, e) {
+                    ScreenExamples.screenTo(0);
+                }
             },{
-                text: 'ScreenA'
+                text: 'ScreenA',
+                handler: function(btn, e) {
+                    ScreenExamples.screenTo(1);
+                }
             },{
-                text: 'ScreenB'
+                text: 'ScreenB',
+                handler: function(btn, e) {
+                    
+                }
             },{
-                text: 'ScreenC'
+                text: 'ScreenC',
+                handler: function(btn, e) {
+                    
+                }
             }]
         }
             

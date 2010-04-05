@@ -37,6 +37,14 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
     autoRender: true,
 
     // }}}
+    // {{{ screenXTypePrefix
+
+    /**
+     * スクリーンXType接頭辞
+     */
+    screenXTypePrefix: '',
+
+    // }}}
     // {{{ screens
 
     /**
@@ -96,6 +104,19 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
     },
     
     // }}}
+    // {{{ screenTo
+
+    /**
+     * スクリーン切り替えメソッド
+     */
+    screenTo : function(to) {
+      
+        var me = this,
+            sp = Ext.getCmp(me.appName + '_SCREEN'); 
+        sp.layout.setActiveItem(to);
+    },
+
+    // }}}
     // {{{ init
 
     /**
@@ -116,14 +137,10 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
         Ext.iterate(me.screens, function(item, cnt, items) {
 
             // Fix用スクリプト一覧作成    
-            if(item.fix)
-            {
-                if(item.items)
-                {
+            if(item.fix) {
+                if(item.items) {
                     scripts = scripts.concat(item.items); 
-                }
-                else
-                {
+                } else {
                     scripts.push({
                         src: 'screens/' + item.name + '.js'
                     }); 
@@ -163,13 +180,21 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
         // スクリーンアイテム配列生成
         var screens = [];
         Ext.iterate(me.screens, function(item, cnt, items) {
-            screens.push({
-                xtype: item.name.toLowerCase()   
-            });
+
+            var o = {
+                xtype: me.screenXTypePrefix + item.name.toLowerCase()   
+            };
+
+            if(item.fix) {
+                o.fix = true;
+            }
+            screens.push(o);
+
         }, me);
 
         // レンダリングアイテム設定
         renderItems = [{
+            id: me.appName + '_SCREEN',
             xtype: 'screen',
             items: screens,
             region: 'center'

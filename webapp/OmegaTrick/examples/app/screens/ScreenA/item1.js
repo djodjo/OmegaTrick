@@ -13,6 +13,11 @@ ScreenExamples.ScreenA.ScreenPanel = Ext.extend(Ext.Panel, {
     
         var me = this;
 
+        Ext.apply(me, {
+            id: 'ScreenA',
+            title: 'ScreenA'    
+        });
+
         // スーパークラスメソッドコール
         ScreenExamples.ScreenA.ScreenPanel.superclass.initComponent.call(me);
     }
