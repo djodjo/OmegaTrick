@@ -70,10 +70,12 @@ Ext.trick.layout.ScreenLayout = Ext.extend(Ext.layout.FitLayout, {
 
         Ext.iterate(ici, function(item, cnt, items) {
             if(!item.fix && ci.items[cnt]) {
-                ci.items[cnt].destroy();
 
-                // 定義も削除
-                //
+                if(Ext.ComponentMgr.types[ici[cnt].xtype]) {
+                    delete Ext.ComponentMgr.types[ici[cnt].xtype];
+                }
+
+                ci.items[cnt].destroy();
             }
 
             if(item.fix && ci.items[cnt]) {
@@ -160,43 +162,6 @@ Ext.trick.layout.ScreenLayout = Ext.extend(Ext.layout.FitLayout, {
         }
 
         si.fireEvent('activate', si);
- 
-
-        /*
-        item = me.container.getComponent(item);
-
-        if(!item) {
-            me.container.activeItem = oi;
-            delete me.container.items;
-            me.container.items = me.container.initialConfig.items;
-            console.log(me.container);
-            item = me.container.add(me.container.initialConfig.items);
-            item = item.pop();
-        }
-
-        if(ai != item) {
-
-            if(ai) {
-                ai.destroy();
-            }
-
-            var layout = item.doLayout && (me.layoutOnCardChange || !item.rendered);
-            this.activeItem = item;
-
-            if(item) {
-                item.show();
-            }
-
-            me.layout();
-
-            if(item && layout) {
-                item.doLayout();
-            }
-
-            item.fireEvent('activate', item);
-        }
-        */
-
     },
 
     // }}}

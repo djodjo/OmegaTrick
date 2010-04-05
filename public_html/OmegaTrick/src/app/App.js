@@ -135,7 +135,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
         } else {
 
             var scripts = [];
-            console.log(t);
+
             if(t.scriptItems) {
                 scripts = scripts.concat(t.scriptItems); 
             } else {
@@ -237,14 +237,6 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
             if(item.items) {
                 o.scriptItems = item.items;
             } 
-            /*
-            // 既にスクリーンパネル定義があるか判定
-            if(Ext.ComponentMgr.types[o.xtype]){
-                o.dynamicLoad = false;
-            } else {
-                o.dynamicLoad = true;
-            }
-*/
 
             if(item.fix) {
                 o.fix = true;
