@@ -68,21 +68,17 @@ Ext.trick.layout.ScreenLayout = Ext.extend(Ext.layout.FitLayout, {
             ic = c.initialConfig,
             ici = ic.items;
 
-        Ext.iterate(ici, function(item, cnt, items) {
-            if(!item.fix && ci.items[cnt]) {
-
-                if(Ext.ComponentMgr.types[ici[cnt].xtype]) {
-                    delete Ext.ComponentMgr.types[ici[cnt].xtype];
+        Ext.iterate(ci.items, function(item, cnt, items) {
+            if(!item.fix) {
+                if(item.xtype && Ext.ComponentMgr.types[item.xtype]) {
+                    delete Ext.ComponentMgr.types[item.xtype];
                 }
-
-                ci.items[cnt].destroy();
-            }
-
-            if(item.fix && ci.items[cnt]) {
-                ci.items[cnt].hide();
-            }
+                item.destroy();
+            } else {
+                item.hide();
+            } 
         });
-    },
+   },
     
     // }}}
     // {{{ setActiveItem

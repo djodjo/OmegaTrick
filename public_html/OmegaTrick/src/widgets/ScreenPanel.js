@@ -51,7 +51,7 @@ Ext.trick.ScreenPanel = Ext.extend(Ext.Panel,{
      * @param comp 追加コンポーネント
      * @return 追加されたコンポーネント
      */
-    add : function(comp) {
+    add : function(comp, num) {
 
         var me = this;
 
