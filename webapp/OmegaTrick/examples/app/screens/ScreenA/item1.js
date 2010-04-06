@@ -15,7 +15,14 @@ ScreenExamples.ScreenA.ScreenPanel = Ext.extend(Ext.Panel, {
 
         Ext.apply(me, {
             id: 'ScreenA',
-            title: 'ScreenA'    
+            title: 'ScreenA',
+            layout: 'fit',
+            items: [{
+                title: 'ScreenAInnerPanel',
+                tbar: [{
+                    text: 'test'
+                }]
+            }]    
         });
 
         // スーパークラスメソッドコール
