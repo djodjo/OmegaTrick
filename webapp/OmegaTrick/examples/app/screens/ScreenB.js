@@ -13,7 +13,7 @@ ScreenExamples.ScreenB.ScreenPanel = Ext.extend(Ext.Panel, {
     
         var me = this;
 
-         Ext.apply(me, {
+        Ext.apply(me, {
             id: 'ScreenB',
             title: 'ScreenB'    
         });
