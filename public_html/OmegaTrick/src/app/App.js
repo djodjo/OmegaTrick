@@ -79,6 +79,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
         );
 
         me.on('init', me.removeScriptTags, me);
+        me.on('init', Ext.trick.app.Entry.removeLoadingMask);
         if(me.autoRender) {
             me.on('init', me.render, me);
         } else {

@@ -71,7 +71,25 @@ Ext.trick.app.Entry = function() {
          *
          */
         removeLoadingMask : function() {
-                            
+
+            var mask = Ext.get('OMEGATRICK_LOADINGMASK'),
+                logo = Ext.get('OMEGATRICK_LOADING_LOGO'),
+                progress = Ext.get('OMEGATRICK_LOADING_PROGRESS');
+
+            if(logo) {
+                logo.fadeOut();
+            }
+
+            if(progress) {
+                progress.fadeOut({
+                    callback: function() {
+                        progress.remove();
+                        if(mask) {
+                            mask.fadeOut();
+                        }
+                    }     
+                });
+            }
         },
 
         // }}}
