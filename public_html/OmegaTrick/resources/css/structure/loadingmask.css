@@ -37,18 +37,19 @@
   z-index:      2001;
   overflow:     auto;
   height:       70px;
-  width:        400px;
+  width:        86px;
   position:     absolute;
   top:          50%;
   left:         50%;
   margin-top:   -40px;
-  margin-left:  -200px;
+  margin-left:  -43px;
   text-align:   center;
 }
 
 #OMEGATRICK_LOADING_PROGRESS p {
-  padding-top:  15px;
-  font-size:    12px;
+  padding-left:   27px;
+  padding-top:    1px;
+  font-size:      12px;
 }
 
 /*

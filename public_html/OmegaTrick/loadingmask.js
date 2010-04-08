@@ -15,6 +15,26 @@ OmegaTrick = {
             div.id = o.id;
         }
 
+        if(o.html) {
+            div.innerHTML = o.html;
+        }
+
+        if(o.cls) {
+            div.className = o.cls;
+        }
+
+        if(o.src) {
+            div.src = o.src
+        }
+
+        if(o.width) {
+            div.width = o.width;
+        }
+
+        if(o.height) {
+            div.height = o.height;
+        }
+
         if(o.renderTo) {
             o.renderTo.appendChild(div);
         }
@@ -39,6 +59,12 @@ OmegaTrick.createElement({
 OmegaTrick.progress = OmegaTrick.createElement({
     id: 'OMEGATRICK_LOADING_PROGRESS', 
     renderTo: document.body
+});
+
+OmegaTrick.progressMsg = OmegaTrick.createElement({
+    tag: 'p',
+    html: '初期化中...',
+    renderTo: OmegaTrick.progress     
 });
 
 delete OmegaTrick;
