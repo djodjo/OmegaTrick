@@ -21,11 +21,13 @@ Ext.onTrick({
     screens: [{
         fix: true,
         id: 'Dashboard',
-        name: 'Dashboard'
+        name: 'Dashboard',
+        loadText: 'ダッシュボード読み込み中...'
     },{
         fix: true,
         id: 'ScreenA',
         name: 'ScreenA',
+        loadText: 'スクリーンA読み込み中...',
         items: [{
             src: 'screens/ScreenA/item1.js'
         },{

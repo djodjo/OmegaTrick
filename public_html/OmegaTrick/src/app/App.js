@@ -140,7 +140,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
                 scripts = scripts.concat(t.scriptItems); 
             } else {
                 scripts.push({
-                    src: 'screens/' + t.name + '.js'
+                    src: 'screens/' + t.name + '.js' 
                 }); 
             }
 
@@ -190,16 +190,23 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
                     scripts = scripts.concat(item.items); 
                 } else {
                     scripts.push({
-                        src: 'screens/' + item.name + '.js'
+                        src: 'screens/' + item.name + '.js',
+                        callback: function() {
+                            if(Ext.isString(item.loadText)) {
+                                Ext.trick.app.Entry.updateLoadText(item.loadText);
+                            }
+                        }
                     }); 
                 }
             }
         });
 
         if(scripts.length > 0) {
+
             var loader = new Ext.trick.util.ScriptLoader({
                 items: scripts        
             });
+
             loader.on('load', function() {
                 if(me.fireEvent('loadscript')) {
                     me.fireEvent('init');

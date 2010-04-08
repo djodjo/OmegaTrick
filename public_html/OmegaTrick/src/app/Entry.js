@@ -1,5 +1,13 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
+/// {{{ Namespace
+
+Ext.ns(
+    'Ext.trick',
+    'Ext.trick.app'
+);
+
+// }}}
 // {{{ Ext.trick.app.Entry
 
 /**
@@ -55,6 +63,39 @@ Ext.trick.app.Entry = function() {
             }
         },
 
+        // }}}
+        // {{{ removeLoadingMask
+        
+        /**
+         * ローディングマスク削除メソッド
+         *
+         */
+        removeLoadingMask : function() {
+                            
+        },
+
+        // }}}
+        // {{{ updateLoadText
+        
+        /**
+         * ローディングテキスト更新メソッド
+         *
+         * @param text 更新テキスト
+         */
+        updateLoadText : function(text) {
+
+            var wrap = Ext.get('OMEGATRICK_LOADING_PROGRESS'),
+                to = Ext.get('OMEGATRICK_LOADING_PROGRESS_MSG'),
+                tm = Ext.util.TextMetrics.createInstance(wrap),
+                width = tm.getWidth(text);
+
+            wrap.setWidth(width);
+            wrap.setStyle({
+                marginLeft: '-' + (width/2) + 'px'     
+            });
+            to.update(text);
+        },
+        
         // }}}
         // {{{ boot
 
