@@ -192,14 +192,18 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
                 } else {
                     scripts.push({
                         src: 'screens/' + item.name + '.js',
-                        callback: function() {
-                            if(Ext.isString(item.loadText)) {
-                                Ext.trick.app.Entry.updateLoadText(item.loadText);
-                            }
-                        }
-                    }); 
+                        loadText: item.loadText
+                   }); 
                 }
             }
+        });
+
+        Ext.iterate(scripts, function(item, cnt, items) {
+            item.callback = function() {
+                if(Ext.isString(item.loadText)) {
+                    Ext.trick.app.Entry.updateLoadText(item.loadText);
+                }
+            }      
         });
 
         if(scripts.length > 0) {

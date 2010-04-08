@@ -69,6 +69,7 @@ Ext.trick.app.Entry = function() {
         /**
          * ローディングマスク削除メソッド
          *
+         * @return void
          */
         removeLoadingMask : function() {
 
@@ -99,6 +100,7 @@ Ext.trick.app.Entry = function() {
          * ローディングテキスト更新メソッド
          *
          * @param text 更新テキスト
+         * @return void
          */
         updateLoadText : function(text) {
 
