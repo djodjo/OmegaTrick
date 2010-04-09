@@ -223,8 +223,8 @@ Ext.trick.SigninWindow = Ext.extend(Ext.Component, {
             width: 100,
             type: 'submit',
             tabIndex: 4,
-            //plugins: ['focusactive'],
-            //handler: this.onSignin,
+            plugins: ['focusactive'],
+            handler: me.onSignin,
             scope: me,
             renderTo: el.id + '_FIELD_SUBMIT'
         });
@@ -234,6 +234,19 @@ Ext.trick.SigninWindow = Ext.extend(Ext.Component, {
 
         // イベント初期化
         me.initEvents();
+    },
+
+    // }}}
+    // {{{ onSignin
+
+    /**
+     * サインインイベントハンドラ
+     *
+     * @return void
+     */
+    onSignin : function() {
+               
+               
     },
 
     // }}}
