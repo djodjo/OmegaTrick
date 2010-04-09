@@ -13,6 +13,24 @@ Ext.onTrick({
     appName: 'SigninExample',
     
     // }}}
+    // {{{ useDirect
+
+    /**
+     * Ext Direct使用設定
+     */
+    useDirect: Ext.app.REMOTING_API,
+
+    // }}}
+    // {{{ auth
+
+    /**
+     * 認証設定
+     */
+    auth: {
+        directFn: 'OmegaTrick_Auth' 
+    },
+
+    // }}}
     // {{{ screens
    
     /**
