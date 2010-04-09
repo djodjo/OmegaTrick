@@ -69,6 +69,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
 
         var me = this;
 
+        // イベント定義
         me.addEvents(
             'beforeinit',
             'init',
@@ -81,8 +82,17 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
         // スクリプトタグ削除
         me.on('init', me.removeScriptTags, me);
 
-        // ローディングマスク削除
-        me.on('init', Ext.trick.app.Entry.removeLoadingMask);
+        // 認証処理
+        if(me.auth) {
+
+            Ext.trick.app.Entry.hideLoadText();
+            
+        } else {
+
+            // ローディングマスク削除
+            me.on('init', Ext.trick.app.Entry.removeLoadingMask);
+
+        }
 
         // 自動レンダリング
         if(me.autoRender) {

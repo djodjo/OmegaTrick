@@ -24,7 +24,7 @@ Ext.trick.app.Entry = function() {
     return {
 
         // {{{ add
-        
+
         /**
          * アプリケーション追加メソッド
          *
@@ -34,9 +34,9 @@ Ext.trick.app.Entry = function() {
         add : function(app) {
 
             var id = Ext.id(null, 'OmegaTrickApp');
-            
+
             apps[id] = new app();
-            
+
             // アプリケーション名が設定されている場合、グローバルスコープに
             // アプリケーションオブジェクトを設定
             if(apps[id].appName) {
@@ -57,7 +57,7 @@ Ext.trick.app.Entry = function() {
          * @return true:成功, false:アプリケーションが存在しない
          */
         remove : function(id) {
-       
+
             if(aps[id]) {
                 delete apps[id];
             }
@@ -65,7 +65,7 @@ Ext.trick.app.Entry = function() {
 
         // }}}
         // {{{ removeLoadingMask
-        
+
         /**
          * ローディングマスク削除メソッド
          *
@@ -88,14 +88,34 @@ Ext.trick.app.Entry = function() {
                         if(mask) {
                             mask.fadeOut();
                         }
-                    }     
+                    }
                 });
             }
         },
 
         // }}}
+        // {{{ hideLoadText
+
+        /**
+         * ローディングテキスト非表示メソッド
+         *
+         * @param anim アニメーションフラグ
+         * @return void
+         */
+        hideLoadText : function(anim) {
+
+            var wrap = Ext.get('OMEGATRICK_LOADING_PROGRESS');
+
+            if(anim === false) {
+                wrap.hide();
+            } else {
+                wrap.fadeOut();
+            }
+        },
+
+        // }}}
         // {{{ updateLoadText
-        
+
         /**
          * ローディングテキスト更新メソッド
          *
@@ -111,11 +131,11 @@ Ext.trick.app.Entry = function() {
 
             wrap.setWidth(width);
             wrap.setStyle({
-                marginLeft: '-' + (width/2) + 'px'     
+                marginLeft: '-' + (width/2) + 'px'
             });
             to.update(text);
         },
-        
+
         // }}}
         // {{{ boot
 
