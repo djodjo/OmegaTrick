@@ -156,7 +156,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
                 me.removeScriptTags();
             });
 
-            me.viewport.el.mask('読み込み中');
+            me.viewport.el.mask(Ext.LoadMask.prototype.msg);
 
             loader.load();
         }
