@@ -45,12 +45,23 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
     screenXTypePrefix: '',
 
     // }}}
+    // {{{ widgets
+
+    /**
+     * ウィジットオブジェクト
+     */
+    widgets: {},
+
+    // }}}
     // {{{ screens
 
     /**
      * スクリーン配列
      */
     screens: [],
+
+    // }}}
+    // {{{ casing
 
     /**
      * ケーシングオブジェクト
@@ -85,8 +96,13 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
         // 認証処理
         if(me.auth) {
 
+            // ローディングテキスト非表示
             Ext.trick.app.Entry.hideLoadText();
-            
+
+            // サインインウィンドウ表示
+            me.widgets.signin = new Ext.trick.SigninWindow();
+            me.widgets.signin.show();
+
         } else {
 
             // ローディングマスク削除
