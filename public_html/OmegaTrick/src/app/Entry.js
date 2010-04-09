@@ -94,6 +94,26 @@ Ext.trick.app.Entry = function() {
         },
 
         // }}}
+        // {{{ showLoadText
+
+        /**
+         * ローディングテキスト表示メソッド
+         *
+         * @param anim アニメーションフラグ
+         * @return void
+         */
+        showLoadText : function(anim) {
+
+            var wrap = Ext.get('OMEGATRICK_LOADING_PROGRESS');
+
+            if(anim === false) {
+                wrap.show();
+            } else {
+                wrap.fadeIn();
+            }
+        },
+
+        // }}}
         // {{{ hideLoadText
 
         /**
