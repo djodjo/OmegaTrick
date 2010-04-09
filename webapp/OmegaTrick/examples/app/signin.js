@@ -11,7 +11,7 @@ Ext.onTrick({
      * アプリケーション名設定
      */
     appName: 'SigninExample',
-    
+
     // }}}
     // {{{ useDirect
 
@@ -27,12 +27,12 @@ Ext.onTrick({
      * 認証設定
      */
     auth: {
-        directFn: 'OmegaTrick_Auth' 
+        directFn: 'OmegaTrick_Auth'
     },
 
     // }}}
     // {{{ screens
-   
+
     /**
      * スクリーン定義
      */
@@ -64,7 +64,7 @@ Ext.onTrick({
      * ケーシング設定
      */
     casing: {
-        
+
         north: {
             border: false,
             tbar: [{
@@ -84,7 +84,7 @@ Ext.onTrick({
                 }
             }]
         }
-            
+
     },
 
     // }}}
@@ -95,7 +95,7 @@ Ext.onTrick({
      */
     start : function() {
     }
-    
+
     // }}}
 
 });

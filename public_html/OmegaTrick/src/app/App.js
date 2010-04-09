@@ -59,7 +59,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
 
     // }}}
     // {{{ initEvents
-    
+
     /**
      * イベント初期化メソッド
      *
@@ -78,8 +78,13 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
             'loadscript'
         );
 
+        // スクリプトタグ削除
         me.on('init', me.removeScriptTags, me);
+
+        // ローディングマスク削除
         me.on('init', Ext.trick.app.Entry.removeLoadingMask);
+
+        // 自動レンダリング
         if(me.autoRender) {
             me.on('init', me.render, me);
         } else {
@@ -89,21 +94,21 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
 
     // }}}
     // {{{ removeScriptTags
-    
+
     /**
      * スクリプトタグ削除メソッド
      */
     removeScriptTags : function() {
-  
+
         var me = this;
-        
+
         // スクリプトタグ削除
         Ext.select('body script').each(function(el) {
             Ext.removeNode(Ext.getDom(el));
         }, me);
-                   
+
     },
-    
+
     // }}}
     // {{{ screenTo
 
@@ -111,24 +116,24 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
      * スクリーン切り替えメソッド
      */
     screenTo : function(to) {
-      
+
         var me = this,
             sp = Ext.getCmp(me.appName + '_SCREEN'),
-            t; 
+            t;
 
         if(Ext.isNumber(to)) {
             Ext.iterate(sp.initialConfig.items, function(item, cnt, items) {
                 if(to === cnt) {
                     t = item;
-                }     
+                }
             });
         }
         if(Ext.isString(to)) {
             Ext.iterate(sp.initialConfig.items, function(item, cnt, items) {
                 if(to === item.id) {
                     t = item;
-                }     
-            }); 
+                }
+            });
         }
 
         if(t && t.fix) {
@@ -138,19 +143,19 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
             var scripts = [];
 
             if(t.scriptItems) {
-                scripts = scripts.concat(t.scriptItems); 
+                scripts = scripts.concat(t.scriptItems);
             } else {
                 scripts.push({
-                    src: 'screens/' + t.name + '.js' 
-                }); 
+                    src: 'screens/' + t.name + '.js'
+                });
             }
 
             var loader = new Ext.trick.util.ScriptLoader({
                 items: scripts
-            }); 
+            });
 
             loader.on('load', function() {
-            
+
                 sp.layout.setActiveItem(to);
                 me.viewport.el.unmask();
                 me.removeScriptTags();
@@ -169,7 +174,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
      * 初期化メソッド
      */
     init : function() {
-        
+
         var me = this;
 
         // イベント初期化
@@ -182,10 +187,10 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
         var scripts = [];
         Ext.iterate(me.screens, function(item, cnt, items) {
 
-            // Fix用スクリプト一覧作成    
+            // Fix用スクリプト一覧作成
             if(item.fix) {
                 if(item.items) {
-                    scripts = scripts.concat(item.items); 
+                    scripts = scripts.concat(item.items);
                 } else {
                     scripts.push({
                         src: 'screens/' + item.name + '.js',
@@ -194,7 +199,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
                                 Ext.trick.app.Entry.updateLoadText(item.loadText);
                             }
                         }
-                    }); 
+                    });
                 }
             }
         });
@@ -202,7 +207,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
         if(scripts.length > 0) {
 
             var loader = new Ext.trick.util.ScriptLoader({
-                items: scripts        
+                items: scripts
             });
 
             loader.on('load', function() {
@@ -218,7 +223,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
             me.fireEvent('init');
         }
     },
-    
+
     // }}}
     // {{{ render
 
@@ -226,22 +231,22 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
      * レンダリングメソッド
      */
     render : function() {
-             
+
         var me = this,
             renderItems;
-        
+
         // スクリーンアイテム配列生成
         var screens = [];
         Ext.iterate(me.screens, function(item, cnt, items) {
 
             var o = {
                 name: item.name,
-                xtype: me.screenXTypePrefix + item.name.toLowerCase()   
+                xtype: me.screenXTypePrefix + item.name.toLowerCase()
             };
-           
+
             if(item.items) {
                 o.scriptItems = item.items;
-            } 
+            }
 
             if(item.fix) {
                 o.fix = true;
@@ -260,7 +265,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
             items: screens,
             region: 'center'
         }];
-       
+
         // ケーシング設定
         if(Ext.isObject(me.casing) && me.casing.north) {
             var north = me.casing.north;
