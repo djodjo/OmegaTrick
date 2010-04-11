@@ -150,7 +150,7 @@ Ext.trick.app.Entry = function() {
             var wrap = Ext.get('OMEGATRICK_LOADING_PROGRESS'),
                 to = Ext.get('OMEGATRICK_LOADING_PROGRESS_MSG'),
                 tm = Ext.util.TextMetrics.createInstance(wrap),
-                width = tm.getWidth(text);
+                width = tm.getWidth(text)+10;
 
             wrap.setWidth(width);
             wrap.setStyle({
