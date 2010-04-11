@@ -14,7 +14,7 @@
  * @license    http://www.gnu.org/licenses/gpl-3.0.html GPL v3
  */
 
-// {{{ SpreadOffice_Auth
+// {{{ OmegaTrick_Auth
 
 /**
  * OmegaTrick_Auth Class
@@ -44,7 +44,7 @@ class OmegaTrick_Auth extends xFrameworkPX_Model
      *
      * @var string
      */
-    public $usetable = false;
+    public $usetable = 'tbl_users';
 
     /**
      * ユーザーセッションキー
