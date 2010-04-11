@@ -245,8 +245,12 @@ Ext.trick.SigninWindow = Ext.extend(Ext.Component, {
      * @return void
      */
     onSignin : function() {
-               
-               
+
+        var me = this;
+        me.hide();
+
+        //alert("a");
+        //me.show();
     },
 
     // }}}
@@ -304,6 +308,31 @@ Ext.trick.SigninWindow = Ext.extend(Ext.Component, {
                         me.fireEvent('show', me);
                     }
                 });
+            }
+        });
+    },
+
+    // }}}
+    // {{{ hide
+
+    /**
+     * 非表示メソッド
+     */
+    hide : function() {
+
+        var me = this,
+            cp = me.getCenterPosition();
+
+        // 非表示アニメーション開始
+        me.layer.shift({
+            x: cp.x - me.distance,
+            easing: 'easeOutStrong',
+            opacity: 0,
+            duration: me.duration,
+            callback: function() {
+                Ext.fly(me.el.id + '_SIGNIN_ITEMS').setOpacity(0);
+                me.fireEvent('hide', me);
+    //            me.destroy();
             }
         });
     },

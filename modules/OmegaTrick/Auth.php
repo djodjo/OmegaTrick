@@ -21,7 +21,7 @@ class OmegaTrick_Auth extends xFrameworkPX_Model
     /**
      * 認証処理メソッド
      */
-    public function execute() {
+    public function execute($params) {
 
 
 

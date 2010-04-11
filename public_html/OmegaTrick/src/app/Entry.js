@@ -102,17 +102,18 @@ Ext.trick.app.Entry = function() {
         /**
          * ローディングテキスト表示メソッド
          *
-         * @param anim アニメーションフラグ
+         * @param o コンフィグオブジェクト
          * @return void
          */
-        showLoadText : function(anim) {
+        showLoadText : function(o) {
 
-            var wrap = Ext.get('OMEGATRICK_LOADING_PROGRESS');
+            var wrap = Ext.get('OMEGATRICK_LOADING_PROGRESS'),
+                config = o || {};
 
-            if(anim === false) {
+            if(config.anim === false) {
                 wrap.show();
             } else {
-                wrap.fadeIn();
+                wrap.fadeIn(config);
             }
         },
 
@@ -122,17 +123,18 @@ Ext.trick.app.Entry = function() {
         /**
          * ローディングテキスト非表示メソッド
          *
-         * @param anim アニメーションフラグ
+         * @param o コンフィグオブジェクト
          * @return void
          */
-        hideLoadText : function(anim) {
+        hideLoadText : function(o) {
 
-            var wrap = Ext.get('OMEGATRICK_LOADING_PROGRESS');
+            var wrap = Ext.get('OMEGATRICK_LOADING_PROGRESS'),
+                config = o || {};
 
-            if(anim === false) {
+            if(config.anim === false) {
                 wrap.hide();
             } else {
-                wrap.fadeOut();
+                wrap.fadeOut(config);
             }
         },
 

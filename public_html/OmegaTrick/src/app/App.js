@@ -130,11 +130,66 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
             if(!ret) {
 
                 // ローディングテキスト非表示
-                Ext.trick.app.Entry.hideLoadText();
+                Ext.trick.app.Entry.hideLoadText({
+                    anim: true,
+                    callback: function() {
 
-                // サインインウィンドウ表示
-                me.widgets.signin = new Ext.trick.SigninWindow();
-                me.widgets.signin.show();
+                        // サインインウィンドウ表示
+                        me.widgets.signin = new Ext.trick.SigninWindow();
+
+                        me.widgets.signin.on('hide', function() {
+
+                            Ext.trick.app.Entry.updateLoadText('認証確認中...');
+                            Ext.trick.app.Entry.showLoadText({
+                                anim: true,
+                                callback: function() {
+                                    auth.execute({
+                                        email: '',
+                                        passwd: ''
+                                    }, function(ret) {
+
+                                        Ext.trick.app.Entry.hideLoadText({
+                                            anim: true,
+                                            callback: function() {
+                                                if(ret) {
+
+                                                    // ローディングマスク削除
+                                                    Ext.trick.app.Entry.removeLoadingMask();
+
+                                                    // 自動レンダリング
+                                                    if(me.autoRender) {
+                                                        me.render();
+                                                    } else {
+                                                        me.start();
+                                                    }
+
+                                                } else {
+
+                                                    // ローディングテキスト非表示
+                                                    Ext.trick.app.Entry.hideLoadText();
+
+                                                    Ext.Msg.alert(
+                                                        Ext.trick.SigninWindow.msg.signin.title,
+                                                        Ext.trick.SigninWindow.msg.signin.auth.error,
+                                                        function() {
+                                                            me.widgets.signin.show();
+                                                        }
+                                                    );
+                                                }
+                                            },
+                                            scope: me
+                                        });
+                                   }, me);
+                                },
+                                scope: me
+                            });
+
+                        }, me);
+
+                        me.widgets.signin.show();
+                    },
+                    scope: me
+                });
 
             } else {
 
@@ -261,7 +316,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
      * レンダリングメソッド
      */
     render : function() {
-        
+
         var me = this,
             renderItems;
 
