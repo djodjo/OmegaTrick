@@ -11,10 +11,10 @@ Ext.onTrick({
      * アプリケーション名設定
      */
     appName: 'ScreenExamples',
-    
+
     // }}}
     // {{{ screens
-   
+
     /**
      * スクリーン定義
      */
@@ -25,12 +25,7 @@ Ext.onTrick({
     },{
         fix: true,
         id: 'ScreenA',
-        name: 'ScreenA',
-        items: [{
-            src: 'screens/ScreenA/item1.js'
-        },{
-            src: 'screens/ScreenA/item2.js'
-        }]
+        name: 'ScreenA'
     },{
         id: 'ScreenB',
         name: 'ScreenB'
@@ -43,7 +38,7 @@ Ext.onTrick({
      * ケーシング設定
      */
     casing: {
-        
+
         north: {
             border: false,
             tbar: [{
@@ -63,7 +58,7 @@ Ext.onTrick({
                 }
             }]
         }
-            
+
     },
 
     // }}}
@@ -74,7 +69,7 @@ Ext.onTrick({
      */
     start : function() {
     }
-    
+
     // }}}
 
 });

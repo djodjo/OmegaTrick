@@ -95,20 +95,43 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
 
         // 認証処理
         if(me.auth) {
+/*
+            var auth = eval(me.auth.directFn);
 
-            // ローディングテキスト非表示
-            Ext.trick.app.Entry.hideLoadText();
+            Ext.trick.app.Entry.updateLoadText('認証確認中...');
 
-            // サインインウィンドウ表示
-            me.widgets.signin = new Ext.trick.SigninWindow();
-            me.widgets.signin.show();
+            auth.isSignin(function(ret) {
+                if(!ret) {
 
+                    // ローディングテキスト非表示
+                    Ext.trick.app.Entry.hideLoadText();
+
+                    // サインインウィンドウ表示
+                    me.widgets.signin = new Ext.trick.SigninWindow();
+                    me.widgets.signin.show();
+
+                } else {
+
+                    // ローディングマスク削除
+                    Ext.trick.app.Entry.removeLoadingMask();
+
+                    // 自動レンダリング
+                    if(me.autoRender) {
+                        me.render();
+                    } else {
+                        me.start();
+                    }
+                }
+            });
+*/
         } else {
 
-            // ローディングマスク削除
-            me.on('init', Ext.trick.app.Entry.removeLoadingMask);
+
 
         }
+
+        // ローディングマスク削除
+        me.on('init', Ext.trick.app.Entry.removeLoadingMask);
 
         // 自動レンダリング
         if(me.autoRender) {
@@ -166,6 +189,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
             sp.layout.setActiveItem(to);
         } else {
 
+/*
             var scripts = [];
 
             if(t.scriptItems) {
@@ -182,7 +206,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
 
             loader.on('load', function() {
 
-                sp.layout.setActiveItem(to);
+            sp.layout.setActiveItem(to);
                 me.viewport.el.unmask();
                 me.removeScriptTags();
             });
@@ -190,6 +214,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
             me.viewport.el.mask(Ext.LoadMask.prototype.msg);
 
             loader.load();
+*/
         }
     },
 
@@ -210,44 +235,14 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
             return false;
         }
 
-        var scripts = [];
-        Ext.iterate(me.screens, function(item, cnt, items) {
-
-            // Fix用スクリプト一覧作成
-            if(item.fix) {
-                if(item.items) {
-                    scripts = scripts.concat(item.items);
-                } else {
-                    scripts.push({
-                        src: 'screens/' + item.name + '.js',
-                        callback: function() {
-                            if(Ext.isString(item.loadText)) {
-                                Ext.trick.app.Entry.updateLoadText(item.loadText);
-                            }
-                        }
-                    });
-                }
-            }
-        });
-
-        if(scripts.length > 0) {
-
-            var loader = new Ext.trick.util.ScriptLoader({
-                items: scripts
-            });
-
-            loader.on('load', function() {
-                if(me.fireEvent('loadscript')) {
-                    me.fireEvent('init');
-                }
-            });
-
-            if(me.fireEvent('beforeloadscript')) {
-                loader.load();
-            }
-        } else {
-            me.fireEvent('init');
+        // ExtDirectプロバイダ追加
+        if(me.useDirect) {
+            Ext.Direct.addProvider(me.useDirect);
         }
+
+
+
+        me.fireEvent('init');
     },
 
     // }}}

@@ -5,6 +5,11 @@
  */
 Ext.onTrick({
 
+    // {{{ autoRender
+
+    autoRender: false,
+
+    // }}}
     // {{{ start
 
     /**
@@ -12,10 +17,10 @@ Ext.onTrick({
      */
     start : function() {
         Ext.DomHelper.append(Ext.getBody(),{
-            html: 'アプリケーション開始！'    
+            html: 'アプリケーション開始！'
         });
     }
-    
+
     // }}}
 
 });
