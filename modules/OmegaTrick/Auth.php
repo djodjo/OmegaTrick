@@ -61,6 +61,9 @@ class OmegaTrick_Auth extends xFrameworkPX_Model
 
     /**
      * 自動サインインメソッド
+     *
+     * @param $key 自動サインインキー
+     * @return array サインイン結果配列
      */
     public function autoSignin($key) {
 
@@ -131,6 +134,8 @@ class OmegaTrick_Auth extends xFrameworkPX_Model
 
     /**
      * サインイン確認メソッド
+     *
+     * @return array サインイン結果配列
      */
     public function isSignin() {
 
@@ -151,6 +156,9 @@ class OmegaTrick_Auth extends xFrameworkPX_Model
 
     /**
      * 認証処理メソッド
+     *
+     * @param $params サインパラメータ配列
+     * @return array サインイン結果配列
      */
     public function execute($params) {
 
@@ -220,7 +228,9 @@ class OmegaTrick_Auth extends xFrameworkPX_Model
     // {{{ signout
 
     /**
-     * 認証実行メソッド
+     * サインアウトメソッド
+     *
+     * @return array サインアウト結果配列
      */
     public function signout() {
 
