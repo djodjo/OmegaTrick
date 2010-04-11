@@ -106,7 +106,7 @@ class OmegaTrick_Auth extends xFrameworkPX_Model
 
             // セッションへユーザーデータ保存
             $this->controller->Session->write(
-                'SPREAD_OFFICE_USER',
+                $this->userSessionKey,
                 array(
                     'id' => $ret['id'],
                     'company' => $ret['company_id'],
@@ -157,10 +157,10 @@ class OmegaTrick_Auth extends xFrameworkPX_Model
     /**
      * 認証処理メソッド
      *
-     * @param $params サインパラメータ配列
+     * @param $param サインパラメータ配列
      * @return array サインイン結果配列
      */
-    public function execute($params) {
+    public function execute($param) {
 
         $ret = $this->count(
             array(

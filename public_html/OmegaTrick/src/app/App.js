@@ -145,13 +145,13 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
                                 callback: function() {
                                     auth.execute({
                                         email: '',
-                                        passwd: ''
+                                        pass: ''
                                     }, function(ret) {
 
                                         Ext.trick.app.Entry.hideLoadText({
                                             anim: true,
                                             callback: function() {
-                                                if(ret) {
+                                                if(ret.success) {
 
                                                     // ローディングマスク削除
                                                     Ext.trick.app.Entry.removeLoadingMask();
@@ -167,7 +167,6 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
 
                                                     // ローディングテキスト非表示
                                                     Ext.trick.app.Entry.hideLoadText();
-
 
                                                     Ext.MessageBox.show({
                                                         title: Ext.trick.SigninWindow.msg.signin.title,
