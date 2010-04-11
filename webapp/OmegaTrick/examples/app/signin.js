@@ -39,10 +39,8 @@ Ext.onTrick({
     screens: [{
         fix: true,
         id: 'Dashboard',
-        name: 'Dashboard',
-        loadText: 'ダッシュボード読み込み中...'
+        name: 'Dashboard'
     },{
-        fix: true,
         id: 'ScreenA',
         name: 'ScreenA'
     },{

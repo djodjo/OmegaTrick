@@ -247,10 +247,12 @@ Ext.trick.SigninWindow = Ext.extend(Ext.Component, {
     onSignin : function() {
 
         var me = this;
+
+        me.email.disable();
+        me.password.disable();
+        
         me.hide();
 
-        //alert("a");
-        //me.show();
     },
 
     // }}}
@@ -301,6 +303,9 @@ Ext.trick.SigninWindow = Ext.extend(Ext.Component, {
                     duration: me.duration,
                     callback: function() {
 
+                        me.email.enable();
+                        me.password.enable();
+
                         // メールアドレスにフォーカス設定
                         me.email.focus();
 
@@ -332,7 +337,7 @@ Ext.trick.SigninWindow = Ext.extend(Ext.Component, {
             callback: function() {
                 Ext.fly(me.el.id + '_SIGNIN_ITEMS').setOpacity(0);
                 me.fireEvent('hide', me);
-    //            me.destroy();
+                //me.destroy();
             }
         });
     },
