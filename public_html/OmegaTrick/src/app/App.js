@@ -189,6 +189,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
             sp.layout.setActiveItem(to);
         } else {
 
+            sp.layout.setActiveItem(to);
 /*
             var scripts = [];
 

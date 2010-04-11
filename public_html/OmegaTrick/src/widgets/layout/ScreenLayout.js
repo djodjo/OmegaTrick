@@ -52,16 +52,16 @@ Ext.trick.layout.ScreenLayout = Ext.extend(Ext.layout.FitLayout, {
 
     // }}}
     // {{{ destroyFlexItems
-   
+
     /**
      * フレックスアイテム削除メソッド
      *
      * 固定アイテム以外を削除します。
      *
      * @return void
-     */ 
+     */
     destroyFlexItems : function() {
-                  
+
         var me = this,
             c = me.container,
             ci = c.items,
@@ -70,16 +70,13 @@ Ext.trick.layout.ScreenLayout = Ext.extend(Ext.layout.FitLayout, {
 
         Ext.iterate(ci.items, function(item, cnt, items) {
             if(!item.fix) {
-                if(item.xtype && Ext.ComponentMgr.types[item.xtype]) {
-                    delete Ext.ComponentMgr.types[item.xtype];
-                }
                 item.destroy();
             } else {
                 item.hide();
-            } 
+            }
         });
    },
-    
+
     // }}}
     // {{{ setActiveItem
 
@@ -102,7 +99,7 @@ Ext.trick.layout.ScreenLayout = Ext.extend(Ext.layout.FitLayout, {
 
         // フレックスアイテム削除
         me.destroyFlexItems();
-        
+
         if(Ext.isNumber(item)) {
 
             // 数値での指定の場合
@@ -121,9 +118,9 @@ Ext.trick.layout.ScreenLayout = Ext.extend(Ext.layout.FitLayout, {
             Ext.iterate(ci.items, function(item, cnt, items) {
                 if(item.id === id) {
                     si = item;
-                }        
+                }
             });
-        
+
             // アイテム内に存在しない場合
             if(!si) {
                 Ext.iterate(ici, function(item, cnt, items) {
@@ -132,12 +129,12 @@ Ext.trick.layout.ScreenLayout = Ext.extend(Ext.layout.FitLayout, {
                     }
                 });
             }
-        
+
         } else {
-        
+
             // オブジェクトで指定された場合
             var target = item;
-            
+
             Ext.iterate(ci.items, function(item, cnt, items) {
                 if(item === target) {
                     si = item;
@@ -150,7 +147,7 @@ Ext.trick.layout.ScreenLayout = Ext.extend(Ext.layout.FitLayout, {
             si.show();
             me.activeItem = si;
         }
-        
+
         me.layout();
 
         if(si) {

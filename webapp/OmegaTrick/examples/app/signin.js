@@ -44,14 +44,7 @@ Ext.onTrick({
     },{
         fix: true,
         id: 'ScreenA',
-        name: 'ScreenA',
-        items: [{
-            src: 'screens/ScreenA/item1.js',
-            loadText: 'スクリーンA:item1.js 読み込み中...'
-        },{
-            src: 'screens/ScreenA/item2.js',
-            loadText: 'スクリーンA:item2.js 読み込み中...'
-        }]
+        name: 'ScreenA'
     },{
         id: 'ScreenB',
         name: 'ScreenB'

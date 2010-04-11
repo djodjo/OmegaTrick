@@ -25,11 +25,11 @@ Ext.trick.ScreenPanel = Ext.extend(Ext.Panel,{
      * @return void
      */
     initComponent: function() {
-    
+
         var me = this;
 
         Ext.applyIf(me, {
-            layout: 'screen'    
+            layout: 'screen'
         });
 
         if(me.layout === 'screen') {
@@ -57,7 +57,7 @@ Ext.trick.ScreenPanel = Ext.extend(Ext.Panel,{
 
         // アイテム初期化
         me.initItems();
-        
+
         var args = arguments.length > 1;
         if(args || Ext.isArray(comp)){
             var result = [];
@@ -78,7 +78,7 @@ Ext.trick.ScreenPanel = Ext.extend(Ext.Panel,{
             me.onAdd(c);
             me.fireEvent('add', me, c, index);
         }
-        
+
         return c;
     }
 

@@ -17,7 +17,7 @@ ScreenExamples.Dashboard.ScreenPanel = Ext.extend(Ext.Panel, {
             id: 'Dashboard',
             title: 'Dashboard'
         });
-console.log(ScreenExamples);
+
         // スーパークラスメソッドコール
         ScreenExamples.Dashboard.ScreenPanel.superclass.initComponent.call(me);
     }

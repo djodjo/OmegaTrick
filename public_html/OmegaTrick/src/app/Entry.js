@@ -40,7 +40,10 @@ Ext.trick.app.Entry = function() {
             // アプリケーション名が設定されている場合、グローバルスコープに
             // アプリケーションオブジェクトを設定
             if(apps[id].appName) {
-                window[apps[id].appName] = apps[id];
+                if(!window[apps[id].appName]) {
+                    window[apps[id].appName] = {};
+                }
+                Ext.applyIf(window[apps[id].appName], apps[id]);
             } else {
                 window[id] = apps[id];
                 apps[id].appName = id;
