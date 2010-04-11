@@ -168,13 +168,17 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
                                                     // ローディングテキスト非表示
                                                     Ext.trick.app.Entry.hideLoadText();
 
-                                                    Ext.Msg.alert(
-                                                        Ext.trick.SigninWindow.msg.signin.title,
-                                                        Ext.trick.SigninWindow.msg.signin.auth.error,
-                                                        function() {
+
+                                                    Ext.MessageBox.show({
+                                                        title: Ext.trick.SigninWindow.msg.signin.title,
+                                                        msg: Ext.trick.SigninWindow.msg.signin.auth.error,
+                                                        buttons: Ext.MessageBox.OK,
+                                                        modal: false,
+                                                        fn: function() {
                                                             me.widgets.signin.show();
-                                                        }
-                                                    );
+                                                        },
+                                                        icon: Ext.MessageBox.ERROR
+                                                    });
                                                 }
                                             },
                                             scope: me
