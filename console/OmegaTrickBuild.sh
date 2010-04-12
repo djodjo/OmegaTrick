@@ -41,6 +41,3 @@ do
 
 done
 
-#echo ../public_html/OmegaTrick/resources/css/OmegaTrick-all.css | sed 's/\.\.\/\.\.\/images/\.\.\/images/' > ../public_html/OmegaTrick/resources/css/OmegaTrick-all.css`
-
-
