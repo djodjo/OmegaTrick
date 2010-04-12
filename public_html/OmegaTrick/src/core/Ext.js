@@ -2,7 +2,7 @@
 
 // {{{ Ext expand methods
 
-Ext.apply(Ext,{
+Ext.applyIf(Ext,{
 
     // {{{ maxZindex
 
@@ -50,6 +50,17 @@ Ext.apply(Ext,{
             y: y
         };
 
+    },
+
+    // }}}
+    // {{{ clone
+
+    /**
+     * クローン生成メソッド
+     */
+    clone : function(o) {
+
+        return Ext.trick.util.Clone(o);
     }
 
     // }}}

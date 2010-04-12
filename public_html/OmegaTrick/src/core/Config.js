@@ -29,9 +29,9 @@ Ext.trick.Config = function() {
     var testingFrameworkName = 'yui';
 
     return {
-    
+
         // {{{ getTestingFrameworkName
-    
+
         /**
          * getTestingFrameworkName
          *
@@ -49,7 +49,7 @@ Ext.trick.Config = function() {
 
         // }}}
         // {{{ setTestingFrameworkName
-        
+
         /**
          * setTestingFrameworkName
          *

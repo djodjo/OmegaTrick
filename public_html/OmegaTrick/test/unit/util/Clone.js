@@ -27,9 +27,9 @@ Ext.trick.test.unit.util.Clone = new Ext.trick.unit.TestCase({
      * オブジェクトクローンテスト
      */
     testCloneObject : function() {
-    
+
         var me = this;
-       
+
         // コピー元のオブジェクト生成
         var src = {
             sdata: 'string data',
@@ -55,7 +55,7 @@ Ext.trick.test.unit.util.Clone = new Ext.trick.unit.TestCase({
 
         // bdata が一致していることを確認
         me.assert.areEqual(src.bdata, dest.bdata);
-    
+
         // adata 自身が一致しないことを確認
         me.assert.areNotEqual(src.adata, dest.adata);
 
@@ -89,12 +89,12 @@ Ext.trick.test.unit.util.Clone = new Ext.trick.unit.TestCase({
 
     // }}}
     // {{{ testCloneArray
-    
+
     /**
      * 配列クローンテスト
      */
     testCloneArray : function() {
-      
+
         var me = this;
 
         // コピー元配列生成
