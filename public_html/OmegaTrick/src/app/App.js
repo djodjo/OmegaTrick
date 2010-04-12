@@ -449,7 +449,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
         }
         if(Ext.isObject(me.casing) && me.casing.south) {
             var south = me.casing.south;
-            south.region = 'east';
+            south.region = 'south';
             renderItems.push(south);
         }
 
