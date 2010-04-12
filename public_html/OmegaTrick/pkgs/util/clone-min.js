@@ -1,1 +1,0 @@
-Ext.ns("Ext.trick","Ext.trick.util");Ext.trick.util.Clone=function(o){if(!o||"object"!==typeof o)return o;var c="[object Array]"===Object.prototype.toString.call(o)?[]:{};var p,v;for(p in o)if(o.hasOwnProperty(p)){v=o[p];if(v&&"object"===typeof v)c[p]=Ext.trick.util.Clone(v);else c[p]=v}return c};

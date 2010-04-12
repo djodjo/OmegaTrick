@@ -1,1 +1,0 @@
-Ext.ns("Ext.trick");Ext.trick.Config=function(){var testingFrameworkName="yui";return{getTestingFrameworkName:function(){return testingFrameworkName},setTestingFrameworkName:function(name){testingFrameworkName=name}}}();
