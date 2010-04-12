@@ -14,3 +14,33 @@ java -jar compiler.jar --compilation_level WHITESPACE_ONLY \
 --js=../public_html/OmegaTrick/src/core/String.js \
 --js=../public_html/OmegaTrick/src/core/Ext.js \
 --js_output_file=../public_html/OmegaTrick/OmegaTrick-all.js
+
+
+files=(
+    'structure/core.css'
+    'structure/loadingmask.css'
+    'structure/SigninWindow.css'
+    'visual/loadingmask.css'
+    'visual/SigninWindow.css'
+)
+
+for file in ${files[@]}
+do
+    filename=`echo "$file" | sed 's/\.css/-min\.css/'`
+    echo `rm ../public_html/OmegaTrick/resources/css/$filename`
+    echo `java -jar yuicompressor-2.4.2.jar --charset UTF-8 ../public_html/OmegaTrick/resources/css/$file -o ../public_html/OmegaTrick/resources/css/$filename`
+done
+
+rm ../public_html/OmegaTrick/resources/css/OmegaTrick-all.css
+touch ../public_html/OmegaTrick/resources/css/OmegaTrick-all.css
+
+for file in ${files[@]}
+do
+    filename=`echo "$file" | sed 's/\.css/-min\.css/'`
+    echo `cat ../public_html/OmegaTrick/resources/css/$filename | sed 's/\.\.\/\.\.\/images/\.\.\/images/g' >> ../public_html/OmegaTrick/resources/css/OmegaTrick-all.css`
+
+done
+
+#echo ../public_html/OmegaTrick/resources/css/OmegaTrick-all.css | sed 's/\.\.\/\.\.\/images/\.\.\/images/' > ../public_html/OmegaTrick/resources/css/OmegaTrick-all.css`
+
+
