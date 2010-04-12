@@ -336,7 +336,11 @@ Ext.trick.SigninWindow = Ext.extend(Ext.Component, {
             duration: me.duration,
             callback: function() {
                 Ext.fly(me.el.id + '_SIGNIN_ITEMS').setOpacity(0);
-                me.fireEvent('hide', me);
+
+                me.fireEvent('hide', {
+                    email: me.email.getValue(),
+                    pass: me.password.getValue()
+                }, me);
                 //me.destroy();
             }
         });

@@ -137,16 +137,13 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
                         // サインインウィンドウ表示
                         me.widgets.signin = new Ext.trick.SigninWindow();
 
-                        me.widgets.signin.on('hide', function() {
+                        me.widgets.signin.on('hide', function(ret) {
 
                             Ext.trick.app.Entry.updateLoadText('認証確認中...');
                             Ext.trick.app.Entry.showLoadText({
                                 anim: true,
                                 callback: function() {
-                                    auth.execute({
-                                        email: '',
-                                        pass: ''
-                                    }, function(ret) {
+                                    auth.execute(ret, function(ret) {
 
                                         Ext.trick.app.Entry.hideLoadText({
                                             anim: true,
