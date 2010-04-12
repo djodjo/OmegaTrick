@@ -78,7 +78,9 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
      */
     initEvents : function() {
 
-        var me = this;
+        var me = this,
+            cp = me.cp,
+            akey = cp.get('autosigninkey');
 
         // イベント定義
         me.addEvents(
@@ -97,7 +99,11 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
         if(me.auth) {
 
             // 認証処理
-            me.on('init', me.doAuth);
+            if(akey) {
+                me.on('init', me.doAutoSignin);
+            } else {
+                me.on('init', me.doAuth);
+            }
 
         } else {
 
@@ -114,6 +120,36 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
    },
 
     // }}}
+    // {{{ doAutoSignin
+
+    /**
+     * 自動サインインメソッド
+     */
+    doAutoSignin : function() {
+
+        var me = this,
+            cp = me.cp,
+            akey = cp.get('autosigninkey');
+            auth = eval(me.auth.directFn);
+
+            // 自動サインイン処理
+            auth.autoSignin(akey, function(ret){
+
+                if (ret.success) {
+
+                    // 自動サインインキー更新
+                    cp.set('autosigninkey', ret.auto_signin_key);
+
+                } else {
+
+                }
+
+                // 認証処理
+                me.doAuth();
+            }, me);
+    },
+
+    // }}}
     // {{{ doAuth
 
     /**
@@ -122,6 +158,8 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
     doAuth : function() {
 
         var me = this,
+            cp = me.cp,
+            akey = cp.get('autosigninkey');
             auth = eval(me.auth.directFn);
 
         Ext.trick.app.Entry.updateLoadText('認証確認中...');
@@ -139,6 +177,8 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
 
                         me.widgets.signin.on('hide', function(ret) {
 
+                            var autoSignin = ret.autoSignin;
+
                             Ext.trick.app.Entry.updateLoadText('認証確認中...');
                             Ext.trick.app.Entry.showLoadText({
                                 anim: true,
@@ -149,6 +189,12 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
                                             anim: true,
                                             callback: function() {
                                                 if(ret.success) {
+
+                                                    if(autoSignin) {
+
+                                                        // 自動サインインキー更新
+                                                        cp.set('autosigninkey', ret.auto_signin_key);
+                                                    }
 
                                                     // ローディングマスク削除
                                                     Ext.trick.app.Entry.removeLoadingMask();
@@ -293,6 +339,17 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
     init : function() {
 
         var me = this;
+
+        // クイックチップス初期化
+        Ext.QuickTips.init();
+
+        // Ext.History初期化
+        //Ext.History.init();
+
+        // Cookie Provider生成
+        me.cp = new Ext.state.CookieProvider({
+            expires: new Date(new Date().getTime()+(1000*60*60*24*7))
+        });
 
         // イベント初期化
         me.initEvents();

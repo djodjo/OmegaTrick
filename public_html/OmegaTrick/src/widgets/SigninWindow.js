@@ -250,7 +250,7 @@ Ext.trick.SigninWindow = Ext.extend(Ext.Component, {
 
         me.email.disable();
         me.password.disable();
-        
+
         me.hide();
 
     },
@@ -339,9 +339,9 @@ Ext.trick.SigninWindow = Ext.extend(Ext.Component, {
 
                 me.fireEvent('hide', {
                     email: me.email.getValue(),
-                    pass: me.password.getValue()
+                    pass: me.password.getValue(),
+                    autoSignin: me.autosignin.getValue()
                 }, me);
-                //me.destroy();
             }
         });
     },

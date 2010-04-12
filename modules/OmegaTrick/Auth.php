@@ -109,7 +109,6 @@ class OmegaTrick_Auth extends xFrameworkPX_Model
                 $this->userSessionKey,
                 array(
                     'id' => $ret['id'],
-                    'company' => $ret['company_id'],
                     'last_name' => $ret['last_name'],
                     'first_name' => $ret['first_name'],
                 )
