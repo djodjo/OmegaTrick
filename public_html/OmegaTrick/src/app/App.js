@@ -45,6 +45,16 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
     screenXTypePrefix: '',
 
     // }}}
+    // {{{ useHistory
+
+    /**
+     * Ext.History機能設定
+     */
+    useHistory: {
+        tokenDelimiter : ':'
+    },
+
+    // }}}
     // {{{ widgets
 
     /**
@@ -366,8 +376,32 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
         // クイックチップス初期化
         Ext.QuickTips.init();
 
-        // Ext.History初期化
-        //Ext.History.init();
+        if(me.useHistory) {
+
+            if(!Ext.isObject(me.useHistory)) {
+                me.useHistory = {
+                    tokenDelimiter : ':'
+                }
+            }
+
+            // Ext.History用タグ生成
+            Ext.DomHelper.append(Ext.getBody(), {
+                tag: 'form',
+                id: 'history-form',
+                cls: 'x-hidden',
+                cn: [{
+                    tag: 'input',
+                    type: 'hidden',
+                    id: 'x-history-field'
+                },{
+                    tag: 'iframe',
+                    id: 'x-history-frame'
+                }]
+            });
+
+            // Ext.History初期化
+            Ext.History.init();
+        }
 
         // Cookie Provider生成
         me.cp = new Ext.state.CookieProvider({
