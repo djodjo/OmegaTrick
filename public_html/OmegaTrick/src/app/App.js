@@ -117,7 +117,30 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
                 me.on('init', me.start, me);
             }
         }
-   },
+    },
+
+    // }}}
+    // {{{ signout
+
+    /**
+     * サインアウトメソッド
+     */
+    signout : function(o) {
+
+        var me = this,
+            config = o || {},
+            arg = [],
+            auth = eval(me.auth.directFn);
+
+        if(config.callback) {
+            arg.push(config.callback);
+            if(config.scope) {
+                arg.push(config.scope);
+            }
+        }
+
+        auth.signout.apply(me, arg);
+    },
 
     // }}}
     // {{{ doAutoSignin

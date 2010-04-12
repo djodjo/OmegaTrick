@@ -73,6 +73,17 @@ Ext.onTrick({
                 handler: function(btn, e) {
                     SigninExample.screenTo('ScreenB');
                 }
+            },'->',{
+                text: 'サインアウト',
+                handler: function(btn, e) {
+                    console.log(SigninExample);
+                    SigninExample.signout({
+                        callback: function() {
+                            location.href = 'signin.html';
+                        },
+                        scope: this
+                    });
+                }
             }]
         }
 
