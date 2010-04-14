@@ -339,6 +339,27 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
     },
 
     // }}}
+    // {{{ directlink
+
+    /**
+     * ダイレクトリンク処理メソッド
+     */
+    directlink : function() {
+
+        var me = this,
+            anchor = location.hash;
+
+        if(Ext.isString(anchor) && anchor.startsWith('#')) {
+            anchor = anchor.substr(1);
+            var tokens = anchor.split(me.useHistory.tokenDelimiter),
+                sp = Ext.getCmp(me.appName + '_SCREEN');
+
+            sp.layout.setActiveItem(tokens[0]);
+        }
+
+    },
+
+    // }}}
     // {{{ init
 
     /**
@@ -385,7 +406,8 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
                     sp.layout.setActiveItem(token);
                 }
             });
-        }
+
+       }
 
         // Cookie Provider生成
         me.cp = new Ext.state.CookieProvider({
@@ -482,6 +504,10 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
             listeners: {
                 afterrender: {
                     fn: function() {
+
+                        // ダイレクトリンク
+                        me.directlink();
+
                         me.start.call(me);
                     }
                 }
