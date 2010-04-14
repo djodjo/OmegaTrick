@@ -1,4 +1,5 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
+/*jslint evil: true */
 
 // {{{ Namespace
 
@@ -381,7 +382,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
             if(!Ext.isObject(me.useHistory)) {
                 me.useHistory = {
                     tokenDelimiter : ':'
-                }
+                };
             }
 
             // Ext.History用タグ生成
