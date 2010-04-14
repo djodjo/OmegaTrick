@@ -4,7 +4,7 @@
 // {{{ String.prototype.endsWith
 
 /**
- * String  インスタンスの末尾が、指定された文字列と一致
+ * Stringインスタンスの末尾が、指定された文字列と一致
  * するかどうかを判断します。
  */
 String.prototype.endsWith = function(suffix) {
@@ -15,9 +15,27 @@ String.prototype.endsWith = function(suffix) {
 // }}}
 // {{{ String.prototype.startsWith
 
+/**
+ * Stringインスタンスの先頭が、指定された文字列と一致
+ * するかどうかを判定します。
+ */
 String.prototype.startsWith = function(prefix) {
   return this.indexOf(prefix) === 0;
 };
+
+// }}}
+// {{{ String.prototype.capitalize
+
+/**
+ * キャピタライズ
+ *
+ * 先頭の1文字を大文字に変換します。
+ */
+String.prototype.capitalize = function() {
+  return this.replace(/\w+/g, function(word){
+    return word.charAt(0).toUpperCase() + word.substr(1).toLowerCase();
+  });
+}
 
 // }}}
 
