@@ -1,4 +1,5 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
+/*jslint evil: true */
 
 // {{{ Namespace
 
@@ -178,7 +179,7 @@ Ext.trick.layout.ScreenLayout = Ext.extend(Ext.layout.FitLayout, {
 // }}}
 // {{{ Register Layout
 
-Ext.Container.LAYOUTS['screen'] = Ext.trick.layout.ScreenLayout;
+Ext.Container.LAYOUTS.screen = Ext.trick.layout.ScreenLayout;
 
 // }}}
 

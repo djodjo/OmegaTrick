@@ -1,4 +1,5 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
+/*jslint evil: true */
 
 // {{{ Ext expand methods
 
@@ -19,7 +20,7 @@ Ext.applyIf(Ext,{
         els.each(function(el){
 
             var zIndex = el.getStyle('z-index');
-            if(Ext.isNumber(parseInt(zIndex)) && ret < zIndex) {
+            if(Ext.isNumber(parseInt(zIndex, 10)) && ret < zIndex) {
                 ret = zIndex;
             }
 
@@ -38,12 +39,8 @@ Ext.applyIf(Ext,{
      */
     getScrollPos: function() {
 
-        var y = (document.documentElement.scrollTop > 0)
-            ? document.documentElement.scrollTop
-            : document.body.scrollTop;
-        var x = (document.documentElement.scrollLeft > 0)
-            ? document.documentElement.scrollLeft
-            : document.body.scrollLeft;
+        var y = (document.documentElement.scrollTop > 0) ? document.documentElement.scrollTop : document.body.scrollTop;
+        var x = (document.documentElement.scrollLeft > 0) ? document.documentElement.scrollLeft : document.body.scrollLeft;
 
         return {
             x: x,

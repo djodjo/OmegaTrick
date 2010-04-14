@@ -1,4 +1,5 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
+/*jslint evil: true */
 
 // {{{ String.prototype.endsWith
 
@@ -15,7 +16,7 @@ String.prototype.endsWith = function(suffix) {
 // {{{ String.prototype.startsWith
 
 String.prototype.startsWith = function(prefix) {
-  return this.indexOf(prefix) == 0;
+  return this.indexOf(prefix) === 0;
 };
 
 // }}}

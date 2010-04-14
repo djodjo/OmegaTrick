@@ -11,10 +11,10 @@ Ext.onTrick({
      * アプリケーション名設定
      */
     appName: 'ScreenExamples',
-    
+
     // }}}
     // {{{ screens
-   
+
     /**
      * スクリーン定義
      */
@@ -46,7 +46,7 @@ Ext.onTrick({
      * ケーシング設定
      */
     casing: {
-        
+
         north: {
             border: false,
             tbar: [{
@@ -66,7 +66,7 @@ Ext.onTrick({
                 }
             }]
         }
-            
+
     },
 
     // }}}
@@ -77,7 +77,7 @@ Ext.onTrick({
      */
     start : function() {
     }
-    
+
     // }}}
 
 });
