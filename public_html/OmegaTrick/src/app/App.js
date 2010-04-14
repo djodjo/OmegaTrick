@@ -330,37 +330,11 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
             });
         }
 
-        if(t && t.fix) {
-            sp.layout.setActiveItem(to);
+        // ヒストリー設定
+        if(me.useHistory) {
+            Ext.History.add(t.name || t.id);
         } else {
-
             sp.layout.setActiveItem(to);
-/*
-            var scripts = [];
-
-            if(t.scriptItems) {
-                scripts = scripts.concat(t.scriptItems);
-            } else {
-                scripts.push({
-                    src: 'screens/' + t.name + '.js'
-                });
-            }
-
-            var loader = new Ext.trick.util.ScriptLoader({
-                items: scripts
-            });
-
-            loader.on('load', function() {
-
-            sp.layout.setActiveItem(to);
-                me.viewport.el.unmask();
-                me.removeScriptTags();
-            });
-
-            me.viewport.el.mask(Ext.LoadMask.prototype.msg);
-
-            loader.load();
-*/
         }
     },
 
@@ -379,10 +353,9 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
 
         if(me.useHistory) {
 
+            // 初期値設定
             if(!Ext.isObject(me.useHistory)) {
-                me.useHistory = {
-                    tokenDelimiter : ':'
-                };
+                me.useHistory = Ext.trick.Config.getDefault('useHistory');
             }
 
             // Ext.History用タグ生成
@@ -402,6 +375,16 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
 
             // Ext.History初期化
             Ext.History.init();
+
+            // changeイベント設定
+            Ext.History.on('change', function(token){
+
+                var sp = Ext.getCmp(me.appName + '_SCREEN');
+
+                if(Ext.isString(token)) {
+                    sp.layout.setActiveItem(token);
+                }
+            });
         }
 
         // Cookie Provider生成

@@ -28,8 +28,35 @@ Ext.trick.Config = function() {
      */
     var testingFrameworkName = 'yui';
 
+    /**
+     * デフォルト値オブジェクト
+     */
+    var defaults = {
+        useHistory : {
+            tokenDelimiter : ':'
+        }
+    };
+
     return {
 
+        // {{{ getDefault
+
+        /**
+         * デフォルト値取得メソッド
+         *
+         * @param key 初期値キー
+         * @return 初期値
+         */
+        getDefault : function(key) {
+
+            if(defaults[key]) {
+                return defaults[key];
+            }
+
+            return undefined;
+        },
+
+        // }}}
         // {{{ getTestingFrameworkName
 
         /**
