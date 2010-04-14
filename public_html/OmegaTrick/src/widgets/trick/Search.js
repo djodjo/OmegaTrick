@@ -19,6 +19,16 @@ Ext.ns(
 Ext.trick.trick.Search = {
 
 
+    // {{{ tricktrigger
+
+    tricktrigger : function() {
+    
+        console.log("Do Executed.");
+
+    }
+
+    // }}}
+
 };
 
 // }}}

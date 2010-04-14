@@ -9,7 +9,6 @@ Ext.onReady(function(){
         height: 500,
         renderTo: Ext.getBody()
     });
-
 });
 
 /*

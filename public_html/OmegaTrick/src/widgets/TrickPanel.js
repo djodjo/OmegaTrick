@@ -11,6 +11,23 @@
  */
 Ext.trick.TrickPanel = Ext.extend(Ext.Panel, {
 
+    // {{{ trick
+
+    /**
+     * トリックタイプ設定
+     */
+    trick : null,
+
+    // }}}
+    // {{{ trickConfig
+
+    /**
+     * トリック設定
+     */
+    trickConfig: {},
+
+    // }}}
+
     // {{{ constructor
 
     /**
@@ -41,9 +58,22 @@ Ext.trick.TrickPanel = Ext.extend(Ext.Panel, {
 
         var me = this;
 
+        // トリックトリガー
+        me.tricktrigger.apply(me, arguments);
+
         // スーパークラスメソッドコール
         Ext.trick.TrickPanel.superclass.initComponent.call(me);
     },
+
+    // }}}
+    // {{{ tricktrigger
+
+    /**
+     * トリックトリガー抽象メソッド
+     *
+     * 適用されたトリックを開始します。
+     */
+    tricktrigger : Ext.emptyFn,
 
     // }}}
     // {{{ addMethods
