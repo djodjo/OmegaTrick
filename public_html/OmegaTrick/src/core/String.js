@@ -35,7 +35,7 @@ String.prototype.capitalize = function() {
   return this.replace(/\w+/g, function(word){
     return word.charAt(0).toUpperCase() + word.substr(1).toLowerCase();
   });
-}
+};
 
 // }}}
 

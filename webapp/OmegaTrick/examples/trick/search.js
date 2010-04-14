@@ -3,8 +3,8 @@
 Ext.onReady(function(){
 
     var p = new Ext.trick.TrickPanel({
-
-        title: 'test',
+        title: 'Ext.trick.TrickPanel',
+        trick: 'search',
         width: 700,
         height: 500,
         renderTo: Ext.getBody()

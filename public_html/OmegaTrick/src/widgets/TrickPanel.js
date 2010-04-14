@@ -11,6 +11,25 @@
  */
 Ext.trick.TrickPanel = Ext.extend(Ext.Panel, {
 
+    // {{{ constructor
+
+    /**
+     * コンストラクタ
+     */
+    constructor : function(o) {
+
+        var me = this,
+            config = o || {};
+
+        if(config.trick && Ext.isString(config.trick)) {
+            me.addMethods(eval('Ext.trick.trick.' + config.trick.capitalize()));
+        }
+
+        // スーパークラスメソッドコール 
+        Ext.trick.TrickPanel.superclass.constructor.apply(me, arguments);
+    },
+
+    // }}}
     // {{{ initComponent
 
     /**
@@ -21,9 +40,23 @@ Ext.trick.TrickPanel = Ext.extend(Ext.Panel, {
     initComponent : function() {
 
         var me = this;
-alert("initComponent");
+
         // スーパークラスメソッドコール
         Ext.trick.TrickPanel.superclass.initComponent.call(me);
+    },
+
+    // }}}
+    // {{{ addMethods
+
+    /**
+     * メソッド追加メソッド
+     *
+     * @param o 追加オブジェクト
+     * @return void
+     */
+    addMethods : function(o) {
+
+        Ext.apply(Ext.trick.TrickPanel.prototype, o);
     }
 
     // }}}
