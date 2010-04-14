@@ -9,7 +9,7 @@
  * @author  Kazuhiro Kotsutsumi <kotsutsumi@xenophy.com>
  * @version 1.0
  */
-Ext.trick.TrickPanel = Ext.extend(Ext.Component, {
+Ext.trick.TrickPanel = Ext.extend(Ext.Panel, {
 
     // {{{ initComponent
 
@@ -21,7 +21,9 @@ Ext.trick.TrickPanel = Ext.extend(Ext.Component, {
     initComponent : function() {
 
         var me = this;
-
+alert("initComponent");
+        // スーパークラスメソッドコール
+        Ext.trick.TrickPanel.superclass.initComponent.call(me);
     }
 
     // }}}
