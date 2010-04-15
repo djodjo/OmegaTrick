@@ -18,12 +18,15 @@ Ext.ns(
  */
 Ext.trick.trick.Search = {
 
-
     // {{{ tricktrigger
 
+    /**
+     * トリックトリガーメソッド
+     *
+     * 仕掛けの設置を開始します。
+     */
     tricktrigger : function() {
-    
-        console.log("Do Executed.");
+
 
     }
 
