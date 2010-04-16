@@ -1,4 +1,5 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
+/*jslint evil: true */
 
 // {{{ Namespace
 
@@ -18,6 +19,55 @@ Ext.ns(
  */
 Ext.trick.trick.List = {
 
+    // {{{ trickInit
+
+    trickInit : [
+        '_initList'
+    ],
+
+    // }}}
+    // {{{ _initList
+
+    /**
+     * Ext.trick.trick.List初期化メソッド
+     */
+    _initList : function(o) {
+
+        var me = this;
+
+        // 設定適用
+        Ext.apply(me, {
+
+            // レイアウト設定
+            layout: 'fit',
+
+            // アイテム設定
+            items: [{
+                xtype: 'trick-list',
+                trickConfig: o.trickConfig.list
+            }]
+
+        });
+
+    },
+
+    // }}}
+    // {{{ initConfig
+
+    /**
+     * コンフィグ初期化メソッド
+     */
+    initConfig : function() {
+
+        var me = this,
+            args = arguments;
+
+        Ext.each(me.trickInit, function(item, cnt, items){
+            eval('me.' + item + '.apply(me, args);');
+        }, me);
+    },
+
+    // }}}
     // {{{ tricktrigger
 
     /**
@@ -27,7 +77,7 @@ Ext.trick.trick.List = {
      */
     tricktrigger : function() {
 
-
+        var me = this;
 
 
 

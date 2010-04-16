@@ -19,6 +19,11 @@ Ext.trick.TrickPanel = Ext.extend(Ext.Panel, {
     trick : null,
 
     // }}}
+    // {{{ trickInit
+
+    trickInit : [],
+
+    // }}}
     // {{{ trickConfig
 
     /**
@@ -38,11 +43,16 @@ Ext.trick.TrickPanel = Ext.extend(Ext.Panel, {
         var me = this,
             config = o || {};
 
+        // トリック適用
         if(config.trick && Ext.isString(config.trick)) {
+
+            config.trickConfig = config.trickConfig || {};
+            config.trickConfig[config.trick] = config.trickConfig[config.trick] || {};
+
             me.addMethods(eval('Ext.trick.trick.' + config.trick.capitalize()));
         }
 
-        // スーパークラスメソッドコール 
+        // スーパークラスメソッドコール
         Ext.trick.TrickPanel.superclass.constructor.apply(me, arguments);
     },
 
@@ -58,12 +68,23 @@ Ext.trick.TrickPanel = Ext.extend(Ext.Panel, {
 
         var me = this;
 
+        // コンフィグ初期化
+        me.initConfig.apply(me, [me.initialConfig]);
+
         // トリックトリガー
         me.tricktrigger.apply(me, arguments);
 
         // スーパークラスメソッドコール
         Ext.trick.TrickPanel.superclass.initComponent.call(me);
     },
+
+    // }}}
+    // {{{ initConfig
+
+    /**
+     * コンフィグ初期化メソッド
+     */
+    initConfig : Ext.emptyFn,
 
     // }}}
     // {{{ tricktrigger

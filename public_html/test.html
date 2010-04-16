@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<head>
+
+    <!-- content-type -->
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <!-- /content-type -->
+
+    <!-- content-script-type -->
+    <meta http-equiv="content-script-type" content="text/javascript" />
+    <!-- /content-script-type -->
+
+    <!-- content-style-type -->
+    <meta http-equiv="content-style-type" content="text/css" />
+    <!-- /content-style-type -->
+
+    <!-- ext-all.css -->
+    <link rel="stylesheet" type="text/css" href="ext-3.2.0/resources/css/ext-all.css" />
+    <!-- /ext-all.css -->
+
+    <!-- Ext JS Theme -->
+    <link rel="stylesheet" type="text/css" href="ext-3.2.0/resources/css/xtheme-gray.css" />
+    <!-- Ext JS Theme -->
+
+    <!-- ux-all.css -->
+    <link rel="stylesheet" type="text/css" href="ext-3.2.0/examples/ux/css/ux-all.css" />
+    <!-- /ux-all.css -->
+
+</head>
+<body>
+
+    <script type="text/javascript" src="ext-3.2.0/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="ext-3.2.0/ext-all.js"></script>
+    <script type="text/javascript" src="ext-3.2.0/examples/ux/ux-all.js"></script>
+    <script type="text/javascript" src="ext-3.2.0/src/locale/ext-lang-ja.js"></script>
+    <script type="text/javascript" src="extdirect.html"></script>
+    <script type="text/javascript">
+
+        Ext.onReady(function(){
+
+
+            Ext.Direct.addProvider(Ext.app.REMOTING_API);
+
+        // ストア生成
+        var store = new Ext.data.DirectStore({
+            api: {
+                read: OmegaTrick_List.readData,
+                create: OmegaTrick_List.readData,
+                update: OmegaTrick_List.readData,
+                destroy: OmegaTrick_List.readData
+            },
+            restful: true,
+            autoLoad: true,
+            paramOrder: 'start|limit|sort|dir|query',
+            remoteSort: true,
+            paramsAsHash: false,
+            idProperty: 'id',
+            root: 'items',
+            baseParams:{
+                start: 0,
+                limit: 50,
+                sort: 'modified',
+                dir: 'DESC',
+                query: ''
+            },
+            fields: [
+                'id',
+                'no',
+                'caption',
+                'total',
+                'publish',
+                'delivery',
+                'expiration',
+                'customer',
+                'owner',
+                {name: 'modified', type: 'date', dateFormat: 'Y-m-d h:i:s'}
+            ]
+        });
+
+            var g = new Ext.grid.GridPanel({
+                title: 'Teston',
+                store: store,
+                height: 500,
+                colModel: new Ext.grid.ColumnModel({
+                    columns:[
+                        {header:'Caption', dataIndex: 'caption'}
+                    ]
+                }),
+                renderTo: Ext.getBody()
+            });
+console.log(g);
+
+            OmegaTrick_List.readData(1,2,3,4);
+
+        });
+
+    </script>
+
+</body>
+</html>

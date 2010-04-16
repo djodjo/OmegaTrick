@@ -8,6 +8,7 @@ class extdirect extends xFrameworkPX_Controller_ExtDirect
 
     public $modules = array(
         'OmegaTrick_Auth' => array('conn' => 'default'),
+        'OmegaTrick_List' => array('conn' => 'default'),
     );
 }
 
