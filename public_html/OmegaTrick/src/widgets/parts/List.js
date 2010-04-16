@@ -121,6 +121,12 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.grid.GridPanel, {
 
         });
 
+        // ページングツールバー設定
+        if(config.ptbar) {
+        
+        
+        }
+
     },
 
     // }}}
