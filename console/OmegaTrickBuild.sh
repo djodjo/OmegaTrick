@@ -12,6 +12,7 @@ java -jar compiler.jar --compilation_level WHITESPACE_ONLY \
 --js=../public_html/OmegaTrick/src/widgets/ScreenPanel.js \
 --js=../public_html/OmegaTrick/src/widgets/TrickPanel.js \
 --js=../public_html/OmegaTrick/src/widgets/trick/Search.js \
+--js=../public_html/OmegaTrick/src/widgets/parts/Search.js \
 --js=../public_html/OmegaTrick/src/widgets/trick/List.js \
 --js=../public_html/OmegaTrick/src/widgets/parts/List.js \
 --js=../public_html/OmegaTrick/src/core/Config.js \
