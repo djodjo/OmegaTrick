@@ -1,15 +1,40 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 /*jslint evil: true */
 
-Ext.onReady(function(){
+Ext.onTrick({
 
-    var p = new Ext.trick.TrickPanel({
-        title: 'Ext.trick.TrickPanel',
-        trick: 'search',
-        width: 700,
-        height: 500,
-        renderTo: Ext.getBody()
-    });
+    // {{{ useDirect
+
+    /**
+     * Ext Direct使用設定
+     */
+    useDirect: Ext.app.REMOTING_API,
+
+    // }}}
+    // {{{ autoRenader
+
+    /**
+     * 自動レンダリング設定
+     */
+    autoRender : false,
+
+    // }}}
+    // {{{ start
+
+    start : function() {
+
+        var p = new Ext.trick.TrickPanel({
+            title: 'Ext.trick.TrickPanel',
+            trick: 'search',
+            width: 700,
+            height: 500,
+            renderTo: Ext.getBody()
+        });
+
+    }
+
+    // }}}
+
 });
 
 /*

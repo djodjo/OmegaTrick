@@ -18,6 +18,68 @@ Ext.ns(
  */
 Ext.trick.trick.Search = {
 
+     // {{{ trickInit
+
+    trickInit : [
+        '_initSearch'
+    ],
+
+    // }}}
+    // {{{ _initSearch
+
+    /**
+     * Ext.trick.trick.Search初期化メソッド
+     */
+    _initSearch : function(o) {
+
+        var me = this,
+            partsConfig = {};
+
+        // トリックパーツへの設定適用
+        Ext.apply(partsConfig, o.trickPartsConfig);
+        Ext.applyIf(partsConfig, {
+
+            // xtype設定
+            xtype: 'trick-search',
+
+            // ボーダー設定
+            border: false,
+
+            // トリックコンフィグ設定
+            trickConfig: o.trickConfig
+
+        });
+
+        // 設定適用
+        Ext.applyIf(me, {
+
+            // レイアウト設定
+            layout: 'fit',
+
+            // アイテム設定
+            items: [partsConfig]
+
+        });
+
+    },
+
+    // }}}
+    // {{{ initConfig
+
+    /**
+     * コンフィグ初期化メソッド
+     */
+    initConfig : function() {
+
+        var me = this,
+            args = arguments;
+
+        Ext.each(me.trickInit, function(item, cnt, items){
+            eval('me.' + item + '.apply(me, args);');
+        }, me);
+    },
+
+    // }}}
     // {{{ tricktrigger
 
     /**

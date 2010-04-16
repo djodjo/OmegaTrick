@@ -187,28 +187,6 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.grid.GridPanel, {
                 tempConfig.bbar = new Ext.PagingToolbar(config.ptbar);
             } else {
 
-/*
-    onPTbarChange : function() {
-
-        var me = this,
-            tbar = me.getTopToolbar(),
-            pt = me.listgrid.ptbar,
-            count = pt.store.getCount(),
-            tbarCopy = tbar.getComponent('ptbar_copy');
-
-        var msg = count == 0 ?
-            pt.emptyMsg :
-            String.format(
-                pt.displayMsg,
-                pt.cursor+1, pt.cursor+count, pt.store.getTotalCount()
-            );
-
-        tbarCopy.setText(msg);
-    },
-
-
-*/
-
                 if(pos.both && Ext.isObject(pos.both)) {
                     if(pos.both.top === true && pos.both.bottom !== true) {
 
@@ -243,16 +221,6 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.grid.GridPanel, {
                             itemId: 'ptbar_info'
                         });
 
-/*
-
-                        tempConfig.bbar = ['->',{
-                            // xtype設定
-                            xtype: 'tbtext',
-
-                            // アイテムID
-                            itemId: 'ptbar_info'
-                        }];
-*/
                     } else if(pos.both.top !== true && pos.both.bottom === true) {
 
                         config.ptbar.listeners = config.ptbar.listeners || {};

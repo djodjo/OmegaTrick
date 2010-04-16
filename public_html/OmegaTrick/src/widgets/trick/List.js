@@ -91,10 +91,6 @@ Ext.trick.trick.List = {
     tricktrigger : function() {
 
         var me = this;
-
-
-
-
     }
 
     // }}}
