@@ -50,7 +50,7 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.grid.GridPanel, {
             paramOrder: config.store.paramOrder || 'start|limit|sort|dir|query',
 
             // リモートソート設定
-            remoteSort: config.store.remoteSotr || false,
+            remoteSort: config.store.remoteSotr || true,
 
             // パラメータハッシュ設定
             paramsAsHash: config.store.paramsAsHash || false,
@@ -123,8 +123,21 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.grid.GridPanel, {
 
         // ページングツールバー設定
         if(config.ptbar) {
-        
-        
+
+            Ext.applyIf(config.ptbar, {
+
+                // ページサイズ設定
+                paseSize: 50,
+
+                // ツールバー情報表示設定
+                displayInfo: true,
+
+                // 情報メッセージ設定
+                displayMsg: '表示中のアイテム: {2} 件中 {0} - {1} 件',
+
+                // 空メッセージ
+                emptyMsg: '表示するアイテムがありません。'
+            });
         }
 
     },
@@ -146,17 +159,38 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.grid.GridPanel, {
         me.initConfig();
 
         // ストア生成
-        var store = new storeCls(config.store);
+        store = new storeCls(config.store);
 
-        // コンフィグ適用
-        Ext.applyIf(me, {
+        // テンポラリコンフィグ設定
+        var tempConfig = {
 
             // ストア設定
             store: store,
 
             // カラムモデル設定
             colModel: new colModelCls(config.colModel)
-        });
+        };
+
+        // ページングツールバー生成
+        if(config.ptbar) {
+
+            // ストア設定
+            Ext.applyIf(config.ptbar, {
+                store: store
+            });
+
+            if(config.ptbar.position === 'top') {
+                tempConfig.tbar = new Ext.PagingToolbar(config.ptbar);
+            } else if(config.ptbar.position == 'bottom') {
+                tempConfig.bbar = new Ext.PagingToolbar(config.ptbar);
+            } else {
+                tempConfig.tbar = new Ext.PagingToolbar(config.ptbar);
+                tempConfig.bbar = new Ext.PagingToolbar(config.ptbar);
+            }
+        }
+
+        // コンフィグ適用
+        Ext.applyIf(me, tempConfig);
 
         // スーパークラスメソッドコール
         Ext.trick.parts.ListPanel.superclass.initComponent.call(me);
