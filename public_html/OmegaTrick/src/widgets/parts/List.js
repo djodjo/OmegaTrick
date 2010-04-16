@@ -115,8 +115,8 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.grid.GridPanel, {
             // カラム設定
             columns: config.colModel.columns || [
                 {header: 'タイトル', width: 200, sortable: true, dataIndex: 'caption'},
-                {header: '更新日時', width: 200, sortable: true, dataIndex: 'modified'},
-                {header: '作成日時', width: 200, sortable: true, dataIndex: 'created'}
+                {header: '更新日時', width: 200, sortable: true, dataIndex: 'modified',renderer: Ext.util.Format.dateRenderer('Y/m/d H:i:s')},
+                {header: '作成日時', width: 200, sortable: true, dataIndex: 'created' ,renderer: Ext.util.Format.dateRenderer('Y/m/d H:i:s')}
             ]
 
         });
