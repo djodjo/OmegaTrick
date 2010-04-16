@@ -33,10 +33,23 @@ Ext.trick.trick.List = {
      */
     _initList : function(o) {
 
-        var me = this;
+        var me = this,
+            partsConfig = {};
 
         // トリックパーツへの設定適用
-        Ext.apply(me, me.trickConfig);
+        Ext.apply(partsConfig, o.trickPartsConfig);
+        Ext.applyIf(partsConfig, {
+
+            // xtype設定
+            xtype: 'trick-list',
+
+            // ボーダー設定
+            border: false,
+
+            // トリックコンフィグ設定
+            trickConfig: o.trickConfig.list
+
+        });
 
         // 設定適用
         Ext.applyIf(me, {
@@ -45,10 +58,7 @@ Ext.trick.trick.List = {
             layout: 'fit',
 
             // アイテム設定
-            items: [{
-                xtype: 'trick-list',
-                trickConfig: o.trickConfig.list
-            }]
+            items: [partsConfig]
 
         });
 
