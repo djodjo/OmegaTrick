@@ -35,8 +35,11 @@ Ext.trick.trick.List = {
 
         var me = this;
 
+        // トリックパーツへの設定適用
+        Ext.apply(me, me.trickConfig);
+
         // 設定適用
-        Ext.apply(me, {
+        Ext.applyIf(me, {
 
             // レイアウト設定
             layout: 'fit',
