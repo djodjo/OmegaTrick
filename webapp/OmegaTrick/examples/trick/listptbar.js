@@ -35,6 +35,13 @@ Ext.onTrick({
                     }
                 }
             },
+            trickPartsConfig: {
+                tbar: [{
+                    text: 'ボタン１'
+                },{
+                    text: 'ボタン２'
+                }]
+            },
             width: 700,
             height: 500,
             renderTo: Ext.getBody()

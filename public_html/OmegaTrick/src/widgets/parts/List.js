@@ -229,6 +229,22 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.grid.GridPanel, {
                         };
 
                         tempConfig.tbar = new Ext.PagingToolbar(config.ptbar);
+
+                        if(!me.bbar) {
+                            me.bbar = [];
+                        }
+
+                        me.bbar.push('->');
+                        me.bbar.push({
+                             // xtype設定
+                            xtype: 'tbtext',
+
+                            // アイテムID
+                            itemId: 'ptbar_info'
+                        });
+
+/*
+
                         tempConfig.bbar = ['->',{
                             // xtype設定
                             xtype: 'tbtext',
@@ -236,7 +252,7 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.grid.GridPanel, {
                             // アイテムID
                             itemId: 'ptbar_info'
                         }];
-
+*/
                     } else if(pos.both.top !== true && pos.both.bottom === true) {
 
                         config.ptbar.listeners = config.ptbar.listeners || {};
@@ -256,13 +272,19 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.grid.GridPanel, {
                         };
 
                         tempConfig.bbar = new Ext.PagingToolbar(config.ptbar);
-                        tempConfig.tbar = ['->',{
-                            // xtype設定
+
+                        if(!me.tbar) {
+                            me.tbar = [];
+                        }
+
+                        me.tbar.push('->');
+                        me.tbar.push({
+                             // xtype設定
                             xtype: 'tbtext',
 
                             // アイテムID
                             itemId: 'ptbar_info'
-                        }];
+                        });
 
                     } else {
                         tempConfig.tbar = new Ext.PagingToolbar(config.ptbar);
