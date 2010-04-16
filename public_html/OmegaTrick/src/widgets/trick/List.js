@@ -47,7 +47,7 @@ Ext.trick.trick.List = {
             border: false,
 
             // トリックコンフィグ設定
-            trickConfig: o.trickConfig.list
+            trickConfig: o.trickConfig
 
         });
 

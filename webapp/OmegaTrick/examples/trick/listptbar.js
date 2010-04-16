@@ -26,9 +26,7 @@ Ext.onTrick({
             title: 'List Trick with PagingToolbar - Ext.trick.TrickPanel',
             trick: 'list',
             trickConfig: {
-                list: {
-                    ptbar: {
-                    }
+                ptbar: {
                 }
             },
             width: 700,
