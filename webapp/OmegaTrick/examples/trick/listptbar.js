@@ -27,6 +27,12 @@ Ext.onTrick({
             trick: 'list',
             trickConfig: {
                 ptbar: {
+                    position: {
+                        both: {
+                            top: false,
+                            bottom: true
+                        }
+                    }
                 }
             },
             width: 700,
