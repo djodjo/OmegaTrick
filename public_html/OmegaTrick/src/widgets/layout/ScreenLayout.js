@@ -109,11 +109,7 @@ Ext.trick.layout.ScreenLayout = Ext.extend(Ext.layout.FitLayout, {
             oi = item;
 
         var si;
-/*
-        if(c.items) {
-            Ext.apply(c.initialConfig.items, c.items);
-        }
-*/
+
         // フレックスアイテム削除
         me.destroyFlexItems();
 
