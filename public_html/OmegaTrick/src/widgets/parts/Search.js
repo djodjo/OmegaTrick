@@ -60,19 +60,10 @@ Ext.trick.parts.SearchPanel = Ext.extend(Ext.Panel, {
             }
         }
 
-/*
-        // 簡易検索ボックス設定
-        Ext.applyIf(list.trickPartsConfig, {
-            tbar: [{
-                xtype: 'tbtext',
-                text: '検索:'
-            },
-            new Ext.ux.form.SearchField({
-                width: 240
-            })
-            ]
+        Ext.apply(list.trickConfig, {
+            searchBox: true
         });
-*/
+
         // コンフィグ適用
         Ext.applyIf(me, {
 

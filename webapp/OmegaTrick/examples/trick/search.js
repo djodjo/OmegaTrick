@@ -30,7 +30,12 @@ Ext.onTrick({
                 list: {
                     trickConfig: {
                         ptbar: {
-                            position: 'bottom'
+                            position: {
+                                both: {
+                                    top: false,
+                                    bottom: true
+                                }
+                            }
                         }
                     },
                     trickPartsConfig: {
@@ -40,7 +45,7 @@ Ext.onTrick({
                     }
                 }
             },
-            width: 700,
+            width: 900,
             height: 500,
             renderTo: Ext.getBody()
         });

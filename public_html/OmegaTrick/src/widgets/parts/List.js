@@ -171,6 +171,23 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.grid.GridPanel, {
             colModel: new colModelCls(config.colModel)
         };
 
+        // 検索ボックス
+        if(config.searchBox) {
+
+            Ext.apply(me , {
+                tbar: [{
+                    xtype: 'tbtext',
+                    text: '検索:'
+                },
+                new Ext.ux.form.SearchField({
+                    width: 240,
+                    store: store
+                }),'-',{
+                    text: '詳細検索'
+                }]
+            });
+        }
+
         // ページングツールバー生成
         if(config.ptbar) {
 
