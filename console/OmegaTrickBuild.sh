@@ -116,4 +116,5 @@ if [ -z "$1" ];then
         compress_js
         compress_css
 fi
+### back to current dir
 cd $CD
