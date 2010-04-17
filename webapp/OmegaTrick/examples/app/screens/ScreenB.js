@@ -2,36 +2,29 @@
 
 Ext.ns(
     'ScreenExamples',
-    'ScreenExamples.ScreenB'    
+    'ScreenExamples.ScreenB'
 );
 
-ScreenExamples.ScreenB.ScreenPanel = Ext.extend(Ext.Panel, {
+ScreenExamples.ScreenB.ScreenPanel = Ext.extend(Ext.trick.TrickPanel, {
 
     // {{{ initComponent
 
     initComponent : function() {
-    
+
         var me = this;
 
         Ext.apply(me, {
             id: 'ScreenB',
-            title: 'ScreenB',
-            layout: 'fit',
-            items: [{
-                title: 'ScreenBInnerPanela',
-                html: 'text',
-                tbar: [{
-                    text: 'test'
-                }]
-            }]    
+            border: false,
+            trick: 'list'
         });
 
         // スーパークラスメソッドコール
         ScreenExamples.ScreenB.ScreenPanel.superclass.initComponent.call(me);
     }
 
-    // }}}        
-        
+    // }}}
+
 });
 
 Ext.reg('screenb', ScreenExamples.ScreenB.ScreenPanel);

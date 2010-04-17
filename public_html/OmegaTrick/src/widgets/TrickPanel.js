@@ -51,7 +51,7 @@ Ext.trick.TrickPanel = Ext.extend(Ext.Panel, {
             var parts = Ext.clone(me.trickPartsConfig);
 
             Ext.applyIf(parts, {
-                xtype: 'trick-' + Ext.clone(me.initialConfig.trick),
+                xtype: 'trick-' + Ext.clone(me.initialConfig.trick || me.trick),
                 trickConfig: Ext.clone(me.trickConfig)
             });
 
@@ -59,8 +59,9 @@ Ext.trick.TrickPanel = Ext.extend(Ext.Panel, {
             Ext.applyIf(me, {
                 layout: 'fit',
                 border: false,
-                items: Ext.clone(parts)
+                items: parts 
             });
+
         }
 
         // スーパークラスメソッドコール

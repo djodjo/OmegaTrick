@@ -13,6 +13,14 @@ Ext.onTrick({
     appName: 'ScreenExamples',
 
     // }}}
+    // {{{ useDirect
+
+    /**
+     * Ext Direct使用設定
+     */
+    useDirect: Ext.app.REMOTING_API,
+
+    // }}}
     // {{{ screens
 
     /**

@@ -407,7 +407,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
                 }
             });
 
-       }
+        }
 
         // Cookie Provider生成
         me.cp = new Ext.state.CookieProvider({
@@ -508,6 +508,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
                         // ダイレクトリンク
                         me.directlink();
 
+                        // 開始メソッドコール
                         me.start.call(me);
                     }
                 }

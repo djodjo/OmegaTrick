@@ -73,6 +73,7 @@ Ext.trick.ScreenPanel = Ext.extend(Ext.Panel,{
         // 以下は、単一のコンポーネントに対する処理
         var c = me.lookupComponent(me.applyDefaults(comp));
         var index = this.items.length;
+
         if(me.fireEvent('beforeadd', me, c, index) !== false && me.onBeforeAdd(c) !== false){
             me.items.add(c);
             c.onAdded(me, index);

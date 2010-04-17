@@ -13,6 +13,14 @@ Ext.onTrick({
     appName: 'ScreenExamples',
 
     // }}}
+    // {{{ useDirect
+
+    /**
+     * Ext Direct使用設定
+     */
+    useDirect: Ext.app.REMOTING_API,
+
+    // }}}
     // {{{ screens
 
     /**
@@ -21,19 +29,11 @@ Ext.onTrick({
     screens: [{
         fix: true,
         id: 'Dashboard',
-        name: 'Dashboard',
-        loadText: 'ダッシュボード読み込み中...'
+        name: 'Dashboard'
     },{
         fix: true,
         id: 'ScreenA',
-        name: 'ScreenA',
-        items: [{
-            src: 'screens/ScreenA/item1.js',
-            loadText: 'スクリーンA:item1.js 読み込み中...'
-        },{
-            src: 'screens/ScreenA/item2.js',
-            loadText: 'スクリーンA:item2.js 読み込み中...'
-        }]
+        name: 'ScreenA'
     },{
         id: 'ScreenB',
         name: 'ScreenB'
