@@ -48,7 +48,8 @@ Ext.trick.layout.ScreenLayout = Ext.extend(Ext.layout.FitLayout, {
     constructor: function(config) {
 
         // スーパークラスメソッドコール
-        Ext.trick.layout.ScreenLayout.superclass.constructor.call(this, config);
+        Ext.trick.layout.ScreenLayout.superclass.constructor.apply(this, arguments);
+
     },
 
     // }}}
@@ -76,7 +77,24 @@ Ext.trick.layout.ScreenLayout = Ext.extend(Ext.layout.FitLayout, {
                 item.hide();
             }
         });
-   },
+    },
+
+    // }}}
+    // {{{ setContainer
+
+    setContainer : function(ct){
+    
+        var me = this;
+
+        if(ct.items) {
+            Ext.applyIf(ct.initialConfig.items, ct.items);
+        
+        }
+
+
+        Ext.trick.layout.ScreenLayout.superclass.setContainer.call(me, ct);
+
+    },
 
     // }}}
     // {{{ setActiveItem
@@ -97,6 +115,10 @@ Ext.trick.layout.ScreenLayout = Ext.extend(Ext.layout.FitLayout, {
             oi = item;
 
         var si;
+
+        if(c.items) {
+            Ext.apply(c.initialConfig.items, c.items);
+        }
 
         // フレックスアイテム削除
         me.destroyFlexItems();

@@ -19,11 +19,6 @@ Ext.trick.TrickPanel = Ext.extend(Ext.Panel, {
     trick : null,
 
     // }}}
-    // {{{ trickInit
-
-    trickInit : [],
-
-    // }}}
     // {{{ trickConfig
 
     /**
@@ -32,29 +27,12 @@ Ext.trick.TrickPanel = Ext.extend(Ext.Panel, {
     trickConfig: {},
 
     // }}}
-
-    // {{{ constructor
+    // {{{ trickPartsConfig
 
     /**
-     * コンストラクタ
+     * トリックパーツ設定
      */
-    constructor : function(o) {
-
-        var me = this,
-            config = o || {};
-
-        // トリック適用
-        if(config.trick && Ext.isString(config.trick)) {
-
-            config.trickConfig = config.trickConfig || {};
-            config.trickConfig[config.trick] = config.trickConfig[config.trick] || {};
-
-            me.addMethods(eval('Ext.trick.trick.' + config.trick.capitalize()));
-        }
-
-        // スーパークラスメソッドコール
-        Ext.trick.TrickPanel.superclass.constructor.apply(me, arguments);
-    },
+    trickPartsConfig: {},
 
     // }}}
     // {{{ initComponent
@@ -68,46 +46,25 @@ Ext.trick.TrickPanel = Ext.extend(Ext.Panel, {
 
         var me = this;
 
-        // コンフィグ初期化
-        me.initConfig.apply(me, [me.initialConfig]);
+        if(me.trick) {
 
-        // トリックトリガー
-        me.tricktrigger.apply(me, arguments);
+            var parts = Ext.clone(me.trickPartsConfig);
+
+            Ext.applyIf(parts, {
+                xtype: 'trick-' + Ext.clone(me.initialConfig.trick),
+                trickConfig: Ext.clone(me.trickConfig)
+            });
+
+            // アイテム設定
+            Ext.applyIf(me, {
+                layout: 'fit',
+                border: false,
+                items: Ext.clone(parts)
+            });
+        }
 
         // スーパークラスメソッドコール
         Ext.trick.TrickPanel.superclass.initComponent.call(me);
-    },
-
-    // }}}
-    // {{{ initConfig
-
-    /**
-     * コンフィグ初期化メソッド
-     */
-    initConfig : Ext.emptyFn,
-
-    // }}}
-    // {{{ tricktrigger
-
-    /**
-     * トリックトリガー抽象メソッド
-     *
-     * 適用されたトリックを開始します。
-     */
-    tricktrigger : Ext.emptyFn,
-
-    // }}}
-    // {{{ addMethods
-
-    /**
-     * メソッド追加メソッド
-     *
-     * @param o 追加オブジェクト
-     * @return void
-     */
-    addMethods : function(o) {
-
-        Ext.apply(Ext.trick.TrickPanel.prototype, o);
     }
 
     // }}}

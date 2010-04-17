@@ -26,6 +26,13 @@ Ext.onTrick({
         var p = new Ext.trick.TrickPanel({
             title: 'Ext.trick.TrickPanel',
             trick: 'search',
+            trickConfig: {
+                list: {
+                    tbar:[{
+                        text:"dsa"
+                    }]
+                }
+            },
             width: 700,
             height: 500,
             renderTo: Ext.getBody()

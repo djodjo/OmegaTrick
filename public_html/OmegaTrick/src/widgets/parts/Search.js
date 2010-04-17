@@ -19,22 +19,17 @@ Ext.ns(
  */
 Ext.trick.parts.SearchPanel = Ext.extend(Ext.Panel, {
 
-    // {{{ constructor
+    // {{{ initComponent
 
     /**
-     * コンストラクタ
+     * コンポーネント初期化
      */
-    constructor : function() {
+    initComponent : function() {
 
-        var me = this,
-            args = arguments;
-
-        if(!args[0]) {
-            args.push({});
-        }
+        var me = this;
 
         // コンフィグ適用
-        Ext.applyIf(args[0], {
+        Ext.applyIf(me, {
 
             // レイアウト設定
             layout: 'screen',
@@ -58,12 +53,15 @@ Ext.trick.parts.SearchPanel = Ext.extend(Ext.Panel, {
                 // レイアウト設定
                 layout: 'border',
 
+                // スクリーン固定設定
+                fix: true,
+
                 // デフォルト設定
                 defaults: {
-                
+
                     // ボーダー設定
                     border: false
-                
+
                 },
 
                 // アイテム設定
@@ -76,46 +74,17 @@ Ext.trick.parts.SearchPanel = Ext.extend(Ext.Panel, {
                     hidden: true
 
                 },{
-
                     // xtype設定
-                    xtype: 'trick-list',
+                    xtype: 'trick',
 
-                    // トリックコンフィグ設定
-                    trickConfig: {},
+                    // トリック設定
+                    trick: 'list',
 
                     // リージョン設定
                     region: 'center'
-
                 }]
             }]
         });
-
-        // スーパークラスメソッドコール
-        Ext.trick.parts.SearchPanel.superclass.constructor.apply(me, args);
-
-    },
-
-    // }}}
-    // {{{ initComponent
-
-    /**
-     * コンポーネント初期化
-     */
-    initComponent : function() {
-
-        var me = this;
-
-
-
-
-
-        /*
-        me.items = [{
-            title: 'test'
-        },{
-            title: 'hoge'
-        }]
-*/
 
         // スーパークラスコンストラクタコール
         Ext.trick.parts.SearchPanel.superclass.initComponent.call(me);

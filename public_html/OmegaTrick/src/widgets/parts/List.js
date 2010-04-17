@@ -27,7 +27,7 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.grid.GridPanel, {
     initConfig : function() {
 
         var me = this,
-            config = me.trickConfig;
+            config = me.trickConfig || {};
 
         Ext.applyIf(config, {
             store: {},
@@ -151,15 +151,15 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.grid.GridPanel, {
     initComponent : function() {
 
         var me = this,
-            config = me.trickConfig,
+            config = me.trickConfig || {},
             storeCls = config.storeCls || Ext.data.DirectStore,
             colModelCls = config.colModelCls || Ext.grid.ColumnModel;
-
+        
         // コンフィグ初期化
         me.initConfig();
 
         // ストア生成
-        store = new storeCls(config.store);
+        var store = new storeCls(config.store);
 
         // テンポラリコンフィグ設定
         var tempConfig = {
