@@ -81,23 +81,15 @@ Ext.trick.layout.ScreenLayout = Ext.extend(Ext.layout.FitLayout, {
 
     // }}}
     // {{{ setContainer
-/*
+
     setContainer : function(ct){
 
         var me = this;
 
-        if(ct.items) {
-            Ext.applyIf(ct.initialConfig.items, ct.items);
-        }
-
-        console.log("setContainer");
-            console.log(ct.items);
-            console.log(ct.initialConfig.items);
-
         Ext.trick.layout.ScreenLayout.superclass.setContainer.call(me, ct);
 
     },
-*/
+
     // }}}
     // {{{ setActiveItem
 
@@ -133,7 +125,6 @@ Ext.trick.layout.ScreenLayout = Ext.extend(Ext.layout.FitLayout, {
             } else {
                 si = c.add(ici[item]);
             }
-
         } else if(Ext.isString(item)) {
 
             // IDで指定された場合
