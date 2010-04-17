@@ -28,9 +28,16 @@ Ext.onTrick({
             trick: 'search',
             trickConfig: {
                 list: {
-                    tbar:[{
-                        text:"dsa"
-                    }]
+                    trickConfig: {
+                        ptbar: {
+                            position: 'bottom'
+                        }
+                    },
+                    trickPartsConfig: {
+                        loadMask: {
+                            msg:"ちょっとまってね..."
+                        }
+                    }
                 }
             },
             width: 700,

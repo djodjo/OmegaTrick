@@ -19,6 +19,11 @@ Ext.ns(
  */
 Ext.trick.parts.SearchPanel = Ext.extend(Ext.Panel, {
 
+    // {{{ trickConfig
+
+//    trickConfig: {},
+
+    // }}}
     // {{{ initComponent
 
     /**
@@ -27,7 +32,47 @@ Ext.trick.parts.SearchPanel = Ext.extend(Ext.Panel, {
     initComponent : function() {
 
         var me = this;
+        var config = me.trickConfig;
+        var listConfig = config.list;
+        var list = {
 
+            // xtype設定
+            xtype: 'trick',
+
+            // トリック設定
+            trick: 'list',
+
+            // リージョン設定
+            region: 'center'
+        };
+
+        Ext.applyIf(list, {
+            trickConfig: {},
+            trickPartsConfig: {}
+        });
+
+        if(listConfig) {
+            if(listConfig.trickConfig) {
+                Ext.applyIf(list.trickConfig, listConfig.trickConfig);
+            }
+            if(listConfig.trickPartsConfig) {
+                Ext.applyIf(list.trickPartsConfig, listConfig.trickPartsConfig);
+            }
+        }
+
+/*
+        // 簡易検索ボックス設定
+        Ext.applyIf(list.trickPartsConfig, {
+            tbar: [{
+                xtype: 'tbtext',
+                text: '検索:'
+            },
+            new Ext.ux.form.SearchField({
+                width: 240
+            })
+            ]
+        });
+*/
         // コンフィグ適用
         Ext.applyIf(me, {
 
@@ -73,16 +118,11 @@ Ext.trick.parts.SearchPanel = Ext.extend(Ext.Panel, {
                     // 表示設定
                     hidden: true
 
-                },{
-                    // xtype設定
-                    xtype: 'trick',
+                },
 
-                    // トリック設定
-                    trick: 'list',
-
-                    // リージョン設定
-                    region: 'center'
-                }]
+                // リストオブジェクト
+                list
+                ]
             }]
         });
 

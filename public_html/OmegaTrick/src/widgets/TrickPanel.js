@@ -48,18 +48,18 @@ Ext.trick.TrickPanel = Ext.extend(Ext.Panel, {
 
         if(me.trick) {
 
-            var parts = Ext.clone(me.trickPartsConfig);
+            var parts = me.trickPartsConfig;
 
             Ext.applyIf(parts, {
-                xtype: 'trick-' + Ext.clone(me.initialConfig.trick || me.trick),
-                trickConfig: Ext.clone(me.trickConfig)
+                xtype: 'trick-' + (me.initialConfig.trick || me.trick),
+                trickConfig: me.trickConfig
             });
 
             // アイテム設定
             Ext.applyIf(me, {
                 layout: 'fit',
                 border: false,
-                items: parts 
+                items: parts
             });
 
         }

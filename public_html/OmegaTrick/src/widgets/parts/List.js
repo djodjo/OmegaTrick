@@ -154,7 +154,7 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.grid.GridPanel, {
             config = me.trickConfig || {},
             storeCls = config.storeCls || Ext.data.DirectStore,
             colModelCls = config.colModelCls || Ext.grid.ColumnModel;
-        
+
         // コンフィグ初期化
         me.initConfig();
 
