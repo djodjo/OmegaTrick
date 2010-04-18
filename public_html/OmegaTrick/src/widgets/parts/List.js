@@ -243,20 +243,49 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
                 listeners: {
                     beforeexpand: {
                         fn : function() {
-                            var dsb = me.getTopToolbar().getComponent('btnDetailSearch');
+                            var dsb = me.getTopToolbar().getComponent('btnSearchDetail');
                             var sf = me.getTopToolbar().getComponent('SearchFiled');
                             var sl = me.getTopToolbar().getComponent('SearchLabelText');
+                            var sdp = me.getComponent(me.id + '_SearchDetail');
+
+                            Ext.iterate(sdp.forms, function(key, item, items) {
+                                if(item.label) {
+                                    item.label.hide();
+                                }
+                                item.hide();
+                            });
+
                             sf.disable();
                             dsb.toggle(true, true);
                             sl.addClass('tx-text-disable');
                             sl.removeClass('tx-text-enable');
                        }
                     },
+                    expand: {
+                        fn: function() {
+                        
+                            var sdp = me.getComponent(me.id + '_SearchDetail');
+                            Ext.iterate(sdp.forms, function(key, item, items) {
+                                if(item.label) {
+                                    item.label.show();
+                                }
+                                item.show();
+                            });
+                        }
+                    },
                     beforecollapse: {
                         fn : function() {
-                            var dsb = me.getTopToolbar().getComponent('btnDetailSearch');
+                            var dsb = me.getTopToolbar().getComponent('btnSearchDetail');
                             var sf = me.getTopToolbar().getComponent('SearchFiled');
                             var sl = me.getTopToolbar().getComponent('SearchLabelText');
+                            var sdp = me.getComponent(me.id + '_SearchDetail');
+
+                            Ext.iterate(sdp.forms, function(key, item, items) {
+                                if(item.label) {
+                                    item.label.hide();
+                                }
+                                item.hide();
+                            });
                             dsb.toggle(false, true);
                             sf.enable();
                             sl.addClass('tx-text-enable');
@@ -298,7 +327,7 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
                 }),'-',{
 
                     // アイテムID設定
-                    itemId: 'btnDetailSearch',
+                    itemId: 'btnSearchDetail',
 
                     // アイコンクラス設定
                     iconCls: 'tx-icon-searchdetail',
@@ -310,28 +339,28 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
                     text: '詳細検索',
 
                     // リファレンス設定
-                    ref: '../searchBox.btnDetailSearch',
+                    ref: '../searchBox.btnSearchDetail',
 
                     // ハンドラ設定
                     toggleHandler : function(button, state) {
 
                         var sf = me.getTopToolbar().getComponent('SearchFiled');
                         var sdp = me.getComponent(me.id + '_SearchDetail');
-                        var sl = me.getTopToolbar().getComponent('SearchLabelText');
+                        //var sl = me.getTopToolbar().getComponent('SearchLabelText');
 
                         if(state) {
                             sf.disable();
                             sdp.expand();
-                            sl.addClass('tx-text-disable');
-                            sl.removeClass('tx-text-enable');
+                            //sl.addClass('tx-text-disable');
+                            //sl.removeClass('tx-text-enable');
                         } else {
                             sf.enable();
                             sdp.collapse();
-                            sl.addClass('tx-text-enable');
-                            sl.removeClass('tx-text-disable');
+                            //sl.addClass('tx-text-enable');
+                            //sl.removeClass('tx-text-disable');
                         }
 
-                        me.fireEvent('toggleDetailSearch', state);
+                        me.fireEvent('toggleSearchDetail', state);
                     },
 
                     // スコープ設定
