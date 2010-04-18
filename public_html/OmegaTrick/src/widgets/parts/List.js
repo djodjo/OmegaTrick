@@ -165,7 +165,8 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
         var store = new storeCls(config.store);
 
         // グリッドコンフィグ
-        var gridConfig = {
+        var gridConfig = config.gird || {};
+        Ext.applyIf(gridConfig, {
 
             // アイテムID設定
             itemId: me.id + '_Grid',
@@ -176,18 +177,26 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
             // ボーダー設定
             border: false,
 
+            // スタイル設定
+            style: {
+                borderTop: '1px solid #D0D0D0'
+            },
+
             // ストア設定
             store: store,
 
             // カラムモデル設定
             colModel: new colModelCls(config.colModel)
-        };
+        });
 
         // テンポラリコンフィグ設定
         var tempConfig = {
 
             // レイアウト設定
             layout: 'fit',
+
+            // CSSクラス設定
+            cls: 'tx-list',
 
             // アイテム設定
             items:[gridConfig]
@@ -236,16 +245,22 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
                         fn : function() {
                             var dsb = me.getTopToolbar().getComponent('btnDetailSearch');
                             var sf = me.getTopToolbar().getComponent('SearchFiled');
+                            var sl = me.getTopToolbar().getComponent('SearchLabelText');
                             sf.disable();
                             dsb.toggle(true, true);
+                            sl.addClass('tx-text-disable');
+                            sl.removeClass('tx-text-enable');
                        }
                     },
                     beforecollapse: {
                         fn : function() {
                             var dsb = me.getTopToolbar().getComponent('btnDetailSearch');
                             var sf = me.getTopToolbar().getComponent('SearchFiled');
+                            var sl = me.getTopToolbar().getComponent('SearchLabelText');
                             dsb.toggle(false, true);
                             sf.enable();
+                            sl.addClass('tx-text-enable');
+                            sl.removeClass('tx-text-disable');
                        }
                     }
                 }
@@ -259,6 +274,9 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
 
                 // トップツールバー設定
                 tbar: [{
+
+                    // アイテムID設定
+                    itemId: 'SearchLabelText',
 
                     // xtype設定
                     xtype: 'tbtext',
@@ -282,6 +300,9 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
                     // アイテムID設定
                     itemId: 'btnDetailSearch',
 
+                    // アイコンクラス設定
+                    iconCls: 'tx-icon-searchdetail',
+
                     // トグル設定
                     enableToggle: true,
 
@@ -296,13 +317,18 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
 
                         var sf = me.getTopToolbar().getComponent('SearchFiled');
                         var sdp = me.getComponent(me.id + '_SearchDetail');
+                        var sl = me.getTopToolbar().getComponent('SearchLabelText');
 
                         if(state) {
                             sf.disable();
                             sdp.expand();
+                            sl.addClass('tx-text-disable');
+                            sl.removeClass('tx-text-enable');
                         } else {
                             sf.enable();
                             sdp.collapse();
+                            sl.addClass('tx-text-enable');
+                            sl.removeClass('tx-text-disable');
                         }
 
                         me.fireEvent('toggleDetailSearch', state);

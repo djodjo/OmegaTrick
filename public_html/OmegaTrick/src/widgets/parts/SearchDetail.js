@@ -37,6 +37,11 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
             // パディング設定
             padding: 10,
 
+            // スタイル設定
+            style: {
+                borderBottom: '1px solid #D0D0D0'
+            },
+
             // アイテム設定
             items: [{
 
@@ -47,17 +52,8 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
 
         });
 
-        Ext.apply(me, {
-
-            // ベースクラス設定
-            //baseCls: 'x-plain',
-
-            // スタイル設定
-            style: {
-                borderBottom: '1px solid #D0D0D0'
-            },
-
-        });
+        me.cls = me.cls || '';
+        me.cls += ' tx-searchdetail';
 
         // スーパークラスメソッドコール
         Ext.trick.parts.SearchDetailPanel.superclass.initComponent.call(me);

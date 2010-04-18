@@ -1,0 +1,28 @@
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2: */
+
+/**
+ * visual/SearchDetail.css
+ *
+ * リストパネル
+ */
+
+.tx-list .tx-icon-searchdetail {
+  background-image: url(../../images/icons/magnifier_zoom_in.png) !important;
+}
+
+.tx-list .tx-text-disable {
+  color: #CCC;
+}
+
+.tx-list .tx-text-enable {
+  color: #111111;
+}
+
+/*
+ * Local variables:
+ * tab-width: 2
+ * c-basic-offset: 2
+ * c-hanging-comment-ender-p: nil
+ * End:
+ */
+
