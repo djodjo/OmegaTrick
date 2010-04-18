@@ -167,6 +167,9 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
         // グリッドコンフィグ
         var gridConfig = {
 
+            // アイテムID設定
+            itemId: me.id + '_Grid',
+
             // xtype設定
             xtype: 'grid',
 
@@ -209,11 +212,43 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
                 // リージョン設定
                 region: 'north',
 
+                // ボーダー設定
+                border: false,
+
                 // xtype設定
                 xtype: 'trick-searchdetail',
 
-                // 表示設定
-                hidden: true
+                // 開閉アニメーション設定
+                animCollapse : (config.searchBox.anim === true) || false,
+
+                // 開閉モード設定
+                collapseMode: 'mini',
+
+                // スプリット設定
+                split: true,
+
+                // 開閉設定
+                collapsed: true,
+
+                // リスナー設定
+                listeners: {
+                    beforeexpand: {
+                        fn : function() {
+                            var dsb = me.getTopToolbar().getComponent('btnDetailSearch');
+                            var sf = me.getTopToolbar().getComponent('SearchFiled');
+                            sf.disable();
+                            dsb.toggle(true, true);
+                       }
+                    },
+                    beforecollapse: {
+                        fn : function() {
+                            var dsb = me.getTopToolbar().getComponent('btnDetailSearch');
+                            var sf = me.getTopToolbar().getComponent('SearchFiled');
+                            dsb.toggle(false, true);
+                            sf.enable();
+                       }
+                    }
+                }
             });
 
 
@@ -244,6 +279,9 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
 
                 }),'-',{
 
+                    // アイテムID設定
+                    itemId: 'btnDetailSearch',
+
                     // トグル設定
                     enableToggle: true,
 
@@ -261,13 +299,12 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
 
                         if(state) {
                             sf.disable();
-                            sdp.show();
+                            sdp.expand();
                         } else {
                             sf.enable();
-                            sdp.hide();
+                            sdp.collapse();
                         }
 
-                        me.doLayout();
                         me.fireEvent('toggleDetailSearch', state);
                     },
 

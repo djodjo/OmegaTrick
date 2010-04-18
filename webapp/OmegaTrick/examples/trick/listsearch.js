@@ -35,7 +35,9 @@ Ext.onTrick({
                         }
                     }
                 },
-                searchBox: true
+                searchBox: {
+                    anim: true
+                }
             },
             width: 900,
             height: 500,

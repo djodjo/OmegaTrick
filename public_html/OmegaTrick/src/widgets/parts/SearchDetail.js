@@ -50,7 +50,7 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
         Ext.apply(me, {
 
             // ベースクラス設定
-            baseCls: 'x-plain',
+            //baseCls: 'x-plain',
 
             // スタイル設定
             style: {
