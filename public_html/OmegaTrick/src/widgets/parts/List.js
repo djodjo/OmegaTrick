@@ -17,7 +17,7 @@ Ext.ns(
  * @author  Kazuhiro Kotsutsumi <kotsutsumi@xenophy.com>
  * @version 1.0
  */
-Ext.trick.parts.ListPanel = Ext.extend(Ext.grid.GridPanel, {
+Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
 
     // {{{ initConfig
 
@@ -155,14 +155,23 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.grid.GridPanel, {
             storeCls = config.storeCls || Ext.data.DirectStore,
             colModelCls = config.colModelCls || Ext.grid.ColumnModel;
 
+        // ID設定
+        Ext.applyIf(me, {id: Ext.id()});
+
         // コンフィグ初期化
         me.initConfig();
 
         // ストア生成
         var store = new storeCls(config.store);
 
-        // テンポラリコンフィグ設定
-        var tempConfig = {
+        // グリッドコンフィグ
+        var gridConfig = {
+
+            // xtype設定
+            xtype: 'grid',
+
+            // ボーダー設定
+            border: false,
 
             // ストア設定
             store: store,
@@ -171,8 +180,42 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.grid.GridPanel, {
             colModel: new colModelCls(config.colModel)
         };
 
+        // テンポラリコンフィグ設定
+        var tempConfig = {
+
+            // レイアウト設定
+            layout: 'fit',
+
+            // アイテム設定
+            items:[gridConfig]
+
+        };
+
         // 検索ボックス
         if(config.searchBox) {
+
+            // テンポラリコンフィグレイアウト変更
+            tempConfig.layout = 'border';
+
+            // グリッドコンフィグリージョン設定
+            gridConfig.region = 'center';
+
+            // テンポラリコンフィグアイテム追加
+            tempConfig.items.push({
+
+                // アイテムID設定
+                itemId: me.id + '_SearchDetail',
+
+                // リージョン設定
+                region: 'north',
+
+                // xtype設定
+                xtype: 'trick-searchdetail',
+
+                // 表示設定
+                hidden: true
+            });
+
 
             Ext.apply(me, {
 
@@ -214,13 +257,18 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.grid.GridPanel, {
                     toggleHandler : function(button, state) {
 
                         var sf = me.getTopToolbar().getComponent('SearchFiled');
+                        var sdp = me.getComponent(me.id + '_SearchDetail');
 
                         if(state) {
                             sf.disable();
+                            sdp.show();
                         } else {
                             sf.enable();
+                            sdp.hide();
                         }
-                        this.fireEvent('toggleDetailSearch', state);
+
+                        me.doLayout();
+                        me.fireEvent('toggleDetailSearch', state);
                     },
 
                     // スコープ設定
