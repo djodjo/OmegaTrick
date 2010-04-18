@@ -19,11 +19,6 @@ Ext.ns(
  */
 Ext.trick.parts.SearchPanel = Ext.extend(Ext.Panel, {
 
-    // {{{ trickConfig
-
-//    trickConfig: {},
-
-    // }}}
     // {{{ initComponent
 
     /**
@@ -35,6 +30,8 @@ Ext.trick.parts.SearchPanel = Ext.extend(Ext.Panel, {
         var config = me.trickConfig;
         var listConfig = config.list;
         var list = {
+
+            ref: '../panels.list',
 
             // xtype設定
             xtype: 'trick',
@@ -69,6 +66,9 @@ Ext.trick.parts.SearchPanel = Ext.extend(Ext.Panel, {
 
             // レイアウト設定
             layout: 'screen',
+
+            // パネルオブジェクト
+            panels: {},
 
             // アクティブアイテム設定
             activeItem: 0,
@@ -110,15 +110,36 @@ Ext.trick.parts.SearchPanel = Ext.extend(Ext.Panel, {
                     hidden: true
 
                 },
-
-                // リストオブジェクト
-                list
+                    // リストオブジェクト
+                    list
                 ]
             }]
         });
 
         // スーパークラスコンストラクタコール
         Ext.trick.parts.SearchPanel.superclass.initComponent.call(me);
+    },
+
+    // }}}
+    // {{{ initEvents
+
+    initEvents : function() {
+
+        var me = this;
+
+        me.on('afterrender', me.onAfterRender, me);
+
+        // スーパークラスメソッドコール
+        Ext.trick.parts.SearchPanel.superclass.initEvents.apply(me, arguments);
+    },
+
+    // }}}
+    // {{{ onAfterRender
+
+    onAfterRender : function() {
+
+        var me = this;
+        console.log(me);
     }
 
     // }}}

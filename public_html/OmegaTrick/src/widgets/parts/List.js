@@ -174,7 +174,8 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.grid.GridPanel, {
         // 検索ボックス
         if(config.searchBox) {
 
-            Ext.apply(me , {
+            Ext.apply(me, {
+                searchBox: {},
                 tbar: [{
                     xtype: 'tbtext',
                     text: '検索:'
@@ -183,7 +184,8 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.grid.GridPanel, {
                     width: 240,
                     store: store
                 }),'-',{
-                    text: '詳細検索'
+                    text: '詳細検索',
+                    ref: '../searchBox.btnDetailSearch'
                 }]
             });
         }
@@ -288,7 +290,29 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.grid.GridPanel, {
         // スーパークラスメソッドコール
         Ext.trick.parts.ListPanel.superclass.initComponent.call(me);
 
-     }
+    },
+
+    // }}}
+    // {{{ initEvents
+
+    initEvents : function() {
+
+        var me = this;
+
+        // スーパークラスメソッドコール
+        Ext.trick.parts.ListPanel.superclass.initEvents.apply(me, arguments);
+
+    },
+
+    // }}}
+    // {{{ onAfterRender
+
+    onAfterRender : function() {
+
+        //me.panels.list = me['searchBox.'];
+        //delete me['panels.listPanel'];
+
+    }
 
     // }}}
 
