@@ -32,7 +32,30 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
         Ext.applyIf(me, {
 
             // サイズ設定
-            height: 100
+            height: 100,
+
+            // パディング設定
+            padding: 10,
+
+            // アイテム設定
+            items: [{
+
+                xtype: 'textfield',
+                fieldLabel: 'タイトル'
+
+            }]
+
+        });
+
+        Ext.apply(me, {
+
+            // ベースクラス設定
+            baseCls: 'x-plain',
+
+            // スタイル設定
+            style: {
+                borderBottom: '1px solid #D0D0D0'
+            },
 
         });
 

@@ -154,7 +154,6 @@ Ext.trick.parts.SearchPanel = Ext.extend(Ext.Panel, {
             } else {
                 me.panels.detailsearch.hide();
             }
-
             me.doLayout();
         }, me);
 
