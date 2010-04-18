@@ -17,6 +17,7 @@ compress_js(){
     --js=$PUBLIC_OMEGA/src/util/Clone.js \
     --js=$PUBLIC_OMEGA/src/util/Phantom.js \
     --js=$PUBLIC_OMEGA/src/util/ScriptLoader.js \
+    --js=$PUBLIC_OMEGA/src/widgets/Component.js \
     --js=$PUBLIC_OMEGA/src/widgets/form/FormPanel.js \
     --js=$PUBLIC_OMEGA/src/widgets/layout/ScreenLayout.js \
     --js=$PUBLIC_OMEGA/src/widgets/ScreenPanel.js \
