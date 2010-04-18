@@ -46,26 +46,65 @@ Ext.trick.TrickPanel = Ext.extend(Ext.Panel, {
 
         var me = this;
 
+        // ID設定
+        Ext.applyIf(me, {id: Ext.id()});
+
         if(me.trick) {
 
             var parts = me.trickPartsConfig;
 
             Ext.applyIf(parts, {
+
+                // アイテムID設定
+                itemId: me.id + '_trickParts',
+
+                // xtype設定
                 xtype: 'trick-' + (me.initialConfig.trick || me.trick),
+
+                // ボーダー設定
+                border: false,
+
+                // トリックコンフィグ設定
                 trickConfig: me.trickConfig
             });
 
             // アイテム設定
             Ext.applyIf(me, {
+
+                // レイアウト設定
                 layout: 'fit',
-                border: false,
+
+                // アイテム設定
                 items: parts
             });
-
         }
 
         // スーパークラスメソッドコール
         Ext.trick.TrickPanel.superclass.initComponent.call(me);
+    },
+
+    // }}}
+    // {{{ initEvents
+
+    initEvents : function() {
+
+        var me = this;
+
+        me.on('afterrender', me.onAfterRender, me);
+
+        // スーパークラスメソッドコール
+        Ext.trick.TrickPanel.superclass.initEvents.apply(me, arguments);
+
+    },
+
+    // }}}
+    // {{{ onAfterRender
+
+    onAfterRender : function() {
+
+        var me = this;
+
+        me.trickParts = me.getComponent(me.id + '_trickParts');
     }
 
     // }}}

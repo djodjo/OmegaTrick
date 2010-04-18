@@ -31,6 +31,7 @@ Ext.trick.parts.SearchPanel = Ext.extend(Ext.Panel, {
         var listConfig = config.list;
         var list = {
 
+            // リファレンス設定
             ref: '../panels.list',
 
             // xtype設定
@@ -103,6 +104,12 @@ Ext.trick.parts.SearchPanel = Ext.extend(Ext.Panel, {
                 // アイテム設定
                 items: [{
 
+                    // リファレンス設定
+                    ref: '../panels.detailsearch',
+
+                    // xtype設定
+                    xtype: 'trick-searchdetail',
+
                     // リージョン設定
                     region: 'north',
 
@@ -139,7 +146,18 @@ Ext.trick.parts.SearchPanel = Ext.extend(Ext.Panel, {
     onAfterRender : function() {
 
         var me = this;
-        console.log(me);
+
+        me.panels.list.trickParts.on('toggleDetailSearch', function(state) {
+
+            if(state) {
+                me.panels.detailsearch.show();
+            } else {
+                me.panels.detailsearch.hide();
+            }
+
+            me.doLayout();
+        }, me);
+
     }
 
     // }}}

@@ -175,17 +175,56 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.grid.GridPanel, {
         if(config.searchBox) {
 
             Ext.apply(me, {
+
+                // 検索ボックスオブジェクト
                 searchBox: {},
+
+                // トップツールバー設定
                 tbar: [{
+
+                    // xtype設定
                     xtype: 'tbtext',
+
+                    // テキスト設定
                     text: '検索:'
                 },
                 new Ext.ux.form.SearchField({
+
+                    // アイテムID設定
+                    itemId: 'SearchFiled',
+
+                    // サイズ設定
                     width: 240,
+
+                    // ストア設定
                     store: store
+
                 }),'-',{
+
+                    // トグル設定
+                    enableToggle: true,
+
+                    // テキスト設定
                     text: '詳細検索',
-                    ref: '../searchBox.btnDetailSearch'
+
+                    // リファレンス設定
+                    ref: '../searchBox.btnDetailSearch',
+
+                    // ハンドラ設定
+                    toggleHandler : function(button, state) {
+
+                        var sf = me.getTopToolbar().getComponent('SearchFiled');
+
+                        if(state) {
+                            sf.disable();
+                        } else {
+                            sf.enable();
+                        }
+                        this.fireEvent('toggleDetailSearch', state);
+                    },
+
+                    // スコープ設定
+                    scope: me
                 }]
             });
         }
@@ -299,6 +338,8 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.grid.GridPanel, {
 
         var me = this;
 
+        me.on('afterrender', me.onAfterRender, me);
+
         // スーパークラスメソッドコール
         Ext.trick.parts.ListPanel.superclass.initEvents.apply(me, arguments);
 
@@ -309,8 +350,7 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.grid.GridPanel, {
 
     onAfterRender : function() {
 
-        //me.panels.list = me['searchBox.'];
-        //delete me['panels.listPanel'];
+        var me = this;
 
     }
 
