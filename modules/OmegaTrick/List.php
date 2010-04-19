@@ -77,7 +77,7 @@ class OmegaTrick_List extends xFrameworkPX_Model
     {
         $option = array();
 
-        if($query) {
+        if($query && is_string($query)) {
             $option['conditions'] = array(
                 'caption' => 'LIKE %%' . $query . '%%',
                 'OR',
@@ -85,6 +85,18 @@ class OmegaTrick_List extends xFrameworkPX_Model
                 'OR',
                 'created' => 'LIKE %%' . $query . '%%'
             );
+        } else if($query && is_object($query)) {
+
+            foreach($query as $key => $value) {
+
+                if(!isset($option['canditions'])) {
+                    $option['conditions'] = array();
+                } else {
+                    $option['conditions'][] = 'OR';
+                }
+                $option['conditions'][$key] = 'LIKE %%' . $value . '%%';
+
+            }
         }
 
         $option['order'] = array(

@@ -218,6 +218,9 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
                 // アイテムID設定
                 itemId: me.id + '_SearchDetail',
 
+                // 検索用ストア設定
+                searchStore: store,
+
                 // リージョン設定
                 region: 'north',
 

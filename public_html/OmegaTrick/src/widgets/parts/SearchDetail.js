@@ -104,7 +104,7 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
 
                         // ストア設定
                         store: Ext.trick.store.Hour,
- 
+
                         // テンプレート設定
                         tpl: [
                             '<tpl for=".">',
@@ -210,7 +210,7 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                     },{
                         // アイテムID設定
                         itemId: 'fromSecond',
-                        
+
                         // xtype設定
                         xtype: 'combo',
 
@@ -794,7 +794,13 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         width: 100,
 
                         // テキスト設定
-                        text: '検索'
+                        text: '検索',
+
+                        // ハンドラ設定
+                        handler: me.onBtnSearch,
+
+                        // スコープ設定
+                        scope: me
                     },{
 
                         // xtype設定
@@ -808,7 +814,8 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
 
                         // サイズ設定
                         width: 5
-                    },{
+
+                   },{
 
                         // xtype設定
                         xtype: 'button',
@@ -858,6 +865,45 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
         me.forms.modified.reset();
         me.forms.created.reset();
 
+    },
+
+    // }}}
+    // {{{ onBtnSearch
+
+    onBtnSearch : function() {
+
+        var me = this,
+            store = me.searchStore,
+            lastOptions = store.lastOptions;
+
+        var query = {};
+
+        if(me.forms.caption.getValue().length > 0) {
+            query.caption = me.forms.caption.getValue();
+        }/* else if(
+            
+        ) {
+        
+        
+        
+        }
+*/
+        var hasQuery = false;
+        Ext.iterate(query, function(){
+            hasQuery = true;
+            return false;
+        });
+
+        if(!hasQuery) {
+            query = '';
+        }
+        if(!lastOptions.params) {
+            lastOptions.params = Ext.clone(store.baseParams);
+        }
+        Ext.apply(lastOptions.params, {
+            query: query
+        });
+        store.reload(lastOptions);
     }
 
     // }}}
