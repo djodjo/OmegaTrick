@@ -18,6 +18,11 @@ Ext.trick.form.FormPanel = Ext.extend(Ext.form.FormPanel, {
     defaultType: 'container',
 
     // }}}
+    // {{{ forms
+
+    forms: {},
+
+    // }}}
     // {{{ initComponent
 
     /**
@@ -27,16 +32,45 @@ Ext.trick.form.FormPanel = Ext.extend(Ext.form.FormPanel, {
 
         var me = this;
 
-        me.setDeepLayout(me.initialConfig.items);
+        // イベントリスナー設定
+        me.on('beforerender', me.onBeforeRender, me);
+        me.on('afterrender', me.onAfterRender, me);
 
         // スーパークラスメソッドコール
         Ext.trick.form.FormPanel.superclass.initComponent.apply(me, arguments);
 
-        // フォームオブジェクト初期化
-        me.forms = {};
+    },
+
+    // }}}
+    // {{{ initEvents
+
+    initEvents : function() {
+
+        var me = this;
+
+        // スーパークラスメソッドコール
+        Ext.trick.form.FormPanel.superclass.initEvents.apply(me, arguments);
+    },
+
+    // }}}
+    // {{{ onAfterRender
+
+    onAfterRender : function() {
+
+        var me = this;
 
         // フォームアイテムスキャン
         me.scanFormItems(me.items);
+    },
+
+    // }}}
+    // {{{ onBeforeRender
+
+    onBeforeRender : function() {
+
+        var me = this;
+
+        me.setDeepLayout(me.initialConfig.items);
     },
 
     // }}}
@@ -75,8 +109,6 @@ Ext.trick.form.FormPanel = Ext.extend(Ext.form.FormPanel, {
             if(item instanceof Ext.form.Field) {
                 me.forms[item.name || item.id] = item;
             }
-
-console.log(item);
 
             if(!(item instanceof Ext.form.CompositeField) && item.items && item.items.getCount() > 0) {
                 me.scanFormItems(item.items);
