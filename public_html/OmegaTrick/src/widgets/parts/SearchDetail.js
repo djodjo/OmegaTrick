@@ -888,7 +888,8 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
         
         }
 */
-console.log(me.forms);
+//console.log(me.forms);
+//console.log(me.forms.modified.forms.fromDate.getRawValue());
         var hasQuery = false;
         Ext.iterate(query, function(){
             hasQuery = true;

@@ -116,9 +116,16 @@ Ext.trick.form.FormPanel = Ext.extend(Ext.form.FormPanel, {
             if(!(item instanceof Ext.form.CompositeField) && item.items && item.items.getCount() > 0) {
                 me.scanFormItems(item.items);
             } else if(item instanceof Ext.form.CompositeField) {
-                Ext.iterate(item.items, function(item, cnt, items) {
-                    me.forms[setkey].forms = me.forms[setkey].forms || {};
-                    me.forms[setkey].forms[item.name || item.itemId || item.id] = item;
+
+                item.on('afterrender', function(field){
+                    Ext.iterate(field.items.items, function(item, cnt, items) {
+
+                        var src = me.forms[setkey];
+                        src.forms = src.forms || {};
+                        var forms = src.forms;
+
+                        forms[item.name || item.itemId || item.id] = src.items.items[cnt];
+                    });
                 });
             }
         }, me);
