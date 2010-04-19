@@ -16,7 +16,10 @@ ScreenExamples.ScreenB.ScreenPanel = Ext.extend(Ext.trick.TrickPanel, {
         Ext.apply(me, {
             id: 'ScreenB',
             border: false,
-            trick: 'list'
+            trick: 'list',
+            trickConfig: {
+                searchBox: true
+            }
         });
 
         // スーパークラスメソッドコール
