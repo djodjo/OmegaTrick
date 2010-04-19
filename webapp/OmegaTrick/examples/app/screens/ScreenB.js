@@ -18,6 +18,14 @@ ScreenExamples.ScreenB.ScreenPanel = Ext.extend(Ext.trick.TrickPanel, {
             border: false,
             trick: 'list',
             trickConfig: {
+                ptbar: {
+                    position: {
+                        both: {
+                            top: false,
+                            bottom: true
+                        }
+                    }
+                },
                 searchBox: true
             }
         });
