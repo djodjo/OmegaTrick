@@ -259,11 +259,12 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
                             dsb.toggle(true, true);
                             sl.addClass('tx-text-disable');
                             sl.removeClass('tx-text-enable');
+
                        }
                     },
                     expand: {
                         fn: function() {
-                        
+
                             var sdp = me.getComponent(me.id + '_SearchDetail');
                             Ext.iterate(sdp.forms, function(key, item, items) {
                                 if(item.label) {
@@ -271,6 +272,9 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
                                 }
                                 item.show();
                             });
+
+
+                            sdp.doLayout();
                         }
                     },
                     beforecollapse: {

@@ -42,18 +42,71 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                 borderBottom: '1px solid #D0D0D0'
             },
 
-            // アイテム設定
-            items: [{
-
-                xtype: 'textfield',
-                fieldLabel: 'タイトル'
-
-            }]
+            items:[{
+          xtype: 'compositefield',
+          fieldLabel: 'Full Name',
+          items: [
+              {xtype: 'textfield', name: 'title',     width: 40},
+              {xtype: 'textfield', name: 'firstName', flex : 1},
+              {xtype: 'textfield', name: 'lastName',  flex : 2}
+          ]
+}]
 
         });
 
         me.cls = me.cls || '';
         me.cls += ' tx-searchdetail';
+
+/*
+        Ext.apply(me, {
+
+            // レイアウト設定
+            layout:'hbox',
+
+            // レイアウトコンフィグ
+            layoutConfig: {
+                align : 'stretch',
+                pack  : 'start',
+            },
+
+            // アイテム設定
+            items: [{
+
+                // レイアウト設定
+                layout: 'form',
+
+                // アイテム設定
+                items: [{
+
+                    // xtype設定
+                    xtype: 'textfield',
+
+                    // フィールドラベル設定
+                    fieldLabel: 'タイトル',
+
+                    // アンカー設定
+                    anchor: '100%'
+
+                },{
+          xtype: 'compositefield',
+          fieldLabel: 'Full Name',
+          items: [
+              {xtype: 'textfield', name: 'title',     width: 40},
+              {xtype: 'textfield', name: 'firstName', flex : 1},
+              {xtype: 'textfield', name: 'lastName',  flex : 2}
+          ]
+},{
+                    html:"3"
+                }],
+
+                // サイズ設定
+                width: 500
+
+            },{
+                flex:1
+            }]
+*/
+//        });
 
         // スーパークラスメソッドコール
         Ext.trick.parts.SearchDetailPanel.superclass.initComponent.call(me);

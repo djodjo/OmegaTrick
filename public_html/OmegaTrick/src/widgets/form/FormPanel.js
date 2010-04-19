@@ -52,7 +52,7 @@ Ext.trick.form.FormPanel = Ext.extend(Ext.form.FormPanel, {
                 item.layout = 'form';
             }
 
-            if(item.items && item.items.length > 0) {
+            if(item && item.items && item.items.length > 0) {
                 me.setDeepLayout(item.items);
             }
         }, me);
@@ -76,7 +76,9 @@ Ext.trick.form.FormPanel = Ext.extend(Ext.form.FormPanel, {
                 me.forms[item.name || item.id] = item;
             }
 
-            if(item.items && item.items.getCount() > 0) {
+console.log(item);
+
+            if(!(item instanceof Ext.form.CompositeField) && item.items && item.items.getCount() > 0) {
                 me.scanFormItems(item.items);
             }
         }, me);

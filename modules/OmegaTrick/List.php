@@ -75,9 +75,25 @@ class OmegaTrick_List extends xFrameworkPX_Model
      */
     public function readData($start, $limit, $sort, $dir, $query)
     {
+        $option = array();
+
+        if($query) {
+            $option['conditions'] = array(
+                'caption' => 'LIKE %%' . $query . '%%',
+                'OR',
+                'modified' => 'LIKE %%' . $query . '%%',
+                'OR',
+                'created' => 'LIKE %%' . $query . '%%'
+            );
+        }
+
+        $option['order'] = array(
+            $sort . ' ' . $dir
+        );
+
         return array(
-            'items' => $this->get(),
-            'total' => $this->get('count')
+            'items' => $this->get('all', $option),
+            'total' => $this->get('count', $option)
         );
 
     }
