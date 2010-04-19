@@ -60,6 +60,9 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                 // アイテム設定
                 items: [{
 
+                    // アイテムID設定
+                    itemId: 'caption',
+
                     // xtype設定
                     xtype: 'textfield',
 
@@ -71,12 +74,20 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
 
                 },{
 
+                    // アイテムID設定
+                    itemId: 'modified',
+
                     // xtype設定
                     xtype: 'compositefield',
 
                     // フィールドラベル設定
                     fieldLabel: '更新日時',
+
+                    // アイテム設定
                     items: [{
+
+                        // アイテムID設定
+                        itemId: 'fromDate',
 
                         // xtype設定
                         xtype: 'datefield',
@@ -85,20 +96,33 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         width: 100
                     },{
 
+                        // アイテムID設定
+                        itemId: 'fromHour',
+
                         // xtype設定
                         xtype: 'combo',
 
                         // ストア設定
                         store: Ext.trick.store.Hour,
+ 
+                        // テンプレート設定
+                        tpl: [
+                            '<tpl for=".">',
+                                '<div class="x-combo-list-item">',
+                                '<tpl if=display.length &gt; 1>{display}</tpl>',
+                                '<tpl if=display.length == 0>&nbsp;</tpl>',
+                                '</div>',
+                            '</tpl>'
+                        ].join(''),
 
                         // 編集設定
                         editable: false,
 
                         // 表示フィールド設定
-                        displayField:'hour',
+                        displayField:'display',
 
                         // 値フィールドラベル設定
-                        valueField: 'hour',
+                        valueField: 'value',
 
                         // モード設定
                         mode: 'local',
@@ -113,7 +137,7 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         selectOnFocus:true,
 
                         // 値設定
-                        value: '00',
+                        value: '',
 
                         // サイズ設定
                         width: 40
@@ -128,6 +152,9 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         // サイズ設定
                         width: 5
                     },{
+
+                        // アイテムID設定
+                        itemId: 'fromMinute',
 
                         // xtype設定
                         xtype: 'combo',
@@ -135,14 +162,24 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         // ストア設定
                         store: Ext.trick.store.Minute,
 
+                        // テンプレート設定
+                        tpl: [
+                            '<tpl for=".">',
+                                '<div class="x-combo-list-item">',
+                                '<tpl if=display.length &gt; 1>{display}</tpl>',
+                                '<tpl if=display.length == 0>&nbsp;</tpl>',
+                                '</div>',
+                            '</tpl>'
+                        ].join(''),
+
                         // 編集設定
                         editable: false,
 
                         // 表示フィールド設定
-                        displayField:'minute',
+                        displayField:'display',
 
                         // 値フィールドラベル設定
-                        valueField: 'minute',
+                        valueField: 'value',
 
                         // モード設定
                         mode: 'local',
@@ -157,7 +194,7 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         selectOnFocus:true,
 
                         // 値設定
-                        value: '00',
+                        value: '',
 
                         // サイズ設定
                         width: 40
@@ -171,21 +208,33 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         // サイズ設定
                         width: 5
                     },{
-
+                        // アイテムID設定
+                        itemId: 'fromSecond',
+                        
                         // xtype設定
                         xtype: 'combo',
 
                         // ストア設定
                         store: Ext.trick.store.Second,
 
+                        // テンプレート設定
+                        tpl: [
+                            '<tpl for=".">',
+                                '<div class="x-combo-list-item">',
+                                '<tpl if=display.length &gt; 1>{display}</tpl>',
+                                '<tpl if=display.length == 0>&nbsp;</tpl>',
+                                '</div>',
+                            '</tpl>'
+                        ].join(''),
+
                         // 編集設定
                         editable: false,
 
                         // 表示フィールド設定
-                        displayField:'second',
+                        displayField:'display',
 
                         // 値フィールドラベル設定
-                        valueField: 'second',
+                        valueField: 'value',
 
                         // モード設定
                         mode: 'local',
@@ -200,7 +249,7 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         selectOnFocus:true,
 
                         // 値設定
-                        value: '00',
+                        value: '',
 
                         // サイズ設定
                         width: 40
@@ -216,12 +265,17 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         width: 10
                     },{
 
+                        // アイテムID設定
+                        itemId: 'toDate',
+
                         // xtype設定
                         xtype: 'datefield',
 
                         // サイズ設定
                         width: 100
                     },{
+                        // アイテムID設
+                        itemId: 'toHour',
 
                         // xtype設定
                         xtype: 'combo',
@@ -229,14 +283,24 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         // ストア設定
                         store: Ext.trick.store.Hour,
 
+                        // テンプレート設定
+                        tpl: [
+                            '<tpl for=".">',
+                                '<div class="x-combo-list-item">',
+                                '<tpl if=display.length &gt; 1>{display}</tpl>',
+                                '<tpl if=display.length == 0>&nbsp;</tpl>',
+                                '</div>',
+                            '</tpl>'
+                        ].join(''),
+
                         // 編集設定
                         editable: false,
 
                         // 表示フィールド設定
-                        displayField:'hour',
+                        displayField:'display',
 
                         // 値フィールドラベル設定
-                        valueField: 'hour',
+                        valueField: 'value',
 
                         // モード設定
                         mode: 'local',
@@ -251,7 +315,7 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         selectOnFocus:true,
 
                         // 値設定
-                        value: '23',
+                        value: '',
 
                         // サイズ設定
                         width: 40
@@ -266,6 +330,8 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         // サイズ設定
                         width: 5
                     },{
+                        // アイテムID設定
+                        itemId: 'toMinute',
 
                         // xtype設定
                         xtype: 'combo',
@@ -273,14 +339,24 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         // ストア設定
                         store: Ext.trick.store.Minute,
 
+                        // テンプレート設定
+                        tpl: [
+                            '<tpl for=".">',
+                                '<div class="x-combo-list-item">',
+                                '<tpl if=display.length &gt; 1>{display}</tpl>',
+                                '<tpl if=display.length == 0>&nbsp;</tpl>',
+                                '</div>',
+                            '</tpl>'
+                        ].join(''),
+
                         // 編集設定
                         editable: false,
 
                         // 表示フィールド設定
-                        displayField:'minute',
+                        displayField:'display',
 
                         // 値フィールドラベル設定
-                        valueField: 'minute',
+                        valueField: 'value',
 
                         // モード設定
                         mode: 'local',
@@ -295,7 +371,7 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         selectOnFocus:true,
 
                         // 値設定
-                        value: '59',
+                        value: '',
 
                         // サイズ設定
                         width: 40
@@ -309,6 +385,8 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         // サイズ設定
                         width: 5
                     },{
+                        // アイテムID設定
+                        itemId: 'toSecond',
 
                         // xtype設定
                         xtype: 'combo',
@@ -316,14 +394,24 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         // ストア設定
                         store: Ext.trick.store.Second,
 
+                        // テンプレート設定
+                        tpl: [
+                            '<tpl for=".">',
+                                '<div class="x-combo-list-item">',
+                                '<tpl if=display.length &gt; 1>{display}</tpl>',
+                                '<tpl if=display.length == 0>&nbsp;</tpl>',
+                                '</div>',
+                            '</tpl>'
+                        ].join(''),
+
                         // 編集設定
                         editable: false,
 
                         // 表示フィールド設定
-                        displayField:'second',
+                        displayField:'display',
 
                         // 値フィールドラベル設定
-                        valueField: 'second',
+                        valueField: 'value',
 
                         // モード設定
                         mode: 'local',
@@ -338,12 +426,15 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         selectOnFocus:true,
 
                         // 値設定
-                        value: '59',
+                        value: '',
 
                         // サイズ設定
                         width: 40
                     }]
                 },{
+
+                    // アイテムID設定
+                    itemId: 'created',
 
                     // xtype設定
                     xtype: 'compositefield',
@@ -367,14 +458,24 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         // ストア設定
                         store: Ext.trick.store.Hour,
 
+                        // テンプレート設定
+                        tpl: [
+                            '<tpl for=".">',
+                                '<div class="x-combo-list-item">',
+                                '<tpl if=display.length &gt; 1>{display}</tpl>',
+                                '<tpl if=display.length == 0>&nbsp;</tpl>',
+                                '</div>',
+                            '</tpl>'
+                        ].join(''),
+
                         // 編集設定
                         editable: false,
 
                         // 表示フィールド設定
-                        displayField:'hour',
+                        displayField: 'display',
 
                         // 値フィールドラベル設定
-                        valueField: 'hour',
+                        valueField: 'value',
 
                         // モード設定
                         mode: 'local',
@@ -389,7 +490,7 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         selectOnFocus:true,
 
                         // 値設定
-                        value: '00',
+                        value: '',
 
                         // サイズ設定
                         width: 40
@@ -411,14 +512,24 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         // ストア設定
                         store: Ext.trick.store.Minute,
 
+                        // テンプレート設定
+                        tpl: [
+                            '<tpl for=".">',
+                                '<div class="x-combo-list-item">',
+                                '<tpl if=display.length &gt; 1>{display}</tpl>',
+                                '<tpl if=display.length == 0>&nbsp;</tpl>',
+                                '</div>',
+                            '</tpl>'
+                        ].join(''),
+
                         // 編集設定
                         editable: false,
 
                         // 表示フィールド設定
-                        displayField:'minute',
+                        displayField:'display',
 
                         // 値フィールドラベル設定
-                        valueField: 'minute',
+                        valueField: 'value',
 
                         // モード設定
                         mode: 'local',
@@ -433,7 +544,7 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         selectOnFocus:true,
 
                         // 値設定
-                        value: '00',
+                        value: '',
 
                         // サイズ設定
                         width: 40
@@ -454,14 +565,24 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         // ストア設定
                         store: Ext.trick.store.Second,
 
+                        // テンプレート設定
+                        tpl: [
+                            '<tpl for=".">',
+                                '<div class="x-combo-list-item">',
+                                '<tpl if=display.length &gt; 1>{display}</tpl>',
+                                '<tpl if=display.length == 0>&nbsp;</tpl>',
+                                '</div>',
+                            '</tpl>'
+                        ].join(''),
+
                         // 編集設定
                         editable: false,
 
                         // 表示フィールド設定
-                        displayField:'second',
+                        displayField:'display',
 
                         // 値フィールドラベル設定
-                        valueField: 'second',
+                        valueField: 'value',
 
                         // モード設定
                         mode: 'local',
@@ -476,7 +597,7 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         selectOnFocus:true,
 
                         // 値設定
-                        value: '00',
+                        value: '',
 
                         // サイズ設定
                         width: 40
@@ -505,14 +626,24 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         // ストア設定
                         store: Ext.trick.store.Hour,
 
+                        // テンプレート設定
+                        tpl: [
+                            '<tpl for=".">',
+                                '<div class="x-combo-list-item">',
+                                '<tpl if=display.length &gt; 1>{display}</tpl>',
+                                '<tpl if=display.length == 0>&nbsp;</tpl>',
+                                '</div>',
+                            '</tpl>'
+                        ].join(''),
+
                         // 編集設定
                         editable: false,
 
                         // 表示フィールド設定
-                        displayField:'hour',
+                        displayField:'display',
 
                         // 値フィールドラベル設定
-                        valueField: 'hour',
+                        valueField: 'value',
 
                         // モード設定
                         mode: 'local',
@@ -527,7 +658,7 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         selectOnFocus:true,
 
                         // 値設定
-                        value: '23',
+                        value: '',
 
                         // サイズ設定
                         width: 40
@@ -549,14 +680,24 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         // ストア設定
                         store: Ext.trick.store.Minute,
 
+                        // テンプレート設定
+                        tpl: [
+                            '<tpl for=".">',
+                                '<div class="x-combo-list-item">',
+                                '<tpl if=display.length &gt; 1>{display}</tpl>',
+                                '<tpl if=display.length == 0>&nbsp;</tpl>',
+                                '</div>',
+                            '</tpl>'
+                        ].join(''),
+
                         // 編集設定
                         editable: false,
 
                         // 表示フィールド設定
-                        displayField:'minute',
+                        displayField:'display',
 
                         // 値フィールドラベル設定
-                        valueField: 'minute',
+                        valueField: 'value',
 
                         // モード設定
                         mode: 'local',
@@ -571,7 +712,7 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         selectOnFocus:true,
 
                         // 値設定
-                        value: '59',
+                        value: '',
 
                         // サイズ設定
                         width: 40
@@ -592,14 +733,24 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         // ストア設定
                         store: Ext.trick.store.Second,
 
+                        // テンプレート設定
+                        tpl: [
+                            '<tpl for=".">',
+                                '<div class="x-combo-list-item">',
+                                '<tpl if=display.length &gt; 1>{display}</tpl>',
+                                '<tpl if=display.length == 0>&nbsp;</tpl>',
+                                '</div>',
+                            '</tpl>'
+                        ].join(''),
+
                         // 編集設定
                         editable: false,
 
                         // 表示フィールド設定
-                        displayField:'second',
+                        displayField:'display',
 
                         // 値フィールドラベル設定
-                        valueField: 'second',
+                        valueField: 'value',
 
                         // モード設定
                         mode: 'local',
@@ -614,7 +765,7 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         selectOnFocus:true,
 
                         // 値設定
-                        value: '59',
+                        value: '',
 
                         // サイズ設定
                         width: 40
@@ -700,9 +851,13 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
     // {{{ onBtnReset
 
     onBtnReset : function() {
+
         var me = this;
-    console.log(me.forms);
-    alert('aaa');
+
+        me.forms.caption.setValue('');
+        me.forms.modified.reset();
+        me.forms.created.reset();
+
     }
 
     // }}}

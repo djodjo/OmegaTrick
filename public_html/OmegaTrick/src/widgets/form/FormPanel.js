@@ -107,7 +107,7 @@ Ext.trick.form.FormPanel = Ext.extend(Ext.form.FormPanel, {
 
         items.each(function(item, index, length) {
             if(item instanceof Ext.form.Field) {
-                me.forms[item.name || item.id] = item;
+                me.forms[item.name || item.itemId || item.id] = item;
             }
 
             if(!(item instanceof Ext.form.CompositeField) && item.items && item.items.getCount() > 0) {
