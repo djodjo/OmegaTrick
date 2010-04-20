@@ -92,6 +92,24 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         // xtype設定
                         xtype: 'datefield',
 
+                        // リスナー設定
+                        listeners: {
+                            select: {
+                                fn: function(field, date) {
+                                    if(
+                                        me.forms.modified.forms.fromHour.getValue() == '' &&
+                                        me.forms.modified.forms.fromMinute.getValue() == '' &&
+                                        me.forms.modified.forms.fromSecond.getValue() == ''
+                                    ) {
+                                        me.forms.modified.forms.fromHour.setValue('00');
+                                        me.forms.modified.forms.fromMinute.setValue('00');
+                                        me.forms.modified.forms.fromSecond.setValue('00');
+                                    }
+                                },
+                                scope: me
+                            }
+                        },
+
                         // サイズ設定
                         width: 100
                     },{
@@ -270,6 +288,24 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
 
                         // xtype設定
                         xtype: 'datefield',
+                        
+                        // リスナー設定
+                        listeners: {
+                            select: {
+                                fn: function(field, date) {
+                                    if(
+                                        me.forms.modified.forms.toHour.getValue() == '' &&
+                                        me.forms.modified.forms.toMinute.getValue() == '' &&
+                                        me.forms.modified.forms.toSecond.getValue() == ''
+                                    ) {
+                                        me.forms.modified.forms.toHour.setValue('23');
+                                        me.forms.modified.forms.toMinute.setValue('59');
+                                        me.forms.modified.forms.toSecond.setValue('59');
+                                    }
+                                },
+                                scope: me
+                            }
+                        },
 
                         // サイズ設定
                         width: 100
@@ -451,6 +487,24 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         // xtype設定
                         xtype: 'datefield',
 
+                        // リスナー設定
+                        listeners: {
+                            select: {
+                                fn: function(field, date) {
+                                    if(
+                                        me.forms.created.forms.fromHour.getValue() == '' &&
+                                        me.forms.created.forms.fromMinute.getValue() == '' &&
+                                        me.forms.created.forms.fromSecond.getValue() == ''
+                                    ) {
+                                        me.forms.created.forms.fromHour.setValue('00');
+                                        me.forms.created.forms.fromMinute.setValue('00');
+                                        me.forms.created.forms.fromSecond.setValue('00');
+                                    }
+                                },
+                                scope: me
+                            }
+                        },
+
                         // サイズ設定
                         width: 100
                     },{
@@ -627,6 +681,24 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
 
                         // xtype設定
                         xtype: 'datefield',
+
+                        // リスナー設定
+                        listeners: {
+                            select: {
+                                fn: function(field, date) {
+                                    if(
+                                        me.forms.created.forms.toHour.getValue() == '' &&
+                                        me.forms.created.forms.toMinute.getValue() == '' &&
+                                        me.forms.created.forms.toSecond.getValue() == ''
+                                    ) {
+                                        me.forms.created.forms.toHour.setValue('23');
+                                        me.forms.created.forms.toMinute.setValue('59');
+                                        me.forms.created.forms.toSecond.setValue('59');
+                                    }
+                                },
+                                scope: me
+                            }
+                        },
 
                         // サイズ設定
                         width: 100
