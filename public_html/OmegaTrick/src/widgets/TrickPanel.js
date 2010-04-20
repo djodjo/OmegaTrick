@@ -51,7 +51,7 @@ Ext.trick.TrickPanel = Ext.extend(Ext.Panel, {
 
         if(me.trick) {
 
-            var parts = me.trickPartsConfig;
+            var parts = {};
 
             Ext.applyIf(parts, {
 

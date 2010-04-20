@@ -22,7 +22,7 @@ compress_js(){
     --js=$PUBLIC_OMEGA/src/widgets/layout/ScreenLayout.js \
     --js=$PUBLIC_OMEGA/src/widgets/ScreenPanel.js \
     --js=$PUBLIC_OMEGA/src/widgets/TrickPanel.js \
-    --js=$PUBLIC_OMEGA/src/widgets/parts/Search.js \
+    --js=$PUBLIC_OMEGA/src/widgets/parts/Unit.js \
     --js=$PUBLIC_OMEGA/src/widgets/parts/SearchDetail.js \
     --js=$PUBLIC_OMEGA/src/widgets/parts/List.js \
     --js=$PUBLIC_OMEGA/src/core/Config.js \

@@ -29,7 +29,7 @@ CustomSearchDetail = Ext.extend(Ext.trick.form.FormPanel,{
 
         });
 
-
+        // スーパークラスメソッドコール
         CustomSearchDetail.superclass.initComponent.call(me);
     }
 

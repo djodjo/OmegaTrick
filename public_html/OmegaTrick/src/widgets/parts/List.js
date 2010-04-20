@@ -213,6 +213,7 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
             gridConfig.region = 'center';
 
             var detailXType = 'trick-searchdetail';
+
             if(Ext.isObject(config.searchBox) && config.searchBox.xtype) {
                 detailXType = config.searchBox.xtype;
             }
