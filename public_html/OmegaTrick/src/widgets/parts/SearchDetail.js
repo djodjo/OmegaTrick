@@ -445,12 +445,18 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                     // アイテム設定
                     items: [{
 
+                        // アイテムID設定
+                        itemId: 'fromDate',
+
                         // xtype設定
                         xtype: 'datefield',
 
                         // サイズ設定
                         width: 100
                     },{
+
+                        // アイテムID設定
+                        itemId: 'fromHour',
 
                         // xtype設定
                         xtype: 'combo',
@@ -505,6 +511,8 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         // サイズ設定
                         width: 5
                     },{
+                        // アイテムID設定
+                        itemId: 'fromMinute',
 
                         // xtype設定
                         xtype: 'combo',
@@ -558,6 +566,8 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         // サイズ設定
                         width: 5
                     },{
+                        // アイテムID設定
+                        itemId: 'fromSecond',
 
                         // xtype設定
                         xtype: 'combo',
@@ -612,6 +622,8 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         // サイズ設定
                         width: 10
                     },{
+                        // アイテムID設定
+                        itemId: 'toDate',
 
                         // xtype設定
                         xtype: 'datefield',
@@ -619,6 +631,8 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         // サイズ設定
                         width: 100
                     },{
+                        // アイテムID設定
+                        itemId: 'toHour',
 
                         // xtype設定
                         xtype: 'combo',
@@ -674,6 +688,9 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         width: 5
                     },{
 
+                        // アイテムID設定
+                        itemId: 'toMinute',
+
                         // xtype設定
                         xtype: 'combo',
 
@@ -726,6 +743,9 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
                         // サイズ設定
                         width: 5
                     },{
+
+                        // アイテムID設定
+                        itemId: 'toSecond',
 
                         // xtype設定
                         xtype: 'combo',
@@ -885,7 +905,6 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
             modToHour = me.forms.modified.forms.toHour.getRawValue(),
             modToMinute = me.forms.modified.forms.toMinute.getRawValue(),
             modToSecond = me.forms.modified.forms.toSecond.getRawValue();
-            /*
             createdFromDate = me.forms.created.forms.fromDate.getRawValue(),
             createdFromHour = me.forms.created.forms.fromHour.getRawValue(),
             createdFromMinute = me.forms.created.forms.fromMinute.getRawValue(),
@@ -894,7 +913,7 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
             createdToHour = me.forms.created.forms.toHour.getRawValue(),
             createdToMinute = me.forms.created.forms.toMinute.getRawValue(),
             createdToSecond = me.forms.created.forms.toSecond.getRawValue();
-*/
+
         if(me.forms.caption.getValue().length > 0) {
             query.caption = me.forms.caption.getValue();
         }
@@ -920,8 +939,29 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
         }
 
 
-//console.log(me.forms);
-//console.log(me.forms.modified.forms.fromDate.getRawValue());
+        if(
+            createdFromDate != '' &&
+            createdFromHour != '' &&
+            createdFromMinute != '' &&
+            createdFromSecond != ''
+        ) {
+            query.created = query.created || {};
+            query.created.from = createdFromDate + ' ' + createdFromHour + ':' + createdFromMinute + ':' + createdFromSecond;
+        }
+
+        if(
+            createdToDate != '' &&
+            createdToHour != '' &&
+            createdToMinute != '' &&
+            createdToSecond != ''
+        ) {
+            query.created = query.created || {};
+            query.created.to = createdToDate + ' ' + createdToHour + ':' + createdToMinute + ':' + createdToSecond;
+        }
+
+
+
+
         var hasQuery = false;
         Ext.iterate(query, function(){
             hasQuery = true;

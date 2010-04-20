@@ -132,7 +132,6 @@ class OmegaTrick_List extends xFrameworkPX_Model
             'created'
         );
 
-// print_r($this->get('all', $option));
         return array(
             'items' => $this->get('all', $option),
             'total' => $this->get('count', $option)
