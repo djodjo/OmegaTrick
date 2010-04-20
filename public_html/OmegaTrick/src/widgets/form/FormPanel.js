@@ -127,6 +127,9 @@ Ext.trick.form.FormPanel = Ext.extend(Ext.form.FormPanel, {
                         forms[item.name || item.itemId || item.id] = src.items.items[cnt];
                     });
                 });
+            } else if(item instanceof Ext.Button) {
+                me.formButtons = me.formButtons || {};
+                me.formButtons[setkey] = item;
             }
         }, me);
     }

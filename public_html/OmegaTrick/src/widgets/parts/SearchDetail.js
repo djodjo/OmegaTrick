@@ -862,9 +862,7 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
 
             },{
                 flex:1
-            },{
             }]
-
         });
 
         me.cls = me.cls || '';
@@ -958,9 +956,6 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
             query.created = query.created || {};
             query.created.to = createdToDate + ' ' + createdToHour + ':' + createdToMinute + ':' + createdToSecond;
         }
-
-
-
 
         var hasQuery = false;
         Ext.iterate(query, function(){

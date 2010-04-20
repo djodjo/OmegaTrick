@@ -258,6 +258,10 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
                                 item.hide();
                             });
 
+                            Ext.iterate(sdp.formButtons, function(key, item, items) {
+                                item.hide();
+                            });
+
                             sf.disable();
                             dsb.toggle(true, true);
                             sl.addClass('tx-text-disable');
@@ -276,6 +280,9 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
                                 item.show();
                             });
 
+                            Ext.iterate(sdp.formButtons, function(key, item, items) {
+                                item.show();
+                            });
 
                             sdp.doLayout();
                         }
@@ -293,6 +300,11 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
                                 }
                                 item.hide();
                             });
+
+                            Ext.iterate(sdp.formButtons, function(key, item, items) {
+                                item.hide();
+                            });
+
                             dsb.toggle(false, true);
                             sf.enable();
                             sl.addClass('tx-text-enable');
