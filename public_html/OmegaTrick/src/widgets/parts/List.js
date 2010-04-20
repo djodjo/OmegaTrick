@@ -212,6 +212,11 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
             // グリッドコンフィグリージョン設定
             gridConfig.region = 'center';
 
+            var detailXType = 'trick-searchdetail';
+            if(Ext.isObject(config.searchBox) && config.searchBox.xtype) {
+                detailXType = config.searchBox.xtype;
+            }
+
             // テンポラリコンフィグアイテム追加
             tempConfig.items.push({
 
@@ -228,7 +233,7 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
                 border: false,
 
                 // xtype設定
-                xtype: 'trick-searchdetail',
+                xtype: detailXType,
 
                 // 開閉アニメーション設定
                 animCollapse : (config.searchBox.anim === true) || false,
