@@ -90,12 +90,30 @@ class OmegaTrick_List extends xFrameworkPX_Model
             foreach($query as $key => $value) {
 
                 if(!isset($option['canditions'])) {
-                    $option['conditions'] = array();
+                    //$option['conditions'] = array();
                 } else {
-                    $option['conditions'][] = 'OR';
+                    //$option['conditions'][] = 'AND';
                 }
-                $option['conditions'][$key] = 'LIKE %%' . $value . '%%';
 
+                if($key == 'caption') {
+                    $option['conditions'][$key] = 'LIKE %%' . $value . '%%';
+                }
+
+                if($key == 'modified') {
+
+                    if(isset($value->from) && !isset($value->to)) {
+                        $option['conditions'][$key] = ">= " . $value->from;
+                    } else if(!isset($value->from) && isset($value->to)) {
+                        $option['conditions'][$key] = "<= " . $value->to;
+                    } else if(isset($value->from) && isset($value->to)) {
+                        //$option['conditions']['from_' . $key] = ">= " . $value->from;
+                        $option['conditions']['to_' . $key] = "<= " . $value->to;
+                   //     $option['conditions'][$key] = array();
+                            //$key . ">= " . $value->from . ' AND ' . $key . "<= " . $value->to;
+                    
+                    }
+
+                }
             }
         }
 
@@ -103,6 +121,16 @@ class OmegaTrick_List extends xFrameworkPX_Model
             $sort . ' ' . $dir
         );
 
+        $option['field'] = array(
+            'id',
+            'caption',
+            'modified',
+            'modified as from_modified',
+            'modified as to_modified',
+            'created'
+        );
+
+print_r($this->get('all', $option));
         return array(
             'items' => $this->get('all', $option),
             'total' => $this->get('count', $option)

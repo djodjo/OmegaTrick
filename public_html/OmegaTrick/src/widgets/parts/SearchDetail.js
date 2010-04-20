@@ -876,18 +876,50 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
             store = me.searchStore,
             lastOptions = store.lastOptions;
 
-        var query = {};
-
+        var query = {},
+            modFromDate = me.forms.modified.forms.fromDate.getRawValue(),
+            modFromHour = me.forms.modified.forms.fromHour.getRawValue(),
+            modFromMinute = me.forms.modified.forms.fromMinute.getRawValue(),
+            modFromSecond = me.forms.modified.forms.fromSecond.getRawValue(),
+            modToDate = me.forms.modified.forms.toDate.getRawValue(),
+            modToHour = me.forms.modified.forms.toHour.getRawValue(),
+            modToMinute = me.forms.modified.forms.toMinute.getRawValue(),
+            modToSecond = me.forms.modified.forms.toSecond.getRawValue();
+            /*
+            createdFromDate = me.forms.created.forms.fromDate.getRawValue(),
+            createdFromHour = me.forms.created.forms.fromHour.getRawValue(),
+            createdFromMinute = me.forms.created.forms.fromMinute.getRawValue(),
+            createdFromSecond = me.forms.created.forms.fromSecond.getRawValue(),
+            createdToDate = me.forms.created.forms.toDate.getRawValue(),
+            createdToHour = me.forms.created.forms.toHour.getRawValue(),
+            createdToMinute = me.forms.created.forms.toMinute.getRawValue(),
+            createdToSecond = me.forms.created.forms.toSecond.getRawValue();
+*/
         if(me.forms.caption.getValue().length > 0) {
             query.caption = me.forms.caption.getValue();
-        }/* else if(
-            
-        ) {
-        
-        
-        
         }
-*/
+
+        if(
+            modFromDate != '' &&
+            modFromHour != '' &&
+            modFromMinute != '' &&
+            modFromSecond != ''
+        ) {
+            query.modified = query.modified || {};
+            query.modified.from = modFromDate + ' ' + modFromHour + ':' + modFromMinute + ':' + modFromSecond;
+        }
+
+        if(
+            modToDate != '' &&
+            modToHour != '' &&
+            modToMinute != '' &&
+            modToSecond != ''
+        ) {
+            query.modified = query.modified || {};
+            query.modified.to = modToDate + ' ' + modToHour + ':' + modToMinute + ':' + modToSecond;
+        }
+
+
 //console.log(me.forms);
 //console.log(me.forms.modified.forms.fromDate.getRawValue());
         var hasQuery = false;
