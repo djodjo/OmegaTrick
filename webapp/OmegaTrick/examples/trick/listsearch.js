@@ -27,6 +27,11 @@ Ext.onTrick({
             title: 'List Trick with SearchBox - Ext.trick.TrickPanel',
             trick: 'list',
             trickConfig: {
+                tbar: [{
+                    text: 'ボタン１'
+                },{
+                    xtype: 'tbseparator' 
+                }],
                 ptbar: {
                     position: {
                         both: {

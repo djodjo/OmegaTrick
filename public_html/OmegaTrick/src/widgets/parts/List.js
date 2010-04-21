@@ -320,6 +320,80 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
                 }
             });
 
+            var searchBoxTbar = [{
+
+                // アイテムID設定
+                itemId: 'SearchLabelText',
+
+                // xtype設定
+                xtype: 'tbtext',
+
+                // テキスト設定
+                text: '検索:'
+            },
+            new Ext.ux.form.SearchField({
+
+                // アイテムID設定
+                itemId: 'SearchFiled',
+
+                // サイズ設定
+                width: 240,
+
+                // ストア設定
+                store: store
+
+            }),'-',{
+
+                // アイテムID設定
+                itemId: 'btnSearchDetail',
+
+                // アイコンクラス設定
+                iconCls: 'tx-icon-searchdetail',
+
+                // トグル設定
+                enableToggle: true,
+
+                // テキスト設定
+                text: '詳細検索',
+
+                // リファレンス設定
+                ref: '../searchBox.btnSearchDetail',
+
+                // ハンドラ設定
+                toggleHandler : function(button, state) {
+
+                    var sf = me.getTopToolbar().getComponent('SearchFiled');
+                    var sdp = me.getComponent(me.id + '_SearchDetail');
+                    //var sl = me.getTopToolbar().getComponent('SearchLabelText');
+
+                    if(state) {
+                        sf.disable();
+                        sdp.expand();
+                        //sl.addClass('tx-text-disable');
+                        //sl.removeClass('tx-text-enable');
+                    } else {
+                        sf.enable();
+                        sdp.collapse();
+                        //sl.addClass('tx-text-enable');
+                        //sl.removeClass('tx-text-disable');
+                    }
+
+                    me.fireEvent('toggleSearchDetail', state);
+                },
+
+                // スコープ設定
+                scope: me
+            }];
+
+            if(Ext.isObject(config.tbar)) {
+
+                serachBoxTbar = [config.tbar].concat(searchBoxTbar);
+
+            } else if(Ext.isArray(config.tbar)) {
+
+                searchBoxTbar = config.tbar.concat(searchBoxTbar);
+
+            }
 
             Ext.apply(me, {
 
@@ -327,70 +401,7 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
                 searchBox: {},
 
                 // トップツールバー設定
-                tbar: [{
-
-                    // アイテムID設定
-                    itemId: 'SearchLabelText',
-
-                    // xtype設定
-                    xtype: 'tbtext',
-
-                    // テキスト設定
-                    text: '検索:'
-                },
-                new Ext.ux.form.SearchField({
-
-                    // アイテムID設定
-                    itemId: 'SearchFiled',
-
-                    // サイズ設定
-                    width: 240,
-
-                    // ストア設定
-                    store: store
-
-                }),'-',{
-
-                    // アイテムID設定
-                    itemId: 'btnSearchDetail',
-
-                    // アイコンクラス設定
-                    iconCls: 'tx-icon-searchdetail',
-
-                    // トグル設定
-                    enableToggle: true,
-
-                    // テキスト設定
-                    text: '詳細検索',
-
-                    // リファレンス設定
-                    ref: '../searchBox.btnSearchDetail',
-
-                    // ハンドラ設定
-                    toggleHandler : function(button, state) {
-
-                        var sf = me.getTopToolbar().getComponent('SearchFiled');
-                        var sdp = me.getComponent(me.id + '_SearchDetail');
-                        //var sl = me.getTopToolbar().getComponent('SearchLabelText');
-
-                        if(state) {
-                            sf.disable();
-                            sdp.expand();
-                            //sl.addClass('tx-text-disable');
-                            //sl.removeClass('tx-text-enable');
-                        } else {
-                            sf.enable();
-                            sdp.collapse();
-                            //sl.addClass('tx-text-enable');
-                            //sl.removeClass('tx-text-disable');
-                        }
-
-                        me.fireEvent('toggleSearchDetail', state);
-                    },
-
-                    // スコープ設定
-                    scope: me
-                }]
+                tbar: searchBoxTbar
             });
         }
 
