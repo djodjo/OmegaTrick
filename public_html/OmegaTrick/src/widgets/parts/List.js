@@ -31,7 +31,8 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
 
         Ext.applyIf(config, {
             store: {},
-            colModel: {}
+            colModel: {},
+            grid: {}
         });
 
         // ストア設定

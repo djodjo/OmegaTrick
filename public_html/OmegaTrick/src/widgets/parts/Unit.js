@@ -28,6 +28,8 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.Panel, {
 
         var me = this;
 
+
+
 Ext.util.Observable.capture(me, function() {
 
 console.log(arguments);

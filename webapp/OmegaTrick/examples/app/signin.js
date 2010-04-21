@@ -26,11 +26,10 @@ Ext.onTrick({
     /**
      * 認証設定
      */
-     /*
     auth: {
         directFn: 'OmegaTrick_Auth'
     },
-*/
+
     // }}}
     // {{{ screens
 
