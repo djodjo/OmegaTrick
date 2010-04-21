@@ -25,8 +25,9 @@ Ext.onTrick({
 
         var p = new Ext.trick.TrickPanel({
             title: 'List Trick Unit - Ext.trick.TrickPanel',
-            trick: 'unit',
+            trick: 'listunit',
             trickConfig: {
+                mode: 'view',
                 list: {
                     ptbar: {
                         position: {

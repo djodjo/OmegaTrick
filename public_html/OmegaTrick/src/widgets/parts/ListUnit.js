@@ -17,7 +17,7 @@ Ext.ns(
  * @author  Kazuhiro Kotsutsumi <kotsutsumi@xenophy.com>
  * @version 1.0
  */
-Ext.trick.parts.UnitPanel = Ext.extend(Ext.Panel, {
+Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.Panel, {
 
     // {{{ initConfig
 
@@ -47,6 +47,9 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.Panel, {
 
         // コンフィグ初期化
         me.initConfig();
+
+
+        var tempConfig = Ext.clone(config);
 
         // テンポラリコンフィグ設定
         var tempConfig = {
@@ -79,7 +82,7 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.Panel, {
                 xtype: 'trick-list',
 
                 // トリックコンフィグ設定
-                trickConfig: config.list || {},
+                trickConfig: config.list || {}
 
             },{
 
@@ -95,7 +98,7 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.Panel, {
         Ext.applyIf(me, tempConfig);
 
         // スーパークラスメソッドコール
-        Ext.trick.parts.UnitPanel.superclass.initComponent.call(me);
+        Ext.trick.parts.ListUnitPanel.superclass.initComponent.call(me);
     }
 
     // }}}
@@ -105,7 +108,7 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.Panel, {
 // }}}
 // {{{ Register xtype
 
-Ext.reg('trick-unit', Ext.trick.parts.UnitPanel);
+Ext.reg('trick-listunit', Ext.trick.parts.ListUnitPanel);
 
 // }}}
 
