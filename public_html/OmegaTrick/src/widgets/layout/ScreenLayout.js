@@ -132,7 +132,7 @@ Ext.trick.layout.ScreenLayout = Ext.extend(Ext.layout.FitLayout, {
                     si = item;
                 }
             });
-
+console.log(c);
             // アイテム内に存在しない場合
             if(!si) {
                 Ext.iterate(ici, function(item, cnt, items) {
@@ -154,7 +154,7 @@ Ext.trick.layout.ScreenLayout = Ext.extend(Ext.layout.FitLayout, {
             });
 
         }
-
+console.log(si);
         if(si) {
             si.show();
             me.activeItem = si;
@@ -164,9 +164,9 @@ Ext.trick.layout.ScreenLayout = Ext.extend(Ext.layout.FitLayout, {
 
         if(si) {
             si.doLayout();
+            si.fireEvent('activate', si);
         }
 
-        si.fireEvent('activate', si);
     },
 
     // }}}

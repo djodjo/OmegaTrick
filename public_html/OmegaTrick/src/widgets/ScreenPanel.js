@@ -39,6 +39,10 @@ Ext.trick.ScreenPanel = Ext.extend(Ext.Panel,{
             });
         }
 
+        if(!me.initialConfig.items) {
+            me.initialConfig.items = me.items;
+        }
+
         // スーパークラスメソッドコール
         Ext.trick.ScreenPanel.superclass.initComponent.call(this);
     },

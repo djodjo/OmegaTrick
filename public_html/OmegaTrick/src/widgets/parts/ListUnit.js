@@ -17,7 +17,7 @@ Ext.ns(
  * @author  Kazuhiro Kotsutsumi <kotsutsumi@xenophy.com>
  * @version 1.0
  */
-Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.Panel, {
+Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
 
     // {{{ initConfig
 
@@ -69,6 +69,17 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.Panel, {
             listConfig.grid = listConfig.grid || {};
             listConfig.grid.sm = listConfig.grid.sm || {};
 
+            Ext.applyIf(listConfig.grid, {
+
+                // リスナー設定
+                listeners: {
+                    dblclick: {
+                        fn: me.onBtnView,
+                        scope: me
+                    }
+                }
+            });
+
             // セレクションモデルコンフィグオプション設定
             Ext.applyIf(listConfig.grid.sm, {
 
@@ -85,6 +96,7 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.Panel, {
                             var sm = grid.getSelectionModel();
                             var selection = sm.getSelections();
 
+                            // 詳細表示ボタン制御
                             if(selection && Ext.isArray(selection) && selection.length > 0) {
                                 btnView.enable();
                             }
@@ -99,6 +111,7 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.Panel, {
                             var sm = grid.getSelectionModel();
                             var selection = sm.getSelections();
 
+                            // 詳細表示ボタン制御
                             if(selection && Ext.isArray(selection) && selection.length === 0) {
                                 btnView.disable();
                             }
@@ -132,17 +145,11 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.Panel, {
         // テンポラリコンフィグ設定
         tempConfig = {
 
-            // レイアウト設定
-            layout: 'screen',
-
             // CSSクラス設定
             cls: 'tx-unit',
 
             // xtype
-            xtype: 'container',
-
-            // アクティブアイテム設定
-            activeItem: 0,
+            xtype: 'screen',
 
             // ボーダー設定
             border: false,
@@ -163,14 +170,30 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.Panel, {
                 border: false,
 
                 // xtype設定
-                xtype: 'trick-list',
+                xtype: config.listXType || 'trick-list',
 
                 // トリックコンフィグ設定
                 trickConfig: config.list
 
             },{
 
-                html: 'b'
+                // ID設定
+                id: me.id + '_UNIT',
+
+                // アイテムID設定
+                itemId: 'unitpanel',
+
+                // リファレンス設定
+                ref: 'panels.unit',
+
+                // ボーダー設定
+                border: false,
+
+                // xtype設定
+                xtype: config.unitXType || 'trick-unit',
+
+                // トリックコンフィグ設定
+                trickConfig: config.unit
             }]
 
         };
@@ -186,6 +209,10 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.Panel, {
     // {{{ onBtnView
 
     onBtnView: function() {
+
+        var me = this;
+
+        me.layout.setActiveItem(me.id + '_UNIT');
 
 
     }

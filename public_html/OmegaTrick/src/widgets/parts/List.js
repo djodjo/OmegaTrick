@@ -191,6 +191,9 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
             // カラムモデル設定
             colModel: new colModelCls(config.colModel),
 
+            // リスナー設定
+            listeners: config.grid.listeners || {},
+
             // セレクションモデル設定
             sm: new smCls(config.grid.sm)
         });

@@ -25,6 +25,7 @@ compress_js(){
     --js=$PUBLIC_OMEGA/src/widgets/parts/ListUnit.js \
     --js=$PUBLIC_OMEGA/src/widgets/parts/SearchDetail.js \
     --js=$PUBLIC_OMEGA/src/widgets/parts/List.js \
+    --js=$PUBLIC_OMEGA/src/widgets/parts/Unit.js \
     --js=$PUBLIC_OMEGA/src/core/Config.js \
     --js=$PUBLIC_OMEGA/src/core/Store.js \
     --js=$PUBLIC_OMEGA/src/core/String.js \
