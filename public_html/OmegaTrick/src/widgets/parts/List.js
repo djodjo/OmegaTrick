@@ -169,7 +169,10 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
         Ext.applyIf(gridConfig, {
 
             // アイテムID設定
-            itemId: me.id + '_Grid',
+            itemId: 'grid',
+
+            // リファレンス設定
+            ref: 'panels.grid',
 
             // xtype設定
             xtype: 'grid',

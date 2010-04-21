@@ -48,6 +48,9 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.Panel, {
 
             listConfig.tbar = listConfig.tbar.concat([{
 
+                // アイテムID設定
+                itemId: 'btnView',
+
                 // テキスト設定
                 text: '詳細表示',
 
@@ -62,19 +65,49 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.Panel, {
 
             }]);
 
-
+            // オブジェクト初期化
             listConfig.grid = listConfig.grid || {};
             listConfig.grid.sm = listConfig.grid.sm || {};
 
+            // セレクションモデルコンフィグオプション設定
             Ext.applyIf(listConfig.grid.sm, {
-                singleSelect: true
+
+                // シングル選択設定
+                singleSelect: true,
+
+                // リスナー設定
+                listeners: {
+                    rowselect: {
+                        fn : function() {
+                            var list = me.getComponent('listpanel');
+                            var btnView = me.panels.list.getTopToolbar().getComponent('btnView');
+                            var grid = me.panels.list.panels.grid;
+                            var sm = grid.getSelectionModel();
+                            var selection = sm.getSelections();
+
+                            if(selection && Ext.isArray(selection) && selection.length > 0) {
+                                btnView.enable();
+                            }
+                        },
+                        scope: me
+                    },
+                    rowdeselect: {
+                        fn: function() {
+                            var list = me.getComponent('listpanel');
+                            var btnView = me.panels.list.getTopToolbar().getComponent('btnView');
+                            var grid = me.panels.list.panels.grid;
+                            var sm = grid.getSelectionModel();
+                            var selection = sm.getSelections();
+
+                            if(selection && Ext.isArray(selection) && selection.length === 0) {
+                                btnView.disable();
+                            }
+
+                        }
+                    }
+                }
             });
-
-
         }
-
-
-
     },
 
     // }}}
@@ -93,7 +126,6 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.Panel, {
 
         // コンフィグ初期化
         me.initConfig();
-
 
         var tempConfig = config;
 
@@ -117,6 +149,12 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.Panel, {
 
             // アイテム設定
             items: [{
+
+                // アイテムID設定
+                itemId: 'listpanel',
+
+                // リファレンス設定
+                ref: 'panels.list',
 
                 // 固定設定
                 fix: true,

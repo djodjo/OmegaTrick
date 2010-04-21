@@ -21,6 +21,7 @@ Ext.onReady(function(){
             layout:'column',
             items: [{
                 columnWidth: .5,
+                layout: 'form',
                 items: [{
                     xtype: 'textfield',
                     name: 'item2',
@@ -30,6 +31,7 @@ Ext.onReady(function(){
                 }]
             },{
                 columnWidth: .5,
+                layout: 'form',
                 items: [{
                     xtype: 'textfield',
                     name: 'item3',
@@ -56,6 +58,7 @@ Ext.onReady(function(){
 
 
     console.log(f.forms);
+    console.log(f.formButtons);
 });
 
 /*

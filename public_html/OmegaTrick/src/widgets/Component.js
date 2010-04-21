@@ -13,9 +13,15 @@ Ext.Component.prototype.initRef = Ext.Component.prototype.initRef.createSequence
     var me = this;
     var getOwner = function(base, arr) {
 
-        var ret;
+        var ret,
+            name = arr.pop();
 
-        ret = base[arr.pop()];
+        ret = base[name];
+
+        if(!ret) {
+            base[name] = {};
+            ret = base[name];
+        }
 
         if(arr.length > 0) {
             // 再帰処理
