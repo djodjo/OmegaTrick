@@ -39,7 +39,7 @@ Ext.onTrick({
                     },
                     searchBox: true,
                     grid: {
-                        sm: {test: 'test'}
+                        sm: {}
                     }
                 }
             },

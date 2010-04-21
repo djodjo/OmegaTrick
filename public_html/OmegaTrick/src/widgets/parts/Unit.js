@@ -19,6 +19,18 @@ Ext.ns(
  */
 Ext.trick.parts.UnitPanel = Ext.extend(Ext.Panel, {
 
+    // {{{ initConfig
+
+    initConfig : function() {
+
+        var me = this,
+            config = me.trickConfig;
+
+
+
+    },
+
+    // }}}
     // {{{ initComponent
 
     /**
@@ -28,13 +40,9 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.Panel, {
 
         var me = this;
 
+        // コンフィグ初期化
+        me.initConfig();
 
-
-Ext.util.Observable.capture(me, function() {
-
-console.log(arguments);
-});
-me.html = 'UnitPanel';
         // スーパークラスメソッドコール
         Ext.trick.parts.UnitPanel.superclass.initComponent.call(me);
     },

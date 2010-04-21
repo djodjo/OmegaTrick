@@ -29,7 +29,9 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
         var me = this;
         var config = me.trickConfig || {};
         config.list = config.list || {};
+        config.unit = config.unit || {};
         var listConfig = config.list;
+        var unitConfig = config.unit;
 
         // リストコンフィグ初期化
         if(listConfig.tbar) {
@@ -121,6 +123,14 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
                 }
             });
         }
+
+        // ユニットコンフィグ設定
+        Ext.applyIf(unitConfig, {
+        
+        
+        
+        });
+
     },
 
     // }}}
