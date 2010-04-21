@@ -66,15 +66,10 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.Panel, {
             listConfig.grid = listConfig.grid || {};
             listConfig.grid.sm = listConfig.grid.sm || {};
 
-console.log(listConfig.grid.sm);
-
             Ext.applyIf(listConfig.grid.sm, {
                 singleSelect: true
-            
-            
             });
 
-            console.log(listConfig.g);
 
         }
 
@@ -103,7 +98,7 @@ console.log(listConfig.grid.sm);
         var tempConfig = config;
 
         // テンポラリコンフィグ設定
-        var tempConfig = {
+        tempConfig = {
 
             // レイアウト設定
             layout: 'screen',
@@ -139,9 +134,6 @@ console.log(listConfig.grid.sm);
 
                 html: 'b'
             }]
-
-            // アイテム設定
-//            items:[gridConfig]
 
         };
 

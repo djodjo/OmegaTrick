@@ -189,9 +189,9 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
             colModel: new colModelCls(config.colModel),
 
             // セレクションモデル設定
-            sm: new smCls(config.sm)
+            sm: new smCls(config.grid.sm)
         });
-console.log(gridConfig);
+
         // テンポラリコンフィグ設定
         var tempConfig = {
 
