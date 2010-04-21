@@ -139,7 +139,6 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
                 emptyMsg: '表示するアイテムがありません。'
             });
         }
-
     },
 
     // }}}
@@ -154,6 +153,7 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
             config = me.trickConfig || {},
             storeCls = config.storeCls || Ext.data.DirectStore,
             colModelCls = config.colModelCls || Ext.grid.ColumnModel;
+            smCls = config.smCls || Ext.grid.RowSelectionModel;
 
         // ID設定
         Ext.applyIf(me, {id: Ext.id()});
@@ -186,9 +186,12 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
             store: store,
 
             // カラムモデル設定
-            colModel: new colModelCls(config.colModel)
-        });
+            colModel: new colModelCls(config.colModel),
 
+            // セレクションモデル設定
+            sm: new smCls(config.sm)
+        });
+console.log(gridConfig);
         // テンポラリコンフィグ設定
         var tempConfig = {
 
@@ -387,11 +390,16 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
 
             if(Ext.isObject(config.tbar)) {
 
-                serachBoxTbar = [config.tbar].concat(searchBoxTbar);
+                serachBoxTbar = [
+                    config.tbar,{
+                    xtype: 'tbseparator'
+                }].concat(searchBoxTbar);
 
             } else if(Ext.isArray(config.tbar)) {
 
-                searchBoxTbar = config.tbar.concat(searchBoxTbar);
+                searchBoxTbar = config.tbar.concat([{
+                    xtype: 'tbseparator'
+                }]).concat(searchBoxTbar);
 
             }
 

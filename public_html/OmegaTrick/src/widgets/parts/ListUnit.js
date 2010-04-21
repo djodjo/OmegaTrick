@@ -26,8 +26,59 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.Panel, {
      */
     initConfig : function() {
 
-        var me = this,
-            config = me.trickConfig || {};
+        var me = this;
+        var config = me.trickConfig || {};
+        config.list = config.list || {};
+        var listConfig = config.list;
+
+        // リストコンフィグ初期化
+        if(listConfig.tbar) {
+
+            if(Ext.isObject(listConfig.tbar)) {
+                listConfig.tbar = [listConfig.tbar];
+            } else if(Ext.isArray(listConfig.tbar)) {
+                listConfig.tbar = listConfig.tbar;
+            }
+
+        } else {
+            listConfig.tbar = [];
+        }
+
+        if(config.mode === 'view') {
+
+            listConfig.tbar = listConfig.tbar.concat([{
+
+                // テキスト設定
+                text: '詳細表示',
+
+                // 無効化設定
+                disabled: true,
+
+                // ハンドラ設定
+                handler: me.onBtnView,
+
+                // スコープ設定
+                scope: me
+
+            }]);
+
+
+            listConfig.grid = listConfig.grid || {};
+            listConfig.grid.sm = listConfig.grid.sm || {};
+
+console.log(listConfig.grid.sm);
+
+            Ext.applyIf(listConfig.grid.sm, {
+                singleSelect: true
+            
+            
+            });
+
+            console.log(listConfig.g);
+
+        }
+
+
 
     },
 
@@ -49,7 +100,7 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.Panel, {
         me.initConfig();
 
 
-        var tempConfig = Ext.clone(config);
+        var tempConfig = config;
 
         // テンポラリコンフィグ設定
         var tempConfig = {
@@ -82,7 +133,7 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.Panel, {
                 xtype: 'trick-list',
 
                 // トリックコンフィグ設定
-                trickConfig: config.list || {}
+                trickConfig: config.list
 
             },{
 
@@ -99,6 +150,14 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.Panel, {
 
         // スーパークラスメソッドコール
         Ext.trick.parts.ListUnitPanel.superclass.initComponent.call(me);
+    },
+
+    // }}}
+    // {{{ onBtnView
+
+    onBtnView: function() {
+
+
     }
 
     // }}}
