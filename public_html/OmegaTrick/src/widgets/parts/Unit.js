@@ -26,6 +26,29 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.Panel, {
         var me = this,
             config = me.trickConfig;
 
+        Ext.applyIf(me, config);
+
+        if(Ext.isObject(me.tbar)) {
+            me.tbar = [me.tbar];
+        } else if(Ext.isArray(me.tbar)) {
+            me.tbar = me.tbar;
+        } else {
+            me.tbar = [];
+        }
+
+        me.tbar = me.tbar.concat([{
+
+            // テキスト設定
+            text: '一覧へ戻る',
+
+            // ハンドラ設定
+            handler: function() {
+                me.fireEvent('backlist');
+            },
+
+            // スコープ
+            scope: me
+        }]);
 
 
     },

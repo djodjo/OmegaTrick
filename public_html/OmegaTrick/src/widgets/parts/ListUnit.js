@@ -202,6 +202,16 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
                 // xtype設定
                 xtype: config.unitXType || 'trick-unit',
 
+                // リスナー設定
+                listeners: {
+                    'backlist': {
+                        fn: function() {
+                            me.layout.setActiveItem(0);
+                        },
+                        scope: me
+                    }
+                },
+
                 // トリックコンフィグ設定
                 trickConfig: config.unit
             }]
