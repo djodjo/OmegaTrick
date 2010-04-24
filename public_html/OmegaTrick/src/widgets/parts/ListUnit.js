@@ -405,7 +405,7 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
             grid = me.panels.list.panels.grid,
             sm = grid.getSelectionModel();
 
-        p.loadData(sm.getSelected());
+        p.loadData(sm.getSelected(), grid.store);
 
     },
 
@@ -418,7 +418,7 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
             grid = me.panels.list.panels.grid,
             sm = grid.getSelectionModel();
 
-        p.loadData(sm.getSelected());
+        p.loadData(sm.getSelected(), grid.store);
 
 
     }
