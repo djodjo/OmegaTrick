@@ -46,6 +46,10 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
             listConfig.tbar = [];
         }
 
+        // オブジェクト初期化
+        listConfig.grid = listConfig.grid || {};
+        listConfig.grid.sm = listConfig.grid.sm || {};
+
         if(config.mode === 'view') {
 
             listConfig.tbar = listConfig.tbar.concat([{
@@ -69,10 +73,6 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
                 scope: me
 
             }]);
-
-            // オブジェクト初期化
-            listConfig.grid = listConfig.grid || {};
-            listConfig.grid.sm = listConfig.grid.sm || {};
 
             Ext.applyIf(listConfig.grid, {
 
@@ -176,6 +176,9 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
                 // アイコンクラス設定
                 iconCls: 'tx-icon-remove',
 
+                // 無効化設定
+                disabled: true,
+
                 // ハンドラ設定
                 handler: me.onBtnRemove,
 
@@ -183,6 +186,62 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
                 scope: me
 
             }]);
+
+            Ext.applyIf(listConfig.grid, {
+
+                // リスナー設定
+                listeners: {
+                    dblclick: {
+                        fn: me.onBtnEdit,
+                        scope: me
+                    }
+                }
+            });
+
+            // セレクションモデルコンフィグオプション設定
+            Ext.applyIf(listConfig.grid.sm, {
+
+                // シングル選択設定
+                singleSelect: true,
+
+                // リスナー設定
+                listeners: {
+                    rowselect: {
+                        fn : function() {
+                            var list = me.getComponent('listpanel');
+                            var btnEdit = me.panels.list.getTopToolbar().getComponent('btnEdit');
+                            var btnRemove = me.panels.list.getTopToolbar().getComponent('btnRemove');
+                            var grid = me.panels.list.panels.grid;
+                            var sm = grid.getSelectionModel();
+                            var selection = sm.getSelections();
+
+                            // 詳細表示ボタン制御
+                            if(selection && Ext.isArray(selection) && selection.length > 0) {
+                                btnEdit.enable();
+                                btnRemove.enable();
+                            }
+                        },
+                        scope: me
+                    },
+                    rowdeselect: {
+                        fn: function() {
+                            var list = me.getComponent('listpanel');
+                            var btnEdit = me.panels.list.getTopToolbar().getComponent('btnEdit');
+                            var btnRemove = me.panels.list.getTopToolbar().getComponent('btnRemove');
+                            var grid = me.panels.list.panels.grid;
+                            var sm = grid.getSelectionModel();
+                            var selection = sm.getSelections();
+
+                            // 詳細表示ボタン制御
+                            if(selection && Ext.isArray(selection) && selection.length === 0) {
+                                btnEdit.disable();
+                                btnRemove.disable();
+                            }
+                        }
+                    }
+                }
+            });
+
 
 
         }
