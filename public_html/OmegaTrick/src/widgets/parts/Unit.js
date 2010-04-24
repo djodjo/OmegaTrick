@@ -53,16 +53,26 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
             handler: function() {
 
                 if(!me.baseRecord.dirty) {
-                    me.fireEvent('backlist');
+
+                    me.store.reload({
+                        callback: function() {
+                            me.fireEvent('backlist');
+                        },
+                        scope: me
+                    });
+
                 } else {
                     Ext.Msg.confirm('確認', '内容が変更されています。<br>内容を破棄して一覧へ戻りますか？',function(btn) {
                         if(btn === 'yes') {
-                            me.fireEvent('backlist');
+                            me.store.reload({
+                                callback: function() {
+                                    me.fireEvent('backlist');
+                                },
+                                scope: me
+                            });
                         }
                     });
                 };
-
-
             },
 
             // スコープ
@@ -71,7 +81,7 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
 
         if(config.mode === 'edit') {
 
-            me.tbar = me.tbar.concat([{
+            me.tbar = me.tbar.concat(['-',{
 
                 // アイテムID設定
                 itemId: 'btnSave',
@@ -86,9 +96,26 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
                 disabled: true,
 
                 // ハンドラ設定
-                handler: function() {
-                    me.fireEvent('backlist');
-                },
+                handler: me.onSave,
+
+                // スコープ
+                scope: me
+            },{
+
+                // アイテムID設定
+                itemId: 'btnPageSave',
+
+                // テキスト設定
+                text: '保存して編集を続ける',
+
+                // アイコンクラス設定
+                iconCls: 'tx-icon-pagesave',
+
+                // 無効化設定
+                disabled: true,
+
+                // ハンドラ設定
+                handler: me.onPageSave,
 
                 // スコープ
                 scope: me
@@ -181,12 +208,15 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
                             fn: function(field, e) {
 
                                 var btnSave = me.getTopToolbar().getComponent('btnSave');
+                                var btnPageSave = me.getTopToolbar().getComponent('btnPageSave');
                                 me.baseRecord.set('caption', field.getValue());
 
                                 if(me.baseRecord.dirty) {
                                     btnSave.enable();
+                                    btnPageSave.enable();
                                 } else {
                                     btnSave.disable();
+                                    btnPageSave.disable();
                                 }
                             },
                             scope: me
@@ -212,12 +242,15 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
                             fn: function(field, e) {
 
                                 var btnSave = me.getTopToolbar().getComponent('btnSave');
+                                var btnPageSave = me.getTopToolbar().getComponent('btnPageSave');
                                 me.baseRecord.set('modified', field.getRawValue());
 
                                 if(me.baseRecord.dirty) {
+                                    btnPageSave.enable();
                                     btnSave.enable();
                                 } else {
                                     btnSave.disable();
+                                    btnPageSave.disable();
                                 }
                             },
                             scope: me
@@ -243,12 +276,15 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
                             fn: function(field, e) {
 
                                 var btnSave = me.getTopToolbar().getComponent('btnSave');
+                                var btnPageSave = me.getTopToolbar().getComponent('btnPageSave');
                                 me.baseRecord.set('created', field.getRawValue());
 
                                 if(me.baseRecord.dirty) {
+                                    btnPageSave.enable();
                                     btnSave.enable();
                                 } else {
                                     btnSave.disable();
+                                    btnPageSave.disable();
                                 }
                             },
                             scope: me
@@ -284,10 +320,9 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
     loadData : function(r, store) {
 
         var me = this;
+        me.store = store;
 
         me.ownerCt.body.mask();
-
-
 
         OmegaTrick_List.getUnit(r.id, function(ret) {
 
@@ -302,9 +337,68 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
             me.ownerCt.body.unmask();
         }, me);
 
+    },
+
+    // }}}
+    // {{{ onSave
+
+    onSave : function() {
+
+        var me = this;
+
+        me.ownerCt.body.mask();
+
+        OmegaTrick_List.setUnit({
+            id: me.baseRecord.get('id'),
+            caption: me.baseRecord.get('caption'),
+            modified: me.baseRecord.get('modified'),
+            created: me.baseRecord.get('created')
+        },function(ret) {
+
+            // データ保存用レコード生成
+            me.baseRecord = new me.store.recordType(ret.data);
+
+            me.store.reload({
+                callback: function() {
+                    me.fireEvent('backlist');
+                },
+                scope: me
+            });
+
+
+            me.ownerCt.body.unmask();
+        }, me);
+
+
+
+    },
+
+    // }}}
+    // {{{ onPageSave
+
+    onPageSave : function() {
+
+        var me = this;
+
+        me.ownerCt.body.mask();
+
+        OmegaTrick_List.setUnit({
+            id: me.baseRecord.get('id'),
+            caption: me.baseRecord.get('caption'),
+            modified: me.baseRecord.get('modified'),
+            created: me.baseRecord.get('created')
+        },function(ret) {
+
+            // データ保存用レコード生成
+            me.baseRecord = new me.store.recordType(ret.data);
+
+            me.ownerCt.body.unmask();
+        }, me);
+
     }
 
     // }}}
+
 
 });
 

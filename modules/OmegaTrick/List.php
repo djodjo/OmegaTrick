@@ -147,6 +147,30 @@ class OmegaTrick_List extends xFrameworkPX_Model
     }
 
     // }}}
+    // {{{ setUnit
+
+    public function setUnit($r)
+    {
+        $data = array();
+
+        if(isset($r->id))
+        {
+            $data['id'] = $r->id;
+        }
+
+        $data['caption'] = $r->caption;
+        $data['modified'] = $r->modified;
+        $data['created'] = $r->created;
+
+        $this->set($data);
+
+        return array(
+            'success' => true,
+            'data' => $data
+        );
+    }
+
+    // }}}
 
 }
 
