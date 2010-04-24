@@ -125,6 +125,66 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
                     }
                 }
             });
+
+        } else if(config.mode === 'edit') {
+
+            listConfig.tbar = listConfig.tbar.concat([{
+
+                // アイテムID設定
+                itemId: 'btnAppend',
+
+                // テキスト設定
+                text: '新規追加',
+
+                // アイコンクラス設定
+                iconCls: 'tx-icon-append',
+
+                // ハンドラ設定
+                handler: me.onBtnAppend,
+
+                // スコープ設定
+                scope: me
+
+            },{
+
+                // アイテムID設定
+                itemId: 'btnEdit',
+
+                // テキスト設定
+                text: '編集',
+
+                // アイコンクラス設定
+                iconCls: 'tx-icon-edit',
+
+                // 無効化設定
+                disabled: true,
+
+                // ハンドラ設定
+                handler: me.onBtnEdit,
+
+                // スコープ設定
+                scope: me
+
+            },{
+
+                // アイテムID設定
+                itemId: 'btnRemove',
+
+                // テキスト設定
+                text: '削除',
+
+                // アイコンクラス設定
+                iconCls: 'tx-icon-remove',
+
+                // ハンドラ設定
+                handler: me.onBtnRemove,
+
+                // スコープ設定
+                scope: me
+
+            }]);
+
+
         }
 
         // ユニットコンフィグ設定
@@ -241,6 +301,27 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
 
         me.layout.setActiveItem(me.id + '_UNIT');
 
+
+    },
+
+    // }}}
+    // {{{ onBtnAppend
+
+    onBtnAppend: function() {
+
+    },
+
+    // }}}
+    // {{{ onBtnEdit
+
+    onBtnEdit: function() {
+
+    },
+
+    // }}}
+    // {{{ onBtnRemove
+
+    onBtnRemove: function() {
 
     },
 

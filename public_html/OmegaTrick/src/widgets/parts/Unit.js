@@ -142,7 +142,7 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
             me.forms.caption.setValue(ret.caption);
             me.forms.modified.setValue(ret.modified);
             me.forms.created.setValue(ret.created);
-        
+
             me.ownerCt.body.unmask();
         }, me);
 
@@ -157,9 +157,6 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
 Ext.reg('trick-unit', Ext.trick.parts.UnitPanel);
 
 // }}}
-
-
-
 
 /*
  * Local variables:
