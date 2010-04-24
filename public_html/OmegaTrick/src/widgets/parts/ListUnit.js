@@ -241,15 +241,13 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
                     }
                 }
             });
-
-
-
         }
 
         // ユニットコンフィグ設定
         Ext.applyIf(unitConfig, {
 
-
+            // モード設定
+            mode: config.mode
 
         });
 
@@ -273,6 +271,27 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
         me.initConfig();
 
         var tempConfig = config;
+
+        var listeners = {
+            'backlist': {
+                fn: function() {
+                    me.layout.setActiveItem(0);
+                },
+                scope: me
+            }
+        };
+
+        if(config.mode === 'view') {
+            listeners.show = {
+                fn: me.onShowDetail,
+                scope: me
+            };
+        } else if(config.mode === 'edit') {
+            listeners.show = {
+                fn: me.onShowEdit,
+                scope: me
+            };
+        }
 
         // テンポラリコンフィグ設定
         tempConfig = {
@@ -325,18 +344,7 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
                 xtype: config.unitXType || 'trick-unit',
 
                 // リスナー設定
-                listeners: {
-                    'backlist': {
-                        fn: function() {
-                            me.layout.setActiveItem(0);
-                        },
-                        scope: me
-                    },
-                    'show': {
-                        fn: me.onShowDetail,
-                        scope: me
-                    }
-                },
+                listeners: listeners,
 
                 // トリックコンフィグ設定
                 trickConfig: config.unit
@@ -359,8 +367,6 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
         var me = this;
 
         me.layout.setActiveItem(me.id + '_UNIT');
-
-
     },
 
     // }}}
@@ -368,6 +374,9 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
 
     onBtnAppend: function() {
 
+        var me = this;
+
+        me.layout.setActiveItem(me.id + '_UNIT');
     },
 
     // }}}
@@ -375,6 +384,9 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
 
     onBtnEdit: function() {
 
+        var me = this;
+
+        me.layout.setActiveItem(me.id + '_UNIT');
     },
 
     // }}}
@@ -394,6 +406,20 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
             sm = grid.getSelectionModel();
 
         p.loadData(sm.getSelected());
+
+    },
+
+    // }}}
+    // {{{ onShowEdit
+
+    onShowEdit : function(p) {
+
+        var me = this,
+            grid = me.panels.list.panels.grid,
+            sm = grid.getSelectionModel();
+
+        p.loadData(sm.getSelected());
+
 
     }
 

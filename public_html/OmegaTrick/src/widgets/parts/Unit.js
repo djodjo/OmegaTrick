@@ -53,6 +53,29 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
             scope: me
         }]);
 
+        if(config.mode === 'edit') {
+
+            me.tbar = me.tbar.concat([{
+
+                // テキスト設定
+                text: '保存',
+
+                // アイコンクラス設定
+                iconCls: 'tx-icon-save',
+
+                // 無効化設定
+                disabled: true,
+
+                // ハンドラ設定
+                handler: function() {
+                    me.fireEvent('backlist');
+                },
+
+                // スコープ
+                scope: me
+            }]);
+        }
+
     },
 
     // }}}
@@ -72,45 +95,91 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
             cls: 'tx-unit'
         });
 
-        Ext.applyIf(me, {
+        if(me.mode === 'view') {
 
-            // パディング設定
-            padding: 20,
+            Ext.applyIf(me, {
 
-            // アイテム設定
-            items: [{
+                // パディング設定
+                padding: 20,
 
-                // アイテムID設定
-                itemId: 'caption',
+                // アイテム設定
+                items: [{
 
-                // xtype設定
-                xtype: 'displayfield',
+                    // アイテムID設定
+                    itemId: 'caption',
 
-                // ラベル設定
-                fieldLabel: 'タイトル'
-            },{
+                    // xtype設定
+                    xtype: 'displayfield',
 
-                // アイテムID設定
-                itemId: 'modified',
+                    // ラベル設定
+                    fieldLabel: 'タイトル'
+                },{
 
-                // xtype設定
-                xtype: 'displayfield',
+                    // アイテムID設定
+                    itemId: 'modified',
 
-                // ラベル設定
-                fieldLabel: '更新日時'
-            },{
+                    // xtype設定
+                    xtype: 'displayfield',
 
-                // アイテムID設定
-                itemId: 'created',
+                    // ラベル設定
+                    fieldLabel: '更新日時'
+                },{
 
-                // xtype設定
-                xtype: 'displayfield',
+                    // アイテムID設定
+                    itemId: 'created',
 
-                // ラベル設定
-                fieldLabel: '作成日時'
-            }]
+                    // xtype設定
+                    xtype: 'displayfield',
 
-        });
+                    // ラベル設定
+                    fieldLabel: '作成日時'
+                }]
+
+            });
+
+        } else if(me.mode === 'edit') {
+
+            Ext.applyIf(me, {
+
+                // パディング設定
+                padding: 20,
+
+                // アイテム設定
+                items: [{
+
+                    // アイテムID設定
+                    itemId: 'caption',
+
+                    // xtype設定
+                    xtype: 'textfield',
+
+                    // ラベル設定
+                    fieldLabel: 'タイトル'
+                },{
+
+                    // アイテムID設定
+                    itemId: 'modified',
+
+                    // xtype設定
+                    xtype: 'textfield',
+
+                    // ラベル設定
+                    fieldLabel: '更新日時'
+                },{
+
+                    // アイテムID設定
+                    itemId: 'created',
+
+                    // xtype設定
+                    xtype: 'textfield',
+
+                    // ラベル設定
+                    fieldLabel: '作成日時'
+                }]
+
+            });
+
+        }
 
         // スーパークラスメソッドコール
         Ext.trick.parts.UnitPanel.superclass.initComponent.call(me);
