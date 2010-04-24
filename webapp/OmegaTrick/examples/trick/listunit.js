@@ -37,10 +37,7 @@ Ext.onTrick({
                             }
                         }
                     },
-                    searchBox: true,
-                    grid: {
-                        sm: {}
-                    }
+                    searchBox: true
                 }
             },
             width: 900,

@@ -41,6 +41,9 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.Panel, {
             // テキスト設定
             text: '一覧へ戻る',
 
+            // アイコンクラス設定
+            iconCls: 'tx-icon-backlist',
+
             // ハンドラ設定
             handler: function() {
                 me.fireEvent('backlist');
@@ -49,7 +52,6 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.Panel, {
             // スコープ
             scope: me
         }]);
-
 
     },
 
@@ -65,6 +67,10 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.Panel, {
 
         // コンフィグ初期化
         me.initConfig();
+
+        Ext.applyIf(me, {
+            cls: 'tx-unit'
+        });
 
         // スーパークラスメソッドコール
         Ext.trick.parts.UnitPanel.superclass.initComponent.call(me);

@@ -10,6 +10,10 @@
   background-image: url(../../images/icons/magnifier_zoom_in.png) !important;
 }
 
+.tx-list .tx-icon-detailview {
+  background-image: url(../../images/icons/detailview.png) !important;
+}
+
 .tx-list .tx-text-disable {
   color: #aaa;
 }

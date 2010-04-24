@@ -52,6 +52,7 @@ compress_css(){
         'visual/SigninWindow.css'
         'visual/SearchDetail.css'
         'visual/List.css'
+        'visual/Unit.css'
     )
 
     if [ -e "$ALL_CSS" ];then

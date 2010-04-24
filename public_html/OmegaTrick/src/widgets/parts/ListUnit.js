@@ -56,6 +56,9 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
                 // テキスト設定
                 text: '詳細表示',
 
+                // アイコンクラス設定
+                iconCls: 'tx-icon-detailview',
+
                 // 無効化設定
                 disabled: true,
 

@@ -1,0 +1,21 @@
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2: */
+
+/**
+ * visual/Unit.css
+ *
+ * ユニットパネル
+ */
+
+.tx-unit .tx-icon-backlist {
+  background-image: url(../../images/icons/backlist.png) !important;
+}
+
+/*
+ * Local variables:
+ * tab-width: 2
+ * c-basic-offset: 2
+ * c-hanging-comment-ender-p: nil
+ * End:
+ */
+
+
