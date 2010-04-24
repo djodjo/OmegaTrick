@@ -17,7 +17,7 @@ Ext.ns(
  * @author  Kazuhiro Kotsutsumi <kotsutsumi@xenophy.com>
  * @version 1.0
  */
-Ext.trick.parts.UnitPanel = Ext.extend(Ext.Panel, {
+Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
 
     // {{{ initConfig
 
@@ -68,8 +68,48 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.Panel, {
         // コンフィグ初期化
         me.initConfig();
 
-        Ext.applyIf(me, {
+        Ext.apply(me, {
             cls: 'tx-unit'
+        });
+
+        Ext.applyIf(me, {
+
+            // パディング設定
+            padding: 20,
+
+            // アイテム設定
+            items: [{
+
+                // アイテムID設定
+                itemId: 'caption',
+
+                // xtype設定
+                xtype: 'displayfield',
+
+                // ラベル設定
+                fieldLabel: 'タイトル'
+            },{
+
+                // アイテムID設定
+                itemId: 'modified',
+
+                // xtype設定
+                xtype: 'displayfield',
+
+                // ラベル設定
+                fieldLabel: '更新日時'
+            },{
+
+                // アイテムID設定
+                itemId: 'created',
+
+                // xtype設定
+                xtype: 'displayfield',
+
+                // ラベル設定
+                fieldLabel: '作成日時'
+            }]
+
         });
 
         // スーパークラスメソッドコール
@@ -83,17 +123,28 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.Panel, {
 
         var me = this;
 
-        me.on('show', me.onShowPanel, me);
-
         // スーパークラスメソッドコール
         Ext.trick.parts.UnitPanel.superclass.initEvents.apply(me, arguments);
     },
 
     // }}}
-    // {{{ onShowPanel
+    // {{{ loadData
 
-    onShowPanel : function(p) {
+    loadData : function(r) {
 
+        var me = this;
+
+        me.ownerCt.body.mask();
+
+        OmegaTrick_List.getUnit(r.id, function(ret) {
+
+            // データ設定
+            me.forms.caption.setValue(ret.caption);
+            me.forms.modified.setValue(ret.modified);
+            me.forms.created.setValue(ret.created);
+        
+            me.ownerCt.body.unmask();
+        }, me);
 
     }
 

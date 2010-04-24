@@ -68,12 +68,12 @@ class OmegaTrick_List extends xFrameworkPX_Model
     public $usetable = 'tbl_list';
 
     // }}}
-    // {{{ readData
+    // {{{ getList
 
     /**
-     * データ読み出しメソッド
+     * 一覧データ取得メソッド
      */
-    public function readData($start, $limit, $sort, $dir, $query)
+    public function readList($start, $limit, $sort, $dir, $query)
     {
         $option = array();
 
@@ -87,17 +87,9 @@ class OmegaTrick_List extends xFrameworkPX_Model
             );
         } else if($query && is_object($query)) {
             foreach($query as $key => $value) {
-
-                if(!isset($option['canditions'])) {
-                    //$option['conditions'] = array();
-                } else {
-                    //$option['conditions'][] = 'AND';
-                }
-
                 if($key == 'caption') {
                     $option['conditions'][$key] = 'LIKE %%' . $value . '%%';
                 }
-
                 if($key == 'modified' || $key == 'created') {
 
                     if(isset($value->from) && !isset($value->to)) {
@@ -113,9 +105,7 @@ class OmegaTrick_List extends xFrameworkPX_Model
                             $key => '<=' . $value->to
                         );
                     }
-
                 }
-
             }
         }
 
@@ -137,6 +127,23 @@ class OmegaTrick_List extends xFrameworkPX_Model
             'total' => $this->get('count', $option)
         );
 
+    }
+
+    // }}}
+    // {{{ getUnit
+
+    public function getUnit($id)
+    {
+        return $this->get(
+            'first',
+            array(
+                'conditions' => array(
+                    array(
+                        'id' => $id,
+                    )
+                )
+            )
+        );
     }
 
     // }}}

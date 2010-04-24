@@ -39,7 +39,7 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
         Ext.applyIf(config.store, {
 
             // Ext.Direct関数設定
-            directFn: config.store.directFn || OmegaTrick_List.readData,
+            directFn: config.store.directFn || OmegaTrick_List.readList,
 
             // レストフル設定
             restful: config.store.restful || true,

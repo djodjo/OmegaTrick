@@ -129,9 +129,9 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
 
         // ユニットコンフィグ設定
         Ext.applyIf(unitConfig, {
-        
-        
-        
+
+
+
         });
 
     },
@@ -212,6 +212,10 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
                             me.layout.setActiveItem(0);
                         },
                         scope: me
+                    },
+                    'show': {
+                        fn: me.onShowDetail,
+                        scope: me
                     }
                 },
 
@@ -237,6 +241,19 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
 
         me.layout.setActiveItem(me.id + '_UNIT');
 
+
+    },
+
+    // }}}
+    // {{{ onShowDetail
+
+    onShowDetail: function(p) {
+
+        var me = this,
+            grid = me.panels.list.panels.grid,
+            sm = grid.getSelectionModel();
+
+        p.loadData(sm.getSelected());
 
     }
 
