@@ -464,12 +464,22 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
         }, me);
 
         // レンダリングアイテム設定
-        renderItems = [{
+        renderItems = [];
+
+        var center = {};
+
+        if(Ext.isObject(me.casing) && me.casing.center) {
+            center = me.casing.center;
+        }
+
+        Ext.applyIf(center, {
             id: me.appName + '_SCREEN',
             xtype: 'screen',
             items: screens,
             region: 'center'
-        }];
+        });
+
+        renderItems.push(center);
 
         // ケーシング設定
         if(Ext.isObject(me.casing) && me.casing.north) {
