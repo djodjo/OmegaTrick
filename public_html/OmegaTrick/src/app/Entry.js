@@ -20,6 +20,7 @@ Ext.ns(
 Ext.trick.app.Entry = function() {
 
     var me = this,
+        leaveCheck = false,
         apps = {};
 
     return {
@@ -163,6 +164,13 @@ Ext.trick.app.Entry = function() {
         },
 
         // }}}
+        // {{{ setLeaveMessage
+
+        setLeaveMessage : function(msg) {
+            me.leaveCheck = msg;
+        },
+
+        // }}}
         // {{{ boot
 
         /**
@@ -171,6 +179,14 @@ Ext.trick.app.Entry = function() {
          * return void
          */
         boot : function() {
+
+            // リーブ制御
+            window.onbeforeunload = function() {
+                if(me.leaveCheck) {
+                    return me.leaveCheck;
+                }
+            };
+
             Ext.iterate(apps, function(key, item, items) {
                 item.init();
             });

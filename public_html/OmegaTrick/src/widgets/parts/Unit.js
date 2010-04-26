@@ -214,7 +214,9 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
                                 if(me.baseRecord.dirty) {
                                     btnSave.enable();
                                     btnPageSave.enable();
+                                    Ext.trick.app.Entry.setLeaveMessage('情報が変更されています。');
                                 } else {
+
                                     btnSave.disable();
                                     btnPageSave.disable();
                                 }
@@ -367,6 +369,14 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
             // データ保存用レコード生成
             me.baseRecord = new me.store.recordType(ret.data);
 
+            Ext.trick.app.Entry.setLeaveMessage(false);
+
+            var btnSave = me.getTopToolbar().getComponent('btnSave');
+            var btnPageSave = me.getTopToolbar().getComponent('btnPageSave');
+
+            btnSave.disable();
+            btnPageSave.disable();
+
             me.store.reload({
                 callback: function() {
                     me.fireEvent('backlist');
@@ -397,6 +407,14 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
 
             // データ保存用レコード生成
             me.baseRecord = new me.store.recordType(ret.data);
+
+            Ext.trick.app.Entry.setLeaveMessage(false);
+
+            var btnSave = me.getTopToolbar().getComponent('btnSave');
+            var btnPageSave = me.getTopToolbar().getComponent('btnPageSave');
+
+            btnSave.disable();
+            btnPageSave.disable();
 
             me.ownerCt.body.unmask();
         }, me);
