@@ -171,6 +171,13 @@ class OmegaTrick_List extends xFrameworkPX_Model
     }
 
     // }}}
+    // {{{ removeUnit
+
+    public function removeUnit($id) {
+        $this->remove(array($id));
+    }
+
+    // }}}
 
 }
 

@@ -397,6 +397,40 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
 
     onBtnRemove: function() {
 
+        var me = this,
+            grid = me.panels.list.panels.grid,
+            store = grid.store,
+            sm = grid.getSelectionModel(),
+            btnRemove = me.panels.list.getTopToolbar().getComponent('btnRemove'),
+            btnEdit = me.panels.list.getTopToolbar().getComponent('btnEdit');
+
+        if(sm.getCount() > 0) {
+
+            var r = sm.getSelected();
+
+            Ext.Msg.confirm(
+                '確認',
+                '選択されたアイテムを削除しますか？',
+                function(btn){
+                    if(btn === 'yes') {
+
+                        btnRemove.disable();
+                        btnEdit.disable();
+
+                        me.body.mask();
+
+                        OmegaTrick_List.removeUnit(r.get('id'), function() {
+                            store.reload({
+                                callback : function() {
+                                    me.body.unmask();
+                                },
+                                scope: me
+                            });
+                        }, me);
+                    }
+                },
+                me);
+        }
     },
 
     // }}}

@@ -338,7 +338,7 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
                 me.ownerCt.body.unmask();
             }, me);
         } else {
-        
+
             // データ保存用レコード生成
             me.baseRecord = new store.recordType({
                 caption: '',
@@ -377,9 +377,6 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
 
             me.ownerCt.body.unmask();
         }, me);
-
-
-
     },
 
     // }}}
