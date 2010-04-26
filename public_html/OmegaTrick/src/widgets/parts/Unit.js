@@ -322,21 +322,30 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
         var me = this;
         me.store = store;
 
-        me.ownerCt.body.mask();
+        if(r) {
+            me.ownerCt.body.mask();
 
-        OmegaTrick_List.getUnit(r.id, function(ret) {
+            OmegaTrick_List.getUnit(r.id, function(ret) {
 
-            // データ設定
-            me.forms.caption.setValue(ret.caption);
-            me.forms.modified.setValue(ret.modified);
-            me.forms.created.setValue(ret.created);
+                // データ設定
+                me.forms.caption.setValue(ret.caption);
+                me.forms.modified.setValue(ret.modified);
+                me.forms.created.setValue(ret.created);
 
+                // データ保存用レコード生成
+                me.baseRecord = new store.recordType(ret);
+
+                me.ownerCt.body.unmask();
+            }, me);
+        } else {
+        
             // データ保存用レコード生成
-            me.baseRecord = new store.recordType(ret);
-
-            me.ownerCt.body.unmask();
-        }, me);
-
+            me.baseRecord = new store.recordType({
+                caption: '',
+                modified: '',
+                created: ''
+            });
+        }
     },
 
     // }}}

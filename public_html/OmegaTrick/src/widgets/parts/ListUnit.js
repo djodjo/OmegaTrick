@@ -376,6 +376,9 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
 
         var me = this;
 
+        var sm = me.panels.list.panels.grid.getSelectionModel();
+        sm.clearSelections();
+
         me.layout.setActiveItem(me.id + '_UNIT');
     },
 

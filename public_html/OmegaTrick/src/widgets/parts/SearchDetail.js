@@ -288,7 +288,7 @@ Ext.trick.parts.SearchDetailPanel = Ext.extend(Ext.trick.form.FormPanel, {
 
                         // xtype設定
                         xtype: 'datefield',
-                        
+
                         // リスナー設定
                         listeners: {
                             select: {
