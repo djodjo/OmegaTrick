@@ -267,17 +267,19 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
                             var sl = me.getTopToolbar().getComponent('SearchLabelText');
                             var sdp = me.getComponent(me.id + '_SearchDetail');
 
+                            /*
                             Ext.iterate(sdp.forms, function(key, item, items) {
                                 if(item.label) {
                                     item.label.hide();
                                 }
+                                console.log(item);
                                 item.hide();
                             });
 
                             Ext.iterate(sdp.formButtons, function(key, item, items) {
                                 item.hide();
                             });
-
+*/
                             sf.disable();
                             dsb.toggle(true, true);
                             sl.addClass('tx-text-disable');
@@ -289,6 +291,7 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
                         fn: function() {
 
                             var sdp = me.getComponent(me.id + '_SearchDetail');
+                            /*
                             Ext.iterate(sdp.forms, function(key, item, items) {
                                 if(item.label) {
                                     item.label.show();
@@ -299,7 +302,7 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
                             Ext.iterate(sdp.formButtons, function(key, item, items) {
                                 item.show();
                             });
-
+*/
                             sdp.doLayout();
                         }
                     },
@@ -310,6 +313,7 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
                             var sl = me.getTopToolbar().getComponent('SearchLabelText');
                             var sdp = me.getComponent(me.id + '_SearchDetail');
 
+                            /*
                             Ext.iterate(sdp.forms, function(key, item, items) {
                                 if(item.label) {
                                     item.label.hide();
@@ -320,7 +324,7 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
                             Ext.iterate(sdp.formButtons, function(key, item, items) {
                                 item.hide();
                             });
-
+*/
                             dsb.toggle(false, true);
                             sf.enable();
                             sl.addClass('tx-text-enable');
@@ -374,18 +378,13 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
 
                     var sf = me.getTopToolbar().getComponent('SearchFiled');
                     var sdp = me.getComponent(me.id + '_SearchDetail');
-                    //var sl = me.getTopToolbar().getComponent('SearchLabelText');
 
                     if(state) {
                         sf.disable();
                         sdp.expand();
-                        //sl.addClass('tx-text-disable');
-                        //sl.removeClass('tx-text-enable');
                     } else {
                         sf.enable();
                         sdp.collapse();
-                        //sl.addClass('tx-text-enable');
-                        //sl.removeClass('tx-text-disable');
                     }
 
                     me.fireEvent('toggleSearchDetail', state);
