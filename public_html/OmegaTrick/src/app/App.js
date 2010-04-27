@@ -315,7 +315,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
     /**
      * スクリーン切り替えメソッド
      */
-    screenTo : function(to) {
+    screenTo : function(to, config) {
 
         var me = this,
             sp = Ext.getCmp(me.appName + '_SCREEN'),
@@ -342,6 +342,15 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
         } else {
             sp.layout.setActiveItem(to);
         }
+
+        // コールバック呼び出し
+        config = config || {};
+        var callback = config.callback || Ext.emptyFn;
+        var scope = config.scope || me;
+
+        callback.call(scope);
+
+        me.fireEvent('screento');
     },
 
     // }}}
