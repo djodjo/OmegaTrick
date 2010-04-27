@@ -30,6 +30,14 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
     appName: null,
 
     // }}}
+    // {{{ userInfo
+
+    /**
+     * サインインユーザー情報
+     */
+    userInfo: {},
+
+    // }}}
     // {{{ autoRender
 
     /**
@@ -230,6 +238,9 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
                                                         cp.set('autosigninkey', ret.auto_signin_key);
                                                     }
 
+                                                    // ユーザー情報設定
+                                                    me.userInfo = ret.userinfo;
+
                                                     // ローディングマスク削除
                                                     Ext.trick.app.Entry.removeLoadingMask();
 
@@ -275,6 +286,9 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
 
                 // ローディングマスク削除
                 Ext.trick.app.Entry.removeLoadingMask();
+
+                // ユーザー情報設定
+                me.userInfo = ret;
 
                 // 自動レンダリング
                 if(me.autoRender) {
