@@ -72,6 +72,11 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
     screens: [],
 
     // }}}
+    // {{{ currentScreen
+
+    currentScreen: null,
+
+    // }}}
     // {{{ casing
 
     /**
@@ -341,6 +346,9 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
             Ext.History.add(t.name || t.id);
         } else {
             sp.layout.setActiveItem(to);
+
+            // カレントスクリーン設定
+            window[me.appName].currentScreen = to;
         }
 
         // コールバック呼び出し
@@ -368,6 +376,9 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
             anchor = anchor.substr(1);
             var tokens = anchor.split(me.useHistory.tokenDelimiter),
                 sp = Ext.getCmp(me.appName + '_SCREEN');
+
+            // カレントスクリーン設定
+            window[me.appName].currentScreen = tokens[0];
 
             sp.layout.setActiveItem(tokens[0]);
         }
@@ -418,6 +429,10 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
                 var sp = Ext.getCmp(me.appName + '_SCREEN');
 
                 if(Ext.isString(token)) {
+
+                    // カレントスクリーン設定
+                    window[me.appName].currentScreen = token;
+
                     sp.layout.setActiveItem(token);
                 }
             });
