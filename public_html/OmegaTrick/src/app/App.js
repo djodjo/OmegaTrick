@@ -30,14 +30,6 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
     appName: null,
 
     // }}}
-    // {{{ userInfo
-
-    /**
-     * サインインユーザー情報
-     */
-    userInfo: {},
-
-    // }}}
     // {{{ autoRender
 
     /**
@@ -239,7 +231,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
                                                     }
 
                                                     // ユーザー情報設定
-                                                    me.userInfo = ret.userinfo;
+                                                    Ext.trick.app.Entry.setUserInfo(ret.userinfo);
 
                                                     // ローディングマスク削除
                                                     Ext.trick.app.Entry.removeLoadingMask();
@@ -288,7 +280,7 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
                 Ext.trick.app.Entry.removeLoadingMask();
 
                 // ユーザー情報設定
-                me.userInfo = ret;
+                Ext.trick.app.Entry.setUserInfo(ret);
 
                 // 自動レンダリング
                 if(me.autoRender) {

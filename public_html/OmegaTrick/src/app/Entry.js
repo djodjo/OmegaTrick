@@ -21,6 +21,7 @@ Ext.trick.app.Entry = function() {
 
     var me = this,
         leaveCheck = false,
+        userInfo = {},
         apps = {};
 
     return {
@@ -168,6 +169,23 @@ Ext.trick.app.Entry = function() {
 
         setLeaveMessage : function(msg) {
             me.leaveCheck = msg;
+        },
+
+        // }}}
+        // {{{ getUserInfo
+
+        getUserInfo: function() {
+
+            return me.userInfo;
+
+        },
+
+        // }}}
+        // {{{ setUserInfo
+
+        setUserInfo: function(info) {
+
+            me.userInfo = info;
         },
 
         // }}}
