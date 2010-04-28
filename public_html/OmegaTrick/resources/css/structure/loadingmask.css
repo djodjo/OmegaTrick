@@ -36,7 +36,7 @@
 #OMEGATRICK_LOADING_PROGRESS {
   z-index:      2001;
   overflow:     auto;
-  height:       70px;
+  height:       80px;
   width:        86px;
   position:     absolute;
   top:          50%;
@@ -49,6 +49,7 @@
 #OMEGATRICK_LOADING_PROGRESS p {
   padding-left:   27px;
   padding-top:    1px;
+  height:         20px;
   font-size:      12px;
 }
 
