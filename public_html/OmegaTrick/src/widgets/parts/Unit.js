@@ -426,6 +426,7 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
 
 });
 
+// }}}
 // {{{ Register xtype
 
 Ext.reg('trick-unit', Ext.trick.parts.UnitPanel);
