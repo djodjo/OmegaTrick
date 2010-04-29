@@ -111,6 +111,11 @@ Ext.trick.form.FormPanel = Ext.extend(Ext.form.FormPanel, {
 
             if(item instanceof Ext.form.Field) {
                 me.forms[setkey] = item;
+                if(item instanceof Ext.form.ComboBox) {
+                    item.on('afterrender', function(combo){
+                        me.forms[setkey] = combo;
+                    });
+                }
             }
 
             if(!(item instanceof Ext.form.CompositeField) && item.items && item.items.getCount() > 0) {
