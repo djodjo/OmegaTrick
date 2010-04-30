@@ -341,6 +341,10 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
             });
         }
 
+        if(!me.fireEvent('beforescreento', to, config)) {
+            return;
+        }
+
         // ヒストリー設定
         if(me.useHistory) {
             Ext.History.add(t.name || t.id);
