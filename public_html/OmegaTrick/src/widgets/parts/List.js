@@ -32,7 +32,7 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
         Ext.applyIf(config, {
             store: {},
             colModel: {},
-            grid: {}
+            grid: config.grid || {}
         });
 
         // ストア設定
@@ -166,8 +166,8 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
         var store = new storeCls(config.store);
 
         // グリッドコンフィグ
-        var gridConfig = config.gird || {};
-        Ext.applyIf(gridConfig, {
+        var gridConfig = config.grid || {};
+        Ext.apply(gridConfig, {
 
             // アイテムID設定
             itemId: 'grid',
