@@ -542,6 +542,13 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
 
         var me = this;
 
+        var sdp = me.getComponent(me.id + '_SearchDetail');
+        var dsb = me.getTopToolbar().getComponent('btnSearchDetail');
+
+        if(!sdp.collapsed) {
+            dsb.toggle();
+        }
+
     }
 
     // }}}
