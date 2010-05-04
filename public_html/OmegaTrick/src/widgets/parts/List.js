@@ -155,6 +155,7 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
             storeCls = config.storeCls || Ext.data.DirectStore,
             colModelCls = config.colModelCls || Ext.grid.ColumnModel;
             smCls = config.smCls || Ext.grid.RowSelectionModel;
+            gridXType = config.gridXType || 'grid';
 
         // ID設定
         Ext.applyIf(me, {id: Ext.id()});
@@ -176,7 +177,7 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
             ref: 'panels.grid',
 
             // xtype設定
-            xtype: 'grid',
+            xtype: gridXType,
 
             // ボーダー設定
             border: false,
@@ -542,13 +543,14 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
 
         var me = this;
 
+        /*
         var sdp = me.getComponent(me.id + '_SearchDetail');
         var dsb = me.getTopToolbar().getComponent('btnSearchDetail');
 
         if(!sdp.collapsed) {
             dsb.toggle();
         }
-
+*/
     }
 
     // }}}

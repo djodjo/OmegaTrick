@@ -122,6 +122,11 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
             }]);
         }
 
+        if(Ext.isObject(me.tailtbar)) {
+            me.tbar = me.tbar.concat([me.tailtbar]);
+        } else if(Ext.isArray(me.tbar)) {
+            me.tbar = me.tbar.concat(me.tailtbar);
+        }
     },
 
     // }}}
