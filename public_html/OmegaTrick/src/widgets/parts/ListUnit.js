@@ -126,6 +126,11 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
                 }
             });
 
+        } else if(config.mode === 'select') {
+
+            listConfig.tbar = null;
+
+
         } else if(config.mode === 'edit') {
 
             listConfig.tbar = listConfig.tbar.concat([{

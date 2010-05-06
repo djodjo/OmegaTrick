@@ -403,11 +403,9 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
                 }].concat(searchBoxTbar);
 
             } else if(Ext.isArray(config.tbar)) {
-
                 searchBoxTbar = config.tbar.concat([{
                     xtype: 'tbseparator'
                 }]).concat(searchBoxTbar);
-
             }
 
             Ext.apply(me, {
