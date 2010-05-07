@@ -64,6 +64,8 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
                 } else {
                     Ext.Msg.confirm('確認', '内容が変更されています。<br>内容を破棄して一覧へ戻りますか？',function(btn) {
                         if(btn === 'yes') {
+
+                            Ext.trick.app.Entry.setLeaveMessage(false);
                             me.store.reload({
                                 callback: function() {
                                     me.fireEvent('backlist');
