@@ -127,7 +127,7 @@ Ext.trick.form.FormPanel = Ext.extend(Ext.form.FormPanel, {
                         var src = me.forms[setkey];
                         src.forms = src.forms || {};
                         var forms = src.forms;
-                        //forms[item.name || item.itemId || item.id] = src.items.items[cnt];
+                        forms[item.name || item.itemId || item.id] = src.items.items[cnt];
                         me.forms[item.name || item.itemId || item.id] = item;
                     });
                 });
