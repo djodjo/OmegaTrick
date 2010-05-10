@@ -89,28 +89,28 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
 
             if(config.disableBacklist !== true) {
                 me.tbar = me.tbar.concat(['-']);
-            }
+                me.tbar = me.tbar.concat([{
 
+                    // アイテムID設定
+                    itemId: 'btnSave',
+
+                    // テキスト設定
+                    text: '保存',
+
+                    // アイコンクラス設定
+                    iconCls: 'tx-icon-save',
+
+                    // 無効化設定
+                    disabled: true,
+
+                    // ハンドラ設定
+                    handler: me.onSave,
+
+                    // スコープ
+                    scope: me
+                }]);
+            } 
             me.tbar = me.tbar.concat([{
-
-                // アイテムID設定
-                itemId: 'btnSave',
-
-                // テキスト設定
-                text: '保存',
-
-                // アイコンクラス設定
-                iconCls: 'tx-icon-save',
-
-                // 無効化設定
-                disabled: true,
-
-                // ハンドラ設定
-                handler: me.onSave,
-
-                // スコープ
-                scope: me
-            },{
 
                 // アイテムID設定
                 itemId: 'btnPageSave',
