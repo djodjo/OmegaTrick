@@ -41,49 +41,57 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
             me.tbar = [];
         }
 
-        me.tbar = me.tbar.concat([{
+        if(config.disableBacklist !== true) {
 
-            // テキスト設定
-            text: '一覧へ戻る',
+            me.tbar = me.tbar.concat([{
 
-            // アイコンクラス設定
-            iconCls: 'tx-icon-backlist',
+                // テキスト設定
+                text: '一覧へ戻る',
 
-            // ハンドラ設定
-            handler: function() {
+                // アイコンクラス設定
+                iconCls: 'tx-icon-backlist',
 
-                if(!me.baseRecord.dirty) {
+                // ハンドラ設定
+                handler: function() {
 
-                    me.store.reload({
-                        callback: function() {
-                            me.fireEvent('backlist');
-                        },
-                        scope: me
-                    });
+                    if(!me.baseRecord.dirty) {
 
-                } else {
-                    Ext.Msg.confirm('確認', '内容が変更されています。<br>内容を破棄して一覧へ戻りますか？',function(btn) {
-                        if(btn === 'yes') {
+                        me.store.reload({
+                            callback: function() {
+                                me.fireEvent('backlist');
+                            },
+                            scope: me
+                        });
 
-                            Ext.trick.app.Entry.setLeaveMessage(false);
-                            me.store.reload({
-                                callback: function() {
-                                    me.fireEvent('backlist');
-                                },
-                                scope: me
-                            });
-                        }
-                    });
-                };
-            },
+                    } else {
+                        Ext.Msg.confirm('確認', '内容が変更されています。<br>内容を破棄して一覧へ戻りますか？',function(btn) {
+                            if(btn === 'yes') {
 
-            // スコープ
-            scope: me
-        }]);
+                                Ext.trick.app.Entry.setLeaveMessage(false);
+                                me.store.reload({
+                                    callback: function() {
+                                        me.fireEvent('backlist');
+                                    },
+                                    scope: me
+                                });
+                            }
+                        });
+                    };
+                },
+
+                // スコープ
+                scope: me
+            }]);
+
+        }
 
         if(config.mode === 'edit') {
 
-            me.tbar = me.tbar.concat(['-',{
+            if(config.disableBacklist !== true) {
+                me.tbar = me.tbar.concat(['-']);
+            }
+
+            me.tbar = me.tbar.concat([{
 
                 // アイテムID設定
                 itemId: 'btnSave',
