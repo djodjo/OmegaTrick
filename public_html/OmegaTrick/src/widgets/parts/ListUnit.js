@@ -422,9 +422,10 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
                         btnRemove.disable();
                         btnEdit.disable();
 
+                        // ローディングマスク設定
                         me.body.mask();
 
-                        OmegaTrick_List.removeUnit(r.get('id'), function() {
+                        me.trickConfig.removeFn(r.get('id'), function() {
                             store.reload({
                                 callback : function() {
                                     me.body.unmask();
