@@ -128,7 +128,7 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
             Ext.applyIf(config.ptbar, {
 
                 // ページサイズ設定
-                paseSize: 50,
+                pageSize: 50,
 
                 // ツールバー情報表示設定
                 displayInfo: true,

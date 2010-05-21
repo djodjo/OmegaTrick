@@ -11,15 +11,27 @@ Ext.ns(
 // }}}
 // {{{ Ext.trick.form.FormPanel
 
+/**
+ * Ext.trick.form.FormPanel Class
+ *
+ * @author  Kazuhiro Kotsutsumi <kotsutsumi@xenophy.com>
+ * @version 1.0
+ */
 Ext.trick.form.FormPanel = Ext.extend(Ext.form.FormPanel, {
 
     // {{{ defaultType
 
+    /**
+     * デフォルトタイプ設定
+     */
     defaultType: 'container',
 
     // }}}
     // {{{ forms
 
+    /**
+     * フォームオブジェクト
+     */
     forms: {},
 
     // }}}
