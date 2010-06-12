@@ -29,7 +29,7 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
     initConfig : function() {
 
         var me = this,
-            config = me.trickConfig;
+            config = me.trickConfig || {};
 
         Ext.applyIf(me, config);
 
@@ -53,6 +53,10 @@ Ext.trick.parts.UnitPanel = Ext.extend(Ext.trick.form.FormPanel, {
 
                 // ハンドラ設定
                 handler: function() {
+
+                    if(!me.fireEvent('beforebacklist')) {
+                        return;
+                    }
 
                     if(!me.baseRecord.dirty) {
 
