@@ -51,7 +51,7 @@ Ext.trick.parts.ListPanel = Ext.extend(Ext.Panel, {
             paramOrder: config.store.paramOrder || 'start|limit|sort|dir|query',
 
             // リモートソート設定
-            remoteSort: config.store.remoteSotr || true,
+            remoteSort: config.store.remoteSort || true,
 
             // パラメータハッシュ設定
             paramsAsHash: config.store.paramsAsHash || false,

@@ -64,7 +64,7 @@ Ext.trick.app.Entry = function() {
          */
         remove : function(id) {
 
-            if(aps[id]) {
+            if(apps[id]) {
                 delete apps[id];
             }
         },

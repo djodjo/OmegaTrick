@@ -326,6 +326,9 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
             sp = Ext.getCmp(me.appName + '_SCREEN'),
             t;
 
+        var tokens = to.split('/');
+        to = tokens[0];
+
         if(Ext.isNumber(to)) {
             Ext.iterate(sp.initialConfig.items, function(item, cnt, items) {
                 if(to === cnt) {
@@ -347,7 +350,14 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
 
         // ヒストリー設定
         if(me.useHistory) {
-            Ext.History.add(t.name || t.id);
+
+            var name = t.name || t.id;
+
+            if(tokens[1]) {
+                name += '/' + tokens[1];
+            }
+            Ext.History.add(name);
+
         } else {
             sp.layout.setActiveItem(to);
 
@@ -381,10 +391,13 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
             var tokens = anchor.split(me.useHistory.tokenDelimiter),
                 sp = Ext.getCmp(me.appName + '_SCREEN');
 
-            // カレントスクリーン設定
-            window[me.appName].currentScreen = tokens[0];
+            toscreen = tokens[0];
+            toscreen = toscreen.split('/');
 
-            sp.layout.setActiveItem(tokens[0]);
+            // カレントスクリーン設定
+            window[me.appName].currentScreen = toscreen[0];
+
+            sp.layout.setActiveItem(toscreen[0]);
         }
 
     },
@@ -434,9 +447,13 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
 
                 if(Ext.isString(token)) {
 
+                    var tokens = token.split('/');
+                    token = tokens[0];
+
                     // カレントスクリーン設定
                     window[me.appName].currentScreen = token;
 
+                    sp.screenConfig = Ext.urlDecode(tokens[1]);
                     sp.layout.setActiveItem(token);
                 }
             });
@@ -583,4 +600,3 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
  * c-hanging-comment-ender-p: nil
  * End:
  */
-
