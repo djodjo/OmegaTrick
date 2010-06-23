@@ -32,9 +32,9 @@ String.prototype.startsWith = function(prefix) {
  * 先頭の1文字を大文字に変換します。
  */
 String.prototype.capitalize = function() {
-  return this.replace(/\w+/g, function(word){
-    return word.charAt(0).toUpperCase() + word.substr(1).toLowerCase();
-  });
+    return this.replace(/\w+/g, function(word){
+        return word.charAt(0).toUpperCase() + word.substr(1).toLowerCase();
+    });
 };
 
 // }}}
@@ -46,4 +46,3 @@ String.prototype.capitalize = function() {
  * c-hanging-comment-ender-p: nil
  * End:
  */
-

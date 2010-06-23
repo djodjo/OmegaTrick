@@ -268,4 +268,3 @@ Ext.trick.store.Second = new Ext.data.ArrayStore({
  * c-hanging-comment-ender-p: nil
  * End:
  */
-
