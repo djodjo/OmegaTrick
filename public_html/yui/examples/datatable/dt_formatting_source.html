@@ -46,7 +46,7 @@ loader.insert({
 
             // Override the built-in formatter
             YAHOO.widget.DataTable.formatEmail = function(elLiner, oRecord, oColumn, oData) {
-                var user = oData;
+                var user = oData.replace(/"/g, "&#34;");;
                 elLiner.innerHTML = "<a href=\"mailto:" + user + "@mycompany.com\">" + user + "</a>";
             };
             
