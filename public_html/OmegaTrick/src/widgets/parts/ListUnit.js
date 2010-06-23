@@ -248,6 +248,15 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
             });
         }
 
+        if(listConfig.tailtbar) {
+
+            if(Ext.isObject(listConfig.tailtbar)) {
+                listConfig.tbar = [listConfig.tailtbar];
+            } else if(Ext.isArray(listConfig.tailtbar)) {
+                listConfig.tbar = listConfig.tbar.concat(listConfig.tailtbar);
+            }
+        }
+
         // ユニットコンフィグ設定
         Ext.applyIf(unitConfig, {
 
