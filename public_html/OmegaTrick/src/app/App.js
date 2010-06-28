@@ -212,7 +212,9 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
                     callback: function() {
 
                         // サインインウィンドウ表示
-                        me.widgets.signin = new Ext.trick.SigninWindow();
+                        me.widgets.signin = new Ext.trick.SigninWindow({
+                            forgetUrl: me.auth.forgetUrl
+                        });
 
                         me.widgets.signin.on('hide', function(ret) {
 

@@ -138,7 +138,7 @@ Ext.trick.SigninWindow = Ext.extend(Ext.Component, {
             '                            <div class="btn_siginin" id="{submitId}"></div>',
             '                        </div>',
             '                        <div class="fogetpass clearfix">',
-            '                            <a href="#" class="fogetpass">{msgFogetPass}</a>',
+            '                            <a href="{forgetUrl}" class="fogetpass">{msgFogetPass}</a>',
             '                        </div>',
             '                    </div>',
             '                </div>',
@@ -158,7 +158,8 @@ Ext.trick.SigninWindow = Ext.extend(Ext.Component, {
             passId: el.id + '_FIELD_PASSWORD',
             checkboxId: el.id + '_FIELD_CHECKBOX',
             submitId: el.id + '_FIELD_SUBMIT',
-            msgFogetPass: Ext.trick.SigninWindow.msg.signin.fogetpass
+            msgFogetPass: Ext.trick.SigninWindow.msg.signin.fogetpass,
+            forgetUrl: me.forgetUrl
         });
 
         // アイテムを透明度0に設定
