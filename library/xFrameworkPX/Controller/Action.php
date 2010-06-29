@@ -65,8 +65,21 @@ extends xFrameworkPX_Controller_Web
             );
         }
 
+        // WiseTagコンポーネント設定
+        $this->_components[] = array(
+            'clsName' => 'xFrameworkPX_Controller_Component_WiseTag',
+            'bindName' => 'Tag',
+            'args' => $conf->pxconf['WISE_TAG']
+        );
+
         // スーパークラスメソッドコール
         parent::__construct($conf);
+
+        // セッションオブジェクト設定
+        $this->Tag->setSession($this->Session);
+
+        // WiseTag初期化
+        $this->Tag->init();
 
         if ($this->_conf->pxconf['DEBUG'] >= 2) {
             xFrameworkPX_Debug::getInstance()->addProfileData(
@@ -98,6 +111,43 @@ extends xFrameworkPX_Controller_Web
             instanceOf
             xFrameworkPX_Controller_Component_RapidDrive
         ) {
+            $sessName = sprintf(
+                '%s_%s',
+                $this->RapidDrive->sessName,
+                $this->getActionName()
+            );
+
+            $this->Tag->init($sessName);
+            $rdSess = $this->Session->read($this->RapidDrive->sessName);
+            $prevActionPath = (isset($this->rapid['prevAction']))
+                            ? sprintf(
+                                '%s/%s',
+                                $this->getContentPath(),
+                                $this->rapid['prevAction']
+                            )
+                            : '';
+            $nextActionPath = (isset($this->rapid['nextAction']))
+                            ? sprintf(
+                                '%s/%s',
+                                $this->getContentPath(),
+                                $this->rapid['nextAction']
+                            )
+                            : '';
+
+            $lastActionPath = (!is_null($rdSess) && isset($rdSess['lastAction']))
+                            ? $rdSess['lastAction']
+                            : '';
+
+            // 実行コマンド取得
+            if (
+                $nextActionPath !== '' && $lastActionPath !== '' &&
+                $nextActionPath == $lastActionPath
+            ) {
+                $this->RapidDrive->cmd = 'back';
+            } else {
+                $this->RapidDrive->cmd = 'init';
+            }
+
             // アクション名設定
             $this->RapidDrive->actionName = $this->getActionName();
 
@@ -114,18 +164,85 @@ extends xFrameworkPX_Controller_Web
             } else {
                 $module = $this->modules[reset($this->modules)];
             }
+
             $ret = $this->RapidDrive->dispatch(
                 $this->rapid['mode'],
                 $this->rapid,
                 $module
             );
 
+            // WiseTag初期化
+            if ($this->RapidDrive->cmd == 'init') {
+                $this->Tag->clear($sessName);
+
+                if (isset($ret[0]['wiseTag'])) {
+
+                    // WiseTag設定
+                    $this->Tag->add($ret[0]['wiseTag']);
+
+                    unset($ret[0]['wiseTag']);
+                }
+
+            } else if ($this->RapidDrive->cmd == 'back') {
+
+                if (isset($ret[0]['wiseTag'])) {
+
+                    foreach ($ret[0]['wiseTag'] as $wiseTag) {
+
+                        if (isset($wiseTag['type']) && $wiseTag['type'] !== 'form') {
+                            $editCond = array();
+
+                            if (isset($wiseTag['type'])) {
+                                $editCond['type'] = $wiseTag['type'];
+                            }
+
+                            if (isset($wiseTag['name'])) {
+                                $editCond['name'] = $wiseTag['name'];
+                            }
+
+                            // WiseTag再設定
+                            $this->Tag->edit($wiseTag, $editCond);
+                        } else if (isset($wiseTag[0])) {
+
+                            foreach($wiseTag as $key => $data) {
+                                $editCond = array();
+
+                                if (isset($data['type'])) {
+                                    $editCond['type'] = $data['type'];
+                                }
+
+                                if (isset($wiseTag['name'])) {
+                                    $editCond['name'] = $data['name'];
+                                }
+
+                                $editCond['count'] = $key + 1;
+
+                                // WiseTag再設定
+                                $this->Tag->edit($data, $editCond);
+                            }
+
+                        }
+
+                    }
+
+                    unset($ret[0]['wiseTag']);
+                }
+
+            }
+
+            $this->Tag->gen($sessName);
+
             // 処理結果をViewに設定
             foreach ($ret as $moderet) {
+                $this->set('rd', $moderet);
+
+                /*
                 foreach ($moderet as $key => $value) {
                     $this->set($key, $value);
                 }
+                */
             }
+
         }
 
         if ($this->_conf->pxconf['DEBUG'] >= 2) {

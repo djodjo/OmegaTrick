@@ -145,6 +145,13 @@ abstract class xFrameworkPX_Model extends xFrameworkPX_Util_Observable
      */
     public $modules;
 
+    /**
+     * オートコネクション
+     *
+     * @var bool
+     */
+    public $autoConn = true;
+
     public $hasOne = array();
     public $belongsTo = array();
     public $hasMany = array();
@@ -174,93 +181,18 @@ abstract class xFrameworkPX_Model extends xFrameworkPX_Util_Observable
                                 : 'id';
         }
 
-        // アダプター対応表作成
-        $adaptermap = array(
-            'mysql' => 'MySQL',
-            'pgsql' => 'PgSQL',
-            'postgresql' => 'PgSQL'
-        );
-
         // 設定オブジェクト格納
         $this->conf = $conf;
 
         // コネクション設定
-        if ($this->usetable !== false) {
-
-            // テーブル名が未指定の場合、クラス名を元に自動設定
-            if (is_null($this->usetable)) {
-                $this->usetable = $this->getTableName();
-            }
-
-            // コネクション設定オブジェクト生成
-            $this->conn = $this->mix();
-
-            // コネクション設定取得
-            foreach ($conf->database->connection as $xmlConn) {
-                $this->conn->{
-                    (string)$xmlConn[ 'name' ]
-                } = new xFrameworkPX_Util_MixedCollection( array(
-                    'charset' => (string)$xmlConn->charset,
-                    'adapter' => (string)$xmlConn->adapter,
-                    'driver' => (string)$xmlConn->driver,
-                    'host' => (string)$xmlConn->host,
-                    'user' => (string)$xmlConn->user,
-                    'password' => (string)$xmlConn->password,
-                    'database' => (string)$xmlConn->database,
-                    'prefix' => (string)$xmlConn->prefix,
-                    'port' => (string)$xmlConn->port,
-                    'socket' => (string)$xmlConn->socket
-                ) );
-            }
-
-            // アダプターオブジェクト生成
-            $clsName = sprintf(
-                'xFrameworkPX_Model_Adapter_%s',
-                $adaptermap[$this->conn->{$conf->conn}->adapter]
-            );
-
-            $this->adapter = new $clsName();
-
-            // PDOオブジェクト生成
-            $this->pdo = new PDO(
-
-                // DSN設定
-                $this->getDSN(
-                    strtolower($this->conn->{$conf->conn}->driver),
-                    $this->conn->{$conf->conn}->host,
-                    $this->conn->{$conf->conn}->database,
-                    $this->conn->{$conf->conn}->socket
-                ),
-
-                // ユーザー設定
-                $this->conn->{$conf->conn}->user,
-
-                // パスワード設定
-                $this->conn->{$conf->conn}->password
-            );
-
-            // PDO例外設定
-            $this->pdo->setAttribute(
-                PDO::ATTR_ERRMODE,
-                PDO::ERRMODE_EXCEPTION
-            );
-
-            // MySQLキャラセット設定
-            if ((string)$xmlConn->driver === 'mysql') {
-                $chaeset = strtolower((string)$xmlConn->charset);
-                if (isset($this->_charasetmap[$chaeset])) {
-                    $this->pdo->exec(
-                        sprintf(
-                            'SET NAMES %s',
-                            $this->_charasetmap[$chaeset]
-                        )
-                    );
-                }
-            }
+        if ($this->usetable !== false && $this->autoConn) {
+            $this->connection();
         }
 
         // ビヘイビア設定
-        $this->behaviors = array_merge($this->behaviors, array('LiveRecord'));
+        $this->behaviors = array_merge(
+            $this->behaviors, array('LiveRecord')
+        );
 
         // ビヘイビアバインド
         $this->_bindBehavior();
@@ -277,6 +209,180 @@ abstract class xFrameworkPX_Model extends xFrameworkPX_Util_Observable
     }
 
     // }}}
+    // {{{ connection
+
+    /**
+     * PDO接続メソッド
+     *
+     * @param SimpleXMLElement $conf 設定オブジェクト
+     */
+    public function connection($settings = null)
+    {
+
+        // コネクション設定オブジェクト生成
+        $this->conn = $this->mix();
+
+        // コネクション設定取得
+        foreach ($this->conf->database->connection as $xmlConn) {
+
+            if ((string)$xmlConn->driver == 'oci') {
+                $this->conn->{
+                    (string)$xmlConn[ 'name' ]
+                } = new xFrameworkPX_Util_MixedCollection( array(
+                    'charset' => (string)$xmlConn->charset,
+                    'adapter' => (string)$xmlConn->adapter,
+                    'driver' => (string)$xmlConn->driver,
+                    'host' => (string)$xmlConn->host,
+                    'user' => (string)$xmlConn->user,
+                    'password' => (string)$xmlConn->password,
+                    'database' => (string)$xmlConn->database,
+                    'prefix' => (string)$xmlConn->prefix,
+                    'port' => (string)$xmlConn->port,
+                    'socket' => (string)$xmlConn->socket,
+                    'nls' => (array)$xmlConn->nls
+                ) );
+            } else {
+                $this->conn->{
+                    (string)$xmlConn[ 'name' ]
+                } = new xFrameworkPX_Util_MixedCollection( array(
+                    'charset' => (string)$xmlConn->charset,
+                    'adapter' => (string)$xmlConn->adapter,
+                    'driver' => (string)$xmlConn->driver,
+                    'host' => (string)$xmlConn->host,
+                    'user' => (string)$xmlConn->user,
+                    'password' => (string)$xmlConn->password,
+                    'database' => (string)$xmlConn->database,
+                    'prefix' => (string)$xmlConn->prefix,
+                    'port' => (string)$xmlConn->port,
+                    'socket' => (string)$xmlConn->socket
+                ) );
+            }
+
+        }
+
+        if (is_array($settings)) {
+            $this->conn->{$this->conf->conn} = $this->mix(array(
+                'charset' => '',
+                'adapter' => '',
+                'driver' => '',
+                'host' => '',
+                'user' => '',
+                'password' => '',
+                'database' => '',
+                'prefix' => '',
+                'port' => '',
+                'socket' => ''
+            ));
+
+            foreach ($settings as $key => $value) {
+                $this->conn->{$this->conf->conn}->$key = $value;
+            }
+
+        }
+
+        // アダプター対応表作成
+        $adaptermap = array(
+            'mysql' => 'MySQL',
+            'pgsql' => 'PgSQL',
+            'postgresql' => 'PgSQL',
+            'oracle' => 'Oracle'
+        );
+
+        // コネクション設定
+        if ($this->usetable !== false) {
+
+            // テーブル名が未指定の場合、クラス名を元に自動設定
+            if (is_null($this->usetable)) {
+                $this->usetable = $this->getTableName();
+            }
+
+            if (!isset($this->conn->{$this->conf->conn})) {
+                throw new xFrameworkPX_Model_Exception(sprintf(
+                    PX_ERR30002, $this->conf->conn
+                ));
+            }
+
+            if (isset($adaptermap[$this->conn->{$this->conf->conn}->adapter])) {
+
+                // アダプターオブジェクト生成
+                $clsName = sprintf(
+                    'xFrameworkPX_Model_Adapter_%s',
+                    $adaptermap[$this->conn->{$this->conf->conn}->adapter]
+                );
+            } else {
+                throw new xFrameworkPX_Model_Exception(sprintf(
+                    PX_ERR30003, $this->conn->{$this->conf->conn}->adapter
+                ));
+            }
+
+            $this->adapter = new $clsName();
+            // PDOオブジェクト生成
+            $this->pdo = @new PDO(
+
+                // DSN設定
+                $this->getDSN(
+                    strtolower($this->conn->{$this->conf->conn}->driver),
+                    $this->conn->{$this->conf->conn}->host,
+                    $this->conn->{$this->conf->conn}->port,
+                    $this->conn->{$this->conf->conn}->database,
+                    $this->conn->{$this->conf->conn}->socket
+                ),
+
+                // ユーザー設定
+                $this->conn->{$this->conf->conn}->user,
+
+                // パスワード設定
+                $this->conn->{$this->conf->conn}->password
+            );
+            $this->pdo->setAttribute(
+                PDO::ATTR_ERRMODE,
+                PDO::ERRMODE_EXCEPTION
+            );
+
+            // MySQLキャラセット設定
+            if (strtolower($this->conn->{$this->conf->conn}->driver) === 'mysql') {
+                $chaeset = strtolower((string)$xmlConn->charset);
+
+                if (isset($this->_charasetmap[$chaeset])) {
+                    $this->pdo->exec(
+                        sprintf(
+                            'SET NAMES %s',
+                            $this->_charasetmap[$chaeset]
+                        )
+                    );
+                }
+
+            } else if (strtolower($this->conn->{$this->conf->conn}->driver) === 'oci') {
+
+                if (isset($this->conn->{$this->conf->conn}->nls)) {
+
+                    if (isset($this->conn->{$this->conf->conn}->nls->date_format)) {
+                        $this->pdo->exec(
+                            sprintf(
+                                "ALTER SESSION SET NLS_DATE_FORMAT = '%s'",
+                                $this->conn->{$this->conf->conn}->nls['date_format']
+                            )
+                        );
+                    }
+
+                    if (isset($this->conn->{$this->conf->conn}->nls->timestamp_format)) {
+                        $this->pdo->exec(
+                            sprintf(
+                                "ALTER SESSION SET NLS_TIMESTAMP_FORMAT = '%s'",
+                                $this->conn->{$this->conf->conn}->nls['timestamp_format']
+                            )
+                        );
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+    // }}}
     // {{{ getDSN
 
     /**
@@ -288,17 +394,71 @@ abstract class xFrameworkPX_Model extends xFrameworkPX_Util_Observable
      * @param $unixScoket
      * @return
      */
-    public function getDSN($type,$host,$database,$unixScoket = null)
+    public function getDSN($type, $host, $port, $database, $unixScoket = null)
     {
         // デバッグ用計測開始
         if ($this->conf['px']['DEBUG'] >= 2) {
             $startTime = microtime(true);
         }
 
-        $dsn = "{$type}:host={$host};dbname={$database}";
+        switch ($type) {
 
-        if (!empty($unixScoket)) {
-            $dsn = $dsn . ";unix_socket={$unixScoket}";
+            case 'mysql':
+                $dsn = 'mysql:';
+
+                if ($host) {
+                    $temp[] = sprintf('host=%s', $host);
+
+                    if ($port) {
+                        $temp[] = sprintf('port=%s', $port);
+                    }
+
+                } else if ($unixSocket) {
+                    $temp[] = sprintf('unix_socket=%s', $unixSocket);
+                }
+
+                $temp[] = sprintf('dbname=%s', $database);
+                break;
+
+            case 'oci':
+                $dsn = 'oci:';
+
+                if (!matchesIn($database, '/') && $host) {
+
+                    if ($port) {
+                        $host .= ':' . $port;
+                    }
+
+                    $database = sprintf('%s/%s', $host, $database);
+                }
+
+                $temp[] = sprintf('dbname=%s', $database);
+                break;
+
+            case 'pgsql':
+                $dsn = 'pgsql:';
+
+                if ($host) {
+                    $temp[] = sprintf('host=%s', $host);
+                }
+
+                if ($port) {
+                    $temp[] = sprintf('port=%s', $port);
+                }
+
+                if ($database) {
+                    $temp[] = sprintf('dbname=%s', $database);
+                }
+
+                break;
+
+            default:
+                $dsn = null;
+                break;
+        }
+
+        if ($dsn) {
+            $dsn .= implode(';', $temp);
         }
 
         if ($this->conf['px']['DEBUG'] >= 2) {

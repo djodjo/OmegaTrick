@@ -14,7 +14,7 @@
  * @package    symfony
  * @subpackage util
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id$
+ * @version    SVN: $Id: sfYamlInline.class.php 2 2009-11-08 18:53:57Z kotsutsumi $
  */
 class sfYamlInline
 {

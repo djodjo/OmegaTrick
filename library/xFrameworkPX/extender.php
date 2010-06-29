@@ -516,15 +516,8 @@ function is_secure()
 {
 
     if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
-
         return true;
-
     } else {
-
-        if (isset($_SERVER['HTTP_VIA']) && $_SERVER['HTTP_VIA'] != 'off') {
-            return true;
-        }
-
         return false;
     }
 
@@ -547,10 +540,15 @@ function base_name($https=false)
     }
 
     $serverName = $_SERVER['SERVER_NAME'];
+    $serverPort = '';
+    
+    if($_SERVER['SERVER_PORT'] != '80' && $_SERVER['SERVER_PORT'] != '443') {
+        $serverPort = ':' . $_SERVER["SERVER_PORT"];
+    }
 
     $path = str_replace('index.php', '', $_SERVER['PHP_SELF']);
 
-    return $protocol . $serverName . $path;
+    return $protocol . $serverName . $serverPort . $path;
 
 }
 

@@ -8,7 +8,7 @@
  * CLI mode is supported
  *
  * @author  Benny Baumann
- * @version $Id$
+ * @version $Id: langcheck.php 1094 2009-12-28 13:18:45Z kotsutsumi $
  */
 header('Content-Type: text/html; charset=utf-8');
 

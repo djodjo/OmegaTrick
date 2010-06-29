@@ -67,6 +67,18 @@ if (!defined('PX_ERR30001')) {
     define('PX_ERR30001', 'Specified %s doesn\'t exist.');
 }
 
+if (!defined('PX_ERR30002')) {
+    define('PX_ERR30002', 'Connection \'%s\' doesn\'t exist.');
+}
+
+if (!defined('PX_ERR30003')) {
+    define('PX_ERR30003', '\'%s\' is Undefined Adapter.');
+}
+
+if (!defined('PX_ERR30004')) {
+    define('PX_ERR30004', 'PDO Object doesn\'t exist.');
+}
+
 // }}}
 // {{{ xFrameworkPX_CodeGenerator
 

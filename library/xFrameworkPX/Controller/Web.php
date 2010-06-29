@@ -316,7 +316,12 @@ class xFrameworkPX_Controller_Web extends xFrameworkPX_Controller
 
                     if (is_string($value)) {
                         $name = $value;
-                        $value = array('conn' => 'default');
+
+                        if (isset($cls->forceConnect)) {
+                            $value = array('conn' => $cls->forceConnect);
+                        } else {
+                            $value = array('conn' => 'default');
+                        }
                     }
 
                     $clsPath = str_replace('_', DS, $name);
@@ -349,7 +354,7 @@ class xFrameworkPX_Controller_Web extends xFrameworkPX_Controller
                     $conf->contentpath = $this->getContentPath();
 
                     // モジュールオブジェクト生成
-                    $cls->modules[$name] = new $name($conf);
+                    $cls->modules[$name] = new $name($conf, $this);
                 }
 
                 // モジュール一覧設定
@@ -425,7 +430,11 @@ class xFrameworkPX_Controller_Web extends xFrameworkPX_Controller
 
                     if (is_string($value)) {
                         $name = $value;
-                        $value = array('conn' => 'default');
+                        if (isset($cls->forceConnect)) {
+                            $value = array('conn' => $cls->forceConnect);
+                        } else {
+                            $value = array('conn' => 'default');
+                        }
                     }
 
                     $clsPath = str_replace('_', DS, $name);
@@ -458,7 +467,7 @@ class xFrameworkPX_Controller_Web extends xFrameworkPX_Controller
                     $conf->contentpath = $this->getContentPath();
 
                     // モジュールオブジェクト生成
-                    $cls->modules[$name] = new $name($conf);
+                    $cls->modules[$name] = new $name($conf, $this);
                 }
 
                 // モジュール一覧設定

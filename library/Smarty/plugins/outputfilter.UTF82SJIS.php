@@ -12,7 +12,7 @@
 // | Authors: Kazuhiro Kotsutsumi <kotsutsumi@xenophy.com>                   |
 // +-------------------------------------------------------------------------+
 //
-// $Id$
+// $Id: outputfilter.UTF82SJIS.php 337 2009-11-24 07:58:02Z kotsutsumi $
 
 /**
  * Smarty Plugins
@@ -21,7 +21,7 @@
  *
  * @package     xFramework
  * @author      Kazuhiro Kotsutsumi <kotsutsumi@xenophy.com>
- * @version     $Id$
+ * @version     $Id: outputfilter.UTF82SJIS.php 337 2009-11-24 07:58:02Z kotsutsumi $
  */
 
 // {{{ template_outputfilter_UTF82SJIS
@@ -32,7 +32,7 @@
  * @category    Smarty Plugins
  * @package     View Plugins
  * @author      Kazuhiro Kotsutsumi <kotsutsumi@xenophy.com>
- * @version     $Id$
+ * @version     $Id: outputfilter.UTF82SJIS.php 337 2009-11-24 07:58:02Z kotsutsumi $
  * @since       Function available since Release 2.0.0
  */
 function smarty_outputfilter_UTF82SJIS($tpl_source, &$template_object) {

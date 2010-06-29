@@ -30,16 +30,103 @@
  */
 class xFrameworkPX_Model_Adapter_MySQL extends xFrameworkPX_Model_Adapter
 {
-    // {{{ getQuerySchema
+
+    // {{{ properties
 
     /**
-     * スキーマ取得クエリー取得メソッド
-     *
-     * @return string SQLフラグメント
+     * カラムデータ型抽象化リスト
      */
-    public function getQuerySchema()
+    public $dataTypeList = array(
+        'num' => array(
+            'tinyint', 'smallint', 'mediumint', 'int', 'integer', 'bigint',
+            'float', 'double', 'numeric', 'decimal', 'dec', 'fixed'
+        ),
+        'date' => array(
+            'date', 'datetime', 'timestamp', 'time', 'year'
+        ),
+        'char' => array(
+            'char', 'varchar', 'binary', 'varbinary', 'tinyblob', 'tinytext',
+            'blob', 'text', 'mediumblob', 'mediumtext', 'longblob', 'longtext',
+            'enum', 'set'
+        )
+    );
+
+    /**
+     * 関数名リスト
+     *
+     * @var array
+     */
+    public $functionList = array(
+        'date' => array(
+            'CURDATE()', 'CURRENT_DATE', 'CURRENT_DATE()',
+            'CURTIME()', 'CURRENT_TIME', 'CURRENT_TIME()',
+            'NOW()', 'CURRENT_TIMESTAMP', 'CURRENT_TIMESTAMP()', 'SYSDATE()'
+        ),
+        'group' => array('COUNT()', 'MIN()', 'MAX()', 'AVG()', 'SUM()'),
+        'other' => array('MD5()')
+    );
+
+    // }}}
+    // {{{ getRdbmsName
+
+    /**
+     * RDBMS名取得メソッド
+     *
+     * @return string
+     */
+    public function getRdbmsName()
     {
-        return 'SHOW FULL COLUMNS FROM %s';
+        return 'mysql';
+    }
+
+    // }}}
+    // {{{ getSchema
+
+    /**
+     * スキーマ取得メソッド
+     *
+     * @return array スキーマ情報とクエリ
+     */
+    public function getSchema($pdoObj, $tableName)
+    {
+        $ret = array();
+        $query = 'SHOW FULL COLUMNS FROM ' . $tableName;
+        $temp = array();
+
+        // PDOStatement取得
+        $stmt = @$pdoObj->prepare($query);
+
+        // クエリー実行
+        $stmt->execute();
+
+        // 単行取得
+        $result = $stmt->fetchAll(PDO::FETCH_NAMED);
+
+        if ($result) {
+            foreach ($result as $field) {
+                $temp[] = array(
+                    'Field' => $field['Field'],
+                    'Type' => $field['Type'],
+                    'Key' => $field['Key'],
+                    'Default' => $field['Default'],
+                    'Extra' => $field['Extra'],
+                    'Comment' => $field['Comment']
+                );
+            }
+
+        }
+
+        // 結果セット
+        $ret['result'] = $temp;
+        $ret['query'] = $query;
+
+        // カーソルを閉じてステートメントを再実行できるようにする
+        $stmt->closeCursor();
+
+        // PDOStatement破棄
+        unset($stmt);
+
+        return $ret;
     }
 
     // }}}
@@ -50,31 +137,73 @@ class xFrameworkPX_Model_Adapter_MySQL extends xFrameworkPX_Model_Adapter
      *
      * @return string SQLフラグメント
      */
-    public function getQueryLastId()
+    public function getQueryLastId($tblName = null, $colName = null)
     {
         return 'SELECT last_insert_id() AS last_id;';
     }
 
     // }}}
-    // {{{ getQueryLimit
+    // {{{ getQueryTableInfo
 
     /**
-     * LIMIT節クエリー取得メソッド
+     * テーブル情報取得クエリー取得メソッド
+     */
+    public function getQueryTableInfo($dbName, $tblName)
+    {
+        return sprintf(
+            "show table status from `%s` like '%s'",
+            $dbName,
+            $tblName
+        );
+    }
+
+    // }}}
+    // {{{ addQueryLimit
+
+    /**
+     * LIMIT節クエリー付加メソッド
      *
+     * @param string $query 元クエリ
      * @param int $count 取得件数
      * @param int $offset オフセット値
      * @return string SQLフラグメント
      * @access public
      */
-    public function getQueryLimit($count = null, $offset = null)
+    public function addQueryLimit($query, $count = null, $offset = null)
     {
-        $ret = '';
+        $ret = $query;
 
         // 取得数設定
         if (!is_null($offset) && !is_null($count)) {
-            $ret = sprintf('LIMIT %s, %s', $offset, $count);
+            $ret .= sprintf(' LIMIT %s, %s', $offset, $count);
         } else if (!is_null($count)) {
-            $ret = sprintf('LIMIT %s', $count);
+            $ret .= sprintf(' LIMIT %s', $count);
+        }
+
+        return $ret;
+    }
+
+    // }}}
+    // {{{ getColTypeAbstract
+
+    /**
+     * カラムデータ型抽象化メソッド
+     */
+    public function getColTypeAbstract($type)
+    {
+        $ret = 'other';
+
+        if (preg_match('/^([a-z]+)\(.+\)/i', $type, $matches)) {
+            $type = $matches[1];
+        }
+
+        foreach ($this->dataTypeList as $abst => $types) {
+
+            if (in_array($type, $types)) {
+                $ret = $abst;
+                break;
+            }
+
         }
 
         return $ret;
@@ -174,7 +303,14 @@ class xFrameworkPX_Model_Adapter_MySQL extends xFrameworkPX_Model_Adapter
     }
 
     // }}}
+    // {{{ getTruncateQuery
 
+    public function getTruncateQuery()
+    {
+        return 'TRUNCATE TABLE %s';
+    }
+
+    // }}}
 }
 
 // }}}
