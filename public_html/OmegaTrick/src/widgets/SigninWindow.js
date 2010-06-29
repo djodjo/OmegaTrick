@@ -345,7 +345,7 @@ Ext.trick.SigninWindow = Ext.extend(Ext.Component, {
                     autoSignin: me.autosignin.getValue()
                 }, me);
 
-                me.destroy();
+                //me.destroy();
             }
         });
     },

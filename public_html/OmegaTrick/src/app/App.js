@@ -243,6 +243,8 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
                                                     // ローディングマスク削除
                                                     Ext.trick.app.Entry.removeLoadingMask();
 
+                                                    me.widgets.signin.destroy();
+
                                                     // 自動レンダリング
                                                     if(me.autoRender) {
                                                         me.render();

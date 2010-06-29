@@ -371,6 +371,53 @@ Ext.trick.parts.ListUnitPanel = Ext.extend(Ext.trick.ScreenPanel, {
 
         // スーパークラスメソッドコール
         Ext.trick.parts.ListUnitPanel.superclass.initComponent.call(me);
+
+        me.on('afterrender', function() {
+
+            var grid = me.panels.list.panels.grid;
+            var store = grid.store;
+
+            store.on('load', function(){
+
+                var list = me.getComponent('listpanel');
+                var grid = me.panels.list.panels.grid;
+                var sm = grid.getSelectionModel();
+                var btnView = me.panels.list.getTopToolbar().getComponent('btnView');
+                var btnEdit = me.panels.list.getTopToolbar().getComponent('btnEdit');
+                var btnRemove = me.panels.list.getTopToolbar().getComponent('btnRemove');
+
+                if(sm.getCount() > 0){
+
+                    if(btnView) {
+                        btnView.enable();
+                    }
+
+                    if(btnEdit) {
+                        btnEdit.enable();
+                    }
+
+                    if(btnRemove) {
+                        btnRemove.enable();
+                    }
+
+                } else {
+
+                    if(btnView) {
+                        btnView.disable();
+                    }
+
+                    if(btnEdit) {
+                        btnEdit.disable();
+                    }
+
+                    if(btnRemove) {
+                        btnRemove.disable();
+                    }
+                }
+
+            });
+
+        }, me);
     },
 
     // }}}
