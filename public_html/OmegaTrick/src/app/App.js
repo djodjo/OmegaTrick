@@ -495,6 +495,10 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
         var me = this,
             renderItems;
 
+        if(me.viewport) {
+            return;
+        }
+
         // スクリーンアイテム配列生成
         var screens = [];
         Ext.iterate(me.screens, function(item, cnt, items) {
@@ -558,7 +562,6 @@ Ext.trick.app.App = Ext.extend(Ext.util.Observable, {
             south.region = 'south';
             renderItems.push(south);
         }
-
 
         // ビューポート生成
         me.viewport = new Ext.Viewport({
