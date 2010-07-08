@@ -14,3 +14,6 @@ xFramework PX が設置されています。
 <pre>public_html/.htaccess</pre>
 
 
+
+※一時的に、establishedブランチでOmegaTrickのスタイルを確立させます。
+ masterはしばらく、いままでのバグ修正。
