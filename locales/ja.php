@@ -56,6 +56,9 @@ if( !defined( 'PX_ERR20002' ) ) define( 'PX_ERR20002', 'コールバックの設
 // {{{ xFrameworkPX\Model
 
 if( !defined( 'PX_ERR30001' ) ) define( 'PX_ERR30001', '指定した%sは存在しません。' );
+if( !defined( 'PX_ERR30002' ) ) define( 'PX_ERR30002', 'コネクション\'%s\'は存在しません。' );
+if( !defined( 'PX_ERR30003' ) ) define( 'PX_ERR30003', '\'%s\'は未定義のアダプタです。' );
+if( !defined( 'PX_ERR30004' ) ) define( 'PX_ERR30004', 'PDOオブジェクトは存在しません。' );
 
 // }}}
 // {{{ xFrameworkPX\Config

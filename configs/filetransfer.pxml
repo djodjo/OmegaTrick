@@ -1181,6 +1181,28 @@
             </bind>
             <!-- prettify -->
 
+            <!-- docs -->
+            <!--
+            ※ ローカルドキュメンテーションを無効にする場合は、
+               下記の<bind>タグを削除するかコメントアウトしてください。
+            -->
+            <bind>
+                <target>docs</target>
+                <emulation>true</emulation>
+            </bind>
+            <!-- /docs -->
+
+            <!-- temporary -->
+            <!--
+            ※ 開発開始時、下記の<bind>タグを削除するか
+               コメントアウトしてください。
+            -->
+            <bind>
+                <target></target>
+                <emulation>true</emulation>
+            </bind>
+            <!-- /temporary -->
+
         </binds>
         <!-- /バインド転送設定 -->
 
