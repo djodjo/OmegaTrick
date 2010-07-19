@@ -1,0 +1,61 @@
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2: */
+
+/**
+ * posts.css
+ */
+
+.post {margin-bottom: 20px;}
+
+.post img.left, .post img.right {margin-bottom: 0;}
+
+.post-date {
+  color: #777;
+  margin: 2px 0 10px;
+}
+.post-date a {color: #444;}
+
+.post-meta a {color: #345; }
+.post-meta a:hover {color: #001;}
+
+.post-body {font-size: 1.1em;}
+.post-body a {color: #039;}
+.post-body a:hover {color: #039;}
+
+.post-body img.left, .post-body img.right {margin-bottom: 1em;}
+
+
+/* Archives */
+.archive-pagination {
+  color: #777;
+  padding: 10px 0;
+}
+.archive-pagination-top {
+  border-bottom: 2px solid #DDD;
+  margin-bottom: 24px;
+}
+.archive-pagination-bottom {
+  border-top: 2px solid #DDD;
+  margin-top: 24px;
+}
+
+.archive-post-date {
+  background: #F5F5F5;
+  border-bottom: 1px solid #C5C5C5;
+  border-right: 1px solid #CFCFCF;
+  float: left;
+  margin-right: 12px;
+  padding: 2px 0 5px;
+  text-align: center;
+  width: 46px;
+}
+.archive-post-title .post-date {margin: 0;}
+.archive-post-title {padding-top: 4px;}
+.archive-post-day {font: normal 1.6em Georgia,serif;}
+
+/*
+ * Local variables:
+ * tab-width: 2
+ * c-basic-offset: 2
+ * c-hanging-comment-ender-p: nil
+ * End:
+ */

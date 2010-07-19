@@ -1,0 +1,16 @@
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2: */
+
+/**
+ * ie.css
+ */
+* html .navigation, * html #footer, * html #splash, * html .comment ul {height: 0.01%;}
+* html #footer-left {width: 500px;}
+.navigation, #splash, .comment ul {min-height: 0.01%;}
+
+/*
+ * Local variables:
+ * tab-width: 2
+ * c-basic-offset: 2
+ * c-hanging-comment-ender-p: nil
+ * End:
+ */

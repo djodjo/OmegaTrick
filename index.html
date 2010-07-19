@@ -1,91 +1,375 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <!-- head -->
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-        <title>xenophy/OmegaTrick @ GitHub</title>
+        <!-- meta -->
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta http-equiv="content-script-type" content="text/javascript" />
+        <meta http-equiv="content-style-type" content="text/css" />
+        <meta name="description" content=""/>
+        <meta name="keywords" content="" />
+        <meta name="author" content="Kazuhiro Kotsutsumi <kotsutsumi@xenophy.com>" />
+        <!-- /meta -->
 
-        <style type="text/css">
-            body {
-                margin-top: 1.0em;
-                background-color: #9d920c;
-                font-family: "Helvetica,Arial,FreeSans";
-                color: #ffffff;
-            }
-            #container {
-                margin: 0 auto;
-                width: 700px;
-            }
-            h1 { font-size: 3.8em; color: #626df3; margin-bottom: 3px; }
-            h1 .small { font-size: 0.4em; }
-            h1 a { text-decoration: none }
-            h2 { font-size: 1.5em; color: #626df3; }
-            h3 { text-align: center; color: #626df3; }
-            a { color: #626df3; }
-            .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-            .download { float: right; }
-            pre { background: #000; color: #fff; padding: 15px;}
-            hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-            .footer { text-align:center; padding-top:30px; font-style: italic; }
-        </style>
+        <!-- css -->
+        <link rel="stylesheet" type="text/css" href="assets/css/reset.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="assets/css/general.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="assets/css/typography.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="assets/css/forms.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="assets/css/alignment.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="assets/css/separators.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="assets/css/posts.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="assets/css/comments.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="assets/css/layout.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="assets/css/footer.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="assets/css/misc.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="assets/css/ie.css" media="screen" />
+        <!-- css -->
+
+        <!-- favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.ico" />
+        <link rel="icon" href="assets/images/favicon.ico" />
+        <!-- /favicon -->
+
+        <!-- title -->
+        <title>OmegaTrick - Sencha Ext JS Application Platform</title>
+        <!-- /title -->
 
     </head>
+    <!-- /head -->
 
+    <!-- body -->
     <body>
-        <a href="http://github.com/xenophy/OmegaTrick"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
 
-        <div id="container">
+        <!-- site-wrapper -->
+        <div id="site-wrapper">
 
-            <div class="download">
-                <a href="http://github.com/xenophy/OmegaTrick/zipball/master">
-                    <img border="0" width="90" src="http://github.com/images/modules/download/zip.png">
-                </a>
-                <a href=""><img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-                <a href=""><img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-                <a href=""><img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-                <a href=""><img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-                <a href=""><img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-                <a href=""><img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-                <a href=""><img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-                <a href=""><img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-                <a href=""><img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-                <a href=""><img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-                <a href=""><img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-                <a href=""><img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+            <!-- header -->
+            <div id="header">
+
+                <!-- top -->
+                <div id="top">
+
+                    <!-- logo -->
+                    <div class="left" id="logo">
+                        <a href="index.html"><img src="assets/images/logo.gif" alt="" /></a>
+                    </div>
+                    <!-- /logo -->
+
+                    <!-- main-nav -->
+                    <div class="left navigation" id="main-nav">
+
+                        <ul class="tabbed">
+                            <li class="current-tab"><a href="overview.html">機能概要</a></li>
+                            <li><a href="tutorial.html">チュートリアル</a></li>
+                            <li><a href="license.html">ライセンス</a></li>
+                            <li><a href="download.html">ダウンロード</a></li>
+                        </ul>
+
+                        <div class="clearer">&nbsp;</div>
+
+                    </div>
+                    <!-- main-nav -->
+
+                    <div class="clearer">&nbsp;</div>
+
+                </div>
+
             </div>
 
-            <h1><a href="http://github.com/xenophy/OmegaTrick">OmegaTrick</a>
-                <span class="small">by <a href="http://github.com/xenophy">xenophy</a></span></h1>
+            <!-- splash -->
+            <div id="splash">
 
-            <div class="description">
-                Ext JS Application Platform
+                <!-- overview -->
+                <div class="col3 left">
+
+                    <h2 class="label label-green">機能概要</h2>
+
+                    <p class="quiet large">Omega Trickの機能と開発方針</p>
+
+                    <p>つれつれーっと概要うめる</p>
+
+                    <p><a href="overview.html" class="more">Learn more &raquo;</a></p>
+
+                </div>
+                <!-- /overview -->
+
+                <!-- tutorial -->
+                <div class="col3-mid left">
+
+                    <h2 class="label label-orange">チュートリアル</h2>
+
+                    <p class="quiet large">Omega Trickを利用方法とサンプル</p>
+
+                    <ul>
+                        <li>Getting Started</li>
+                        <li>アプリケーション設計</li>
+                        <li>サインインアシスタント</li>
+                        <li>リストトリック</li>
+                        <li>サンプル</li>
+                    </ul>
+
+                    <p><a href="tutorial.html" class="more">Learn more &raquo;</a></p>
+
+                </div>
+                <!-- /tutorial -->
+
+                <!-- download -->
+                <div class="col3 right">
+
+                    <h2 class="label label-blue">ダウンロード</h2>
+
+                    <p class="quiet large">ダウンロードとアーカイブ</p>
+
+                    <ul>
+                        <li>Version 0.5(最新版)</li>
+                        <li>Version 0.4</li>
+                        <li>Version 0.3</li>
+                        <li>Version 0.2</li>
+                        <li>Version 0.1</li>
+                    </ul>
+
+                </div>
+                <!-- download -->
+
+                <div class="clearer">&nbsp;</div>
+
+            </div>
+            <!-- /splash -->
+
+            <div class="main" id="main-two-columns">
+
+                <div class="left" id="main-content">
+
+                    <div class="section">
+
+                        <div class="section-title">Blog</div>
+
+                        <div class="section-content">
+
+                            <div class="post">
+
+                                <div class="post-title"><h2><a href="#">Template Information</a></h2></div>
+
+                                <div class="post-date">Saturday, September 19, 2009 by Viktor Persson</div>
+
+                                <div class="post-body">
+
+                                    <p><a href="#"><img src="img/sample-image.jpg" alt="" class="bordered" /></a></p>
+
+                                    <p class="large">This is a free website template by <a href="http://arcsin.se/">Arcsin</a>, built using tableless XHTML and CSS.</p>
+
+                                    <p>This template is distributed under a <a href="http://templates.arcsin.se/license/">Creative Commons Attribution 2.5 License</a>, which allows you to use and modify it for any purpose (personal and commercial), under the condition that you keep the provided credit links in the footer.</p>
+
+                                    <p>The latest template version and CMS conversions for platforms such as WordPress and Blogger can be found at the official <a href="http://templates.arcsin.se/simple-organization-website-template/">Simple Organization Website Template</a> page.</p>
+
+                                    <p>For more templates, questions and comments please visit <a href="http://templates.arcsin.se/">Arcsin Web Templates</a>.</p>
+
+                                    <a href="http://templates.arcsin.se/" class="more">Read more &#187;</a>
+
+                                </div>
+
+                            </div>
+
+                            <div class="content-separator"></div>
+
+                            <div class="col3 left">
+                                <div class="column-content">
+
+                                    <div class="post">
+                                        <h3><a href="#">Article title</a></h3>
+
+                                        <p>Integer diam elit, condi mentum ac semper ut, tincidunt non diam. Ut congue at commodo aenean euismod tincidunt lorem euismod.</p>
+                                        <a href="#" class="more">Read more &#187;</a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col3 col3-mid left">
+                                <div class="column-content">
+
+                                    <div class="post">
+                                        <h3><a href="#">Second Article Title</a></h3>
+                                        <p>Sed congue lacinia leo, sed dignissim odio pharetra vel. Fusce a dignissim dui. Fusce semper porttitor enim dapibus venenatis.</p>
+                                        <a href="#" class="more">Read more &#187;</a>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col3 right">
+                                <div class="column-content">
+
+                                    <div class="post">
+                                        <h3><a href="#">Third title</a></h3>
+                                        <p>Sed auctor hendrerit eros eu eleifend. Cras hendrerit iaculis sodales. Pellentesque interdum rhoncus magna.</p>
+                                        <a href="#" class="more">Read more &#187;</a>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="clearer">&nbsp;</div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="clearer">&nbsp;</div>
+
+                </div>
+
+                <div class="right sidebar" id="sidebar">
+
+                    <!--
+                    <div class="section">
+
+                        <div class="section-title">Search</div>
+
+                        <div class="section-content">
+
+                            <form method="post" action="">
+                                <input type="text" class="text" size="28" /> &nbsp; <input type="submit" class="button" value="Submit" />
+                            </form>
+                        </div>
+
+                    </div>
+                    -->
+
+                    <div class="section">
+
+                        <div class="section-title">Recent Entries</div>
+
+                        <div class="section-content">
+
+                            <ul class="nice-list">
+                                <li>
+                                <div class="left"><a href="#">Aenean tempor arcu..</a></div>
+                                <div class="right">Oct 12</div>
+
+                                <div class="clearer">&nbsp;</div>
+                                </li>
+                                <li>
+                                <div class="left"><a href="#">Justo interdum rutrum</a></div>
+                                <div class="right">Sep 15</div>
+                                <div class="clearer">&nbsp;</div>
+                                </li>
+                                <li>
+
+                                <div class="left"><a href="#">In nec justo in urna</a></div>
+                                <div class="right">Sep 12</div>
+                                <div class="clearer">&nbsp;</div>
+                                </li>
+                                <li>
+                                <div class="left"><a href="#">Accumsan condimentum</a></div>
+                                <div class="right">Sep 6</div>
+
+                                <div class="clearer">&nbsp;</div>
+                                </li>
+                                <li>
+                                <div class="left"><a href="#">Etiam commodo bibendum</a></div>
+                                <div class="right">Aug 27</div>
+                                <div class="clearer">&nbsp;</div>
+                                </li>
+                                <li>
+
+                                <div class="left"><a href="#">Mauris euismod justo</a></div>
+                                <div class="right">Aug 21</div>
+                                <div class="clearer">&nbsp;</div>
+                                </li>
+                                <li><a href="#" class="more">Browse Archives &#187;</a></li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                    <div class="section">
+
+                        <div class="section-title">Board of Members</div>
+
+                        <div class="section-content">
+
+                            <ul class="nice-list">
+                                <li><a href="#">Elem Semper</a> <span class="quiet">- Director</span></li>
+
+                                <li><a href="#">Porttitor Urna</a> <span class="quiet">- Lead Writer</span></li>
+                                <li><a href="#">Congue Porttitor</a> <span class="quiet">- Editor</span></li>
+                                <li><a href="#">Etiam Blandit</a> <span class="quiet">- Writer</span></li>
+                                <li><a href="#">Diet Tesque</a> <span class="quiet">- Writer</span></li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                    <!--
+                    <div class="section">
+
+                        <div class="section-title">Topics</div>
+
+                        <div class="section-content">
+
+                            <div class="quiet">
+                                <a href="#" style="font-size: 120%">vestibulum</a> <a href="#" style="font-size: 120%">ante</a> <a href="#" style="font-size: 150%">ipsum</a> <a href="#" style="font-size: 120%">faucibus</a> <a href="#" style="font-size: 90%">orci luctus</a> <a href="#" style="font-size: 80%">ultrices</a> <a href="#" style="font-size: 220%">posuere cubilia</a> <a href="#" style="font-size: 100%">curae</a> <a href="#" style="font-size: 110%">quisque</a> <a href="#" style="font-size: 150%">ut arcu</a> <a href="#" style="font-size: 140%">eros</a> <a href="#" style="font-size: 100%">vestibulum</a> <a href="#" style="font-size: 90%">dapibus</a> <a href="#" style="font-size: 120%">volutpat</a> <a href="#" style="font-size: 200%">elementum</a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    -->
+
+                </div>
+
+                <div class="clearer">&nbsp;</div>
+
             </div>
 
-            <h2>Authors</h2>
-            <p>Kazuhiro Kotsutsumi (kotsutsumi@xenophy.com)<br/></p>
-            <h2>Contact</h2>
-            <p>Kazuhiro Kotsutsumi (kotsutsumi@xenophy.com)<br/>      </p>
+            <!-- footer -->
+            <div id="footer">
+
+                <div class="left" id="footer-left">
+
+                    <!-- logo small -->
+                    <img src="assets/images/logo-small.gif" alt="" class="left" />
+                    <!-- /logo small -->
+
+                    <!-- copyright -->
+                    <p>&copy; 2006-2010 Xenophy.CO.,LTD All. All rights Reserved</p>
+                    <!-- /copyright -->
+
+                    <!-- quiet -->
+                    <p class="quiet"><a href="http://www.xenophy.com/">提供会社</a> by <a href="http://code.xenophy.com/">Kazuhiro Kotsutsumi</a></p>
+                    <!-- /quiet -->
+
+                    <div class="clearer">&nbsp;</div>
+
+                </div>
+
+                <div class="right" id="footer-right">
 
 
-            <h2>Download</h2>
-            <p>
-            You can download this project in either
-            <a href="http://github.com/xenophy/OmegaTrick/zipball/master">zip</a> or
-            <a href="http://github.com/xenophy/OmegaTrick/tarball/master">tar</a> formats.
-            </p>
-            <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-            by running:
-      <pre>$ git clone git://github.com/xenophy/OmegaTrick</pre>
-            </p>
+                    <!-- footer-nav -->
+                    <p class="large"><a href="index.html">機能概要</a> <span class="text-separator">|</span> <a href="tutorial.html">チュートリアル</a> <span class="text-separator">|</span> <a href="lisense.html">ライセンス</a> <span class="text-separator">|</span> <a href="download.html">ダウンロード</a></p>
+                    <!-- /footer-nav -->
 
-            <div class="footer">
-                get the source code on GitHub : <a href="http://github.com/xenophy/OmegaTrick">xenophy/OmegaTrick</a>
+                </div>
+
+                <div class="clearer">&nbsp;</div>
+
             </div>
+            <!-- /footer -->
 
         </div>
-
+        <!-- site-wrapper -->
 
     </body>
+    <!-- body -->
+
 </html>

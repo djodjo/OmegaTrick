@@ -1,0 +1,106 @@
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2: */
+
+/**
+ * layout.css
+ */
+
+/* Common */
+#top, #sub-nav {border-bottom: 1px solid #DDD;}
+
+
+/* Wrapper */
+#site-wrapper {
+  margin: 0 auto;
+  width: 920px;
+}
+
+
+/* Header */
+#header {padding-top: 24px;}
+
+/* Top */
+#top {padding-bottom: 32px;}
+
+
+/* Logo */
+#logo {	border-right: 1px solid #DDD;
+  padding: 10px 40px 10px 0;
+  margin-right: 40px;
+}
+#logo img {}
+
+/* Splash */
+#splash {padding-top: 32px;}
+
+
+/* Navigation */
+.navigation a {
+  color: #888;
+  text-decoration: none;
+}
+.navigation a:hover {color: #002;}
+.navigation li.current-tab a {color: #222;}
+
+#main-nav li:first-child, #sub-nav li:first-child {margin-left: 0;}
+
+/* Main navigation */
+#main-nav {padding-top: 72px;}
+#main-nav li {margin: 0 1.5em;}
+#main-nav a {
+  font-size: 1.8em;
+  line-height: 2em;
+  padding-bottom: 2px;
+}
+#main-nav li.current-tab a {color: #333;}
+#main-nav a:hover {color: #002;}
+#main-nav li.current-tab a {border-bottom: 2px solid #94CC5F;}
+
+
+/* Subnav */
+#sub-nav {
+  border-bottom: 1px solid #DDD;
+  padding: 12px 0;
+}
+#sub-nav a {
+  font-size: 1.2em;
+  text-decoration: none;
+}
+#sub-nav li {margin: 0 1em;}
+#sub-nav li.current-tab a {font-weight: bold;}
+
+
+/* Main */
+.main {margin: 24px 0;}
+
+.main#main-two-columns {background: url('img/main-two-columns.gif') repeat-y right top;}
+.main#main-two-columns-left {background: url('img/main-two-columns-left.gif') repeat-y left top;}
+.main#main-two-columns #main-content, .main#main-two-columns-left #main-content {width: 620px;}
+
+/* Sidebar */
+#sidebar {width: 255px;}
+
+
+/* Columns */
+.col3, .col3-mid {width: 31%;}
+.col3-mid {margin-left: 3%;}
+
+/* Sections */
+.section {margin-bottom: 24px;}
+.section-title {
+  background-color: #F9F9F9;
+  border-top: 2px solid #DDD;
+  color: #7A7A7A;
+  font: bold 1.2em sans-serif;
+  margin-bottom: 16px;
+  padding: 7px 10px 6px;
+}
+#sidebar .section-title {margin-bottom: 8px;}
+
+
+/*
+ * Local variables:
+ * tab-width: 2
+ * c-basic-offset: 2
+ * c-hanging-comment-ender-p: nil
+ * End:
+ */
