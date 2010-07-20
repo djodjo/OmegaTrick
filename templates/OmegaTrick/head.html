@@ -22,32 +22,27 @@
     <!-- /favicon -->
 
     <!-- ext-all.css -->
-    <!--{if $load_extall_css}-->
+    <!--{if $ext}-->
     <link rel="stylesheet" type="text/css" href="<!--{$relpath}--><!--{$extjsdir}-->/resources/css/ext-all.css" />
     <!--{/if}-->
     <!-- /ext-all.css -->
 
     <!-- Ext JS Theme -->
-    <!--{if $extjs_theme}-->
+    <!--{if $theme}-->
     <link rel="stylesheet" type="text/css" href="<!--{$relpath}--><!--{$extjsdir}-->/resources/css/xtheme-<!--{$extjs_theme}-->.css" />
     <!--{/if}-->
     <!-- Ext JS Theme -->
 
     <!-- ux-all.css -->
-    <!--{if $load_extjs_uxcss}-->
+    <!--{if $ux}-->
     <link rel="stylesheet" type="text/css" href="<!--{$relpath}--><!--{$extjsdir}-->/examples/ux/css/ux-all.css" />
     <!--{/if}-->
     <!-- /ux-all.css -->
 
     <!-- Omega Trick -->
-    <!--{if $load_omegatrick}-->
+    <!--{if $trick}-->
     <link rel="stylesheet" href="<!--{$relpath}--><!--{$omegatrickdir}-->/resources/css/OmegaTrick-all.css" type="text/css" />
     <!--{/if}-->
     <!-- /Omega Trick -->
-
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="<!--{$relpath}-->resources/images/favicon.ico" />
-    <link rel="icon" href="<!--{$relpath}-->resources/images/favicon.ico" />
-    <!-- /Favicon -->
 
 <!--{/clean}--><!--{/strip}-->
