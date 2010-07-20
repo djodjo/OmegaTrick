@@ -1150,59 +1150,6 @@
         <!-- バインド転送設定 -->
         <binds>
 
-            <!-- Ext JS -->
-            <bind>
-                <target>extjs</target>
-                <exts>
-                    <ext>js</ext>
-                    <ext>swf</ext>
-                    <ext>css</ext>
-                    <ext>gif</ext>
-                    <ext>png</ext>
-                    <ext>jpg</ext>
-                </exts>
-            </bind>
-            <!-- Ext JS -->
-
-            <!-- xFrameworkPX -->
-            <bind>
-                <target>xFrameworkPX</target>
-                <emulation>true</emulation>
-            </bind>
-            <!-- xFrameworkPX -->
-
-            <!-- prettify -->
-            <bind>
-                <target>prettify</target>
-                <exts>
-                    <ext>js</ext>
-                    <ext>css</ext>
-                </exts>
-            </bind>
-            <!-- prettify -->
-
-            <!-- docs -->
-            <!--
-            ※ ローカルドキュメンテーションを無効にする場合は、
-               下記の<bind>タグを削除するかコメントアウトしてください。
-            -->
-            <bind>
-                <target>docs</target>
-                <emulation>true</emulation>
-            </bind>
-            <!-- /docs -->
-
-            <!-- temporary -->
-            <!--
-            ※ 開発開始時、下記の<bind>タグを削除するか
-               コメントアウトしてください。
-            -->
-            <bind>
-                <target></target>
-                <emulation>true</emulation>
-            </bind>
-            <!-- /temporary -->
-
         </binds>
         <!-- /バインド転送設定 -->
 
