@@ -1,10 +1,11 @@
 ## Description
 
+
 ## Getting Started
 
 Omega Trickは、一部を切り出して利用することも可能ですが、リポジトリに最初から
-xFramework PX が設置されています。
-従って、動作させるためにPHP 5.1.x以上、.htaccessによるrewriteルール設定が可能な
+[xFramework PX][] が設置されています。
+動作させるためにPHP 5.1.x以上、.htaccessによるrewriteルール設定が可能な
 状態が必要です。
 
 また、rewriteルールは、ユーザーディレクトリ**OmegaTrick**という
@@ -13,4 +14,5 @@ xFramework PX が設置されています。
 
 <pre>public_html/.htaccess</pre>
 
+[xFramework PX]: http://www.xFrameworkPX.com/
 
