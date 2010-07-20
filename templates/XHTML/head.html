@@ -51,22 +51,29 @@
 
 
     <!-- Ext JS Theme -->
-    <!--{if $theme}-->
-    <link rel="stylesheet" type="text/css" href="<!--{$relpath}--><!--{$extjsdir}-->/resources/css/xtheme-<!--{$theme}-->.css" />
+
+    <!--{if $smarty.config.Link_ext_theme}-->
+    <!--{include file="../templates/XHTML/head/link/ext_theme.tpl"}-->
     <!--{/if}-->
+
     <!-- Ext JS Theme -->
 
 
     <!-- ux-all.css -->
-    <!--{if $ux}-->
-    <link rel="stylesheet" type="text/css" href="<!--{$relpath}--><!--{$extjsdir}-->/examples/ux/css/ux-all.css" />
+
+    <!--{if $smarty.config.Link_ext_ux_all}-->
+    <!--{include file="../templates/XHTML/head/link/ext_theme.tpl"}-->
     <!--{/if}-->
+
     <!-- /ux-all.css -->
 
+
     <!-- Omega Trick -->
-    <!--{if $trick}-->
-    <link rel="stylesheet" href="<!--{$relpath}--><!--{$omegatrickdir}-->/resources/css/OmegaTrick-all.css" type="text/css" />
+
+    <!--{if $smarty.config.Link_omegatrick_all}-->
+    <!--{include file="../templates/XHTML/head/link/omegatrick_all.tpl"}-->
     <!--{/if}-->
+
     <!-- /Omega Trick -->
 
 
