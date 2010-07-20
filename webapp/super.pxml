@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <px>
-
-<!--
-    <controller>xxxx</controller>
--->
-
+    <controller>OmegaTrick_Env</controller>
 </px>
