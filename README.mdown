@@ -6,6 +6,10 @@
 Omega Trickは、一部を切り出して利用することも可能ですが、リポジトリに最初から
 [xFramework PX][] が設置されています。
 
+Omega Trick単体で[xFramework PX][] と切り離して利用する場合は、次のディレクトリ以下をコピーして利用してください。
+
+<pre>public_html/OmegaTrick/</pre>
+
 動作させるためにPHP 5.1.x以上、.htaccessによるrewriteルール設定が可能な
 状態が必要です。
 
