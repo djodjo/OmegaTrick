@@ -3,21 +3,21 @@
 
 ## Getting Started
 
-Omega Trickは、一部を切り出して利用することも可能ですが、リポジトリに最初から
-[xFramework PX][] が設置されています。
 
-Omega Trick単体で[xFramework PX][] と切り離して利用する場合は、次のディレクトリ以下をコピーして利用してください。
 
-<pre>public_html/OmegaTrick/</pre>
+## Directory composition
 
-動作させるためにPHP 5.1.x以上、.htaccessによるrewriteルール設定が可能な
-状態が必要です。
-
-また、rewriteルールは、ユーザーディレクトリ**OmegaTrick**という
-ディレクトリの下で動作する前提で設定されています。
-環境に応じて、次の位置に格納されている.htaccessを変更してください。
-
-<pre>public_html/.htaccess</pre>
-
-[xFramework PX]: http://www.xFrameworkPX.com/
++--[Document Root]
+   |
+   +--[ext] Ext JS(please set it up by yourself.)
+   |
+   +--[ext-core] Ext Core(please set it up by yourself.)
+   |
+   +--[sencha-touch] Sencha Touch(please set it up by yourself.)
+   |
+   +--[OmegaTrick]
+   |
+   .
+   .
+   .
 
