@@ -9,6 +9,15 @@ Trick = {};
     // OmegaTrick適用フラグ
     var isOmegaTrick = true;
 
+    // SenchaTouch有効フラグ
+    var isSenchaTouch = Ext.TouchEventManager ? true : false;
+
+    // Ext Core有効フラグ
+    var isExtCore = (!isSenchaTouch && !Ext.ComponentMgr) ? true : false;
+
+    // Ext JS有効フラグ
+    var isExtJS = (!isSenchaTouch && !isExtCore) ? true : false;
+
     // バージョン情報
     var trick = {
         version : '0.5.0',
@@ -23,6 +32,11 @@ Trick = {};
     Ext.apply(Ext, {
         isOmegaTrick : isOmegaTrick,
         trick: trick
+    });
+    Ext.applyIf(Ext, {
+        isSenchaTouch : isSenchaTouch,
+        isExtCore : isExtCore,
+        isExtJS : isExtJS
     });
 
     // グローバルオブジェクトへリンク
