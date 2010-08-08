@@ -6,6 +6,16 @@ Trick = {};
 
 (function(){
 
+    // バージョン情報
+    var trick = {
+        version : '0.5.0',
+        versionDetail : {
+            major : 0,
+            minor : 5,
+            patch : 0
+        }
+    };
+
     // OmegaTrick適用フラグ
     var isOmegaTrick = true;
 
@@ -17,16 +27,6 @@ Trick = {};
 
     // Ext JS有効フラグ
     var isExtJS = (!isSenchaTouch && !isExtCore) ? true : false;
-
-    // バージョン情報
-    var trick = {
-        version : '0.5.0',
-        versionDetail : {
-            major : 0,
-            minor : 5,
-            patch : 0
-        }
-    };
 
     // Extオブジェクトに適用
     Ext.apply(Ext, {
@@ -43,6 +43,20 @@ Trick = {};
     Trick = Ext.trick;
 
 })();
+
+
+Ext.apply(Trick, {
+
+    // {{{ テスティングフレームワーク設定
+
+    testingFramework : {
+        name: 'yui'
+    }
+
+    // }}}
+
+});
+
 
 // }}}
 
