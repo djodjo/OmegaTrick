@@ -7,6 +7,7 @@
 
 ## Directory composition
 
+<pre>
 +--[Document Root]
    |
    +--[ext] Ext JS(please set it up by yourself.)
@@ -20,4 +21,4 @@
    .
    .
    .
-
+</pre>
