@@ -16,7 +16,7 @@
    |
    +--[sencha-touch] Sencha Touch(please set it up by yourself.)
    |
-   +--[OmegaTrick]
+   +--[OmegaTrick] Omega Trick
    |
    .
    .
