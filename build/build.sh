@@ -8,15 +8,38 @@ compress_extjs(){
 
     echo "OmegaTrick for Ext JS Compress..."
 
-    ExtJS="$OMEGALIB/OmegaTrick-all.js";
-
-    file=(`cat "$CONSOLE/core.js.list"`)
+    ExtJS="$OMEGALIB/omegatrick-all.js";
 
     compress_cmd="java -jar $CONSOLE/compiler.jar --compilation_level WHITESPACE_ONLY"
+
+    file=(`cat "$CONSOLE/core.js.list"`)
     ln=0
     for line in "${file[@]}"; do
-#        ln=`expr $ln + 1`
-#        printf '%3d %s\n' "$ln" "$line"
+        compress_cmd=$compress_cmd" --js=$OMEGALIB/$line"
+    done
+
+    file=(`cat "$CONSOLE/js.list"`)
+    ln=0
+    for line in "${file[@]}"; do
+        compress_cmd=$compress_cmd" --js=$OMEGALIB/$line"
+    done
+
+    compress_cmd=$compress_cmd" --js_output_file=$ExtJS"
+
+    eval $compress_cmd
+
+}
+compress_extcore(){
+
+    echo "OmegaTrick for Ext Core Compress..."
+
+    ExtJS="$OMEGALIB/omegatrick-core-all.js";
+
+    compress_cmd="java -jar $CONSOLE/compiler.jar --compilation_level WHITESPACE_ONLY"
+
+    file=(`cat "$CONSOLE/core.js.list"`)
+    ln=0
+    for line in "${file[@]}"; do
         compress_cmd=$compress_cmd" --js=$OMEGALIB/$line"
     done
 
@@ -54,6 +77,7 @@ done
 ### options is undef
 if [ -z "$1" ];then
     compress_extjs
+    compress_extcore
 fi
 
 ### back to current dir
