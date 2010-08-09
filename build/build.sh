@@ -2,8 +2,6 @@
 
 IFS=$'\n'
 
-
-
 compress_extjs(){
 
     echo "OmegaTrick for Ext JS Compress..."
