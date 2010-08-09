@@ -1,68 +1,64 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
-// {{{ Ext expand methods
-
-/**
- * Ext expand methods
+/*!
+ * Omega Trick Library 0.5.0
+ * Copyright(c) 2006-2010 Xenophy.CO.,LTD All rights Reserved.
+ * http://omegatrick.com
+ * http://www.gnu.org/licenses/gpl-3.0.html
  */
-Ext.applyIf(Ext,{
 
-    // {{{ maxZindex
+// {{{ Ext.emptyFn
 
-    /**
-     * DOMツリー内のzindex最大値を取得します。
-     *
-     * @return zindex最大値
-     */
-    maxZindex : function() {
+// for Ext Core
+if(Ext.isExtCore && !Ext.emptyFn) {
+    Ext.emptyFn = function(){};
+}
 
-        var ret = 0;
-        Ext.select('*').each(function(el){
+// }}}
+// {{{ Function.prototype.createCallback
 
-            var zIndex = el.getStyle('z-index');
-            if(Ext.isNumber(parseInt(zIndex, 10)) && ret < zIndex) {
-                ret = zIndex;
-            }
+// for Sencha Touch
+if(Ext.isSenchaTouch && !Function.prototype.createCallback) {
 
-        }, this);
+    Ext.apply(Function.prototype, {
 
-        return ret;
-    },
+        createCallback : function(/*args...*/){
 
-    // }}}
-    // {{{ getScrollPos
+            var args = arguments,
+                method = this;
 
-    /**
-     * スクロール位置取得
-     *
-     * @return Object x:x位置 y:y位置
-     */
-    getScrollPos: function() {
+            return function() {
+                return method.apply(window, args);
+            };
 
-        var y = (document.documentElement.scrollTop > 0) ? document.documentElement.scrollTop : document.body.scrollTop;
-        var x = (document.documentElement.scrollLeft > 0) ? document.documentElement.scrollLeft : document.body.scrollLeft;
+        }
 
-        return {
-            x: x,
-            y: y
-        };
+    });
 
-    },
+}
 
-    // }}}
-    // {{{ clone
+// }}}
+// {{{ Function.createSequence
 
-    /**
-     * クローン生成メソッド
-     */
-    clone : function(o) {
+// for Ext Core and Sencha Touch
+if((Ext.isExtCore || Ext.isSenchaTouch) && !Function.prototype.createSequence) {
 
-//        return Ext.trick.util.Clone(o);
-    }
+    Ext.apply(Function.prototype, {
 
-    // }}}
+        createSequence : function(fcn, scope){
+            var method = this;
+            return (typeof fcn != 'function') ?
+                this :
+                    function(){
+                var retval = method.apply(this || window, arguments);
+                fcn.apply(scope || this || window, arguments);
+                return retval;
+            };
+        }
 
-});
+    });
+
+}
 
 // }}}
 
