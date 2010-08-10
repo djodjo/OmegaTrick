@@ -14,31 +14,6 @@
  *
  * テストケースクラス
  */
-Trick.unit.TestCase = function(o) {
-
-    var me = this,
-        ret;
-
-    switch(Trick.testingFramework.name) {
-
-        // {{{ YUI Test
-
-        case 'yui':
-
-            // テストケース生成
-            ret = new YAHOO.tool.TestCase(o);
-
-            // assetメソッドショートハンド
-            ret.assert = YAHOO.util.Assert;
-
-            break;
-
-        // }}}
-
-    }
-
-    return ret;
-};
 
 // }}}
 

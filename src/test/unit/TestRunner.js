@@ -7,14 +7,14 @@
  * http://www.gnu.org/licenses/gpl-3.0.html
  */
 
-// {{{ Trick.unit.Runner
+// {{{ Trick.test.unit.Runner
 
 /**
- * Trick.unit.TestRunner
+ * Trick.test.unit.TestRunner
  *
  * テストランナークラス
  */
-Trick.unit.TestRunner = function() {
+Trick.test.unit.TestRunner = function() {
 
     var me = this,
         runner;

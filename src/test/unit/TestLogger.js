@@ -7,14 +7,14 @@
  * http://www.gnu.org/licenses/gpl-3.0.html
  */
 
-// {{{ Trick.unit.TestSuite
+// {{{ Trick.test.unit.TestLogger
 
 /**
- * Ext.trick.unit.TestSuite
+ * Trick.test.unit.TestLogger
  *
- * テストスイートクラス
+ * テストロガークラス
  */
-Trick.unit.TestSuite = function(name) {
+Trick.test.unit.TestLogger = function(id) {
 
     var me = this,
         ret;
@@ -24,8 +24,8 @@ Trick.unit.TestSuite = function(name) {
         // YUI Test
         case 'yui':
 
-            // テストケース生成
-            ret = new YAHOO.tool.TestSuite(name);
+            // テストロガークラス生成
+            ret = new YAHOO.tool.TestLogger(id);
 
             break;
     }
