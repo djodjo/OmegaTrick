@@ -85,13 +85,15 @@ CONSOLE=$(cd $(dirname $0) && pwd)
 OMEGALIB=`dirname $CONSOLE`
 cd $CONSOLE
 
-PATH=${PATH}:$CONSOLE/../../compiler-latest/
-
 while getopts cjh opt
 do
     case "$opt" in
-    r)
+    j)
         compress_extjs;;
+    c)
+        compress_extcore;;
+    t)
+        compress_sencahtouch;;
     *)
         help;;
     esac

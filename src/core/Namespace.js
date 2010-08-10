@@ -9,7 +9,7 @@
 
 // {{{ Namespaces
 
-Ext.ns('Trick.app', 'Trick.util');
+Ext.ns('Trick.app', 'Trick.util', 'Trick.unit');
 
 // }}}
 
