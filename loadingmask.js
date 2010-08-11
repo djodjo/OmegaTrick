@@ -79,8 +79,13 @@ OmegaTrickLoadingMask.progress = OmegaTrickLoadingMask.createElement({
 OmegaTrickLoadingMask.progressMsg = OmegaTrickLoadingMask.createElement({
     id: 'OMEGATRICK_LOADING_PROGRESS_MSG',
     tag: 'p',
-    html: '初期化中...',
     renderTo: OmegaTrickLoadingMask.progress
+});
+
+OmegaTrickLoadingMask.createElement({
+    html: '初期化中...',
+    tag: 'span',
+    renderTo: OmegaTrickLoadingMask.progressMsg
 });
 
 delete OmegaTrick;
