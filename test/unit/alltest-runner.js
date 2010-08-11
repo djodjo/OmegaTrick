@@ -6,16 +6,34 @@
  * http://omegatrick.com
  * http://www.gnu.org/licenses/gpl-3.0.html
  */
+Application.setup({
 
-// {{{ Trick.unit.TestCase
+    onReady : function() {
 
-/**
- * Trick.unit.TestCase
- *
- * テストケースクラス
- */
+        // テストランナー生成
+        var r = Trick.test.unit.TestRunner;
 
-// }}}
+        // テストスイート生成
+        var suite = {};
+        suite.core = new Trick.test.unit.TestSuite("Omega Trick Core Suite");
+
+        // テストケース追加
+        suite.core.add(Trick.test.case.Trick);
+
+        // テストランナーに追加
+        Ext.iterate(suite, function(index, o) {
+            r.add(o);
+        });
+
+        // ロガー生成
+        var logger = new Trick.test.unit.TestLogger('UnitTestLogger');
+
+        // テスト実行
+        r.run();
+
+    }
+
+});
 
 /*
  * Local variables:
