@@ -10,13 +10,26 @@ Application.setup({
 
     onReady : function() {
 
-        Ext.fly('version').update(String(Trick.version));
+        // Omega Trick Version
+        Ext.fly('version').update(Trick.version);
+
+        // Omega Trick Major Version
         Ext.fly('version_major').update(String(Trick.versionDetail.major));
+
+        // Omega Trick Minor Version
         Ext.fly('version_minor').update(String(Trick.versionDetail.minor));
+
+        // Omega Trick Patch Version
         Ext.fly('version_patch').update(String(Trick.versionDetail.patch));
-        Ext.fly('isSenchaTouch').update(Ext.isSenchaTouch ? 'true' : 'false');
-        Ext.fly('isExtCore').update(Ext.isExtCore ? 'true' : 'false');
+
+        // Use Ext JS?
         Ext.fly('isExtJS').update(Ext.isExtJS ? 'true' : 'false');
+
+        // Use Ext Core?
+        Ext.fly('isExtCore').update(Ext.isExtCore ? 'true' : 'false');
+
+        // Use Sencha Touch?
+        Ext.fly('isSenchaTouch').update(Ext.isSenchaTouch ? 'true' : 'false');
 
     }
 
