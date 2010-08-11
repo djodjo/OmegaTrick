@@ -15,6 +15,74 @@ if(Ext.isExtCore && !Ext.emptyFn) {
 }
 
 // }}}
+// {{{ Ext.Loader
+
+if(!Ext.Loader) {
+
+    Ext.Loader = Ext.apply({}, {
+
+        load: function(fileList, callback, scope, preserveOrder) {
+            var scope       = scope || this,
+            head        = document.getElementsByTagName("head")[0],
+            fragment    = document.createDocumentFragment(),
+            numFiles    = fileList.length,
+            loadedFiles = 0,
+            me          = this;
+
+            var loadFileIndex = function(index) {
+                head.appendChild(
+                    me.buildScriptTag(fileList[index], onFileLoaded)
+                );
+            };
+
+            var onFileLoaded = function() {
+                loadedFiles ++;
+
+                if (numFiles == loadedFiles && typeof callback == 'function') {
+                    callback.call(scope);
+                } else {
+                    if (preserveOrder === true) {
+                        loadFileIndex(loadedFiles);
+                    }
+                }
+            };
+
+            if (preserveOrder === true) {
+                loadFileIndex.call(this, 0);
+            } else {
+                Ext.each(fileList, function(file, index) {
+                    fragment.appendChild(
+                        this.buildScriptTag(file, onFileLoaded)
+                    );
+                }, this);
+
+                head.appendChild(fragment);
+            }
+        },
+
+        buildScriptTag: function(filename, callback) {
+            var script  = document.createElement('script');
+            script.type = "text/javascript";
+            script.src  = filename;
+
+            if (script.readyState) {
+                script.onreadystatechange = function() {
+                    if (script.readyState == "loaded" || script.readyState == "complete") {
+                        script.onreadystatechange = null;
+                        callback();
+                    }
+                };
+            } else {
+                script.onload = callback;
+            }
+
+            return script;
+        }
+    });
+
+}
+
+// }}}
 // {{{ Function.prototype.createCallback
 
 // for Sencha Touch
@@ -25,7 +93,7 @@ if(Ext.isSenchaTouch && !Function.prototype.createCallback) {
         createCallback : function(/*args...*/){
 
             var args = arguments,
-                method = this;
+            method = this;
 
             return function() {
                 return method.apply(window, args);
