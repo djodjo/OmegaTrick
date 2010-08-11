@@ -23,13 +23,13 @@ Application.setup({
         Ext.fly('version_patch').update(String(Trick.versionDetail.patch));
 
         // Use Ext JS?
-        Ext.fly('isExtJS').update(Ext.isExtJS ? 'true' : 'false');
+        Ext.fly('isExtJS').update(Trick.isExtJS ? 'true' : 'false');
 
         // Use Ext Core?
-        Ext.fly('isExtCore').update(Ext.isExtCore ? 'true' : 'false');
+        Ext.fly('isExtCore').update(Trick.isExtCore ? 'true' : 'false');
 
         // Use Sencha Touch?
-        Ext.fly('isSenchaTouch').update(Ext.isSenchaTouch ? 'true' : 'false');
+        Ext.fly('isSenchaTouch').update(Trick.isSenchaTouch ? 'true' : 'false');
 
     }
 

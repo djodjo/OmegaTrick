@@ -49,6 +49,12 @@ Trick = {};
     // グローバルオブジェクトへリンク
     Trick = Ext.trick;
 
+    Ext.applyIf(Trick, {
+        isSenchaTouch : isSenchaTouch,
+        isExtCore : isExtCore,
+        isExtJS : isExtJS
+    });
+
 })();
 
 Ext.apply(Trick, {

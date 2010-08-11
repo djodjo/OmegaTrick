@@ -6,20 +6,24 @@
  * http://omegatrick.com
  * http://www.gnu.org/licenses/gpl-3.0.html
  */
+Application.setup({
 
-// {{{ Namespaces
+    onReady : function() {
 
-Ext.ns(
-    'Trick.app',
-    'Trick.util',
-    'Trick.test',
-    'Trick.test.unit',
-    'Trick.test.case',
-    'Trick.test.case.core',
-    'Trick.test.case.touch'
-);
+        var r = Trick.test.unit.TestRunner;
 
-// }}}
+        // テストケース追加
+        r.add(Trick.test.case.Trick);
+
+        // ロガー生成
+        var logger = new Trick.test.unit.TestLogger('UnitTestLogger');
+
+        // テスト実行
+        r.run();
+
+    }
+
+});
 
 /*
  * Local variables:
