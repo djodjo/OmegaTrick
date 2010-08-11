@@ -71,16 +71,16 @@ OmegaTrickLoadingMask.createElement({
 });
 
 // 処理状態表示用DIVタグ生成
-OmegaTrickLoadingMask.progress = OmegaTrick.createElement({
+OmegaTrickLoadingMask.progress = OmegaTrickLoadingMask.createElement({
     id: 'OMEGATRICK_LOADING_PROGRESS',
     renderTo: document.body
 });
 
-OmegaTrickLoadingMask.progressMsg = OmegaTrick.createElement({
+OmegaTrickLoadingMask.progressMsg = OmegaTrickLoadingMask.createElement({
     id: 'OMEGATRICK_LOADING_PROGRESS_MSG',
     tag: 'p',
     html: '初期化中...',
-    renderTo: OmegaTrick.progress
+    renderTo: OmegaTrickLoadingMask.progress
 });
 
 delete OmegaTrick;
