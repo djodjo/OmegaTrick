@@ -6,7 +6,8 @@ compress_extjs(){
 
     echo "OmegaTrick for Ext JS Compress..."
 
-    ExtJS="$OMEGALIB/omegatrick-all.js";
+    # JS Code Compress
+    DestFile="$OMEGALIB/omegatrick-all.js";
 
     compress_cmd="java -jar $CONSOLE/compiler.jar --compilation_level WHITESPACE_ONLY"
 
@@ -22,16 +23,57 @@ compress_extjs(){
         compress_cmd=$compress_cmd" --js=$OMEGALIB/$line"
     done
 
-    compress_cmd=$compress_cmd" --js_output_file=$ExtJS"
+    compress_cmd=$compress_cmd" --js_output_file=$DestFile"
 
     eval $compress_cmd
+
+
+    # CSS Compress
+    DestFile="$OMEGALIB/resources/css/omegatrick-all.css";
+
+    if [ -e "$DestFile" ];then
+        rm -f "$DestFile"
+    fi
+
+    file=(`cat "$CONSOLE/core.css.list"`)
+    ln=0
+    for line in "${file[@]}"; do
+
+        filename=`echo "$line" | sed 's/\.css/-min\.css/'`
+        java -jar yuicompressor-2.4.2.jar --charset UTF-8 $OMEGALIB/resources/css/$line -o $OMEGALIB/resources/css/$filename
+
+        res=$?
+        if [ $res == 1 ];then
+            error $DestFile
+        fi
+        cat $OMEGALIB/resources/css/$filename | sed 's/\.\.\/\.\.\/images/\.\.\/images/g' >> $DestFile
+        rm $OMEGALIB/resources/css/$filename
+
+    done
+
+    file=(`cat "$CONSOLE/css.list"`)
+    ln=0
+    for line in "${file[@]}"; do
+
+        filename=`echo "$line" | sed 's/\.css/-min\.css/'`
+        java -jar yuicompressor-2.4.2.jar --charset UTF-8 $OMEGALIB/resources/css/$line -o $OMEGALIB/resources/css/$filename
+
+        res=$?
+        if [ $res == 1 ];then
+            error $DestFile
+        fi
+        cat $OMEGALIB/resources/css/$filename | sed 's/\.\.\/\.\.\/images/\.\.\/images/g' >> $DestFile
+        rm $OMEGALIB/resources/css/$filename
+
+    done
 
 }
 compress_extcore(){
 
     echo "OmegaTrick for Ext Core Compress..."
 
-    ExtJS="$OMEGALIB/omegatrick-core-all.js";
+    # JS Code Compress
+    DestFile="$OMEGALIB/omegatrick-core-all.js";
 
     compress_cmd="java -jar $CONSOLE/compiler.jar --compilation_level WHITESPACE_ONLY"
 
@@ -41,16 +83,41 @@ compress_extcore(){
         compress_cmd=$compress_cmd" --js=$OMEGALIB/$line"
     done
 
-    compress_cmd=$compress_cmd" --js_output_file=$ExtJS"
+    compress_cmd=$compress_cmd" --js_output_file=$DestFile"
 
     eval $compress_cmd
+
+
+    # CSS Compress
+    DestFile="$OMEGALIB/resources/css/omegatrick-core-all.css";
+
+    if [ -e "$DestFile" ];then
+        rm -f "$DestFile"
+    fi
+
+    file=(`cat "$CONSOLE/core.css.list"`)
+    ln=0
+    for line in "${file[@]}"; do
+
+        filename=`echo "$line" | sed 's/\.css/-min\.css/'`
+        java -jar yuicompressor-2.4.2.jar --charset UTF-8 $OMEGALIB/resources/css/$line -o $OMEGALIB/resources/css/$filename
+
+        res=$?
+        if [ $res == 1 ];then
+            error $DestFile
+        fi
+        cat $OMEGALIB/resources/css/$filename | sed 's/\.\.\/\.\.\/images/\.\.\/images/g' >> $DestFile
+        rm $OMEGALIB/resources/css/$filename
+
+    done
 
 }
 compress_senchatouch(){
 
     echo "OmegaTrick for Sencha Touch Compress..."
 
-    ExtJS="$OMEGALIB/omegatrick-touch-all.js";
+    # JS Code Compress
+    DestFile="$OMEGALIB/omegatrick-touch-all.js";
 
     compress_cmd="java -jar $CONSOLE/compiler.jar --compilation_level WHITESPACE_ONLY"
 
@@ -66,9 +133,49 @@ compress_senchatouch(){
         compress_cmd=$compress_cmd" --js=$OMEGALIB/$line"
     done
 
-    compress_cmd=$compress_cmd" --js_output_file=$ExtJS"
+    compress_cmd=$compress_cmd" --js_output_file=$DestFile"
 
     eval $compress_cmd
+
+
+    # CSS Compress
+    DestFile="$OMEGALIB/resources/css/omegatrick-touch-all.css";
+
+    if [ -e "$DestFile" ];then
+        rm -f "$DestFile"
+    fi
+
+    file=(`cat "$CONSOLE/core.css.list"`)
+    ln=0
+    for line in "${file[@]}"; do
+
+        filename=`echo "$line" | sed 's/\.css/-min\.css/'`
+        java -jar yuicompressor-2.4.2.jar --charset UTF-8 $OMEGALIB/resources/css/$line -o $OMEGALIB/resources/css/$filename
+
+        res=$?
+        if [ $res == 1 ];then
+            error $DestFile
+        fi
+        cat $OMEGALIB/resources/css/$filename | sed 's/\.\.\/\.\.\/images/\.\.\/images/g' >> $DestFile
+        rm $OMEGALIB/resources/css/$filename
+
+    done
+
+    file=(`cat "$CONSOLE/touch.css.list"`)
+    ln=0
+    for line in "${file[@]}"; do
+
+        filename=`echo "$line" | sed 's/\.css/-min\.css/'`
+        java -jar yuicompressor-2.4.2.jar --charset UTF-8 $OMEGALIB/resources/css/$line -o $OMEGALIB/resources/css/$filename
+
+        res=$?
+        if [ $res == 1 ];then
+            error $DestFile
+        fi
+        cat $OMEGALIB/resources/css/$filename | sed 's/\.\.\/\.\.\/images/\.\.\/images/g' >> $DestFile
+        rm $OMEGALIB/resources/css/$filename
+
+    done
 
 }
 help(){
