@@ -35,22 +35,6 @@ compress_extjs(){
         rm -f "$DestFile"
     fi
 
-    file=(`cat "$CONSOLE/core.css.list"`)
-    ln=0
-    for line in "${file[@]}"; do
-
-        filename=`echo "$line" | sed 's/\.css/-min\.css/'`
-        java -jar yuicompressor-2.4.2.jar --charset UTF-8 $OMEGALIB/resources/css/$line -o $OMEGALIB/resources/css/$filename
-
-        res=$?
-        if [ $res == 1 ];then
-            error $DestFile
-        fi
-        cat $OMEGALIB/resources/css/$filename | sed 's/\.\.\/\.\.\/images/\.\.\/images/g' >> $DestFile
-        rm $OMEGALIB/resources/css/$filename
-
-    done
-
     file=(`cat "$CONSOLE/css.list"`)
     ln=0
     for line in "${file[@]}"; do
@@ -144,22 +128,6 @@ compress_senchatouch(){
     if [ -e "$DestFile" ];then
         rm -f "$DestFile"
     fi
-
-    file=(`cat "$CONSOLE/core.css.list"`)
-    ln=0
-    for line in "${file[@]}"; do
-
-        filename=`echo "$line" | sed 's/\.css/-min\.css/'`
-        java -jar yuicompressor-2.4.2.jar --charset UTF-8 $OMEGALIB/resources/css/$line -o $OMEGALIB/resources/css/$filename
-
-        res=$?
-        if [ $res == 1 ];then
-            error $DestFile
-        fi
-        cat $OMEGALIB/resources/css/$filename | sed 's/\.\.\/\.\.\/images/\.\.\/images/g' >> $DestFile
-        rm $OMEGALIB/resources/css/$filename
-
-    done
 
     file=(`cat "$CONSOLE/touch.css.list"`)
     ln=0
