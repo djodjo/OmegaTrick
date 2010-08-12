@@ -14,15 +14,31 @@ Application.setup({
         var task = {};
 
         task.remove = new Ext.util.DelayedTask(function(){
+
+            // ローディングマスク解除
             lm.remove();
+
         });
 
-        task.msg1 = new Ext.util.DelayedTask(function(){
-            lm.setText('Message1');
-//            task.remove.delay(3000);
-        });
+        // "初期化中..."をフェードアウト非表示
+        lm.hideText({
+            anim: true,
+            callback: function() {
 
-        task.msg1.delay(3000);
+                // "Message1"をメッセージ設定
+                lm.setText('Message1');
+
+                lm.showText({
+                    anim: true,
+                    callback: function() {
+
+                        // ローディングマスク解除タスク開始
+                        task.remove.delay(2000);
+                    }
+                });
+
+            }
+        });
 
     }
 

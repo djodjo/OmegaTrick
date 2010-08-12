@@ -72,13 +72,50 @@ Trick.app.LoadingMaskMgr = function(){
                 marginLeft: '-' + (width/2) + 'px'
             });
 
-            /*
-            jo.setStyle({
-                paddingTop: (iconWidth - to.getHeight()) / 2 + 'px'
-            });
-            */
             to.update('<span>' + text + '</span>');
 
+        },
+
+        // }}}
+        // {{{ showText
+
+        /**
+         * ローディングテキスト表示メソッド
+         *
+         * @param o コンフィグオブジェクト
+         * @return void
+         */
+        showText : function(o) {
+
+            var wrap = Ext.get('OMEGATRICK_LOADING_PROGRESS'),
+                config = o || {};
+
+            if(config.anim === false) {
+                wrap.show();
+            } else {
+                wrap.fadeIn(config);
+            }
+        },
+
+        // }}}
+        // {{{ hideText
+
+        /**
+         * ローディングテキスト非表示メソッド
+         *
+         * @param o コンフィグオブジェクト
+         * @return void
+         */
+        hideText : function(o) {
+
+            var wrap = Ext.get('OMEGATRICK_LOADING_PROGRESS'),
+                config = o || {};
+
+            if(config.anim === false) {
+                wrap.hide();
+            } else {
+                wrap.fadeOut(config);
+            }
         }
 
         // }}}
