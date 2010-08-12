@@ -8,6 +8,14 @@ compress_extjs(){
 
     # JS Code Compress
     DestFile="$OMEGALIB/omegatrick-all.js";
+    DebugDestFile="$OMEGALIB/omegatrick-all-debug.js";
+
+    if [ -e "$DestFile" ];then
+        rm -f "$DestFile"
+    fi
+    if [ -e "$DebugDestFile" ];then
+        rm -f "$DebugDestFile"
+    fi
 
     compress_cmd="java -jar $CONSOLE/compiler.jar --compilation_level WHITESPACE_ONLY"
 
@@ -15,12 +23,14 @@ compress_extjs(){
     ln=0
     for line in "${file[@]}"; do
         compress_cmd=$compress_cmd" --js=$OMEGALIB/$line"
+        cat $OMEGALIB/$line >> $DebugDestFile
     done
 
     file=(`cat "$CONSOLE/js.list"`)
     ln=0
     for line in "${file[@]}"; do
         compress_cmd=$compress_cmd" --js=$OMEGALIB/$line"
+        cat $OMEGALIB/$line >> $DebugDestFile
     done
 
     compress_cmd=$compress_cmd" --js_output_file=$DestFile"
@@ -58,6 +68,14 @@ compress_extcore(){
 
     # JS Code Compress
     DestFile="$OMEGALIB/omegatrick-core-all.js";
+    DebugDestFile="$OMEGALIB/omegatrick-core-all-debug.js";
+
+    if [ -e "$DestFile" ];then
+        rm -f "$DestFile"
+    fi
+    if [ -e "$DebugDestFile" ];then
+        rm -f "$DebugDestFile"
+    fi
 
     compress_cmd="java -jar $CONSOLE/compiler.jar --compilation_level WHITESPACE_ONLY"
 
@@ -65,6 +83,7 @@ compress_extcore(){
     ln=0
     for line in "${file[@]}"; do
         compress_cmd=$compress_cmd" --js=$OMEGALIB/$line"
+        cat $OMEGALIB/$line >> $DebugDestFile
     done
 
     compress_cmd=$compress_cmd" --js_output_file=$DestFile"
@@ -102,6 +121,14 @@ compress_senchatouch(){
 
     # JS Code Compress
     DestFile="$OMEGALIB/omegatrick-touch-all.js";
+    DebugDestFile="$OMEGALIB/omegatrick-touch-all-debug.js";
+
+    if [ -e "$DestFile" ];then
+        rm -f "$DestFile"
+    fi
+    if [ -e "$DebugDestFile" ];then
+        rm -f "$DebugDestFile"
+    fi
 
     compress_cmd="java -jar $CONSOLE/compiler.jar --compilation_level WHITESPACE_ONLY"
 
@@ -109,12 +136,14 @@ compress_senchatouch(){
     ln=0
     for line in "${file[@]}"; do
         compress_cmd=$compress_cmd" --js=$OMEGALIB/$line"
+        cat $OMEGALIB/$line >> $DebugDestFile
     done
 
     file=(`cat "$CONSOLE/touch.js.list"`)
     ln=0
     for line in "${file[@]}"; do
         compress_cmd=$compress_cmd" --js=$OMEGALIB/$line"
+        cat $OMEGALIB/$line >> $DebugDestFile
     done
 
     compress_cmd=$compress_cmd" --js_output_file=$DestFile"

@@ -129,6 +129,61 @@ if((Ext.isExtCore || Ext.isSenchaTouch) && !Function.prototype.createSequence) {
 }
 
 // }}}
+// {{{ Ext expand methods
+
+/**
+ * Ext expand methods
+ */
+Ext.applyIf(Ext,{
+
+    // {{{ getMaxZindex
+
+    /**
+     * DOMツリー内のzindex最大値を取得します。
+     *
+     * @return zindex最大値
+     */
+    getMaxZindex : function() {
+
+        var ret = 0;
+        Ext.select('*').each(function(el){
+
+            var zIndex = el.getStyle('z-index');
+            if(Ext.isNumber(parseInt(zIndex, 10)) && ret < zIndex) {
+                ret = zIndex;
+            }
+
+        }, this);
+
+        return ret;
+    },
+
+    // }}}
+    // {{{ getScrollPos
+
+    /**
+     * スクロール位置取得
+     *
+     * @return Object x:x位置 y:y位置
+     */
+    getScrollPos: function() {
+
+        var y = (document.documentElement.scrollTop > 0) ? document.documentElement.scrollTop : document.body.scrollTop;
+        var x = (document.documentElement.scrollLeft > 0) ? document.documentElement.scrollLeft : document.body.scrollLeft;
+
+        return {
+            x: x,
+            y: y
+        };
+
+    }
+
+    // }}}
+
+});
+
+// }}}
+
 
 /*
  * Local variables:
