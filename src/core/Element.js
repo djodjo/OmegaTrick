@@ -40,10 +40,6 @@ if(Ext.isExtCore || Ext.isSenchaTouch) {
             },
             this);
             return ret;
-        },
-
-        getSize : function(contentSize){
-            return {width: this.getWidth(contentSize), height: this.getHeight(contentSize)};
         }
 
     });
