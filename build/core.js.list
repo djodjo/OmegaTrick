@@ -9,3 +9,4 @@ src/test/unit/TestLogger.js
 src/test/unit/TestRunner.js
 src/test/unit/TestSuite.js
 src/app/App.js
+src/app/LoadingMaskMgr.js

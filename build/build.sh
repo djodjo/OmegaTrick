@@ -19,13 +19,6 @@ compress_extjs(){
 
     compress_cmd="java -jar $CONSOLE/compiler.jar --compilation_level WHITESPACE_ONLY"
 
-    file=(`cat "$CONSOLE/core.js.list"`)
-    ln=0
-    for line in "${file[@]}"; do
-        compress_cmd=$compress_cmd" --js=$OMEGALIB/$line"
-        cat $OMEGALIB/$line >> $DebugDestFile
-    done
-
     file=(`cat "$CONSOLE/js.list"`)
     ln=0
     for line in "${file[@]}"; do
@@ -131,13 +124,6 @@ compress_senchatouch(){
     fi
 
     compress_cmd="java -jar $CONSOLE/compiler.jar --compilation_level WHITESPACE_ONLY"
-
-    file=(`cat "$CONSOLE/core.js.list"`)
-    ln=0
-    for line in "${file[@]}"; do
-        compress_cmd=$compress_cmd" --js=$OMEGALIB/$line"
-        cat $OMEGALIB/$line >> $DebugDestFile
-    done
 
     file=(`cat "$CONSOLE/touch.js.list"`)
     ln=0
