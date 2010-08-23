@@ -10,4 +10,5 @@ src/test/unit/TestRunner.js
 src/test/unit/TestSuite.js
 src/app/App.js
 src/app/LoadingMaskMgr.js
+src/app/AccountMgr.js
 src/core/Namespace-more.js
