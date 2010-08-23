@@ -17,6 +17,8 @@
  */
 Trick.app.AccountMgr = function(){
 
+    // {{{ public
+
     return {
 
         // {{{ msg
@@ -44,8 +46,15 @@ Trick.app.AccountMgr = function(){
             var me = this;
             var lm = Application.LoadingMask;
 
+            // 初期値設定
             Ext.applyIf(o, {
-                text: me.msg.text
+
+                // ローディングテキスト設定
+                text: me.msg.text,
+
+                // Direct関数設定
+                directFn: ''
+
             });
 
             lm.setText(o.text);
@@ -55,6 +64,8 @@ Trick.app.AccountMgr = function(){
         // }}}
 
     }
+
+    // }}}
 
 }();
 

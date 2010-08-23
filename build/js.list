@@ -12,3 +12,4 @@ src/app/App.js
 src/app/LoadingMaskMgr.js
 src/app/AccountMgr.js
 src/core/Namespace-more.js
+src/widgets/SigninWindow.js
