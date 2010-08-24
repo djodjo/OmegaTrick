@@ -24,17 +24,20 @@ foreach($filelist as $value) {
 
         if(!class_exists($cname)) {
 
+            $actions[$cname] = array();
+
             require_once(TARGET_DIR . $value);
 
             $class = new ReflectionClass($cname);
 
             $methods = $class->getMethods();
-            foreach($methods as $name) {
-                echo $name;
+            foreach($methods as $method) {
 
+                $mname = $method->getName();
+
+                $count = count($method->getParameters());
+                $actions[$cname][] = array('name' => $mname, 'len' => $count);
             }
-
-            array_push($actions, $value);
 
         } else {
             Throw new Exception('Duplicate Class Name : ' . $cname);

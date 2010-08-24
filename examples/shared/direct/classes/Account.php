@@ -8,12 +8,29 @@
  * http://www.gnu.org/licenses/gpl-3.0.html
  */
 
-// {{{ Auth
+// {{{ Account
 
-class Auth
+/**
+ * Account Class
+ */
+class Account
 {
+    // {{{ auth
 
+    /**
+     * 認証メソッド
+     */
+    public function auth($id, $passwd)
+    {
+        // 認証方式はユーザー実装依存
+        if($id === 'omega' && $passwd === 'trick') {
+            return true;
+        }
 
+        return false;
+    }
+
+    // }}}
 }
 
 // }}}
