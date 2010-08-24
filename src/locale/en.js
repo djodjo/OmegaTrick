@@ -8,7 +8,8 @@
  */
 
 Trick.app.AccountMgr.msg = {
-    text: 'Now Signin...'
+    text: 'Now Signin...',
+    complete : 'done.'
 }
 
 /*

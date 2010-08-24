@@ -1032,7 +1032,8 @@ Trick.app.AccountMgr = function(){
          * 言語設定でオーバーライドできるように、あえてクロージャーにしない
          */
         msg : {
-            text : '認証中...'
+            text : '認証中...',
+            complete : '認証完了'
         },
 
         // }}}
@@ -1051,24 +1052,32 @@ Trick.app.AccountMgr = function(){
 
             // 初期値設定
             Ext.applyIf(o, {
-
-                // ローディングテキスト設定
-                text: me.msg.text
-
+                dialog: Trick.SigninDialog
             });
 
             // ローディングマスクテキスト更新
-            lm.setText(o.text);
+            lm.setText(me.msg.text);
 
             // サインイン状態確認
             o.directFn.isSignin(function(ret) {
 
                 if(ret) {
 
+                    // ローディングマスクテキスト更新
+                    lm.setText(me.msg.complete);
+
                     // ローディングマスク解除
                     lm.remove();
 
                 } else {
+
+                    // 自動サインイン処理
+
+
+
+
+                    // ダイアログ表示
+                    me._showDialog(o);
 
                 }
 
@@ -1081,6 +1090,27 @@ Trick.app.AccountMgr = function(){
             });
             */
 
+        },
+
+        // }}}
+        // {{{ _showDialog
+
+        _showDialog : function (o) {
+
+            o = o || {};
+            var me = this;
+            var lm = Application.LoadingMask;
+            var dlg = new o.dialog();
+
+            // ローディングテキスト非表示
+            lm.hideText({
+                callback : function() {
+
+                    dlg.show();
+
+                }
+            });
+
         }
 
         // }}}
@@ -1090,6 +1120,8 @@ Trick.app.AccountMgr = function(){
     // }}}
 
 }();
+
+Ext.apply(Trick.app.AccountMgr, new Ext.util.Observable());
 
 // }}}
 // {{{ Shorthand
@@ -1131,15 +1163,15 @@ Application.Account = Trick.app.AccountMgr;
  * http://www.gnu.org/licenses/gpl-3.0.html
  */
 
-// {{{ Trick.SigninWindow
+// {{{ Trick.SigninDialog
 
 /**
- * Trick.SigninWindow Class
+ * Trick.SigninDialog Class
  *
  * @author  Kazuhiro Kotsutsumi <kotsutsumi@xenophy.com>
  * @version 0.5.0
  */
-Trick.SigninWindow = Ext.extend(Ext.Window, {
+Trick.SigninDialog = Ext.extend(Ext.Container, {
 
     // {{{ initComponent
 
@@ -1150,13 +1182,75 @@ Trick.SigninWindow = Ext.extend(Ext.Window, {
 
         var me = this;
 
+        // 初期設定適用
         Ext.applyIf(me, {
-            width: 500,
-            height: 280
+
+            // ID設定
+            id: Ext.id(),
+
+            // ベースCSSクラス設定
+            baseCls: 'tx-signin',
+
+            // 持続時間設定
+            duration: 0.3,
+
+            // 移動距離設定
+            distance: 75
+
         });
 
+        // レイヤー生成
+        me.layer = new Ext.Layer({
+
+            // ID設定
+            id: me.id,
+
+            // CSSクラス設定
+            cls: me.baseCls
+
+        });
+
+        // プロパティ設定
+        Ext.apply(me, {
+
+            // ID設定
+            id: Ext.id(),
+
+            // ボディーラッパーCSSクラス設定
+            bwrapCls: me.baseCls + '-bwrap',
+
+            // ボディーCSSクラス設定
+            bodyCls: me.baseCls + '-body',
+
+            // インナーCSSクラス設定
+            innerCls: me.baseCls + '-inner',
+
+            // アイテムCSSクラス設定
+            itemsCls: me.baseCls + '-items',
+
+            // ヘッダーCSSクラス設定
+            headerCls: me.baseCls + '-header',
+
+            // コンテンツCSSクラス設定
+            contentCls: me.baseCls + '-content',
+
+            // レンダリング先設定
+            renderTo: me.layer,
+
+            // アイテム設定
+            items: [{
+            
+                html :"hoge"
+            
+            }]
+
+        });
+
+ 
+
         // スーパークラスメソッドコール
-        Trick.SigninWindow.superclass.initComponent.call(me);
+        Trick.SigninDialog.superclass.initComponent.call(me);
+
     }
 
     // }}}

@@ -29,7 +29,8 @@ Trick.app.AccountMgr = function(){
          * 言語設定でオーバーライドできるように、あえてクロージャーにしない
          */
         msg : {
-            text : '認証中...'
+            text : '認証中...',
+            complete : '認証完了'
         },
 
         // }}}
@@ -48,24 +49,32 @@ Trick.app.AccountMgr = function(){
 
             // 初期値設定
             Ext.applyIf(o, {
-
-                // ローディングテキスト設定
-                text: me.msg.text
-
+                dialog: Trick.SigninDialog
             });
 
             // ローディングマスクテキスト更新
-            lm.setText(o.text);
+            lm.setText(me.msg.text);
 
             // サインイン状態確認
             o.directFn.isSignin(function(ret) {
 
                 if(ret) {
 
+                    // ローディングマスクテキスト更新
+                    lm.setText(me.msg.complete);
+
                     // ローディングマスク解除
                     lm.remove();
 
                 } else {
+
+                    // 自動サインイン処理
+
+
+
+
+                    // ダイアログ表示
+                    me._showDialog(o);
 
                 }
 
@@ -78,6 +87,27 @@ Trick.app.AccountMgr = function(){
             });
             */
 
+        },
+
+        // }}}
+        // {{{ _showDialog
+
+        _showDialog : function (o) {
+
+            o = o || {};
+            var me = this;
+            var lm = Application.LoadingMask;
+            var dlg = new o.dialog();
+
+            // ローディングテキスト非表示
+            lm.hideText({
+                callback : function() {
+
+                    dlg.show();
+
+                }
+            });
+
         }
 
         // }}}
@@ -87,6 +117,8 @@ Trick.app.AccountMgr = function(){
     // }}}
 
 }();
+
+Ext.apply(Trick.app.AccountMgr, new Ext.util.Observable());
 
 // }}}
 // {{{ Shorthand

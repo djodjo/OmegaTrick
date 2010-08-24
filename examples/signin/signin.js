@@ -21,9 +21,6 @@ Application.setup({
         // アカウント管理オブジェクト
         var ac = Application.Account;
 
-        // ローディングマスク解除
-        //lm.remove();
-
         // 認証実行
         ac.auth({
             directFn: Account
