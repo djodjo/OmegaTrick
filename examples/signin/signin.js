@@ -8,6 +8,11 @@
  */
 Application.setup({
 
+    // Ext.Direct Provider
+    directProvider: Ext.app.REMOTING_API,
+
+    // {{{ onReady
+
     onReady : function() {
 
         // ローディングマスク管理オブジェクト
@@ -20,9 +25,13 @@ Application.setup({
         //lm.remove();
 
         // 認証実行
-        ac.auth();
+        ac.auth({
+            directFn: Account
+        });
 
     }
+
+    // }}}
 
 });
 

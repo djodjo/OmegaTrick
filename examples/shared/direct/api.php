@@ -8,46 +8,12 @@
  * http://www.gnu.org/licenses/gpl-3.0.html
  */
 
-// {{{ load classes
+// {{{ load config
 
-$actions = array();
-
-define('TARGET_DIR', './classes/');
-
-$filelist = scandir(TARGET_DIR);
-foreach($filelist as $value) {
-    if(
-        is_file(TARGET_DIR . $value) &&
-        pathinfo($value, PATHINFO_EXTENSION) === 'php'
-    ) {
-        $cname = pathinfo($value, PATHINFO_FILENAME);
-
-        if(!class_exists($cname)) {
-
-            $actions[$cname] = array();
-
-            require_once(TARGET_DIR . $value);
-
-            $class = new ReflectionClass($cname);
-
-            $methods = $class->getMethods();
-            foreach($methods as $method) {
-
-                $mname = $method->getName();
-
-                $count = count($method->getParameters());
-                $actions[$cname][] = array('name' => $mname, 'len' => $count);
-            }
-
-        } else {
-            Throw new Exception('Duplicate Class Name : ' . $cname);
-        }
-
-    }
-}
+require_once('config.php');
 
 $cfg = array(
-    'url'=>'php/router.php',
+    'url'=>'../shared/direct/router.php',
     'type'=>'remoting',
     'actions'=>$actions
 );

@@ -820,10 +820,20 @@ Trick.app.App = function() {
             setupConfig = Trick.util.clone(config);
             config.onReady = config.onReady || Ext.emptyFn;
 
+            // Ext.Directプロバイダ設定
+            if(Ext.isExtJS && config.directProvider) {
+                Ext.Direct.addProvider(config.directProvider);
+            }
+
+            // エントリーポイント設定
             if(Ext.isSenchaTouch) {
                 Ext.setup(config);
             } else {
-                Ext.onReady(config.onReady, config.scope || window, config.onReadyOption);
+                Ext.onReady(
+                    config.onReady,
+                    config.scope || window,
+                    config.onReadyOption
+                );
             }
 
             Trick.app.App.setupConfig = setupConfig;

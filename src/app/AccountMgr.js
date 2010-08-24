@@ -50,14 +50,33 @@ Trick.app.AccountMgr = function(){
             Ext.applyIf(o, {
 
                 // ローディングテキスト設定
-                text: me.msg.text,
-
-                // Direct関数設定
-                directFn: ''
+                text: me.msg.text
 
             });
 
+            // ローディングマスクテキスト更新
             lm.setText(o.text);
+
+            // サインイン状態確認
+            o.directFn.isSignin(function(ret) {
+
+                if(ret) {
+
+                    // ローディングマスク解除
+                    lm.remove();
+
+                } else {
+
+                }
+
+            });
+            /*
+            o.directFn.auth('omega', 'trick', function(ret) {
+
+                alert(ret);
+
+            });
+            */
 
         }
 

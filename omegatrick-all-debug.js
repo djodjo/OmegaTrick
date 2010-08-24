@@ -820,10 +820,20 @@ Trick.app.App = function() {
             setupConfig = Trick.util.clone(config);
             config.onReady = config.onReady || Ext.emptyFn;
 
+            // Ext.Directプロバイダ設定
+            if(Ext.isExtJS && config.directProvider) {
+                Ext.Direct.addProvider(config.directProvider);
+            }
+
+            // エントリーポイント設定
             if(Ext.isSenchaTouch) {
                 Ext.setup(config);
             } else {
-                Ext.onReady(config.onReady, config.scope || window, config.onReadyOption);
+                Ext.onReady(
+                    config.onReady,
+                    config.scope || window,
+                    config.onReadyOption
+                );
             }
 
             Trick.app.App.setupConfig = setupConfig;
@@ -1010,6 +1020,8 @@ Application.LoadingMask = Trick.app.LoadingMaskMgr;
  */
 Trick.app.AccountMgr = function(){
 
+    // {{{ public
+
     return {
 
         // {{{ msg
@@ -1037,17 +1049,45 @@ Trick.app.AccountMgr = function(){
             var me = this;
             var lm = Application.LoadingMask;
 
+            // 初期値設定
             Ext.applyIf(o, {
+
+                // ローディングテキスト設定
                 text: me.msg.text
+
             });
 
+            // ローディングマスクテキスト更新
             lm.setText(o.text);
+
+            // サインイン状態確認
+            o.directFn.isSignin(function(ret) {
+
+                if(ret) {
+
+                    // ローディングマスク解除
+                    lm.remove();
+
+                } else {
+
+                }
+
+            });
+            /*
+            o.directFn.auth('omega', 'trick', function(ret) {
+
+                alert(ret);
+
+            });
+            */
 
         }
 
         // }}}
 
     }
+
+    // }}}
 
 }();
 
@@ -1099,7 +1139,7 @@ Application.Account = Trick.app.AccountMgr;
  * @author  Kazuhiro Kotsutsumi <kotsutsumi@xenophy.com>
  * @version 0.5.0
  */
-Trick.SigninWindow = Ext.extend(Ext.Component, {
+Trick.SigninWindow = Ext.extend(Ext.Window, {
 
     // {{{ initComponent
 
@@ -1108,6 +1148,12 @@ Trick.SigninWindow = Ext.extend(Ext.Component, {
      */
     initComponent : function() {
 
+        var me = this;
+
+        Ext.applyIf(me, {
+            width: 500,
+            height: 280
+        });
 
         // スーパークラスメソッドコール
         Trick.SigninWindow.superclass.initComponent.call(me);

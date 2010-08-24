@@ -15,6 +15,28 @@
  */
 class Account
 {
+    // {{{ Account Session KEY
+
+    private $_sessKey = 'OmegaTrickAccount';
+
+    // }}}
+    // {{{ isSignin
+
+    /**
+     * サインイン確認メソッド
+     */
+    public function isSignin()
+    {
+        session_start();
+
+        if(isset($_SESSION[$this->_sessKey])) {
+            return true;
+        }
+
+        return false;
+    }
+
+    // }}}
     // {{{ auth
 
     /**
