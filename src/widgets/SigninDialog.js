@@ -72,6 +72,9 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
             // アイテムCSSクラス設定
             itemsCls: me.baseCls + '-items',
 
+            // アイテム内部CSSクラス設定
+            itemsInnerCls: me.baseCls + '-items-inner',
+
             // ヘッダーCSSクラス設定
             headerCls: me.baseCls + '-header',
 
@@ -125,11 +128,11 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
             '<div class="{bodyCls}">',
             '   <div class="{innerCls}">',
             '       <div class="clearfix">',
+            '           <div class="{headerCls}">',
+            '               <div class="title">{title}</div>',
+            '           </div>',
             '           <div class="{itemsCls} clearfix">',
-            '               <div class="{headerCls}">',
-            '                   <div class="title"></div>',
-            '               </div>',
-            '               <div class="clearfix">',
+            '               <div class="{itemsInnerCls} clearfix">',
             '                   <div class="{contentCls}">',
             '                       <div class="form">',
             '                           <div class="mail">',
@@ -159,7 +162,9 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
             bodyCls: me.bodyCls,
             innerCls: me.innerCls,
             itemsCls: me.itemsCls,
+            itemsInnerCls: me.itemsInnerCls,
             headerCls: me.headerCls,
+            title: Trick.SigninDialog.msg.signin.title,
             contentCls: me.contentCls,
             emailId: el.id + '_FIELD_EMAIL',
             passId: el.id + '_FIELD_PASSWORD',
@@ -171,6 +176,7 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
         me.body = Ext.get(me.body);
         me.bodyInner = Ext.get(me.body.down('.' + me.innerCls));
         me.bodyItems = Ext.get(me.body.child('.' + me.itemsCls));
+        me.header = Ext.get(me.body.child('.' + me.headerCls));
 
         // レンダリングフラグ設定
         this.rendered = true;
@@ -198,6 +204,9 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
         me.layer.setOpacity(0);
         me.layer.show();
 
+        // ボディ要素透明度設定
+        me.body.setOpacity(.5);
+
         // 内部アイテム要素透明度設定
         me.bodyItems.setOpacity(0);
 
@@ -208,6 +217,9 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
             opacity: 1,
             duration: me.duration,
             callback: function() {
+
+                // ボディ要素透明度設定
+                me.body.setOpacity(1);
 
                 // 内部アイテム要素フェードイン
                 me.bodyItems.fadeIn({
@@ -238,14 +250,14 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
      */
     getCenterPosition : function() {
 
-                            var me = this,
-                            vs = Ext.getDoc().getViewSize();
+        var me = this,
+            vs = Ext.getDoc().getViewSize();
 
-                            return {
-                                x: (vs.width - me.layer.getWidth()) / 2,
-                                    y: (vs.height - me.layer.getHeight()) / 2
-                            };
-                        },
+        return {
+            x: (vs.width - me.layer.getWidth()) / 2,
+            y: (vs.height - me.layer.getHeight()) / 2
+        };
+    },
 
     // }}}
     // {{{ onWindowResize
@@ -255,21 +267,33 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
      */
     onWindowResize : function(w, h) {
 
-                         var me = this,
-                         vs = Ext.getDoc().getViewSize(),
-                         cwp = (vs.width - me.layer.getWidth()) / 2,
-                         chp = (vs.height - me.layer.getHeight()) / 2;
+        var me = this,
+            vs = Ext.getDoc().getViewSize(),
+            cwp = (vs.width - me.layer.getWidth()) / 2,
+            chp = (vs.height - me.layer.getHeight()) / 2;
 
-                         if (me.isVisible) {
-                             me.layer.setLeft(cwp);
-                             me.layer.setTop(chp);
-                         }
+        if (me.isVisible) {
+            me.layer.setLeft(cwp);
+            me.layer.setTop(chp);
+        }
 
-                     }
+    }
 
     // }}}
 
 });
+
+// }}}
+// {{{ Setting Messages
+
+/**
+ * メッセージ設定
+ */
+Trick.SigninDialog.msg = {
+    signin: {
+        title: 'サインイン'
+    }
+};
 
 // }}}
 

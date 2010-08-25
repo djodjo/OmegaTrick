@@ -7,6 +7,40 @@
  * http://www.gnu.org/licenses/gpl-3.0.html
  */
 
+/* ------------------------------
+ ダイアログ
+------------------------------ */
+.tx-signin-body {
+  border: 1px solid #d6d6d6;
+  background: #e7e7e7;
+}
+
+/* ------------------------------
+ ヘッダー
+------------------------------ */
+.tx-signin-header {
+  border-bottom: 1px solid #cdcdcd;
+  background: url('../../images/SigninDialog/header_bg.gif') repeat-x #3d3d3d;
+}
+
+.tx-signin-header .title {
+  color: #222;
+}
+
+/* ------------------------------
+ アイテム
+------------------------------ */
+.tx-signin-items {
+  border: 1px solid #d6d6d6;
+}
+
+
+.tx-signin-items-inner {
+  border: 1px solid #fff;
+  background: #e7e7e7;
+  height: 100px;
+}
+
 
 /*
  * Local variables:
