@@ -11,9 +11,8 @@
  ローディングマスク
 ------------------------------ */
 #OMEGATRICK_LOADINGMASK {
-  background-image: url(../../images/loading/bg.gif);
   background-repeat: repeat-x;
-  background-color: #f6f6f6;
+  background-color: #fff;
 }
 
 /* ------------------------------

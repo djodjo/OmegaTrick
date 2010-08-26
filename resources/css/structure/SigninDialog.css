@@ -18,19 +18,18 @@
  ラッパー
 ------------------------------ */
 .tx-signin-bwrap {
-  width: 450px;
+  width: 400px;
 }
 
 /* ------------------------------
  ヘッダー
 ------------------------------ */
 .tx-signin-header {
-  padding: 6px 6px 5px 6px;
-  height: 14px;
 }
 
 .tx-signin-header .title {
-  font-size: 12px;
+  padding: 6px 6px 5px 6px;
+  font-size: 1.2em;
   font-weight :bold;
 }
 
@@ -39,6 +38,35 @@
 ------------------------------ */
 .tx-signin-items {
   margin: 6px;
+}
+
+.tx-signin-items-inner {
+  padding: 6px;
+}
+
+
+/* ------------------------------
+ フォーム
+------------------------------ */
+.tx-signin-content .form th {
+  width: 100px;
+  padding: 5px;
+}
+
+.tx-signin-content .form .userid input {
+  width: 170px;
+}
+
+.tx-signin-content .form .passwd input {
+  width: 170px;
+}
+
+
+/* ------------------------------
+ パスワード紛失
+------------------------------ */
+.tx-signin .forget {
+  margin: 10px 0 0 6px;
 }
 
 /*

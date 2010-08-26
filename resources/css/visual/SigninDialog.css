@@ -11,36 +11,52 @@
  ダイアログ
 ------------------------------ */
 .tx-signin-body {
-  border: 1px solid #d6d6d6;
-  background: #e7e7e7;
+  border: 1px solid #989da5;
+  background: #f9f9f9;
 }
 
 /* ------------------------------
  ヘッダー
 ------------------------------ */
 .tx-signin-header {
-  border-bottom: 1px solid #cdcdcd;
-  background: url('../../images/SigninDialog/header_bg.gif') repeat-x #3d3d3d;
+  background-color: #989da5;
 }
 
 .tx-signin-header .title {
-  color: #222;
+  color: #fff;
 }
 
 /* ------------------------------
  アイテム
 ------------------------------ */
 .tx-signin-items {
-  border: 1px solid #d6d6d6;
+  border: 1px solid #e7e7e7;
 }
-
 
 .tx-signin-items-inner {
   border: 1px solid #fff;
-  background: #e7e7e7;
-  height: 100px;
+  background: #f9f9f9;
 }
 
+/* ------------------------------
+ フォーム
+------------------------------ */
+.tx-signin-content .form th {
+  font-weight: bold;
+}
+
+/* ------------------------------
+ パスワード紛失
+------------------------------ */
+.tx-signin .forget a {
+  background-image: url(../../images/SigninDialog/icon_arrow_right.gif);
+  background-repeat: no-repeat;
+  background-position: 0 5px;
+  padding-left: 6px;
+  color:#3366CC;
+  font-weight: bold;
+  text-decoration:none;
+}
 
 /*
  * Local variables:

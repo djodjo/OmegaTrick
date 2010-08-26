@@ -1216,6 +1216,9 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
             // ID設定
             id: Ext.id(),
 
+            // フォームオブジェクト
+            forms: {},
+
             // ボディーラッパーCSSクラス設定
             bwrapCls: me.baseCls + '-bwrap',
 
@@ -1290,55 +1293,143 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
             '           <div class="{itemsCls} clearfix">',
             '               <div class="{itemsInnerCls} clearfix">',
             '                   <div class="{contentCls}">',
-            '                       <div class="form">',
-            '                           <div class="mail">',
-            '                               <div class="label"></div>',
-            '                           </div>',
-            '                           <div class="textfield space" id="{emailId}"></div>',
-            '                           <div class="pass">',
-            '                               <div class="label"></div>',
-            '                           </div>',
-            '                           <div class="textfield space" id="{passId}"></div>',
-            '                        </div>',
-            '                        <div class="autologin clearfix">',
-            '                            <div class="auto" id="{checkboxId}"></div>',
-            '                            <div class="btn_siginin" id="{submitId}"></div>',
-            '                        </div>',
-            '                        <div class="fogetpass clearfix">',
-            '                            <a href="{forgetUrl}" class="fogetpass">{msgFogetPass}</a>',
-            '                        </div>',
+            '                       <table class="form">',
+            '                       <tbody>',
+            '                       <tr>',
+            '                           <th>{labelUserId}</th>',
+            '                           <td class="userid"></td>',
+            '                       </tr>',
+            '                       <tr>',
+            '                           <th>{labelPassword}</th>',
+            '                           <td class="passwd"></td>',
+            '                       </tr>',
+            '                       <tr>',
+            '                           <th>&nbsp;</th>',
+            '                           <td class="auto-signin"></td>',
+            '                       </tr>',
+            '                       <tr>',
+            '                           <th>&nbsp;</th>',
+            '                           <td class="btn-signin"></td>',
+            '                       </tr>',
+            '                       </tbody>',
+            '                       </table>',
             '                    </div>',
             '                </div>',
-            '           </div>',
-            '       </div>',
-            '   </div>',
+            '            </div>',
+            '        </div>',
+            '    </div>',
+            '</div>',
+            '<div class="forget">',
+            '    <a href="{forgetUrl}">{msgForgetPass}</a>',
             '</div>'
         );
-        me.body = t.append(el, {
+        t.append(el, {
             bodyCls: me.bodyCls,
             innerCls: me.innerCls,
             itemsCls: me.itemsCls,
             itemsInnerCls: me.itemsInnerCls,
             headerCls: me.headerCls,
-            title: Trick.SigninDialog.msg.signin.title,
             contentCls: me.contentCls,
-            emailId: el.id + '_FIELD_EMAIL',
-            passId: el.id + '_FIELD_PASSWORD',
-            checkboxId: el.id + '_FIELD_CHECKBOX',
-            submitId: el.id + '_FIELD_SUBMIT',
-            msgFogetPass: 'forget',//Ext.trick.SigninWindow.msg.signin.fogetpass,
-            forgetUrl: ''//me.forgetUrl
+            title: Trick.SigninDialog.msg.signin.title,
+            labelUserId: Trick.SigninDialog.msg.signin.labels.userid,
+            labelPassword: Trick.SigninDialog.msg.signin.labels.password,
+            msgForgetPass: Trick.SigninDialog.msg.signin.forget.text,
+            forgetUrl: Trick.SigninDialog.msg.signin.forget.url
         });
-        me.body = Ext.get(me.body);
-        me.bodyInner = Ext.get(me.body.down('.' + me.innerCls));
+        me.body = Ext.get(el.child('.' + me.bodyCls));
+        me.bodyInner = Ext.get(me.body.child('.' + me.innerCls));
         me.bodyItems = Ext.get(me.body.child('.' + me.itemsCls));
         me.header = Ext.get(me.body.child('.' + me.headerCls));
+        me.forget = Ext.get(el.child('.forget'));
+
+        me.forget.setOpacity(0);
+
+        // フォームレンダリング
+        me._renderForms();
 
         // レンダリングフラグ設定
         this.rendered = true;
 
         // イベント初期化
         me.initEvents();
+    },
+
+    // }}}
+    // {{{ _renderForms
+
+    _renderForms : function() {
+
+        var me = this;
+        var useridContainer = Ext.get(me.body.child('.form .userid'));
+        var passwdContainer = Ext.get(me.body.child('.form .passwd'));
+        var autosigninContainer = Ext.get(me.body.child('.form .auto-signin'));
+        var btnsigninContainer = Ext.get(me.body.child('.form .btn-signin'));
+
+        // ユーザーID/メールアドレステキストフィールド生成
+        me.forms.userid = new Ext.form.TextField({
+            tabIndex: 1,
+            allowBlank: false,
+            enableKeyEvents: true,
+            validationEvent: false,
+            validator : function(v) {
+                if (v == '') {
+                    return Trick.SigninDialog.msg.signin.validate.email;
+                }
+                return true;
+            },
+            listeners: {
+                keypress: {
+                    fn: function(field, e) {
+                        if (e.getKey() === e.ENTER) {
+//                            me.onSignin();
+                        }
+                    },
+                    scope: me
+                }
+            },
+            renderTo: useridContainer
+        });
+
+        // パスワードテキストフィールド生成
+        me.password = new Ext.form.TextField({
+            inputType: 'password',
+            tabIndex: 2,
+            enableKeyEvents: true,
+            listeners: {
+                keypress: {
+                    fn: function(field, e) {
+                        if (e.getKey() === e.ENTER) {
+                            me.onSignin();
+                        }
+                    },
+                    scope: me
+                }
+            },
+            renderTo: passwdContainer
+        });
+
+        // チェックボックス生成
+        me.autosignin = new Ext.form.Checkbox({
+            boxLabel : Trick.SigninDialog.msg.signin.labels.autosignin,
+            tabIndex: 3,
+            renderTo: autosigninContainer
+        });
+
+        // サインインボタン生成
+        me.submit = new Ext.Button({
+            text: Trick.SigninDialog.msg.signin.labels.submit,
+            type: 'submit',
+            tabIndex: 4,
+            /*plugins: ['focusactive'],*/
+            handler: me.onSignin,
+            scope: me,
+            renderTo: btnsigninContainer
+        });
+
+
+
+
+
     },
 
     // }}}
@@ -1376,6 +1467,11 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
 
                 // ボディ要素透明度設定
                 me.body.setOpacity(1);
+
+                // パスワード紛失要素フェードイン
+                me.forget.fadeIn({
+                    duration: me.duration
+                });
 
                 // 内部アイテム要素フェードイン
                 me.bodyItems.fadeIn({
@@ -1447,7 +1543,20 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
  */
 Trick.SigninDialog.msg = {
     signin: {
-        title: 'サインイン'
+        title: 'OmegaTrickにサインイン',
+        labels: {
+            userid: 'ユーザーID',
+            password: 'パスワード',
+            autosignin: '1 週間サインインし続ける',
+            submit: 'サインイン'
+        },
+        validate: {
+            email: 'ユーザIDを入力してください。'
+        },
+        forget: {
+            text: 'パスワード紛失',
+            url: 'forget.html'
+        }
     }
 };
 
