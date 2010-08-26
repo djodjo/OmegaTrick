@@ -184,8 +184,13 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
         me.bodyInner = Ext.get(me.body.child('.' + me.innerCls));
         me.bodyItems = Ext.get(me.body.child('.' + me.itemsCls));
         me.header = Ext.get(me.body.child('.' + me.headerCls));
+        me.title = Ext.get(me.header.child('.title'));
         me.forget = Ext.get(el.child('.forget'));
 
+        // タイトル要素透明度設定
+        me.title.setOpacity(0);
+
+        // パスワード紛失要素透明度設定
         me.forget.setOpacity(0);
 
         // フォームレンダリング
@@ -213,6 +218,7 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
         me.forms.userid = new Ext.form.TextField({
             tabIndex: 1,
             allowBlank: false,
+            disabled: true,
             enableKeyEvents: true,
             validationEvent: false,
             validator : function(v) {
@@ -225,7 +231,7 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
                 keypress: {
                     fn: function(field, e) {
                         if (e.getKey() === e.ENTER) {
-//                            me.onSignin();
+                            me.signin();
                         }
                     },
                     scope: me
@@ -235,15 +241,16 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
         });
 
         // パスワードテキストフィールド生成
-        me.password = new Ext.form.TextField({
+        me.forms.password = new Ext.form.TextField({
             inputType: 'password',
             tabIndex: 2,
+            disabled: true,
             enableKeyEvents: true,
             listeners: {
                 keypress: {
                     fn: function(field, e) {
                         if (e.getKey() === e.ENTER) {
-                            me.onSignin();
+                            me.signin();
                         }
                     },
                     scope: me
@@ -253,28 +260,97 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
         });
 
         // チェックボックス生成
-        me.autosignin = new Ext.form.Checkbox({
+        me.forms.autosignin = new Ext.form.Checkbox({
+            disabled: true,
             boxLabel : Trick.SigninDialog.msg.signin.labels.autosignin,
             tabIndex: 3,
             renderTo: autosigninContainer
         });
 
         // サインインボタン生成
-        me.submit = new Ext.Button({
+        me.forms.submit = new Ext.Button({
             text: Trick.SigninDialog.msg.signin.labels.submit,
+            disabled: true,
             type: 'submit',
             tabIndex: 4,
             /*plugins: ['focusactive'],*/
-            handler: me.onSignin,
+            handler: me.signin,
             scope: me,
             renderTo: btnsigninContainer
         });
 
+    },
 
+    // }}}
+    // {{{ signin
 
+    /**
+     * サインインメソッド
+     */
+    signin : function() {
 
+        var me = this;
+
+        // フォーム無効化
+        me.forms.userid.disable();
+        me.forms.password.disable();
+        me.forms.autosignin.disable();
+        me.forms.submit.disable();
+
+        // ダイアログ非表示
+        me.hide();
 
     },
+
+    // }}}
+    // {{{ hide
+
+    /**
+     * 非表示メソッド
+     */
+    hide : function() {
+
+        var me = this,
+            cp = me.getCenterPosition();
+
+        // タイトル要素フェードアウト
+        me.title.fadeOut({
+            duration: me.duration
+        });
+
+        // パスワード紛失要素フェードアウト
+        me.forget.fadeOut({
+            duration: me.duration
+        });
+
+        // 内部アイテム要素フェードアウト
+        me.bodyItems.fadeOut({
+            duration: me.duration,
+            callback: function() {
+
+                // 非表示アニメーション開始
+                me.layer.shift({
+                    x: cp.x - me.distance,
+                easing: 'easeOutStrong',
+                opacity: 0,
+                duration: me.duration,
+                callback: function() {
+
+                    me.fireEvent('hide', {
+                        email: me.forms.userid.getValue(),
+                        pass: me.forms.password.getValue(),
+                        autoSignin: me.forms.autosignin.getValue()
+                    }, me);
+
+                    //me.destroy();
+                }
+                });
+
+            }
+        });
+
+
+   },
 
     // }}}
     // {{{ show
@@ -312,6 +388,11 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
                 // ボディ要素透明度設定
                 me.body.setOpacity(1);
 
+                // タイトル要素フェードイン
+                me.title.fadeIn({
+                    duration: me.duration
+                });
+
                 // パスワード紛失要素フェードイン
                 me.forget.fadeIn({
                     duration: me.duration
@@ -322,14 +403,15 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
                     duration: me.duration,
                     callback: function() {
 
-                        /*
-                           me.email.enable();
-                           me.password.enable();
+                        // フォーム有効化
+                        me.forms.userid.enable();
+                        me.forms.password.enable();
+                        me.forms.autosignin.enable();
+                        me.forms.submit.enable();
 
                         // メールアドレスにフォーカス設定
-                        me.email.focus();
+                        me.forms.userid.focus();
 
-*/
                         // イベント発火
                         me.fireEvent('show', me);
                     }
