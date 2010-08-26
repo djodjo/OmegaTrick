@@ -36,10 +36,10 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
             baseCls: 'tx-signin',
 
             // 持続時間設定
-            duration: 0.3,
+            duration: 0.4,
 
             // 移動距離設定
-            distance: 75
+            distance: 100
 
         });
 
