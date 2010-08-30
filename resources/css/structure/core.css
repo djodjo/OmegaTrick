@@ -16,6 +16,11 @@ input[type="checkbox"] {
   margin-right:6px;
 }
 
+.ffbug-x-form-field {
+  position: fixed;
+  position:expression("absolute");
+}
+
 /*
  * Local variables:
  * tab-width: 2

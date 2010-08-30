@@ -44,12 +44,19 @@ class Account
      */
     public function auth($id, $passwd)
     {
+        $ret = array(
+            'success' => false,
+            'options' => array()
+        );
+
         // 認証方式はユーザー実装依存
         if($id === 'omega' && $passwd === 'trick') {
-            return true;
+            $ret['success'] = true;
+        } else {
+            $ret['options']['msg'] = 'ユーザーIDかパスワードが間違っています。';
         }
 
-        return false;
+        return $ret;
     }
 
     // }}}

@@ -34,14 +34,14 @@ Trick.app.AccountMgr = function(){
         },
 
         // }}}
-        // {{{ auth
+        // {{{ init
 
         /**
-         * 認証メソッド
+         * 初期化メソッド
          *
          * @param o コンフィグオプション
          */
-        auth : function(o) {
+        init : function(o) {
 
             o = o || {};
             var me = this;
@@ -79,14 +79,31 @@ Trick.app.AccountMgr = function(){
                 }
 
             });
-            /*
-            o.directFn.auth('omega', 'trick', function(ret) {
 
-                alert(ret);
+        },
+
+        // }}}
+        // {{{ auth
+
+        /**
+         * 認証メソッド
+         *
+         * @param o コンフィグオプション
+         */
+        auth : function(o) {
+
+            var me = this;
+
+            // サーバーサイド認証処理
+            o.directFn.auth(o.userid, o.passwd, function(ret) {
+
+                if(ret.success) {
+                    me.success(ret.options);
+                } else {
+                    me.failure(ret.options);
+                }
 
             });
-            */
-
         },
 
         // }}}
@@ -97,7 +114,16 @@ Trick.app.AccountMgr = function(){
             o = o || {};
             var me = this;
             var lm = Application.LoadingMask;
-            var dlg = new o.dialog();
+            var dlg = new o.dialog(o);
+
+            // イベント設定
+            dlg.on('auth', me.auth, dlg);
+            dlg.on('hide', function(){
+
+                // ローディングマスク解除
+                lm.remove();
+
+            }, me);
 
             // ローディングテキスト非表示
             lm.hideText({

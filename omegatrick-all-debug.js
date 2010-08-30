@@ -1037,14 +1037,14 @@ Trick.app.AccountMgr = function(){
         },
 
         // }}}
-        // {{{ auth
+        // {{{ init
 
         /**
-         * 認証メソッド
+         * 初期化メソッド
          *
          * @param o コンフィグオプション
          */
-        auth : function(o) {
+        init : function(o) {
 
             o = o || {};
             var me = this;
@@ -1082,14 +1082,31 @@ Trick.app.AccountMgr = function(){
                 }
 
             });
-            /*
-            o.directFn.auth('omega', 'trick', function(ret) {
 
-                alert(ret);
+        },
+
+        // }}}
+        // {{{ auth
+
+        /**
+         * 認証メソッド
+         *
+         * @param o コンフィグオプション
+         */
+        auth : function(o) {
+
+            var me = this;
+
+            // サーバーサイド認証処理
+            o.directFn.auth(o.userid, o.passwd, function(ret) {
+
+                if(ret.success) {
+                    me.success(ret.options);
+                } else {
+                    me.failure(ret.options);
+                }
 
             });
-            */
-
         },
 
         // }}}
@@ -1100,7 +1117,16 @@ Trick.app.AccountMgr = function(){
             o = o || {};
             var me = this;
             var lm = Application.LoadingMask;
-            var dlg = new o.dialog();
+            var dlg = new o.dialog(o);
+
+            // イベント設定
+            dlg.on('auth', me.auth, dlg);
+            dlg.on('hide', function(){
+
+                // ローディングマスク解除
+                lm.remove();
+
+            }, me);
 
             // ローディングテキスト非表示
             lm.hideText({
@@ -1304,6 +1330,9 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
             '                           <td class="passwd"></td>',
             '                       </tr>',
             '                       <tr>',
+            '                           <td colspan="2" class="msg"><span></span></td>',
+            '                       </tr>',
+            '                       <tr>',
             '                           <th>&nbsp;</th>',
             '                           <td class="auto-signin"></td>',
             '                       </tr>',
@@ -1446,16 +1475,93 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
     signin : function() {
 
         var me = this;
+        var msg = me.bodyItems.child('td.msg span');
 
         // フォーム無効化
-        me.forms.userid.disable();
-        me.forms.password.disable();
-        me.forms.autosignin.disable();
         me.forms.submit.disable();
+
+        // タイトル変更
+        me.title.update(Trick.SigninDialog.msg.signin.progress);
+
+        // パスワード紛失要素フェードアウト
+        me.forget.fadeOut({
+            duration: me.duration
+        });
+
+        // エラーメッセージ非表示
+        msg.fadeOut({
+            duration: me.duration,
+            callback: function() {
+
+                msg.setStyle({
+                    display: 'none'
+                });
+
+                // イベント発火
+                me.fireEvent('auth', {
+                    directFn: me.directFn,
+                    userid: me.forms.userid.getValue(),
+                    passwd: me.forms.password.getValue(),
+                    autoSignin: me.forms.autosignin.getValue()
+                });
+
+            }
+        });
+
+
+    },
+
+    // }}}
+    // {{{ success
+
+    /**
+     * 認証成功時処理メソッド
+     */
+    success : function(o) {
+
+        var me = this;
 
         // ダイアログ非表示
         me.hide();
 
+    },
+
+    // }}}
+    // {{{ failure
+
+    /**
+     * 認証失敗時処理メソッド
+     *
+     * @param o パラメータ
+     */
+    failure : function(o) {
+
+        var me = this;
+        var msg = me.bodyItems.child('td.msg span');
+
+        // タイトル変更
+        me.title.update(Trick.SigninDialog.msg.signin.title);
+
+        // エラーメッセージ更新
+        msg.update(o.msg);
+
+        // パスワード紛失要素フェードイン
+        me.forget.fadeIn({
+            duration: me.duration
+        });
+
+        // フォーム有効化
+        me.forms.submit.enable();
+
+        // エラーメッセージ表示
+        msg.fadeIn({
+            display: 'block',
+            callback: function() {
+
+                // メールアドレスにフォーカス設定
+                me.forms.userid.selectText();
+            }
+        });
     },
 
     // }}}
@@ -1492,19 +1598,13 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
                 duration: me.duration,
                 callback: function() {
 
-                    me.fireEvent('hide', {
-                        email: me.forms.userid.getValue(),
-                        pass: me.forms.password.getValue(),
-                        autoSignin: me.forms.autosignin.getValue()
-                    }, me);
+                    me.fireEvent('hide', {}, me);
 
-                    //me.destroy();
                 }
                 });
 
             }
         });
-
 
    },
 
@@ -1626,6 +1726,7 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
 Trick.SigninDialog.msg = {
     signin: {
         title: 'OmegaTrickにサインイン',
+        progress: 'サインイン中...',
         labels: {
             userid: 'ユーザーID',
             password: 'パスワード',

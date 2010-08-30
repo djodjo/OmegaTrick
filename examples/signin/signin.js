@@ -22,7 +22,7 @@ Application.setup({
         var ac = Application.Account;
 
         // 認証実行
-        ac.auth({
+        ac.init({
             directFn: Account
         });
 
