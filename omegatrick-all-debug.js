@@ -1020,6 +1020,18 @@ Application.LoadingMask = Trick.app.LoadingMaskMgr;
  */
 Trick.app.AccountMgr = function(){
 
+    // {{{ private
+
+    var success = function() {
+
+        var lm = Application.LoadingMask;
+
+        // ローディングマスク解除
+        lm.remove();
+
+    };
+
+    // }}}
     // {{{ public
 
     return {
@@ -1052,7 +1064,9 @@ Trick.app.AccountMgr = function(){
 
             // 初期値設定
             Ext.applyIf(o, {
-                dialog: Trick.SigninDialog
+                dialog: Trick.SigninDialog,
+                expDay: 7,
+                autoSigninKey: 'Trick.app.AccountMgr'
             });
 
             // ローディングマスクテキスト更新
@@ -1072,15 +1086,22 @@ Trick.app.AccountMgr = function(){
                 } else {
 
                     // 自動サインイン処理
+                    var key = Ext.util.Cookies.get(o.autoSigninKey);
 
+                    o.directFn.autoSignin(key, function(ret) {
 
+                        if(ret.success) {
 
+                            success();
 
-                    // ダイアログ表示
-                    me._showDialog(o);
+                        } else {
 
+                            // ダイアログ表示
+                            me._showDialog(o);
+
+                        }
+                    });
                 }
-
             });
 
         },
@@ -1098,9 +1119,21 @@ Trick.app.AccountMgr = function(){
             var me = this;
 
             // サーバーサイド認証処理
-            o.directFn.auth(o.userid, o.passwd, function(ret) {
+            o.directFn.auth(o.userid, o.passwd, o.autoSignin, function(ret) {
 
                 if(ret.success) {
+
+                    if(o.autoSignin) {
+
+                        // クッキーに自動サインインキーを保存
+                        Ext.util.Cookies.set(
+                            me.autoSigninKey,
+                            ret.auto_signin_key,
+                            new Date((new Date).getTime()+me.expDay*24*60*60*1000)
+                        );
+
+                    }
+
                     me.success(ret.options);
                 } else {
                     me.failure(ret.options);
@@ -1123,8 +1156,7 @@ Trick.app.AccountMgr = function(){
             dlg.on('auth', me.auth, dlg);
             dlg.on('hide', function(){
 
-                // ローディングマスク解除
-                lm.remove();
+                success();
 
             }, me);
 
