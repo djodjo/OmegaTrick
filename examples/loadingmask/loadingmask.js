@@ -13,6 +13,9 @@ Application.setup({
         var lm = Application.LoadingMask;
         var task = {};
 
+        // スクリプトタグ消去
+        Trick.removeScriptTags();
+
         task.remove = new Ext.util.DelayedTask(function(){
 
             // ローディングマスク解除
