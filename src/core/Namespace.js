@@ -12,6 +12,7 @@
 Ext.ns(
     'Trick.app',
     'Trick.util',
+    'Trick.plugins',
     'Trick.test',
     'Trick.test.unit',
     'Trick.test.case',
