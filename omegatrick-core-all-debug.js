@@ -898,18 +898,32 @@ Trick.app.LoadingMaskMgr = function(){
                 progress = Ext.get('OMEGATRICK_LOADING_PROGRESS');
 
             if(logo) {
-                logo.fadeOut(o);
+                logo.fadeOut(Ext.apply(Trick.clone(o), {
+                    callback: function() {
+                        logo.remove();
+                    }
+                }));
             }
 
             if(progress) {
-                progress.fadeOut({
+
+                progress.fadeOut(Ext.apply(Trick.clone(o), {
                     callback: function() {
                         progress.remove();
                         if(mask) {
-                            mask.fadeOut(0);
+                            var cb = function() {
+                                mask.remove();
+                            }
+                            if(Ext.isFunction(o.callback)) {
+                                cb.createSequence(o.callback);
+                            }
+
+                            mask.fadeOut(Ext.apply(Trick.clone(o), {
+                                callback: cb
+                            }));
                         }
                     }
-                });
+                }));
             }
 
         },
