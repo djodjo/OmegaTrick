@@ -267,6 +267,15 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
             disabled: true,
             boxLabel : Trick.SigninDialog.msg.signin.labels.autosignin,
             tabIndex: 3,
+            listeners: {
+                afterrender: function(c) {
+                    c.el.on('keypress', function(e, t) {
+                        if (e.getKey() === e.ENTER) {
+                            me.signin();
+                        }
+                    });
+                }
+            },
             renderTo: autosigninContainer
         });
 
