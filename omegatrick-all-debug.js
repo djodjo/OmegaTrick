@@ -1750,6 +1750,10 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
                 duration: me.duration,
                 callback: function() {
 
+                    // レイヤーオブジェクト削除
+                    me.layer.remove();
+
+                    // イベント発火
                     me.fireEvent('hide', {}, me);
 
                 }
