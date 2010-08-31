@@ -23,7 +23,33 @@ Application.setup({
 
         // 認証実行
         ac.init({
-            directFn: Account
+            directFn: Account,
+            authsuccess: function() {
+
+                // サインアウトボタン生成
+                new Ext.Button({
+                    text: 'サインアウト',
+                    handler: function() {
+
+                        // サインアウト処理
+                        ac.signout();
+
+                    },
+                    renderTo: Ext.getBody()
+                });
+
+            },
+            authfailure : function() {
+
+                // 認証失敗イベントハンドラ
+
+            },
+            signout: function() {
+
+                // リロード
+                location.reload();
+
+            }
         });
 
     }

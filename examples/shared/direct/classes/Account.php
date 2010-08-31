@@ -102,8 +102,12 @@ class Account
     // }}}
     // {{{ signout
 
+    public function signout()
+    {
+        session_start();
 
-
+        unset($_SESSION[$this->_sessKey]);
+    }
 
     // }}}
     // {{{ auth

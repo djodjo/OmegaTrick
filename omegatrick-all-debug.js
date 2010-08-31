@@ -1022,12 +1022,44 @@ Trick.app.AccountMgr = function(){
 
     // {{{ private
 
-    var success = function() {
+    /**
+     * イベント初期化メソッド
+     */
+    var _initEvents = function() {
 
+        var me = this;
+        var o = me.config;
+
+        // イベント登録
+        var events = {
+            authsuccess : true,
+            authfailure : true,
+            signout: true
+        };
+        me.addEvents(events);
+
+        // イベントハンドラ登録
+        Ext.iterate(events, function(name) {
+            if(Ext.isFunction(o[name])) {
+                me.on(name, o[name], o.scope || me);
+            }
+        });
+
+    };
+
+    /**
+     * 認証成功処理メソッド
+     */
+    var _success = function() {
+
+        var me = this;
         var lm = Application.LoadingMask;
 
         // ローディングマスク解除
         lm.remove();
+
+        // イベント発火
+        me.fireEvent('authsuccess');
 
     };
 
@@ -1069,6 +1101,11 @@ Trick.app.AccountMgr = function(){
                 autoSigninKey: 'Trick.app.AccountMgr'
             });
 
+            me.config = Trick.clone(o);
+
+            // イベント初期化
+            _initEvents.call(me);
+
             // ローディングマスクテキスト更新
             lm.setText(me.msg.text);
 
@@ -1080,8 +1117,8 @@ Trick.app.AccountMgr = function(){
                     // ローディングマスクテキスト更新
                     lm.setText(me.msg.complete);
 
-                    // ローディングマスク解除
-                    lm.remove();
+                    // 認証成功処理
+                    _success.call(me);
 
                 } else {
 
@@ -1092,7 +1129,8 @@ Trick.app.AccountMgr = function(){
 
                         if(ret.success) {
 
-                            success();
+                            // 認証成功処理
+                            _success.call(me);
 
                         } else {
 
@@ -1135,11 +1173,42 @@ Trick.app.AccountMgr = function(){
                     }
 
                     me.success(ret.options);
+
                 } else {
+
                     me.failure(ret.options);
+
                 }
 
             });
+        },
+
+        // }}}
+        // {{{ signout
+
+        /**
+         * サインアウトメソッド
+         */
+        signout : function() {
+
+            var me = this;
+            var o = me.config;
+
+            // サインアウト処理
+            o.directFn.signout(function() {
+
+                // クッキークリア
+                Ext.util.Cookies.set(
+                    o.autoSigninKey,
+                    null,
+                    new Date((new Date).getTime()+-1*24*60*60*1000)
+                );
+
+                // イベント発火
+                me.fireEvent('signout');
+
+            });
+
         },
 
         // }}}
@@ -1156,7 +1225,14 @@ Trick.app.AccountMgr = function(){
             dlg.on('auth', me.auth, dlg);
             dlg.on('hide', function(){
 
-                success();
+                // 認証成功処理
+                _success.call(me);
+
+            }, me);
+            dlg.on('failure', function(){
+
+                // イベント発火
+                me.fireEvent('authfailure');
 
             }, me);
 
@@ -1592,6 +1668,10 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
 
                 // メールアドレスにフォーカス設定
                 me.forms.userid.selectText();
+
+                // イベント発火
+                me.fireEvent('failure');
+
             }
         });
     },
@@ -1602,7 +1682,7 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
     /**
      * 非表示メソッド
      */
-    hide : function() {
+    hide : function(o) {
 
         var me = this,
             cp = me.getCenterPosition();

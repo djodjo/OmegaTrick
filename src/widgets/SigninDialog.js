@@ -378,6 +378,10 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
 
                 // メールアドレスにフォーカス設定
                 me.forms.userid.selectText();
+
+                // イベント発火
+                me.fireEvent('failure');
+
             }
         });
     },
@@ -388,7 +392,7 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
     /**
      * 非表示メソッド
      */
-    hide : function() {
+    hide : function(o) {
 
         var me = this,
             cp = me.getCenterPosition();
