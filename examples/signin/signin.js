@@ -25,6 +25,12 @@ Application.setup({
         var ac = Application.Account;
 
         // 認証実行
+        /**
+         * サンプルのID、パスワードは
+         *
+         * UserID:omega
+         * Password:trick
+         */
         ac.init({
             directFn: Account,
             authsuccess: function() {
