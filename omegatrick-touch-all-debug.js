@@ -63,6 +63,23 @@ Ext.apply(Trick, {
 
     testingFramework : {
         name: 'yui'
+    },
+
+    // }}}
+    // {{{ removeScriptTags
+
+    /**
+     * スクリプトタグ削除メソッド
+     */
+    removeScriptTags : function() {
+
+        var me = this;
+
+        // スクリプトタグ削除
+        Ext.select('body script').each(function(el) {
+            Ext.removeNode(Ext.getDom(el));
+        }, me);
+
     }
 
     // }}}

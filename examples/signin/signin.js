@@ -15,6 +15,9 @@ Application.setup({
 
     onReady : function() {
 
+        // スクリプトタグ消去
+        Trick.removeScriptTags();
+
         // ローディングマスク管理オブジェクト
         var lm = Application.LoadingMask;
 
