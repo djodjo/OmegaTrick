@@ -16,12 +16,16 @@ Application.setup({
         // スクリプトタグ消去
         Trick.removeScriptTags();
 
-        // パネル生成
-        new Ext.Panel({
-            title: 'Panel with Trick.plugins.Define',
-            width: 500,
-            height: 300,
-            plugins: ['T_Define'],
+        // Form Panel生成
+        new Ext.form.FormPanel({
+            title: 'Form Panel with Trick.plugins.Define',
+            padding: 20,
+            width: 300,
+            plugins: ['t.xitems'],
+            xitems: [
+                'UserName',
+                'EMail'
+            ],
             renderTo: Ext.get('renderarea')
         });
 

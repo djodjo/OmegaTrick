@@ -447,6 +447,7 @@ if(Ext.isExtCore || Ext.isSenchaTouch) {
 Ext.ns(
     'Trick.app',
     'Trick.util',
+    'Trick.fields',
     'Trick.plugins',
     'Trick.test',
     'Trick.test.unit',
@@ -1918,15 +1919,18 @@ Trick.SigninDialog.msg = {
  * http://www.gnu.org/licenses/gpl-3.0.html
  */
 
-// {{{ Trick.plugins.Define
+// {{{ Trick.plugins.xitems
 
 /**
- * Trick.plugins.Define Plugin
+ * Trick.plugins.xitems Plugin
+ *
+ * コンテナーオブジェクトにコンフィグオプションxitemsを追加し
+ * xtype名の配列によりアイテム設定を行うことが可能になります。
  *
  * @author  Kazuhiro Kotsutsumi <kotsutsumi@xenophy.com>
  * @version 0.5.0
  */
-Trick.plugins.Define = function() {
+Trick.plugins.xitems = function() {
 
     // {{{ vars
 
@@ -1940,9 +1944,14 @@ Trick.plugins.Define = function() {
      *
      * @return void
      */
-    me.init = function(comp) {
+    me.init = function(cmp) {
 
-        console.log("init");
+        Ext.each(cmp.xitems, function(item) {
+            cmp.add({
+                xtype: item
+            });
+        });
+
     }
 
     // }}}
@@ -1952,7 +1961,7 @@ Trick.plugins.Define = function() {
 // }}}
 // {{{ Register ptype
 
-Ext.preg('T_Define', Trick.plugins.Define);
+Ext.preg('t.xitems', Trick.plugins.xitems);
 
 // }}}
 

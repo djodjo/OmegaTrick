@@ -13,4 +13,4 @@ src/app/LoadingMaskMgr.js
 src/app/AccountMgr.js
 src/core/Namespace-more.js
 src/widgets/SigninDialog.js
-src/plugins/Define.js
+src/plugins/xitems.js
