@@ -30,9 +30,12 @@
 
     <h1>xitems Plugin Sample - Omega Trick for Ext JS</h1>
 
+    <h2>ptype:t.xitems</h2>
+
     <p>参照：<a href="xitems/fields/UserName.js">UserName.js</a>,<a href="xitems/fields/EMail.js">EMail.js</a></p>
 
     <p>パネルなどコンテナーに設置するアイテム定義を短縮してxtype名のみで定義するプラグインです。</p>
+    <p>コンフィグオプションの"<strong>xitems</strong>"に、配列でxtypeを羅列します。<p>
 
     <div id="renderarea"></div>
 
@@ -41,11 +44,11 @@ new Ext.form.FormPanel({
     title: 'Form Panel with Trick.plugins.Define',
     padding: 20,
     width: 300,
-    plugins: ['t.xitems'],
-    xitems: [
+    <strong>plugins: ['t.xitems']</strong>,
+    <strong>xitems: [
         'UserName',
         'EMail'
-    ],
+    ]</strong>,
     renderTo: Ext.get('renderarea')
 });
 </pre>

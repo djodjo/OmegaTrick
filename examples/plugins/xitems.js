@@ -18,7 +18,7 @@ Application.setup({
 
         // Form Panel生成
         new Ext.form.FormPanel({
-            title: 'Form Panel with Trick.plugins.Define',
+            title: 'Form Panel with Trick.plugins.xforms',
             padding: 20,
             width: 300,
             plugins: ['t.xitems'],

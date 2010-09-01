@@ -14,3 +14,4 @@ src/app/AccountMgr.js
 src/core/Namespace-more.js
 src/widgets/SigninDialog.js
 src/plugins/xitems.js
+src/plugins/xforms.js
