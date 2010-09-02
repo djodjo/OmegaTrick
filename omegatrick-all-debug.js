@@ -1989,7 +1989,7 @@ Trick.form.FormPanel = Ext.extend(Ext.form.FormPanel, {
 
     // {{{ plugins
 
-    plugins: ['t.xforms', 't.CompositeFieldFix'],
+    plugins: ['t.xitems', 't.xforms', 't.CompositeFieldFix'],
 
     // }}}
     // {{{ initComponent
@@ -2098,11 +2098,11 @@ Trick.plugins.xitems = function() {
             });
         });
 
-        if(cmp.items) {
+        if(cmp.items && cmp.items.each) {
+
             cmp.items.each(function(item) {
                 me.deep(item);
             });
-        
         }
 
     }

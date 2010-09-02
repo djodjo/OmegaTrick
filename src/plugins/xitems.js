@@ -49,11 +49,11 @@ Trick.plugins.xitems = function() {
             });
         });
 
-        if(cmp.items) {
+        if(cmp.items && cmp.items.each) {
+
             cmp.items.each(function(item) {
                 me.deep(item);
             });
-        
         }
 
     }

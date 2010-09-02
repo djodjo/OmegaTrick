@@ -20,7 +20,6 @@ Application.setup({
         var p = new Trick.form.FormPanel({
             title: 'Trick.form.FormPanel',
             padding: 20,
-            width: 560,
             height: 150,
             layout:'column',
             xdefault: {
@@ -29,50 +28,30 @@ Application.setup({
             },
             items: [{
                 columnWidth: .5,
-                items: [{
-                    xtype: 'textfield',
-                    xname: 'field1',
-                    anchor: '100%',
-                    fieldLabel: 'Field1'
-                },{
-                    xtype: 'textfield',
-                    xname: 'field2',
-                    anchor: '100%',
-                    fieldLabel: 'Field11'
-                },{
-                    xtype: 'compositefield',
-                    fieldLabel: 'Full Name',
-                    anchor: '100%',
-                    items: [{
-                        xtype: 'textfield',
-                        name: 'title',
-                        xname: 'title',
-                        width: 40
-                    },{
-                        xtype: 'textfield',
-                        name: 'firstName',
-                        xname: 'firstName',
-                        flex : 1
-                    },{
-                        xtype: 'textfield',
-                        name: 'lastName',
-                        xname: 'lastName',
-                        flex : 2
-                    }]
-                }]
+                xitems: [
+                    'Field1',
+                    'Field2',
+                    'CompositeField1'
+                ]
             },{
                 width: 25,
                 html: '&nbsp'
             },{
                 columnWidth: .5,
+                layout:'column',
                 items: [{
-                    xtype: 'textfield',
-                    xname: 'field3',
-                    fieldLabel: 'Field2'
+                    columnWidth: .5,
+                    xitems: [
+                        'Field3'
+                    ]
                 },{
-                    xtype: 'textfield',
-                    xname: 'field4',
-                    fieldLabel: 'Field21'
+                    width: 25,
+                    html: '&nbsp'
+                },{
+                    columnWidth: .5,
+                    xitems: [
+                        'Field4'
+                    ]
                 }]
             }],
             renderTo: Ext.get('renderarea')

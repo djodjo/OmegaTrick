@@ -19,7 +19,7 @@ Trick.form.FormPanel = Ext.extend(Ext.form.FormPanel, {
 
     // {{{ plugins
 
-    plugins: ['t.xforms', 't.CompositeFieldFix'],
+    plugins: ['t.xitems', 't.xforms', 't.CompositeFieldFix'],
 
     // }}}
     // {{{ initComponent

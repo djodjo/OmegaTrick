@@ -25,19 +25,26 @@
 
     <!-- Sample Core includes -->
     <script type="text/javascript" src="FormPanel.js"></script>
+    <script type="text/javascript" src="FormPanel/Field1.js"></script>
+    <script type="text/javascript" src="FormPanel/Field2.js"></script>
+    <script type="text/javascript" src="FormPanel/Field3.js"></script>
+    <script type="text/javascript" src="FormPanel/Field4.js"></script>
+    <script type="text/javascript" src="FormPanel/CompositeField1.js"></script>
+    <script type="text/javascript" src="FormPanel/Title.js"></script>
+    <script type="text/javascript" src="FormPanel/FirstName.js"></script>
+    <script type="text/javascript" src="FormPanel/LastName.js"></script>
 
     <h1>Trick.form.FormPanel Sample - Omega Trick for Ext JS</h1>
 
-    <p>Trick.plugins.xform,Trick.plugins.CompositeFieldFixプラグインが初期状態で設定されています。</p>
+    <p>Trick.plugins.xitems,Trick.plugins.xform,Trick.plugins.CompositeFieldFixプラグインが初期状態で設定されています。</p>
     <p>また、xdefaultコンフィグオプションを提供します。defaultと同様ですが、ネストするコンテナーに対して再帰的に初期値を設定することができます。</p>
 
     <div id="renderarea"></div>
 
     <pre class="code">
 var p = new <strong>Trick.form.FormPanel</strong>({
-    title: 'Form Panel with Trick.plugins.xforms',
+    title: 'Trick.form.FormPanel',
     padding: 20,
-    width: 560,
     height: 150,
     layout:'column',
     <strong>xdefault: {
@@ -46,50 +53,30 @@ var p = new <strong>Trick.form.FormPanel</strong>({
     }</strong>,
     items: [{
         columnWidth: .5,
-        items: [{
-            xtype: 'textfield',
-            xname: 'field1',
-            anchor: '100%',
-            fieldLabel: 'Field1'
-        },{
-            xtype: 'textfield',
-            xname: 'field2',
-            anchor: '100%',
-            fieldLabel: 'Field11'
-        },{
-            xtype: 'compositefield',
-            fieldLabel: 'Full Name',
-            anchor: '100%',
-            items: [{
-                xtype: 'textfield',
-                name: 'title',
-                xname: 'title',
-                width: 40
-            },{
-                xtype: 'textfield',
-                name: 'firstName',
-                xname: 'firstName',
-                flex : 1
-            },{
-                xtype: 'textfield',
-                name: 'lastName',
-                xname: 'lastName',
-                flex : 2
-            }]
-        }]
+        <strong>xitems: [
+            'Field1',
+            'Field2',
+            'CompositeField1'
+        ]</strong>
     },{
         width: 25,
         html: '&nbsp'
     },{
         columnWidth: .5,
+        layout:'column',
         items: [{
-            xtype: 'textfield',
-            xname: 'field3',
-            fieldLabel: 'Field2'
+            columnWidth: .5,
+            <strong>xitems: [
+                'Field3'
+            ]</strong>
         },{
-            xtype: 'textfield',
-            xname: 'field4',
-            fieldLabel: 'Field21'
+            width: 25,
+            html: '&nbsp'
+        },{
+            columnWidth: .5,
+            <strong>xitems: [
+                'Field4'
+            ]</strong>
         }]
     }],
     renderTo: Ext.get('renderarea')
