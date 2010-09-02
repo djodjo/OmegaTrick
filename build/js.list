@@ -17,4 +17,5 @@ src/widgets/grid/Column.js
 src/plugins/xitems.js
 src/plugins/xforms.js
 src/plugins/xcolumns.js
+src/plugins/xbuttons.js
 src/plugins/CompositeFieldFix.js
