@@ -52,5 +52,42 @@ new Ext.form.FormPanel({
     renderTo: Ext.get('renderarea')
 });
 </pre>
+
+    <hr />
+
+    <p>次の例は、プラグインを設置したコンテナーに直接配置されたxitems出ない場合にも動作するサンプルです。</p>
+    <p>xitemsプラグインは、ネストする複雑なレイアウトにも対応します。</p>
+
+    <div id="renderarea2"></div>
+
+    <pre class="code">
+new Ext.form.FormPanel({
+    title: 'Form Panel deep layout with Trick.plugins.xforms',
+    padding: 20,
+    width: 700,
+    <strong>plugins: ['t.xitems']</strong>,
+    layout: 'column',
+    defaultType: 'container',
+    items: [{
+        columnWidth: .5,
+        layout: 'form',
+        <strong>xitems: [
+            'UserName',
+            'EMail'
+        ]</strong>
+    },{
+        width: 25,
+        html: '&nbsp'
+    },{
+        columnWidth: .5,
+        layout: 'form',
+        <strong>xitems: [
+            'UserName',
+            'EMail'
+        ]</strong>
+    }],
+    renderTo: Ext.get('renderarea2')
+});
+</pre>
 </body>
 </html>

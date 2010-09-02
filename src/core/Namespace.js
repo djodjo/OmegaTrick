@@ -11,6 +11,7 @@
 
 Ext.ns(
     'Trick.app',
+    'Trick.form',
     'Trick.grid',
     'Trick.util',
     'Trick.plugins',

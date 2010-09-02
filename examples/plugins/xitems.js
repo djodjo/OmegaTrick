@@ -16,7 +16,7 @@ Application.setup({
         // スクリプトタグ消去
         Trick.removeScriptTags();
 
-        // Form Panel生成
+        // Ext.form.FormPanel生成
         new Ext.form.FormPanel({
             title: 'Form Panel with Trick.plugins.xforms',
             padding: 20,
@@ -28,6 +28,35 @@ Application.setup({
             ],
             renderTo: Ext.get('renderarea')
         });
+
+        new Ext.form.FormPanel({
+            title: 'Form Panel deep layout with Trick.plugins.xforms',
+            padding: 20,
+            width: 700,
+            plugins: ['t.xitems'],
+            layout: 'column',
+            defaultType: 'container',
+            items: [{
+                columnWidth: .5,
+                layout: 'form',
+                xitems: [
+                    'UserName',
+                    'EMail'
+                ]
+            },{
+                width: 25,
+                html: '&nbsp'
+            },{
+                columnWidth: .5,
+                layout: 'form',
+                xitems: [
+                    'UserName',
+                    'EMail'
+                ]
+            }],
+            renderTo: Ext.get('renderarea2')
+        });
+
 
     }
 

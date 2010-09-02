@@ -34,11 +34,27 @@ Trick.plugins.xitems = function() {
      */
     me.init = function(cmp) {
 
+        me.deep(cmp);
+
+    };
+
+    // }}}
+    // {{{ deep
+
+    me.deep = function(cmp) {
+
         Ext.each(cmp.xitems, function(item) {
             cmp.add({
                 xtype: item
             });
         });
+
+        if(cmp.items) {
+            cmp.items.each(function(item) {
+                me.deep(item);
+            });
+        
+        }
 
     }
 
