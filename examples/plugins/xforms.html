@@ -41,59 +41,57 @@ var p = new Ext.Panel({
     padding: 20,
     width: 560,
     height: 150,
-    <strong>plugins: ['t.xforms']</strong>,
-    layout: 'fit',
+    plugins: ['<strong>t.xforms</strong>', 't.CompositeFieldFix'],
+    layout:'column',
     defaultType: 'container',
     items: [{
-        layout:'hbox',
-        layoutConfig: {
-            align : 'stretch',
-            pack  : 'start'
-        },
-        defaultType: 'container',
+        columnWidth: .5,
+        layout: 'form',
         items: [{
-            layout: 'form',
+            xtype: 'textfield',
+            <strong>xname: 'field1'</strong>,
+            anchor: '100%',
+            fieldLabel: 'Field1'
+        },{
+            xtype: 'textfield',
+            <strong>xname: 'field2'</strong>,
+            anchor: '100%',
+            fieldLabel: 'Field11'
+        },{
+            xtype: 'compositefield',
+            fieldLabel: 'Full Name',
+            anchor: '100%',
             items: [{
                 xtype: 'textfield',
-                <strong>xname: 'field1'</strong>,
-                fieldLabel: 'Field1'
+                name: 'title',
+                <strong>xname: 'title'</strong>,
+                width: 40
             },{
                 xtype: 'textfield',
-                <strong>xname: 'field2'</strong>,
-                fieldLabel: 'Field11'
+                name: 'firstName',
+                <strong>xname: 'firstName'</strong>,
+                flex : 1
             },{
-                xtype: 'compositefield',
-                fieldLabel: 'Full Name',
-                items: [{
-                    xtype: 'textfield',
-                    name: 'title',
-                    <strong>xname: 'title'</strong>,
-                    width: 40
-                },{
-                    xtype: 'textfield',
-                    name: 'firstName',
-                    <strong>xname: 'firstName'</strong>,
-                    flex : 1
-                },{
-                    xtype: 'textfield',
-                    name: 'lastName',
-                    <strong>xname: 'lastName'</strong>,
-                    flex : 2
-                }]
+                xtype: 'textfield',
+                name: 'lastName',
+                <strong>xname: 'lastName'</strong>,
+                flex : 2
             }]
+        }]
+    },{
+        width: 25,
+        html: '&nbsp'
+    },{
+        columnWidth: .5,
+        layout: 'form',
+        items: [{
+            xtype: 'textfield',
+            <strong>xname: 'field3'</strong>,
+            fieldLabel: 'Field2'
         },{
-            width: 20
-        },{
-            layout: 'form',
-            items: [{
-                xtype: 'textfield',
-                <strong>xname: 'field3'</strong>,
-                fieldLabel: 'Field2'
-            },{
-                xtype: 'textfield',
-                <strong>xname: 'field4'</strong>,
-                fieldLabel: 'Field21'
-            }]
+            xtype: 'textfield',
+            <strong>xname: 'field4'</strong>,
+            fieldLabel: 'Field21'
         }]
     }],
     renderTo: Ext.get('renderarea')

@@ -22,59 +22,57 @@ Application.setup({
             padding: 20,
             width: 560,
             height: 150,
-            plugins: ['t.xforms'],
-            layout: 'fit',
+            plugins: ['t.xforms', 't.CompositeFieldFix'],
+            layout:'column',
             defaultType: 'container',
             items: [{
-                layout:'hbox',
-                layoutConfig: {
-                    align : 'stretch',
-                    pack  : 'start'
-                },
-                defaultType: 'container',
+                columnWidth: .5,
+                layout: 'form',
                 items: [{
-                    layout: 'form',
+                    xtype: 'textfield',
+                    xname: 'field1',
+                    anchor: '100%',
+                    fieldLabel: 'Field1'
+                },{
+                    xtype: 'textfield',
+                    xname: 'field2',
+                    anchor: '100%',
+                    fieldLabel: 'Field11'
+                },{
+                    xtype: 'compositefield',
+                    fieldLabel: 'Full Name',
+                    anchor: '100%',
                     items: [{
                         xtype: 'textfield',
-                        xname: 'field1',
-                        fieldLabel: 'Field1'
+                        name: 'title',
+                        xname: 'title',
+                        width: 40
                     },{
                         xtype: 'textfield',
-                        xname: 'field2',
-                        fieldLabel: 'Field11'
+                        name: 'firstName',
+                        xname: 'firstName',
+                        flex : 1
                     },{
-                        xtype: 'compositefield',
-                        fieldLabel: 'Full Name',
-                        items: [{
-                            xtype: 'textfield',
-                            name: 'title',
-                            xname: 'title',
-                            width: 40
-                        },{
-                            xtype: 'textfield',
-                            name: 'firstName',
-                            xname: 'firstName',
-                            flex : 1
-                        },{
-                            xtype: 'textfield',
-                            name: 'lastName',
-                            xname: 'lastName',
-                            flex : 2
-                        }]
+                        xtype: 'textfield',
+                        name: 'lastName',
+                        xname: 'lastName',
+                        flex : 2
                     }]
+                }]
+            },{
+                width: 25,
+                html: '&nbsp'
+            },{
+                columnWidth: .5,
+                layout: 'form',
+                items: [{
+                    xtype: 'textfield',
+                    xname: 'field3',
+                    fieldLabel: 'Field2'
                 },{
-                    width: 20
-                },{
-                    layout: 'form',
-                    items: [{
-                        xtype: 'textfield',
-                        xname: 'field3',
-                        fieldLabel: 'Field2'
-                    },{
-                        xtype: 'textfield',
-                        xname: 'field4',
-                        fieldLabel: 'Field21'
-                    }]
+                    xtype: 'textfield',
+                    xname: 'field4',
+                    fieldLabel: 'Field21'
                 }]
             }],
             renderTo: Ext.get('renderarea')

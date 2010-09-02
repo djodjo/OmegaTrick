@@ -149,7 +149,7 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
             '                       </tr>',
             '                       <tr>',
             '                           <th></th>',
-            '                           <td class="msg"><span></span></td>',
+            '                           <td class="msg"><span>&nbsp;</span></td>',
             '                       </tr>',
             '                       <tr>',
             '                           <th>&nbsp;</th>',

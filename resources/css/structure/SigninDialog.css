@@ -61,6 +61,9 @@
   width: 170px;
 }
 
+.tx-sigin-content input[type="checkbox"] {
+  margin-right:6px;
+}
 
 /* ------------------------------
  パスワード紛失

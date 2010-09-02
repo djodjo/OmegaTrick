@@ -7,20 +7,6 @@
  * http://www.gnu.org/licenses/gpl-3.0.html
  */
 
-body, p, .p, div, td, h1, .h1, h2, .h2, h3, .h3, h4, .h4, li {
-  font-family:arial,helvetica,sans-serif;
-  line-height:1.5;
-}
-
-input[type="checkbox"] {
-  margin-right:6px;
-}
-
-.ffbug-x-form-field {
-  position: fixed;
-  position:expression("absolute");
-}
-
 /*
  * Local variables:
  * tab-width: 2
