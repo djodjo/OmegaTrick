@@ -15,7 +15,9 @@
   left:     0;
   top:      0;
   width:    100%;
+  _width:   9999px;
   height:   100%;
+  _height:  9999px;
   z-index:  2000;
 }
 

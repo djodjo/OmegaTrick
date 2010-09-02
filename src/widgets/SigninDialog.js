@@ -148,7 +148,8 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
             '                           <td class="passwd"></td>',
             '                       </tr>',
             '                       <tr>',
-            '                           <td colspan="2" class="msg"><span></span></td>',
+            '                           <th></th>',
+            '                           <td class="msg"><span></span></td>',
             '                       </tr>',
             '                       <tr>',
             '                           <th>&nbsp;</th>',
@@ -320,9 +321,11 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
             duration: me.duration,
             callback: function() {
 
+                /*
                 msg.setStyle({
                     display: 'none'
                 });
+                */
 
                 // イベント発火
                 me.fireEvent('auth', {
@@ -381,8 +384,11 @@ Trick.SigninDialog = Ext.extend(Ext.Component, {
         me.forms.submit.enable();
 
         // エラーメッセージ表示
+        msg.setOpacity(0);
+        msg.setStyle({
+            display: 'block'
+        });
         msg.fadeIn({
-            display: 'block',
             callback: function() {
 
                 // メールアドレスにフォーカス設定
