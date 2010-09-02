@@ -446,6 +446,7 @@ if(Ext.isExtCore || Ext.isSenchaTouch) {
 
 Ext.ns(
     'Trick.app',
+    'Trick.grid',
     'Trick.util',
     'Trick.plugins',
     'Trick.test',
