@@ -65,6 +65,49 @@ Application.setup({
         p.xforms.firstName.setValue('firstName');
         p.xforms.lastName.setValue('lastName');
 
+        var p2 = new Trick.form.FormPanel({
+            title: 'Trick.form.FormPanel with SubPanel',
+            padding: 20,
+            layout:'column',
+            xdefault: {
+                xtype: 'container',
+                layout: 'form'
+            },
+            items: [{
+                columnWidth: .5,
+                xtype: 'subpanel'
+            },{
+                width: 25,
+                html: '&nbsp'
+            },{
+                columnWidth: .5,
+                layout:'column',
+                items: [{
+                    columnWidth: .5,
+                    xitems: [
+                        'Field3'
+                    ]
+                },{
+                    width: 25,
+                    html: '&nbsp'
+                },{
+                    columnWidth: .5,
+                    xitems: [
+                        'Field4'
+                    ]
+                }]
+            }],
+            renderTo: Ext.get('renderarea2')
+        });
+
+        p2.xforms.field1.setValue('Text1');
+        p2.xforms.field2.setValue('Text2');
+        p2.xforms.field3.setValue('Text3');
+        p2.xforms.field4.setValue('Text4');
+        p2.xforms.title.setValue('title');
+        p2.xforms.firstName.setValue('firstName');
+        p2.xforms.lastName.setValue('lastName');
+
     }
 
     // }}}

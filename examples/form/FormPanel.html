@@ -33,6 +33,7 @@
     <script type="text/javascript" src="FormPanel/Title.js"></script>
     <script type="text/javascript" src="FormPanel/FirstName.js"></script>
     <script type="text/javascript" src="FormPanel/LastName.js"></script>
+    <script type="text/javascript" src="SubPanel.js"></script>
 
     <h1>Trick.form.FormPanel Sample - Omega Trick for Ext JS</h1>
 
@@ -91,5 +92,12 @@ p.xforms.title.setValue('title');
 p.xforms.firstName.setValue('firstName');
 p.xforms.lastName.setValue('lastName');
 </pre>
+
+    <hr />
+
+    <p>また、xtypeで別コンポーネントとして継承したもので、xitemsが定義されていれば、Trick.form.FormPanel内に配置されることで、xformsから参照可能になります。</p>
+
+    <div id="renderarea2"></div>
+
 </body>
 </html>
