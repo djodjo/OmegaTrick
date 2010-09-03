@@ -22,6 +22,11 @@ Trick.app.App = function() {
 
     return {
 
+        // {{{ beforeunloadMsg
+
+        beforeunloadMsg : 'このままページを移動すると編集中の内容は保存されませんがよろしいですか？',
+
+        // }}}
         // {{{ beforeunload
 
         beforeunload : false,

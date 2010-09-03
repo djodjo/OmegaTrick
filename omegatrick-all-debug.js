@@ -828,6 +828,11 @@ Trick.app.App = function() {
 
     return {
 
+        // {{{ beforeunloadMsg
+
+        beforeunloadMsg : 'このままページを移動すると編集中の内容は保存されませんがよろしいですか？',
+
+        // }}}
         // {{{ beforeunload
 
         beforeunload : false,
@@ -2000,6 +2005,16 @@ Trick.grid.Column = Ext.extend(Ext.grid.Column, {
  */
 Trick.form.FormPanel = Ext.extend(Ext.form.FormPanel, {
 
+    // {{{ initialFormData
+
+    initialFormData : {},
+
+    // }}}
+    // {{{ dirty
+
+    dirty: false,
+
+    // }}}
     // {{{ plugins
 
     plugins: ['t.xitems', 't.xforms', 't.CompositeFieldFix'],
@@ -2018,6 +2033,50 @@ Trick.form.FormPanel = Ext.extend(Ext.form.FormPanel, {
 
         // スーパークラスメソッドコール
         Trick.form.FormPanel.superclass.initComponent.apply(me, arguments);
+
+    },
+
+    // }}}
+    // {{{ setFormData
+
+    /**
+     * フォームデータ設定メソッド
+     *
+     * @param data 設定データオブジェクト
+     * @param force 強制的に変更状態を初期化します。(初期値:true)
+     */
+    setFormData : function(data, force) {
+
+        var me = this;
+        force = force || true;
+
+        Ext.iterate(data, function(name, val) {
+            me.xforms[name].setValue(val);
+        });
+
+        if(force) {
+            me.initialFormData = data;
+            me.dirty = false;
+        }
+
+    },
+
+    // }}}
+    // {{{ getFormData
+
+    /**
+     * フォームデータ取得メソッド
+     */
+    getFormData : function() {
+
+        var me = this;
+        var ret = {};
+
+        Ext.iterate(me.xforms, function(name, form) {
+            ret[name] = form.getValue();
+        });
+
+        return ret;
 
     },
 
