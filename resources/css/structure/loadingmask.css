@@ -8,6 +8,18 @@
  */
 
 /* ------------------------------
+ html/body
+------------------------------ */
+html, body {
+  margin:0;
+  padding:0;
+  border:0 none;
+  overflow:hidden;
+  height:100%;
+  width:100%;
+}
+
+/* ------------------------------
  ローディングマスク
 ------------------------------ */
 #OMEGATRICK_LOADINGMASK {
@@ -15,9 +27,7 @@
   left:     0;
   top:      0;
   width:    100%;
-  _width:   9999px;
   height:   100%;
-  _height:  9999px;
   z-index:  2000;
 }
 
