@@ -18,6 +18,7 @@ Application.setup({
 
         // Trick.form.FormPanel生成
         var p = new Trick.form.FormPanel({
+            collapsible: true,
             id: 'DataForm',
             title: 'Data set/get for Trick.form.FormPanel',
             padding: 20,
@@ -93,6 +94,13 @@ Application.setup({
             renderTo: Ext.get('renderarea')
         });
 
+        p.on('dirty', function() {
+            p.setTitle('[変更あり] Data set/get for Trick.form.FormPanel');
+        });
+
+        p.on('undirty', function() {
+            p.setTitle('Data set/get for Trick.form.FormPanel');
+        });
     }
 
     // }}}

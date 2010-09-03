@@ -55,6 +55,9 @@ Trick.plugins.xforms = function() {
         // フォームアイテムスキャン
         me.scanFormItems(cmp.items, cmp);
 
+        // イベント発火
+        cmp.fireEvent('initxforms', cmp.xforms);
+
     };
 
     // }}}

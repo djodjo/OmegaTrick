@@ -41,10 +41,79 @@ Trick.form.FormPanel = Ext.extend(Ext.form.FormPanel, {
 
         var me = this;
 
+        // 多階層初期値設定
         me.setDeepDefault(me.initialConfig.items);
+
+        // xformsプラグイン初期化イベントリスナー追加
+        me.on('initxforms', me.onInitXForms, me);
+
+        // データ変更イベントリスナー追加
+        me.on('dirty', function() {
+            Application.beforeunload = Application.beforeunloadMsg;
+        }, me);
+        me.on('undirty', function() {
+            Application.beforeunload = false;
+        }, me);
 
         // スーパークラスメソッドコール
         Trick.form.FormPanel.superclass.initComponent.apply(me, arguments);
+
+    },
+
+    // }}}
+    // {{{ onChangeData
+
+    /**
+     * データ変更イベントハンドラ
+     */
+    onChangeData : function(form) {
+
+        var me = this;
+        var name = form.xname;
+        var dirty = false;
+
+        Ext.iterate(me.xforms, function(name, form) {
+
+            var val = me.initialFormData[name];
+
+            if(val !== form.getValue()) {
+
+                // ダーティーフラグ更新
+                dirty = true;
+
+                return false;
+            }
+        });
+
+        me.dirty = dirty;
+        if(dirty) {
+            me.fireEvent('dirty');
+        } else {
+            me.fireEvent('undirty');
+        }
+
+    },
+
+    // }}}
+    // {{{ onInitXForms
+
+    /**
+     * xformsプラグイン初期化イベントハンドラ
+     */
+    onInitXForms : function() {
+
+        var me = this;
+
+        Ext.iterate(me.xforms, function(name, form) {
+
+            if(form instanceof Ext.form.Field) {
+                form.on('change', me.onChangeData, me);
+                form.on('keyup', me.onChangeData, me);
+            }
+
+            me.initialFormData[name] = '';
+
+        });
 
     },
 
@@ -69,6 +138,7 @@ Trick.form.FormPanel = Ext.extend(Ext.form.FormPanel, {
         if(force) {
             me.initialFormData = data;
             me.dirty = false;
+            me.fireEvent('undirty');
         }
 
     },

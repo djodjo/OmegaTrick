@@ -23,6 +23,9 @@ Field1 = Ext.extend(Ext.form.TextField, {
     // アンカー設定
     anchor: '100%',
 
+    // キーイベント有効化
+    enableKeyEvents: true,
+
     // フィールドラベル設定
     fieldLabel: 'Field1'
 

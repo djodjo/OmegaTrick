@@ -23,6 +23,9 @@ FirstName = Ext.extend(Ext.form.TextField, {
     // name
     name: 'firstName',
 
+    // キーイベント有効化
+    enableKeyEvents: true,
+
     // flex
     flex : 1
 
