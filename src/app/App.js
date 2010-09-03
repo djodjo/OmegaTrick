@@ -22,6 +22,11 @@ Trick.app.App = function() {
 
     return {
 
+        // {{{ beforeunload
+
+        beforeunload : false,
+
+        // }}}
         // {{{ setup
 
         /**
@@ -31,6 +36,7 @@ Trick.app.App = function() {
          */
         setup : function(config) {
 
+            var me = this;
             setupConfig = Trick.util.clone(config);
             config.onReady = config.onReady || Ext.emptyFn;
 
@@ -38,6 +44,13 @@ Trick.app.App = function() {
             if(Ext.isExtJS && config.directProvider) {
                 Ext.Direct.addProvider(config.directProvider);
             }
+
+            // window.beforeunload
+            window.onbeforeunload = function() {
+                if(me.beforeunload) {
+                    return me.beforeunload;
+                }
+            };
 
             // エントリーポイント設定
             if(Ext.isSenchaTouch) {
