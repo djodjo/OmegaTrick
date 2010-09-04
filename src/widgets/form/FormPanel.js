@@ -75,8 +75,17 @@ Trick.form.FormPanel = Ext.extend(Ext.form.FormPanel, {
         Ext.iterate(me.xforms, function(name, form) {
 
             var val = me.initialFormData[name];
+            var fval = form.getValue();
 
-            if(val !== form.getValue()) {
+            if(
+                form instanceof Ext.form.TimeField ||
+                form instanceof Ext.form.ComboBox ||
+                form instanceof Ext.form.DateField
+            ) {
+                fval = form.getRawValue();
+            }
+
+            if(val != fval) {
 
                 // ダーティーフラグ更新
                 dirty = true;
@@ -106,12 +115,50 @@ Trick.form.FormPanel = Ext.extend(Ext.form.FormPanel, {
 
         Ext.iterate(me.xforms, function(name, form) {
 
+            me.initialFormData[name] = form.getValue();
+
             if(form instanceof Ext.form.Field) {
                 form.on('change', me.onChangeData, me);
                 form.on('keyup', me.onChangeData, me);
             }
 
-            me.initialFormData[name] = '';
+            if(form instanceof Ext.form.Checkbox) {
+                form.on('check', me.onChangeData, me);
+            }
+
+            if(form.xradioSelector) {
+                Ext.each(form.items, function(item) {
+                    item.on('check', me.onChangeData, me);
+                });
+            }
+
+            if(form instanceof Ext.form.ComboBox) {
+                form.on('select', me.onChangeData, me);
+            }
+
+            if(form instanceof Ext.form.SliderField) {
+                form.slider.on('change', me.onChangeData, me);
+            }
+
+            if(form instanceof Ext.form.HtmlEditor) {
+
+                form._preFireEventData = me.initialFormData[name];
+
+                Ext.TaskMgr.start({
+                    run : function() {
+
+                        if(form._preFireEventData != form.getValue()) {
+                            console.log(form._preFireEventData);
+                            console.log(form.getValue());
+                            form.fireEvent('change', form);
+                            form._preFireEventData = form.getValue();
+                        }
+
+                    },
+                    interval: 100
+                });
+
+            }
 
         });
 
@@ -136,7 +183,14 @@ Trick.form.FormPanel = Ext.extend(Ext.form.FormPanel, {
         });
 
         if(force) {
-            me.initialFormData = data;
+            Ext.apply(me.initialFormData, data);
+
+            Ext.iterate(me.xforms, function(name, form) {
+                if(form instanceof Ext.form.HtmlEditor) {
+                    form._preFireEventData = me.initialFormData[name];
+                }
+            });
+
             me.dirty = false;
             me.fireEvent('undirty');
         }

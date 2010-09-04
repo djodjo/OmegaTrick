@@ -77,12 +77,68 @@ Trick.plugins.xforms = function() {
             }
 
             if(item.xname) {
-                cmp.xforms[item.xname] = item;
+                if(item instanceof Ext.form.Radio) {
+
+                    if(!cmp.xforms[item.xname]) {
+                        cmp.xforms[item.xname] = new me.radio();
+                    }
+
+                    cmp.xforms[item.xname].items.push(item);
+
+                } else {
+                    cmp.xforms[item.xname] = item;
+                }
             }
 
         });
 
     };
+
+    // }}}
+    // {{{ radio
+
+    me.radio = function() {
+
+        return {
+
+            xradioSelector: true,
+
+            items: [],
+
+            getValue: function() {
+
+                var ret;
+
+                Ext.each(this.items, function(item) {
+
+                    if(item.getValue()) {
+                        ret = item.inputValue;
+                        return false;
+                    }
+
+                });
+
+                return ret;
+
+            },
+
+            setValue: function(val) {
+
+                Ext.each(this.items, function(item) {
+
+                    if(item.inputValue == val) {
+                        item.setValue(true);
+                    } else {
+                        item.setValue(false);
+                    }
+
+                });
+
+            }
+
+        }
+
+    }
 
     // }}}
 
